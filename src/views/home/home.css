@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+img {
+  vertical-align: middle;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+/* header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 150px;
+  background-color: #fff;
+
+  padding: 10px 20px;
+}
+
+header h1 {
+  float: left;
+}
+
+header nav {
+  float: right;
+}
+
+header ul li {
+  display:inline-block;
+  margin-right: 32px;
+}
+
+header ul li:last-child {
+  margin-right: 0;
+}
+
+header ul li a {
+  color: #4c4c4c;
+}
+
+/* Auto Image Slider */
+#slider {
+  width: 1024px;
+  height: 300px;
+  overflow: hidden;
+}
+
+#slider .slides {
+  display: block;
+  width: 8000px;
+  height: 100%;
+}
+
+#slider .slide {
+  float: left;
+  width: 1024px;
+  height: 300px;
+}
+
+/* main */
+#category {
+  margin: 20px 0px;
+}
+
+.nav-item.category {
+  display:inline-block;
+  margin: 10px;
+}
+
+.nav-item.category .nav-link {
+  cursor: pointer;
+  color: #4c4c4c;
+  border: 1px solid #4c4c4c;
+  border-radius: 20px;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.nav-item.category .nav-link:hover {
+  color: #a374db;
+  border-color: #a374db;
+}
+
+/* book list */
+.books {
+  margin: 10px 10px 0 0;
+}
+
+.book {
+  display: inline-block;
+  margin: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.book-body {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.book-link {
+  color: #000;
+  text-decoration: none;
+}
+
+.book-link:hover {
+  color: #4c4c4c;
+}
+
+.book-text.title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.book-text.category {
+  font-size: 14px;
+}
+
+.book-text.price {
+  font-size: 14px;
+}
+
+/* footer */
+#footer {
+  clear: both;
+
+  width: 100%;
+  height: 80px;
+  background-color: #f9f9f9;
+}
+
+#footer .copyright p {
+  font-size: 14px;
+
+  padding: 32px 0 0 40px;
+  text-align: center;
+}
