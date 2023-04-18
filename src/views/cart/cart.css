@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+img {
+  vertical-align: middle;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 1024px;
+  margin: 0 auto;
+}
+/* header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 150px;
+  background-color: #fff;
+
+  padding: 10px 20px;
+}
+
+header h1 {
+  float: left;
+}
+
+header nav {
+  float: right;
+}
+
+header ul li {
+  display:inline-block;
+  margin-right: 32px;
+}
+
+header ul li:last-child {
+  margin-right: 0;
+}
+
+header ul li a {
+  color: #4c4c4c;
+}
+
+header ul li a:hover {
+  color: #bfbfbf;
+}
+
+/* main */
+main {
+  padding: 20px 0px;
+}
+/* cartMenu */
+.cartMenu {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
+  padding: 0 20px;
+}
+.cartMenu .cartTitle {
+  text-align: center;
+  font-size: 30px;
+  margin: 20px 20px;
+}
+
+.cartMenu .selectMenu {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.selectAll {
+  display: flex;
+}
+
+.selectAll p {
+  padding-left: 8px;
+}
+/* cart container */
+.cart {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 20px;
+  justify-content: space-between;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 0 20px;
+}
+
+.book-title {
+  display: flex;
+  align-items: center;
+
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.delete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* pay list */
+.pay__list {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.pay__detail__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pay__detail {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pay__detail div {
+  padding: 8px;
+}
+
+div.order__button {
+  display: flex;
+  justify-content: end;
+  padding: 8px;
+}
+
+button.order__button {
+  width: 180px;
+  height: 30px;
+}
+
+/* footer */
+#footer {
+  clear: both;
+
+  width: 100%;
+  height: 80px;
+  background-color: #f9f9f9;
+}
+
+#footer .copyright p {
+  font-size: 14px;
+
+  padding: 32px 0 0 40px;
+  text-align: center;
+}

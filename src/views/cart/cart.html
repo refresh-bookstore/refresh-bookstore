@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>새로고침</title>
+  <link rel="stylesheet" href="cart.css">
+  <script defer src="cart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1 class="logo">새로고침</h1>
+        <nav>
+          <ul>
+            <li><a href="#">검색</a></li>
+            <li><a href="#">로그인</a></li>
+            <li><a href="#">회원가입</a></li>
+            <li><a href="#">장바구니</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <!-- 구분선 -->
+    <hr/>
+    
+    <main>
+      <div class="cartMenu">
+        <!-- 장바구니 타이틀 -->
+        <p class="cartTitle">장바구니</p>
+        <div class="selectMenu">
+          <div class="selectAll">
+            <input type="checkbox" name="checkAll" checked="">
+            <p>전체선택</p>
+          </div>
+          <button class="removeSelected">선택 삭제</button>
+        </div>
+      </div>
+      <!-- <hr/> -->
+      <!-- 책 장바구니 -->
+      <div class="cart">
+        <input type="checkbox" name="buy" checked="">
+        <!-- 책 이미지 -->
+        <div class="book-img">
+          <a class="book-link" href="#">
+            <img src="../../../public/images/img_sample_book.png" class="book-img" alt="bookImg1"/>
+          </a>
+        </div>
+          
+        <div class="book-title">
+          <a class="book-link" href="#">책 제목</a>
+        </div>
+        <!-- 수량 변경 -->
+        <div class="set-amount"></div>
+          
+        <!-- 상품 금액 -->
+        <div class="price">
+          <p>상품 금액</p>
+          <div class="book-price">20,000원</div>
+        </div>
+        <!-- 삭제 버튼 -->
+        <div class="delete">
+          <button class="deleteBtn">삭제</button>
+        </div>
+      </div>
+
+      <!-- <hr/> -->
+      <!-- 금액 안내  -->
+      <div class="pay__list">
+        <p>50,000원 이상 구매 시 무료 배송</p>
+        <div class="pay__detail__container">
+          <div class="pay__detail">
+            <div>선택 상품 금액</div>
+            <div class="total__price">10,000원</div>
+          </div>
+
+          <div class="pay__detail">
+            <div>배송비</div>
+            <div class="deliveryFee">3,000원</div>
+          </div>
+
+          <div class="pay__detail">
+            <div>총 결제 금액</div>
+            <div class="total__sum">13,000원</div>
+          </div>
+          <div class="order__button">
+            <button class="order__button">구매하기</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer">
+      <div class="copyright">
+        <p>Copyright © 2023 refresh-store. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
