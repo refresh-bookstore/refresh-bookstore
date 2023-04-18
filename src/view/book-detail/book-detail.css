@@ -1,9 +1,9 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+@import url('../../../public/css/main.css');
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: 'NanumSquare', sans-serif;
 }
 
@@ -16,9 +16,17 @@ a {
   text-decoration: none;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
 .container {
   margin-top: 30px;
-  width: 100%;
   height: 90%;
 
   display: flex;
@@ -70,7 +78,7 @@ a {
 }
 
 .imageArea {
-  width: 50%;
+  width: 48%;
   margin: 20px;
   padding: 10px;
 
@@ -86,7 +94,7 @@ a {
 
 .imageArea img{
   margin: 20px 0;
-  width: 50%;
+  width: 48%;
   align-items: center;
   box-shadow: 10px 10px 20px rgb(226, 226, 226);
 }
@@ -123,7 +131,7 @@ a {
 
 .bookTitleArea p {
   font-size: 10pt;
-  color:#838383;
+  color:#1DC078;
   margin: 5px;
 }
 
@@ -167,7 +175,8 @@ a {
   width: 100%;
   background-color: #ececec;
   padding: 15px;
-  margin: 25px, 0;
+  margin: 30px, 0;
+  border-radius: 8px;
 
   display: flex;
   flex-direction: row;
@@ -179,6 +188,7 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: end;
+  align-items: center;
 }
 
 .purchaseInfo .costArea .amountArea button{
@@ -209,11 +219,12 @@ a {
 #totalCost {
   font-size: 20pt;
   font-weight: 900;
-  color: rgb(101, 101, 230);
+  color: rgb(17, 17, 17);
   
   text-align: right;
 
   margin: 5px;
+  margin-top: 20px;
 
 }
 
@@ -225,19 +236,36 @@ a {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  
 
   
 }
 
-.purchaseBtnArea button{
+.purchaseBtnArea #addToCartBtn{
   width: 48%;
   height: 30px;
+  background-color: #FFFFFF;
 
-  color:rgb(17, 17, 17);
+  color:#1DC078;
   font-size: 13pt;
-  font-weight: 500;
+  font-weight: 700;
   text-align: center;
-  border: 0.5px rgb(17, 17, 17) solid;
+  border: 0.5px  #1DC078 solid;
+  border-radius: 8px;
+
+}
+
+.purchaseBtnArea  #purchaseBtn{
+  width: 48%;
+  height: 30px;
+  background-color: #1DC078;
+
+  color:#FFFFFF;
+  font-size: 13pt;
+  font-weight: 700;
+  text-align: center;
+  border: 0.5px rgb(17, 17, 17);
+  border-radius: 8px;
 
 }
 
@@ -246,11 +274,18 @@ a {
   padding: 50px;
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: stretch;
 
   line-height: 25pt;
 
-  border-bottom: #b8b8b8 solid 0.5px;
+}
+
+.detailArea h3{
+  font-weight: 800;
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-bottom:#e7e7e7 0.3px solid;
+  padding-bottom: 20px;
 }

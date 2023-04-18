@@ -66,6 +66,6 @@ plusBtn.addEventListener('click',(e)=>{
 totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
 
 
-
+//책 소개
 
 bookIntroduction.innerText = book.introduction;
