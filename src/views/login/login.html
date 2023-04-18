@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>새로고침</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1 class="logo">새로고침</h1>
+        <nav>
+          <ul>
+            <li><a href="#">검색</a></li>
+            <li><a href="#">로그인</a></li>
+            <li><a href="#">회원가입</a></li>
+            <li><a href="#">장바구니</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <!-- login form -->
+    <main>
+      <h2 class="title">로그인</h2>
+      <div class="login-form-container">
+        <form class="login-form-box" method="post">
+
+          <div class="field">
+            <label class="label" for="emailInput">이메일</label>
+            <div class="control">
+              <input
+                class="input"
+                id="emailInput"
+                type="email"
+                placeholder="elice@love.com"
+                autocomplete="on"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="passwordInput">비밀번호</label>
+            <div class="control">
+              <input
+                class="input"
+                id="passwordInput"
+                type="password"
+                placeholder="********"
+                autocomplete="on"
+              />
+            </div>
+          </div>
+
+          <button class="login-submit" id="submitButton">로그인</button>
+        </form>
+    </main>
+
+    <footer id="footer">
+      <div class="copyright">
+        <p>Copyright © 2023 refresh-store. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
