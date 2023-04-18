@@ -1,3 +1,5 @@
+@import "../../../public/css/main.css";
+
 /* main */
 .title {
   font-size: 35px;
@@ -41,7 +43,7 @@
 
 .login-submit {
   font-size: 20px;
-  background-color: #a374db;
+  background-color: #1DC078;
   margin-top: 60px;
 
   width: 100%;
@@ -53,5 +55,21 @@
 }
 
 .login-submit:hover {
-  background-color: #8865a0;
+  background-color: #12794b;
+}
+
+.btn-register {
+  font-size: 20px;
+  margin-top: 30px;
+
+  width: 100%;
+  height: 50px;
+  border: 1px solid #1DC078;
+  border-radius: 10px;
+  font-weight: 600;
+  background-color: #fff;
+}
+
+.btn-register:hover {
+ background-color: #bfbfbf;
 }

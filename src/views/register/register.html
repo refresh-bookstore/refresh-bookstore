@@ -2,11 +2,24 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>새로고침</title>
+  <title>Refresh Books</title>
   <link rel="stylesheet" href="register.css">
 </head>
 <body>
   <div class="container">
+    <!-- Header -->
+    <header>
+      <img src="../../../public/images/img_sample_logo.png"></img>
+        <nav>
+          <ul>
+            <li><a href="#">검색</a></li>
+            <li><a href="../login/login.html">로그인</a></li>
+            <li><a href="../register/register.html">회원가입</a></li>
+            <li><a href="#">장바구니</a></li>
+          </ul>
+        </nav>
+    </header>
+
     <!-- register form -->
     <main>
       <h2 class="title">회원가입</h2>
@@ -68,9 +81,30 @@
             <div class="control">
               <input
                 class="input"
+                id="postalCodeInput"
+                type="text"
+                placeholder="우편주소"
+                readonly
+              />
+            </div>
+            <div class="contor">
+              <button id="searchAddress">주소 찾기</button>
+            </div>
+            <div class="control">
+              <input
+                class="input"
                 id="addressInput"
                 type="text"
-                placeholder="주소를 입력해주세요"
+                placeholder="주소를 검색해주세요"
+                readonly
+              />
+            </div>
+            <div class="control">
+              <input
+                class="input"
+                id="detailAddressInput"
+                type="text"
+                placeholder="상세주소를 입력해주세요"
               />
             </div>
           </div>
@@ -91,6 +125,12 @@
           <button class="register-submit" id="submitButton">회원가입</button>
         </form>
     </main>
+
+    <footer id="footer">
+      <div class="copyright">
+        <p>Copyright © 2023 refresh-store. All rights reserved.</p>
+      </div>
+    </footer>
   </div>
 </body>
 </html>
