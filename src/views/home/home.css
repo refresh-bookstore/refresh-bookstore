@@ -56,6 +56,10 @@ header ul li a {
   color: #4c4c4c;
 }
 
+header ul li a:hover {
+  color: #bfbfbf;
+}
+
 /* Auto Image Slider */
 #slider {
   width: 1024px;
@@ -125,7 +129,7 @@ header ul li a {
 }
 
 .book-link:hover {
-  color: #4c4c4c;
+  color: #bfbfbf;
 }
 
 .book-text.title {
