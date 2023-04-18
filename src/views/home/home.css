@@ -106,11 +106,13 @@ header ul li a:hover {
 /* book list */
 .books {
   margin: 10px 10px 0 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 .book {
-  display: inline-block;
-  margin: 5px;
+  margin: 10px;
   margin-bottom: 20px;
   cursor: pointer;
 }
