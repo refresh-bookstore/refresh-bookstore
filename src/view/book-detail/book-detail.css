@@ -1,0 +1,256 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'NanumSquare', sans-serif;
+}
+
+img {
+  vertical-align: middle;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  margin-top: 30px;
+  width: 100%;
+  height: 90%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  padding: 50px 100px;
+  box-sizing: border-box;
+  color: rgb(62, 62, 62);
+
+
+}
+
+.upperArea {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+
+  width: 100%;
+  height: 100 px;
+
+  padding: 10px 20px;
+  border-bottom: #b8b8b8 solid 0.5px;
+}
+
+.upperArea span {
+  display: flex;
+  align-items: center;
+}
+
+.upperArea img {
+  width: 20px;
+  margin: 10px;
+
+}
+
+.middleArea {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: stretch;
+
+  padding: 10px 20px;
+  border-bottom: #b8b8b8 solid 0.5px;
+
+}
+
+.imageArea {
+  width: 50%;
+  margin: 20px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-grow: 1;
+
+  border: #e7e7e7 0.3px solid;
+
+}
+
+.imageArea img{
+  margin: 20px 0;
+  width: 50%;
+  align-items: center;
+  box-shadow: 10px 10px 20px rgb(226, 226, 226);
+}
+
+
+
+.purchaseArea {
+  width: 50%;
+  margin: 0;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.bookTitleArea {
+
+  padding-bottom: 20px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  border-bottom: #e7e7e7 solid 0.3px;
+
+}
+
+
+
+.bookTitleArea p {
+  font-size: 10pt;
+  color:#838383;
+  margin: 5px;
+}
+
+.bookTitleArea .bookTitle {
+  font-size: 20pt;
+  font-weight: 900;
+
+  margin: 5px;
+}
+
+.bookTitleArea #bookSubtitle {
+  font-size: 12pt;
+  font-weight: 400;
+  margin: 5px;
+}
+
+.purchaseInfo {
+  width: 100%;
+  padding: 15px 0;
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+
+.purchaseInfo p {
+  font-size: 8pt;
+  color:#838383;
+  margin: 5px;
+}
+.purchaseInfo .bookTitle{
+  width: 100%;
+  color:rgb(62, 62, 62);
+  font-size: 12pt;
+  font-weight: 800;
+}
+
+.purchaseInfo .costArea {
+  width: 100%;
+  background-color: #ececec;
+  padding: 15px;
+  margin: 25px, 0;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.purchaseInfo .costArea .amountArea {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.purchaseInfo .costArea .amountArea button{
+  width: 35px;
+  height: 30px;
+
+  color: #838383;
+  font-size: 15pt;
+  font-weight: 200;
+  border: #9c9c9c 0.5px solid;
+}
+
+.purchaseInfo .costArea .amountArea input{
+  width: 35px;
+  height: 30px;
+
+  color:#4d4d4d;
+  font-size: 13pt;
+  font-weight: 200;
+  text-align: center;
+
+  border-top: #9c9c9c 0.5px solid;
+  border-bottom: #9c9c9c 0.5px solid;
+  border-left: 0;
+  border-right: 0;
+}
+
+#totalCost {
+  font-size: 20pt;
+  font-weight: 900;
+  color: rgb(101, 101, 230);
+  
+  text-align: right;
+
+  margin: 5px;
+
+}
+
+.purchaseBtnArea {
+  padding: 20px 0;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  
+}
+
+.purchaseBtnArea button{
+  width: 48%;
+  height: 30px;
+
+  color:rgb(17, 17, 17);
+  font-size: 13pt;
+  font-weight: 500;
+  text-align: center;
+  border: 0.5px rgb(17, 17, 17) solid;
+
+}
+
+.detailArea{
+  margin: 30px;
+  padding: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: stretch;
+
+  line-height: 25pt;
+
+  border-bottom: #b8b8b8 solid 0.5px;
+}

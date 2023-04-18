@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="book-detail.css">
+  <title>새로고침</title>
+
+
+
+</head>
+<body>
+  <div class="container">
+    <div class="upperArea">
+      <span><img id="backBtn" src="../../../public/images/list.svg"> 목록으로</span>
+      <img id="likeBtn" src="../../../public/images/like_1.svg">
+    </div>
+    <div class="middleArea">
+      <div class="imageArea">
+        <img src="../../../public/images/sample_image.jpg">
+      </div>
+      <div class="purchaseArea">
+        <div class="bookTitleArea">
+          <p id="category"></p>
+          <h3 class="bookTitle"></h3>
+          <h4 id="bookSubtitle"></h4>
+          <p id="detailedInfo"></p>
+        </div>
+        <div class="purchaseInfo">
+          <p>* 50,000원 이상 구매시 배송비는 무료입니다.</p>
+          <div class="costArea">
+            <p class="bookTitle"></p>
+            <div class="amountArea">
+              <button id="minusBtn">-</button>
+              <input id ="amountInput" value="1">
+              <button id="plusBtn">+</button>
+            </div>
+          </div>
+          <h3 id="totalCost"></h3>
+          <div class="purchaseBtnArea">
+              <button id="addToCartBtn">장바구니</button>
+              <button id="purchaseBtn" style="background-color: rgb(17, 17, 17); color: white;">바로 구매</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detailArea">
+      <p id="bookIntroduction"></p>
+    </div>
+
+
+  </div>
+  <script src="book-detail.js"></script>
+</body>
+</html>
+
+</body>
+</html>
