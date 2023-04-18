@@ -37,6 +37,7 @@
                 autocomplete="on"
               />
             </div>
+            <p class="error" id="name-error">에러메세지</p>
           </div>
 
           <div class="field">
@@ -50,6 +51,7 @@
                 autocomplete="on"
               />
             </div>
+            <p class="error" id="email-error">에러메세지</p>
           </div>
 
           <div class="field">
@@ -59,9 +61,10 @@
                 class="input"
                 id="passwordInput"
                 type="password"
-                placeholder="비밀번호를 입력해주세요"
+                placeholder="비밀번호를 입력해주세요 (8 ~ 15자, 특수문자, 문자, 숫자 포함)"
               />
             </div>
+            <p class="error" id="password-error">에러메세지</p>
           </div>
 
           <div class="field">
@@ -71,9 +74,10 @@
                 class="input"
                 id="passwordCheckInput"
                 type="password"
-                placeholder="비밀번호를 재입력해주세요"
+                placeholder="비밀번호를 다시 입력해주세요"
               />
             </div>
+            <p class="error" id="passwordCheck-error">에러메세지</p>
           </div>
 
           <div class="field">
@@ -116,10 +120,11 @@
                 class="input"
                 id="phoneInput"
                 type="text"
-                placeholder="전화번호를 입력해주세요"
+                placeholder="전화번호를 입력해주세요 (010-0000-0000)"
                 autocomplete="on"
               />
             </div>
+            <p class="error" id="phone-error">에러메세지</p>
           </div>
 
           <button class="register-submit" id="submitButton">회원가입</button>
@@ -132,5 +137,6 @@
       </div>
     </footer>
   </div>
+  <script src="register.js"></script>
 </body>
 </html>

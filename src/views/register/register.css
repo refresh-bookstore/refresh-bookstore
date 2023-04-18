@@ -1,6 +1,6 @@
 @import "../../../public/css/main.css";
 
-input[type=password]{
+input[type=password] {
 	font-family:"Nanum Gothic", sans-serif !important;
 }
 input[type=password]::placeholder {
@@ -42,10 +42,19 @@ input[type=password]::placeholder {
 }
 
 .input {
+  clear: both;
   width: 100%;
   padding: 8px;
   border: 1px solid #bfbfbf;
   border-radius: 3px;
+}
+
+.error {
+  display: flex;
+  display: none;
+  color: rgb(255, 0, 0);
+  font-size: 14px;
+  margin: 5px 0 5px 3px;
 }
 
 #postalCodeInput {
@@ -55,7 +64,7 @@ input[type=password]::placeholder {
 
 #searchAddress {
   float: right;
-  width: 37%;
+  width: 39%;
   padding: 8px;
   border: 1px solid #1DC078;
   border-radius: 3px;
@@ -78,7 +87,8 @@ input[type=password]::placeholder {
   border: none;
   border-radius: 8px;
   font-weight: 600;
-  color: #fff
+  color: #fff;
+  cursor: pointer;
 }
 
 .register-submit:hover {

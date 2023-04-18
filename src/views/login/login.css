@@ -1,5 +1,12 @@
 @import "../../../public/css/main.css";
 
+input[type=password] {
+	font-family:"Nanum Gothic", sans-serif !important;
+}
+input[type=password]::placeholder {
+	font-family: "NanumSquare"; 
+}
+
 /* main */
 .title {
   font-size: 35px;
@@ -38,7 +45,15 @@
   width: 100%;
   padding: 8px;
   border: 1px solid #bfbfbf;
-  border-radius: 5px;
+  border-radius: 3px;
+}
+
+.error {
+  display: flex;
+  display: none;
+  color: rgb(255, 0, 0);
+  font-size: 14px;
+  margin: 5px 0 5px 3px;
 }
 
 .login-submit {
@@ -49,9 +64,10 @@
   width: 100%;
   height: 50px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: 600;
-  color: #fff
+  color: #fff;
+  cursor: pointer;
 }
 
 .login-submit:hover {
@@ -65,9 +81,10 @@
   width: 100%;
   height: 50px;
   border: 1px solid #1DC078;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: 600;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .btn-register:hover {
