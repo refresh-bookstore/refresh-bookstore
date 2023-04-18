@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>새로고침</title>
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <div class="container">
+    <!-- register form -->
+    <main>
+      <h2 class="title">회원가입</h2>
+      <div class="register-form-container">
+        <form class="register-form-box" method="post">
+
+          <div class="field">
+            <label class="label" for="nameInput">이름</label>
+            <div class="control">
+              <input
+                class="input"
+                id="nameInput"
+                type="text"
+                placeholder="이름을 입력해주세요"
+                autocomplete="on"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="emailInput">이메일</label>
+            <div class="control">
+              <input
+                class="input"
+                id="emailInput"
+                type="email"
+                placeholder="이메일을 입력해주세요"
+                autocomplete="on"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="passwordInput">비밀번호</label>
+            <div class="control">
+              <input
+                class="input"
+                id="passwordInput"
+                type="password"
+                placeholder="비밀번호를 입력해주세요"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="passwordCheckInput">비밀번호 확인</label>
+            <div class="control">
+              <input
+                class="input"
+                id="passwordCheckInput"
+                type="password"
+                placeholder="비밀번호를 재입력해주세요"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="addressInput">주소</label>
+            <div class="control">
+              <input
+                class="input"
+                id="addressInput"
+                type="text"
+                placeholder="주소를 입력해주세요"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="phoneInput">전화번호</label>
+            <div class="control">
+              <input
+                class="input"
+                id="phoneInput"
+                type="text"
+                placeholder="전화번호를 입력해주세요"
+                autocomplete="on"
+              />
+            </div>
+          </div>
+
+          <button class="register-submit" id="submitButton">회원가입</button>
+        </form>
+    </main>
+  </div>
+</body>
+</html>
