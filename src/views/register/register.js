@@ -1,3 +1,5 @@
+import { findAddress } from "./findAddress.js";
+
 const nameInput = document.getElementById("nameInput");
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
@@ -9,13 +11,8 @@ const phoneInput = document.getElementById("phoneInput");
 const searchButton = document.getElementById("searchAddress");
 const submitButton = document.getElementById("submitButton");
 
-searchButton.addEventListener("click", handleSearch);
+searchButton.addEventListener("click", findAddress);
 submitButton.addEventListener("click", handleSubmit);
-
-function handleSearch(event) {
-  event.preventDefault();
-
-}
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -32,9 +29,9 @@ function checkValid() {
   const email = emailInput.value;
   const password = passwordInput.value;
   const passwordCheck = passwordCheckInput.value;
-  // const postalCode = postalCodeInput.value;
-  // const address = addressInput.value;
-  // const detailAddress = detailAddressInput.value;
+  const postalCode = postalCodeInput.value;
+  const address = addressInput.value;
+  const detailAddress = detailAddressInput.value;
   const phone = phoneInput.value;
 
   // 이름 길이 확인
