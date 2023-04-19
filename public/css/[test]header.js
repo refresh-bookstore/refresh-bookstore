@@ -44,14 +44,12 @@ searchBtn.addEventListener('mouseover', ()=>{
 })
 
 searchInput.addEventListener('mouseout', ()=>{
-  searchBtn.addEventListener('mouseover', ()=>{
-    return;
-  })
     searchInput.animate(searchInputDisappear,searchInputTiming);
     searchInput.placeholder = "";
     searchInput.value = "";
     setTimeout(()=>{
       searchBtn.classList.remove('activate');
+    
       searchInput.classList.remove('activate');
     }, 230);
 })
@@ -62,8 +60,7 @@ searchInput.addEventListener('mouseout', ()=>{
 //test
 const purchaseBtn = document.querySelector('#purchase-button');
 
-purchaseBtn.addEventListener('click', (e)=> {
-  e.preventDefault();
+purchaseBtn.addEventListener('click', ()=> {
   cartItem.push('hi');
   if(cartItem.length > 0) {
   cartBtn.classList.add('full');
