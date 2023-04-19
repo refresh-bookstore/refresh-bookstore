@@ -48,7 +48,7 @@ function checkValid() {
 
   if (!isNameValid) {
     nameError.style.display = "flex";
-    nameError.innerText = "이름은 2글자 이상 입력해주세요.";
+    nameError.innerText = "이름은 2글자 이상 입력해주세요";
     return false;
   } else {
     nameError.style.display = "none";
