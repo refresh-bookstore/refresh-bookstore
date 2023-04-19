@@ -28,6 +28,8 @@ function checkValid() {
   const email = emailInput.value;
   const password = passwordInput.value;
   const passwordCheck = passwordCheckInput.value;
+  const postalCode = postalCodeInput.value;
+  const address = addressInput.value;
   const phone = phoneInput.value;
 
   // 이름 길이 확인
@@ -37,6 +39,8 @@ function checkValid() {
   // 비밀번호 확인 (8 ~ 15자, 특수문자, 문자, 숫자 포함)
   const isPasswordValid = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
   const isPasswordSame = password === passwordCheck;
+  // 주소 검색 여부 확인
+  const isAddressValid = postalCode && address;
   // 전화번호 확인 (가운데 - 기호 포함)
   const isPhoneValid = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
 
@@ -45,6 +49,7 @@ function checkValid() {
   const passwordError = document.getElementById("password-error");
   const passwordCheckError = document.getElementById("passwordCheck-error");
   const phoneError = document.getElementById("phone-error");
+  const addresError = document.getElementById("address-error");
 
   if (!isNameValid) {
     nameError.style.display = "flex";
@@ -76,6 +81,14 @@ function checkValid() {
     return false;
   } else {
     passwordCheckError.style.display = "none";
+  }
+
+  if (!isAddressValid) {
+    addresError.style.display = "flex";
+    addresError.innerText = "주소를 검색해주세요";
+    return false;
+  } else {
+    addresError.style.display = "none";
   }
 
   if (!isPhoneValid.test(phone)) {
