@@ -32,7 +32,7 @@
   color: var(--color-black);
   border: 1px solid var(--color-black);
   border-radius: 20px;
-  font-size: var(--font-small);
+  font-size: var(--font-regular);
   padding: 5px;
 }
 
@@ -42,9 +42,23 @@
 }
 
 .nav-item.category .nav-link.clicked {
-  color: var(--color-point);
-  border: 2px solid var(--color-point);
+  color: var(--color-white);
+  background-color: var(--color-point);
   font-weight: var(--weight-regular);
+  border-color: var(--color-point);
+}
+
+.line {
+  background-color: var(--color-dark-gray);
+  height: 1px;
+  border: none;
+}
+
+#product-counter {
+  margin: 20px;
+  color: var(--color-black);
+  font-size: var(--font-medium);
+  font-weight: var(--weight-bold);
 }
 
 /* book list */

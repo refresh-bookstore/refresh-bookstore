@@ -36,6 +36,7 @@ function slideImage() {
 }
 
 const categoryList = ['웹 개발', '프론트엔드', '백엔드', '모바일 앱 개발', '게임 개발', '알고리즘·자료구조', '데이터베이스']
+const productCounter = document.getElementById("product-counter");
 
 const createCategory = (category) => {
   return `<li class="nav-item category">
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       link.classList.add('clicked');
+      productCounter.textContent = `${event.target.textContent} (0)`;
     });
   });
 });

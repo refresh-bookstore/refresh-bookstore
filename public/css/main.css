@@ -1,5 +1,5 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
-/* @import url('header.css'); */
+@import url('header.css');
 
 :root {
   /* Font size */
@@ -27,6 +27,7 @@
 	--color-light-gray: #e7e7e7;
 	--color-light-green: #b7fbdc;
 	--color-dark-green: #16a263;
+  --color-red: #FF0000;
 }
 
 * {
