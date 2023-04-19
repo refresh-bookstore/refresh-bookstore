@@ -1,11 +1,11 @@
 @import "../../../public/css/main.css";
 
 .order-create-title {
-  text-align: center;
-  font-size: 30px;
+  text-align: left;
+  font-size: var(--font-large);
   margin: 20px 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid var(--color-dark-gray);
 }
 
 main {
@@ -28,7 +28,7 @@ main .rightSide {
 /* Left Side */
 .leftSide > p {
   padding: 16px 0;
-  font-size: 20px;
+  font-size: var(--font-medium);
 }
 .delivery__information {
   width: 100%;
@@ -44,7 +44,7 @@ main .rightSide {
   padding-left: 20px;
   display: flex;
   align-items: center;
-  border-right: 1px solid gray;
+  border-right: 1px solid var(--color-dark-gray);
   margin-right: 8px;
 }
 .userName {
@@ -55,8 +55,8 @@ main .rightSide {
 .userName input {
   padding: 8px;
   width: 250px;
-  border: 1px solid #bfbfbf;
-  border-radius: 3px;
+  border: 1px solid var(--color-dark-gray);
+  border-radius: var(--border-radius-input);
 }
 
 .userPhoneNumber {
@@ -67,8 +67,9 @@ main .rightSide {
 .userPhoneNumber input {
   padding: 8px;
   width: 250px;
-  border: 1px solid #bfbfbf;
-  border-radius: 3px;
+  border: 1px solid var(--color-dark-gray);
+  border-radius: var(--border-radius-input);
+  color: var(--color-dark-gray);
 }
 
 .userAddress {
@@ -80,8 +81,8 @@ main .rightSide {
   width: 250px;
   margin: 8px 0;
   padding: 8px;
-  border-radius: 3px;
-  border: 1px solid #bfbfbf;
+  border-radius: var(--border-radius-input);
+  border: 1px solid var(--color-dark-gray);
 }
 
 .userAddress #sample6_postcode {
@@ -90,6 +91,7 @@ main .rightSide {
 
 input.findAddress {
   width: 100px;
+  color: gray;
 }
 
 .deliveryRequest {
@@ -99,18 +101,18 @@ input.findAddress {
   width: 140px;
   display: flex;
   align-items: center;
-  border-right: 1px solid gray;
+  border-right: 1px solid var(--color-dark-gray);
   margin-right: 8px;
   padding-left: 20px;
   padding-right: 8px;
-
+  margin-bottom: 40px;
 }
 .deliveryRequest select, input {
   width: 250px;
   margin: 4px 0;
   padding: 8px;
-  border-radius: 3px;
-  border: 1px solid #bfbfbf;
+  border-radius: var(--border-radius-input);
+  border: 1px solid var(--color-dark-gray);
   color: gray;
 }
 
@@ -127,7 +129,7 @@ input.findAddress {
 
 .rightSide p {
   padding: 16px 0;
-  font-size: 20px;
+  font-size: var(--font-medium);
 }
 
 .orderList {
@@ -140,13 +142,13 @@ input.findAddress {
   display: flex;
   flex-direction: row;
   /* width: 400px; */
-  border-bottom: 1px solid #bfbfbf;
+  border-bottom: 1px solid var(--color-light-gray);
   padding: 0px 0;
   /* border-radius: 12px; */
 }
 
 .bookInfo .book-img img {
-  border: 1px solid gray;
+  border: 1px solid var(--color-light-gray);
   scale: 80%;
 }
 
@@ -159,17 +161,17 @@ input.findAddress {
 
 .bookInfo .book-title {
   padding-bottom: 80px;
-  font-size: 24px;
+  font-size: var(--font-medium);
 }
 
 .bookInfo .amount {
-  font-size: 20px;
+  font-size: var(--font-regular);
   text-align: end;
 }
 
 .bookInfo .price {
   padding-top: 4px;
-  font-size: 18px;
+  font-size: var(--font-medium);
   text-align: end;
 }
 
@@ -184,9 +186,7 @@ input.findAddress {
 .pay__detail {
   display: flex;
   padding: 4px 0;
-  font-size: 20px;
-  /* justify-content: flex-end;
-  justify-content: space-between; */
+  font-size: var(--font-medium);
 }
 
 .pay__detail .total__price, .deliveryFee, .total__sum {
@@ -196,7 +196,6 @@ input.findAddress {
 
 
 .pay__detail div {
-  /* padding: 8px; */
   padding-left: 12px;
 }
 
@@ -206,14 +205,14 @@ input.findAddress {
 }
 
 .paymentButton button {
-  font-size: 20px;
+  font-size: var(--font-medium);
   background-color: #1DC078;
   margin-top: 20px;
 
   width: 300px;
   height: 70px;
   border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  color: #fff
+  border-radius: var(--border-radius-button);
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-white);
 }
