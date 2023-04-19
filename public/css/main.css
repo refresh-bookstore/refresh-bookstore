@@ -35,6 +35,7 @@ header {
 
 header img {
   float: left;
+  width: 200px;
 }
 
 header nav {

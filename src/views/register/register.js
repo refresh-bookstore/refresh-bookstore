@@ -1,5 +1,3 @@
-import { findAddress } from "./findAddress.js";
-
 const nameInput = document.getElementById("nameInput");
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
@@ -11,16 +9,17 @@ const phoneInput = document.getElementById("phoneInput");
 const searchButton = document.getElementById("searchAddress");
 const submitButton = document.getElementById("submitButton");
 
-searchButton.addEventListener("click", findAddress);
 submitButton.addEventListener("click", handleSubmit);
 
-function handleSubmit(event) {
-  event.preventDefault();
-
+function handleSubmit(e) {
+  e.preventDefault();
   const isAllValid = checkValid();
 
   if (isAllValid) {
     console.log('회원가입 성공');
+    location.replace('../home/home.html');
+  } else {
+    checkValid();
   }
 }
 
@@ -29,9 +28,6 @@ function checkValid() {
   const email = emailInput.value;
   const password = passwordInput.value;
   const passwordCheck = passwordCheckInput.value;
-  const postalCode = postalCodeInput.value;
-  const address = addressInput.value;
-  const detailAddress = detailAddressInput.value;
   const phone = phoneInput.value;
 
   // 이름 길이 확인

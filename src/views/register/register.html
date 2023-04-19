@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>Refresh Books</title>
   <link rel="stylesheet" href="register.css">
-  <script src="register.js"></script>
+  <script src="findAddress.js"></script>
   <!--다음 지도 API-->
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
   <div class="container">
@@ -27,7 +27,7 @@
     <main>
       <h2 class="title">회원가입</h2>
       <div class="register-form-container">
-        <form class="register-form-box" method="post">
+        <form class="register-form-box" method="get"> <!-- live server에선 post 방식을 지원하지 않음-->
 
           <div class="field">
             <label class="label" for="nameInput">이름</label>
@@ -94,9 +94,16 @@
                 readonly
               />
             </div>
+
             <div class="contorol">
-              <button id="searchAddress">주소 찾기</button>
+              <input 
+                type="button" 
+                id="searchAddress" 
+                value="주소 검색" 
+                onclick="findAddress()"
+              />
             </div>
+
             <div class="control">
               <input
                 class="input"
@@ -106,6 +113,7 @@
                 readonly
               />
             </div>
+
             <div class="control">
               <input
                 class="input"
@@ -130,7 +138,7 @@
             <p class="error" id="phone-error">에러메세지</p>
           </div>
 
-          <button class="register-submit" id="submitButton">회원가입</button>
+          <input type="submit" class="register-submit" id="submitButton" value="회원가입"/>
         </form>
     </main>
 
@@ -140,5 +148,6 @@
       </div>
     </footer>
   </div>
+  <script src="register.js"></script>
 </body>
 </html>

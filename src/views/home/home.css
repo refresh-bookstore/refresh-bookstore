@@ -1,3 +1,5 @@
+@import "../../../public/css/main.css";
+
 /* Auto Image Slider */
 #slider {
   width: 1024px;
@@ -37,18 +39,20 @@
 }
 
 .nav-item.category .nav-link:hover {
-  color: #a374db;
-  border-color: #a374db;
+  color: #1DC078;
+  border-color: #1DC078;
 }
 
 /* book list */
 .books {
   margin: 10px 10px 0 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 .book {
-  display: inline-block;
-  margin: 5px;
+  margin: 10px;
   margin-bottom: 20px;
   cursor: pointer;
 }
