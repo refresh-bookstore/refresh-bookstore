@@ -1,0 +1,113 @@
+header .logo {
+  width: 120px;
+}
+
+header .icons {
+  width: 400px;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  float:none;
+}
+
+header .icon{
+  display: flex;
+  height: 40px;
+  width: 40px;
+
+  margin: 0 5px;
+
+}
+
+
+header .search-box{
+  position: relative;
+  width: 300px;
+  height: 60%;
+  display: flex;
+
+  flex-direction: row;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: flex-end;
+
+  overflow: hidden;
+  border-radius: 6px;
+
+
+}
+
+header .search-input { 
+
+  display: none;
+  flex-direction: row;
+  flex-flow: nowrap;
+  flex: 1;
+  padding: 20px;
+  
+  width: 200px;
+  height: 60%;
+
+  border-radius: 5px;
+  border: none;
+  outline: none;
+
+}
+
+header .search-input.activate {
+  display: flex;
+}
+
+header .search {
+  background-image: url('../images/icon_search_white.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: contain;
+  cursor: pointer;
+}
+
+header .search.activate {
+  right:0px;
+  position: absolute;
+  background-color: #FFFFFF;
+  background-image: url('../images/icon_search_green.svg');
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+header .cart {
+  background-image: url('../images/icon_cart_mt.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: contain;
+  cursor: pointer;
+}
+
+header .cart .full{
+  background-image: url('../images/icon_cart_full.svg');
+}
+
+header .user {
+  background-image: url('../images/icon_user_noface.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: contain;
+  cursor: pointer;
+}
+
+
+.white {
+  fill: #FFFFFF;
+}
+
+.green {
+  fill: #1DC078;
+}
+
+
+
