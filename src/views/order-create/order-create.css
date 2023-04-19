@@ -84,6 +84,10 @@ main .rightSide {
   border: 1px solid #bfbfbf;
 }
 
+.userAddress #sample6_postcode {
+  width: 140px;
+}
+
 input.findAddress {
   width: 100px;
 }
@@ -118,7 +122,7 @@ input.findAddress {
 /* Right Side */
 /* 주문 상품 정보 */
 .rightSide {
-  width: 400px;
+  width: 450px;
 }
 
 .rightSide p {
@@ -137,7 +141,7 @@ input.findAddress {
   flex-direction: row;
   /* width: 400px; */
   border-bottom: 1px solid #bfbfbf;
-  padding: 20px 0;
+  padding: 0px 0;
   /* border-radius: 12px; */
 }
 
