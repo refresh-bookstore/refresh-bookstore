@@ -1,6 +1,10 @@
 const slider = document.querySelector("#slider");
 const slides = slider.querySelector(".slides");
 const slide = slides.querySelectorAll(".slide");
+const categoryWrap = document.querySelector("#category");
+
+const width = getImageWidth();
+let currentSlide = 0;
 
 setInterval(slideImage, 5000);
 
@@ -10,9 +14,6 @@ function getImageWidth() {
   img.src = "../../../public/images/img_sample.png";
   return img.width;
 }
-
-const width = getImageWidth();
-let currentSlide = 0;
 
 function slideImage() {
   let from = -(width * currentSlide);
@@ -33,3 +34,37 @@ function slideImage() {
     currentSlide = 0;
   }
 }
+
+const categoryList = ['웹 개발', '프론트엔드', '백엔드', '모바일 앱 개발', '게임 개발', '알고리즘·자료구조', '데이터베이스']
+
+const createCategory = (category) => {
+  return `<li class="nav-item category">
+            <a class="nav-link clicked" href="#">${category}</a>
+          </li>`
+}
+
+categoryList.forEach(category => {
+  const categoryEl = createCategory(category);
+  categoryWrap.innerHTML += categoryEl;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  navLinks.forEach(link => {
+    link.classList.remove('clicked');
+  })
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const clickedLink = document.querySelector('.nav-link.clicked');
+      if (clickedLink) {
+        clickedLink.classList.remove('clicked');
+      }
+
+      link.classList.add('clicked');
+    });
+  });
+});
