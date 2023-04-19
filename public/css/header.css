@@ -1,5 +1,20 @@
+header .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 100%;
+  width: 1024px;
+}
+
 header .logo {
-  width: 120px;
+  width: 100px;
+  height: 150px;
+  background-image: url('../images/logo_green.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: contain;
+  cursor: pointer;
 }
 
 header .icons {
@@ -59,10 +74,11 @@ header .search-input {
 
 header .search-input.activate {
   display: flex;
+  border: #1DC078 1px;
 }
 
 header .search {
-  background-image: url('../images/icon_search_white.svg');
+  background-image: url('../images/icon_search_green.svg');
   background-repeat: no-repeat;
   background-position: center left;
   background-size: contain;
@@ -70,18 +86,18 @@ header .search {
 }
 
 header .search.activate {
-  right:0px;
+
   position: absolute;
   background-color: #FFFFFF;
   background-image: url('../images/icon_search_green.svg');
-  border: none;
+  border-right: #1DC078 1px;
   border-radius: 5px;
   cursor: pointer;
-  padding: 10px;
+
 }
 
 header .cart {
-  background-image: url('../images/icon_cart_mt.svg');
+  background-image: url('../images/icon_cart_mt_green.svg');
   background-repeat: no-repeat;
   background-position: center left;
   background-size: contain;
@@ -89,11 +105,11 @@ header .cart {
 }
 
 header .cart.full{
-  background-image: url('../images/icon_cart_full.svg');
+  background-image: url('../images/icon_cart_full_green.svg');
 }
 
 header .user {
-  background-image: url('../images/icon_user_noface.svg');
+  background-image: url('../images/icon_user_noface_green.svg');
   background-repeat: no-repeat;
   background-position: center left;
   background-size: contain;
