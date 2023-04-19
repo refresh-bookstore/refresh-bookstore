@@ -110,11 +110,6 @@ input.findAddress {
   color: gray;
 }
 
-.deliveryRequest select {
-  /* margin-left: 88px; */
-
-}
-
 .customRequestContainer input {
   width: 250px;
   padding: 8px;
