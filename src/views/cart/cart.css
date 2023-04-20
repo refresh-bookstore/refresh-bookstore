@@ -1,3 +1,5 @@
+@import url('../../../public/css/main.css');
+
 /* main */
 main {
   padding: 20px 0px;
@@ -20,10 +22,11 @@ main {
 .cartMenu .selectMenu {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--color-dark-gray);
 }
 
-.cartMenu .selectMenu .removeSelected {
+.cartMenu .selectMenu .deleteSelected {
   border: 1px solid var(--color-dark-gray);
   border-radius: var(--border-radius-button);
   padding: 4px;
@@ -35,34 +38,42 @@ main {
 
 .selectAll p {
   padding-left: 8px;
+  display: flex;
+  align-items: center;
 }
 /* cart container */
-.cart {
+.item {
   display: flex;
   flex-direction: row;
-  margin: 10px 0;
   justify-content: space-between;
-  border-top: 1px solid var(--color-dark-gray);
   border-bottom: 1px solid var(--color-dark-gray);
   padding: 0 20px;
 }
 
-.cart .book-img {
+.cart div.book-img {
+  position: relative;
+  right: 30px;
+}
+.book-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   right: 60px;
-}
-.book-title {
-  display: flex;
-  align-items: center;
-  position: relative;
-  right: 150px;
+  /* width: 300px; */
   font-size: var(--font-medium);
   color: var(--color-black);
 }
 
-.book-link {
+.book-title {
   text-decoration: none;
   color: var(--color-black);
+}
+
+.author {
+  font-size: var(--font-regular);
+  padding: 8px 0;
+  color: var(--color-light-black);
 }
 
 .price {
@@ -78,6 +89,39 @@ main {
 }
 .book-price {
   padding: 8px 0;
+  font-size: var(--font-medium);
+}
+
+.amountArea {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.amountArea button{
+  width: 35px;
+  height: 30px;
+
+  color: var(--color-point);
+  font-size: var(--font-regular);
+  font-weight: 200;
+  border: var(--color-point) 0.5px solid;
+  background-color: var(--color-light-green);
+}
+
+.amountArea input{
+  width: 35px;
+  height: 30px;
+
+  color:var(--color-point);
+  font-size: var(--font-regular);
+  font-weight: 200;
+  text-align: center;
+
+  border-top: var(--color-point) 0.5px solid;
+  border-bottom: var(--color-point) 0.5px solid;
+  border-left: 0;
+  border-right: 0;
 }
 
 .delete {

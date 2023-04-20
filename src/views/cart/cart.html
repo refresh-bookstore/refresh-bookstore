@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <title>Refresh Bookstore</title>
   <link rel="stylesheet" href="cart.css">
-  <link rel="stylesheet" href="../../../public/css/main.css">
-  <script defer src="cart.js"></script>
+  <script type="module" src="cart.js"></script>
 </head>
 <body>
+  <header></header>
   <div class="container">
 
     <main>
@@ -19,34 +19,71 @@
             <input type="checkbox" name="checkAll" checked="">
             <p>전체선택</p>
           </div>
-          <button class="removeSelected">선택 삭제</button>
+          <button class="deleteSelected">선택 삭제</button>
         </div>
       </div>
       <!-- <hr/> -->
       <!-- 책 장바구니 -->
       <div class="cart">
-        <input type="checkbox" name="buy" checked="">
-        <!-- 책 이미지 -->
-        <div class="book-img">
-          <a class="book-link" href="#">
-            <img src="../../../public/images/img_sample_book.png" class="book-img" alt="bookImg1"/>
-          </a>
-        </div>
+        <div class="item">
+          <input type="checkbox" name="buy" checked="">
+          <!-- 책 이미지 -->
+          <div class="book-img">
+            <a class="book-link" href="#">
+              <img src="../../../public/images/img_sample_book.png" class="book-img" alt="bookImg1"/>
+            </a>
+          </div>
           
-        <div class="book-title">
-          <a class="book-link" href="#">책 제목</a>
-        </div>
-        <!-- 수량 변경 -->
-        <div class="set-amount"></div>
+          <div class="book-info">
+            <a class="book-title" href="#">asdfasdfadfasdfasdfasdfadfadfadfadfas</a>
+            <div class="author">고현민</div>
+          </div>
+          <!-- 상품 금액 -->
+          <div class="price">
+            <p class="price-title">상품 금액</p>
+            <div class="book-price">20,000원</div>
+          </div>
+          <!-- 수량 변경 -->
+          <div class="amountArea">
+            <button id="minusBtn">-</button>
+            <input id ="amountInput" value="1">
+            <button id="plusBtn">+</button>
+          </div>
           
-        <!-- 상품 금액 -->
-        <div class="price">
-          <p class="book-price">상품 금액</p>
-          <div class="book-price">20,000원</div>
+          <!-- 삭제 버튼 -->
+          <div class="delete">
+            <button class="deleteBtn">삭제</button>
+          </div>
         </div>
-        <!-- 삭제 버튼 -->
-        <div class="delete">
-          <button class="deleteBtn">삭제</button>
+        <div class="item">
+          <input type="checkbox" name="buy" checked="">
+          <!-- 책 이미지 -->
+          <div class="book-img">
+            <a class="book-link" href="#">
+              <img src="../../../public/images/img_sample_book.png" class="book-img" alt="bookImg1"/>
+            </a>
+          </div>
+          
+          <div class="book-info">
+            <a class="book-title" href="#">asdfasdfadfasdfasdfasdfadfadfadfadfas</a>
+            <div class="author">고현민</div>
+          </div>
+          <!-- 상품 금액 -->
+          <div class="price">
+            <p class="price-title">상품 금액</p>
+            <div class="book-price">20,000원</div>
+          </div>
+          <!-- 수량 변경 -->
+          <div class="amountArea">
+            <button id="minusBtn">-</button>
+            <input id ="amountInput" value="1">
+            <button id="plusBtn">+</button>
+          </div>
+          
+          <!-- 삭제 버튼 -->
+          <div class="delete">
+            <button class="deleteBtn">삭제</button>
+          </div>
         </div>
       </div>
 
@@ -77,5 +114,6 @@
     </main>
 
   </div>
+  <footer></footer>
 </body>
 </html>
