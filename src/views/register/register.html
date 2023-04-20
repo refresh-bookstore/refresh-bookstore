@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Refresh Books</title>
+  <!-- 커스텀 css, js -->
+  <link rel="stylesheet" href="register.css">
+  <script src="findAddress.js"></script>
+  <!-- 다음 지도 API -->
+  <!-- https:// 임의 추가 -->
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <!--
+      <img src="../../../public/images/img_sample_logo.png"></img>
+        <nav>
+          <ul>
+            <li><a href="#">검색</a></li>
+            <li><a href="../login/login.html">로그인</a></li>
+            <li><a href="../register/register.html">회원가입</a></li>
+            <li><a href="#">장바구니</a></li>
+          </ul>
+        </nav>
+      -->
+    </header>
+
+    <!-- register form -->
+    <main>
+      <h2 class="title">회원가입</h2>
+      <div class="register-form-container">
+        <form class="register-form-box" action="/register" method="post"> <!-- live server에선 post 방식을 지원하지 않음-->
+
+          <div class="field">
+            <label class="label" for="nameInput">이름</label>
+            <div class="control">
+              <input
+                class="input"
+                id="nameInput"
+                type="text"
+                placeholder="이름을 입력해주세요"
+                autocomplete="on"
+              />
+            </div>
+            <p class="error" id="name-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="emailInput">이메일</label>
+            <div class="control">
+              <input
+                class="input"
+                id="emailInput"
+                type="email"
+                placeholder="이메일을 입력해주세요"
+                autocomplete="on"
+              />
+            </div>
+            <p class="error" id="email-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="passwordInput">비밀번호</label>
+            <div class="control">
+              <input
+                class="input"
+                id="passwordInput"
+                type="password"
+                placeholder="비밀번호를 입력해주세요 (8 ~ 15자, 특수문자, 문자, 숫자 포함)"
+              />
+            </div>
+            <p class="error" id="password-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="passwordCheckInput">비밀번호 확인</label>
+            <div class="control">
+              <input
+                class="input"
+                id="passwordCheckInput"
+                type="password"
+                placeholder="비밀번호를 다시 입력해주세요"
+              />
+            </div>
+            <p class="error" id="passwordCheck-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="addressInput">주소</label>
+            <div class="control">
+              <input
+                class="input"
+                id="postalCodeInput"
+                type="text"
+                placeholder="우편주소"
+                readonly
+              />
+            </div>
+
+            <div class="control">
+              <input
+                type="button"
+                id="searchAddress"
+                value="주소 검색"
+                onclick="findAddress()"
+              />
+            </div>
+
+            <div class="control">
+              <input
+                class="input"
+                id="addressInput"
+                type="text"
+                placeholder="주소를 검색해주세요"
+                readonly
+              />
+            </div>
+
+            <div class="control">
+              <input
+                class="input"
+                id="detailAddressInput"
+                type="text"
+                placeholder="상세주소를 입력해주세요"
+              />
+            </div>
+            <p class="error" id="address-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="phoneInput">전화번호</label>
+            <div class="control">
+              <input
+                class="input"
+                id="phoneInput"
+                type="text"
+                placeholder="전화번호를 입력해주세요 (010-0000-0000)"
+                autocomplete="on"
+              />
+            </div>
+            <p class="error" id="phone-error"></p>
+          </div>
+
+          <input type="submit" class="register-submit" id="submitButton" value="회원가입"/>
+        </form>
+    </main>
+
+    <footer id="footer">
+      <!--
+      <div class="copyright">
+        <p>Copyright © 2023 refresh-store. All rights reserved.</p>
+      </div>
+      -->
+    </footer>
+  </div>
+  <!-- 커스텀 js -->
+  <script src="register.js"></script>
+</body>
+</html>
