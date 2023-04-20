@@ -76,8 +76,9 @@
   align-items: center;
 }
 
-.content-area h4{
+.content-area .title{
   margin-right: 30px;
+  font-size: var(--font-medium);
 }
 
 .active {
@@ -168,17 +169,20 @@
   height: 50px;
 }
 
-.content .item .item-info .item-buttons button{
-  width: 48%;
+.content .item .item-info .item-buttons .button{
+  width: 30%;
   height: 30px;
-  background-color: var(--color-white);
+  padding: 2px;
+  opacity: 0.3;
 
-  color: var(--color-point);
-  font-size: var(--font-regular);
-  font-weight: var(--weight-regular);
-  text-align: center;
-  border: 0.5px var(--color-point) solid;
-  border-radius: 8px;
+}
+
+.content .item .item-info .item-buttons .button:hover{
+  width: 30%;
+  height: 30px;
+  padding: 2px;
+  opacity: 1;
+
 }
 
 .content .item .item-info .item-buttons button.red{

@@ -1,6 +1,7 @@
-//import { dataLists } from './dummy-datas';
+import { dataLists } from './dummy-datas.js';
+import { main } from '../../../public/js/main.js';
 
-
+main();
 const title = document.querySelector('.title');
 const lists = [
   adminBooks = document.querySelector('#list-books'),
