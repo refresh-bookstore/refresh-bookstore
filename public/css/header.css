@@ -23,7 +23,7 @@ header .header-container {
 }
 
 header .logo {
-  width: 130px;
+  width: 110px;
   height: 100px;
   background-image: url('../images/logo_green.svg');
   background-repeat: no-repeat;

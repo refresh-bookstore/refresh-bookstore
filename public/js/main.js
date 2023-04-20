@@ -1,9 +1,10 @@
 import { renderHeader } from "./render-header.js";
+import { renderFooter } from "./render-footer.js";
 
-async function main() {
-
+function main() {
 
   renderHeader();
+  renderFooter();
 
 }
 

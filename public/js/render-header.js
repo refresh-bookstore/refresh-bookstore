@@ -1,7 +1,7 @@
 function renderHeader() {
   const header = document.querySelector("header");
 
-  header.innerHTML = `<!-- Copyright -->
+  header.innerHTML = `
     <div class="header-container">
       <span class="logo"></span>
       <span class="icons">
@@ -13,7 +13,8 @@ function renderHeader() {
         <span class="icon user" id="user-icon"> </span>
       </span>
     </div>
-    <!-- Copyright -->`;
+    <script src="../../../public/js/header.js"></script>
+    `;
 }
 
 export { renderHeader };
