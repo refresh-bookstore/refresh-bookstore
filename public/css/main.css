@@ -35,6 +35,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'NanumSquare', sans-serif;
+  color: var(--color-black);
 }
 
 ol, ul, li {
