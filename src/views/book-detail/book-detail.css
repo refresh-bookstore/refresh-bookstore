@@ -1,46 +1,6 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 @import url('../../../public/css/main.css');
 
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'NanumSquare', sans-serif;
-}
-
-img {
-  vertical-align: middle;
-  border: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-
-.container {
-  margin-top: 30px;
-  height: 90%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-
-  padding: 50px 100px;
-  box-sizing: border-box;
-  color: rgb(62, 62, 62);
-
-
-}
 
 .upperArea {
   display: flex;
@@ -51,7 +11,7 @@ body {
   height: 100 px;
 
   padding: 10px 20px;
-  border-bottom: #b8b8b8 solid 0.5px;
+  border-bottom: var(--color-dark-gray) solid 0.5px;
 }
 
 .upperArea span {
@@ -62,7 +22,6 @@ body {
 .upperArea img {
   width: 20px;
   margin: 10px;
-
 }
 
 .middleArea {
@@ -73,7 +32,7 @@ body {
   align-items: stretch;
 
   padding: 10px 20px;
-  border-bottom: #b8b8b8 solid 0.5px;
+  border-bottom: var(--color-dark-gray) solid 0.5px;
 
 }
 
@@ -88,7 +47,7 @@ body {
   align-items: center;
   flex-grow: 1;
 
-  border: #e7e7e7 0.3px solid;
+  border: var(--color-light-gray) 0.3px solid;
 
 }
 
@@ -96,7 +55,7 @@ body {
   margin: 20px 0;
   width: 48%;
   align-items: center;
-  box-shadow: 10px 10px 20px rgb(226, 226, 226);
+  box-shadow: 10px 10px 20px var(--color-light-gray);
 }
 
 
@@ -123,27 +82,31 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
 
-  border-bottom: #e7e7e7 solid 0.3px;
+  border-bottom: var(--color-light-gray) solid 0.3px;
 
 }
 
 
 
 .bookTitleArea p {
-  font-size: 10pt;
-  color:#1DC078;
+  font-size: var(--font-small);
+  color: var(--color-point);
   margin: 5px;
 }
 
+.bookTitleArea p#detailedInfo {
+  color: var(--color-dark-gray);
+}
+
 .bookTitleArea .bookTitle {
-  font-size: 20pt;
+  font-size: var(--font-large);
   font-weight: 900;
 
   margin: 5px;
 }
 
 .bookTitleArea #bookSubtitle {
-  font-size: 12pt;
+  font-size: var(--font-regular);
   font-weight: 400;
   margin: 5px;
 }
@@ -160,20 +123,20 @@ body {
 
 
 .purchaseInfo p {
-  font-size: 8pt;
-  color:#838383;
+  font-size: var(--font-micro);
+  color: var(--color-dark-gray);
   margin: 5px;
 }
 .purchaseInfo .bookTitle{
   width: 100%;
-  color:rgb(62, 62, 62);
-  font-size: 12pt;
+  color: var(--color-point);
+  font-size: var(--font-regular);
   font-weight: 800;
 }
 
 .purchaseInfo .costArea {
   width: 100%;
-  background-color: #ececec;
+  background-color: var(--color-light-green);
   padding: 15px;
   margin: 30px, 0;
   border-radius: 8px;
@@ -195,23 +158,24 @@ body {
   width: 35px;
   height: 30px;
 
-  color: #838383;
-  font-size: 15pt;
+  color: var(--color-point);
+  font-size: var(--font-regular);
   font-weight: 200;
-  border: #9c9c9c 0.5px solid;
+  border: var(--color-point) 0.5px solid;
+  background-color: var(--color-light-green);
 }
 
 .purchaseInfo .costArea .amountArea input{
   width: 35px;
   height: 30px;
 
-  color:#4d4d4d;
-  font-size: 13pt;
+  color:var(--color-point);
+  font-size: var(--font-regular);
   font-weight: 200;
   text-align: center;
 
-  border-top: #9c9c9c 0.5px solid;
-  border-bottom: #9c9c9c 0.5px solid;
+  border-top: var(--color-point) 0.5px solid;
+  border-bottom: var(--color-point) 0.5px solid;
   border-left: 0;
   border-right: 0;
 }
@@ -219,7 +183,7 @@ body {
 #totalCost {
   font-size: 20pt;
   font-weight: 900;
-  color: rgb(17, 17, 17);
+  color: var(--color-black);
   
   text-align: right;
 
@@ -244,13 +208,13 @@ body {
 .purchaseBtnArea #addToCartBtn{
   width: 48%;
   height: 30px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
 
-  color:#1DC078;
+  color:var(--color-point);
   font-size: 13pt;
   font-weight: 700;
   text-align: center;
-  border: 0.5px  #1DC078 solid;
+  border: 0.5px  var(--color-point) solid;
   border-radius: 8px;
 
 }
@@ -260,11 +224,11 @@ body {
   height: 30px;
   background-color: #1DC078;
 
-  color:#FFFFFF;
+  color:var(--color-white);
   font-size: 13pt;
   font-weight: 700;
   text-align: center;
-  border: 0.5px rgb(17, 17, 17);
+  border: none;
   border-radius: 8px;
 
 }
@@ -275,8 +239,8 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
+  justify-content: center;
+  align-items: center;
 
   line-height: 25pt;
 
@@ -286,6 +250,6 @@ body {
   font-weight: 800;
   font-size: 20px;
   margin-bottom: 20px;
-  border-bottom:#e7e7e7 0.3px solid;
+  border-bottom:var(--color-light-gray) 0.3px solid;
   padding-bottom: 20px;
 }
