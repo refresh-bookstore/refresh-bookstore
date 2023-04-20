@@ -32,6 +32,7 @@
 .navigate-area {
   display: flex;
   width: 30%;
+  height: 250px;
   margin: 30px;
   padding: 20px 10px;
 
@@ -81,4 +82,117 @@
 
 .active {
   display:flex;
+}
+
+.content .item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  margin: 10px;
+
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-button);
+  border: 0.3px var(--color-light-gray) solid;
+  box-shadow: 5px 5px 5px var(--color-light-gray);
+}
+
+.content .item input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  margin: 20px;
+  background-color: var(--color-dark-gray);
+
+  border: 1px var(--color-light-gray) solid;
+}
+
+.content .item .item-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 30%;
+  height: 150px;
+  margin: 20px;
+  padding: 20px;
+  border: 0.3px var(--color-light-gray) solid;
+}
+
+.content .item .item-img img{
+  width: 100px;
+}
+
+.content .item .item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  margin: 20px;
+  width: 70%;
+}
+
+.content .item .item-info .item-name {
+
+  font-size: var(--font-medium);
+  font-weight: var(--weight-bold);
+  color: var(--color-black);
+  text-align: right;
+
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 0.3px var(--color-light-gray) solid;
+}
+
+.content .item .item-info .item-detail {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+  text-align: right;
+  width: 100%;
+  margin: 0 10px;
+  padding: 0 10px;
+}
+
+.content .item .item-info .item-cost {
+  font-size: var(--font-medium);
+  font-weight: var(--weight-bold);
+  color: var(--color-black);
+  text-align: right;
+  width: 100%;
+  margin: 10px;
+  padding: 0 10px;
+}
+
+.content .item .item-info .item-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100%;
+  height: 50px;
+}
+
+.content .item .item-info .item-buttons button{
+  width: 48%;
+  height: 30px;
+  background-color: var(--color-white);
+
+  color: var(--color-point);
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  text-align: center;
+  border: 0.5px var(--color-point) solid;
+  border-radius: 8px;
+}
+
+.content .item .item-info .item-buttons button.red{
+  color: var(--color-white);
+  background-color: var(--color-red);
+  border: none;
 }
