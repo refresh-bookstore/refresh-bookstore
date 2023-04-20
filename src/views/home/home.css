@@ -46,6 +46,7 @@
   background-color: var(--color-point);
   font-weight: var(--weight-regular);
   border-color: var(--color-point);
+  transition: all 0.2s;
 }
 
 .line {

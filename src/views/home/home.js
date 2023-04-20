@@ -51,10 +51,7 @@ categoryList.forEach(category => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-link');
-
-  navLinks.forEach(link => {
-    link.classList.remove('clicked');
-  })
+  let isFirst = true;
 
   navLinks.forEach(link => {
     link.addEventListener('click', (event) => {
@@ -68,5 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.add('clicked');
       productCounter.textContent = `${event.target.textContent} (0)`;
     });
+  });
+
+  navLinks.forEach((link) => {
+    if (isFirst) {
+      link.classList.add('clicked');
+      productCounter.textContent = `전체 (0)`;
+      isFirst = false;
+    } else {
+      link.classList.remove('clicked');
+    }
   });
 });
