@@ -13,7 +13,6 @@ function renderHeader() {
         <span class="icon user" id="user-icon"> </span>
       </span>
     </div>
-    <script src="../../../public/js/header.js"></script>
     `;
 }
 
