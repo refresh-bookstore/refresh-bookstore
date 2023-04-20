@@ -7,3 +7,27 @@
   padding-bottom: 20px;
   border-bottom: 1px solid var(--color-dark-gray);
 }
+
+.complete__message p.title {
+  text-align: center;
+  font-size: var(--font-large);
+  padding: 100px 0;
+}
+
+.complete__message p.message {
+  font-size: var(--font-medium);
+  text-align: center;
+  padding: 60px 0;
+}
+
+.button__area {
+  text-align: center;
+}
+
+.button__area button {
+  font-size: var(--font-medium);
+  padding: 4px;
+  margin: 4px;
+  border-radius: var(--border-radius-button);
+  border: 1px solid var(--color-dark-gray);
+}
