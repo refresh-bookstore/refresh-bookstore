@@ -1,3 +1,5 @@
+import { main } from '../../../public/js/main.js';
+
 const slider = document.querySelector("#slider");
 const slides = slider.querySelector(".slides");
 const slide = slides.querySelectorAll(".slide");
@@ -69,12 +71,12 @@ const createBook = (book) => {
   return `<div class="book">
             <a class="book-link" href="#">
               <div class="img-container">
-                <img src="../../../public/images/img_sample_book.png" class="book-img" alt="${book.title}"/>
+                <img src="../../../public/images/sample_image.jpg" class="book-img" alt="${book.title}"/>
               </div>
               <div class="book-body">
                 <div class="book-text title">${book.title}</div>
                 <div class="book-text category">${book.category}</div>
-                <div class="book-text price">${book.price}</div>
+                <div class="book-text price">${book.price.toLocaleString()}원</div>
               </div>
             </a>
           </div>`;
@@ -84,43 +86,43 @@ const createBook = (book) => {
 const bookList = [{
   title: "프론트엔드 성능 최적화 가이드",
   category: categoryList[1],
-  price: "19800원"
+  price: 19800
 }, {
   title: "Hello IT 프론트엔드 개발을 시작하려고 해: 입문편",
   category: categoryList[1],
-  price: "26550원"
+  price: 26550
 }, {
   title: "Node.js 백엔드 개발자 되기",
   category: categoryList[2],
-  price: "34200원"
+  price: 34200
 }, {
   title: "백엔드를 위한 Django REST Framework with 파이썬",
   category: categoryList[2],
-  price: "16200원"
+  price: 16200
 }, {
   title: "인사이드 안드로이드 OS",
   category: categoryList[3],
-  price: "25200원"
+  price: 25200
 }, {
   title: "iOS 앱 개발을 위한 Swift 3",
   category: categoryList[3],
-  price: "38700원"
+  price: 38700
 }, {
   title: "유니티 2D 게임 개발",
   category: categoryList[4],
-  price: "27000원"
+  price: 27000
 }, {
   title: "Do it! 첫 알고리즘",
   category: categoryList[5],
-  price: "16200원"
+  price: 16200
 }, {
   title: "누구나 자료 구조와 알고리즘",
   category: categoryList[5],
-  price: "29700원"
+  price: 29700
 }, {
   title: "데이터베이스 개론",
   category: categoryList[6],
-  price: "29000원"
+  price: 29000
 }, ];
 
 // 책 html 추가
@@ -128,8 +130,6 @@ bookList.forEach(book => {
   const bookEl = createBook(book);
   books.innerHTML += bookEl;
 });
-
-const categoryLiList = document.querySelectorAll(".nav-item.category");
 
 // 페이지가 로드되면 실행
 document.addEventListener("DOMContentLoaded", () => {
@@ -160,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
       books.innerHTML = "";
 
       const findBookListByCategory = [];
-
       const clickedCategory = event.target.textContent;
 
       // 클릭한 카테고리별 책 배열에 담기
@@ -182,8 +181,9 @@ document.addEventListener("DOMContentLoaded", () => {
           const newBook = createBook(book);
           books.innerHTML += newBook;
         });
-        
       }
     });
   });
 });
+
+main();

@@ -74,7 +74,11 @@
   display: inline-block;
   width: 20%;
   cursor: pointer;
-  padding-left: 10px;
+  padding: 0 0 20px 10px;
+}
+
+.img-container {
+  text-align: center;
 }
 
 .book-link {
@@ -82,8 +86,11 @@
   text-decoration: none;
 }
 
-.img-container {
-  width: 180px;
+.book-img {
+  width: auto;
+  height: 180px;
+  object-fit: cover;
+  justify-content: center
 }
 
 .book-text.title {
