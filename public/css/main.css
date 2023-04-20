@@ -1,6 +1,35 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 @import url('header.css');
 
+:root {
+  /* Font size */
+  --font-large: 30px;
+  --font-medium: 20px;
+  --font-regular: 16px;
+  --font-small: 14px;
+  --font-micro: 10px;
+
+  /* Font weight */
+  --weight-bold: 900;
+  --weight-semi-bold: 700;
+  --weight-regular: 500;
+	--weight-light: 300;
+
+  /* Size */
+  --border-radius-button: 8px;
+	--border-radius-input: 3px;
+
+  /* Color */
+  --color-white: #ffffff;
+	--color-black: #111111;
+	--color-point: #1DC078;
+	--color-dark-gray: #bfbfbf;
+	--color-light-gray: #e7e7e7;
+	--color-light-green: #b7fbdc;
+	--color-dark-green: #16a263;
+  --color-red: #FF0000;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,62 +47,5 @@ a {
 
 .container {
   width: 1024px;
-  margin: 0 auto;
-}
-
-/* header */
-header {
-  top: 0px;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 100%;
-  height: 55px;
-  background-color: #1DC078;
-
-  padding: 10px 20px;
-  border-bottom: #FFFFFF 1px solid;
-}
-
-header img {
-  float: left;
-}
-
-header nav {
-  float: right;
-}
-
-header ul li {
-  display:inline-block;
-  margin-right: 32px;
-}
-
-header ul li:last-child {
-  margin-right: 0;
-}
-
-header ul li a {
-  color: #4c4c4c;
-}
-
-header ul li a:hover {
-  color: #bfbfbf;
-}
-
-/* footer */
-footer {
-  bottom: 0px;
-
-  width: 100%;
-  height: 150px;
-  background-color: #1DC078;
-}
-
-#footer .copyright p {
-  font-size: 14px;
-
-  padding: 32px 0 0 40px;
-  text-align: center;
+  margin: 70px auto auto auto;
 }
