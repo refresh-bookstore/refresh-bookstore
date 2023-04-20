@@ -1,3 +1,18 @@
+header {
+  top: 0px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 70px;
+  background-color: #b5ffde;
+
+  padding: 10px 20px;
+}
+
+
 header .header-container {
   display: flex;
   align-items: center;
@@ -8,13 +23,14 @@ header .header-container {
 }
 
 header .logo {
-  width: 100px;
-  height: 150px;
+  width: 130px;
+  height: 100px;
   background-image: url('../images/logo_green.svg');
   background-repeat: no-repeat;
   background-position: center left;
   background-size: contain;
   cursor: pointer;
+  overflow: visible;
 }
 
 header .icons {

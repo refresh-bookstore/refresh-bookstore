@@ -1,4 +1,7 @@
+@import url('../../../public/css/main.css');
+
 /* Auto Image Slider */
+
 #slider {
   width: 1024px;
   height: 300px;
@@ -12,7 +15,6 @@
 }
 
 #slider .slide {
-  float: left;
   width: 1024px;
   height: 300px;
 }
