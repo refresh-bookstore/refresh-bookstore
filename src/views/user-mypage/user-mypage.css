@@ -1,5 +1,13 @@
 @import url('../../../public/css/main.css');
 
+input[type=password] {
+	font-family:"Nanum Gothic", sans-serif !important;
+}
+input[type=password]::placeholder {
+	font-family: "NanumSquare"; 
+}
+
+
 .intro {
   margin-bottom: 20px;
 }
@@ -18,6 +26,7 @@
 .main-contents {
   display: flex;
   margin-top: 20px;
+  justify-content: center;
 }
 
 .mypage__category.nav {
@@ -49,9 +58,107 @@
   border-radius: var(--border-radius-button);
 }
 
-.information__zone {
+.content-area {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  width: 500px;
+  border-left: 1px solid var(--color-dark-gray);
+  padding: 20px 0 0 20px;
+}
+
+.register-form-box {
+  width: 800px;
+}
+
+#content-title {
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-black);
+  margin-bottom: 20px;
+}
+
+.field {
+  margin: 20px 0 20px 0;
+  display: flex;
+  flex-flow: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.label {
+  font-size: var(--font-medium);
+  width: 200px;
+  margin-left: 40px;
+}
+
+.input {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid var(--color-dark-gray);
+  border-radius: var(--border-radius-input);
+}
+
+#postalCodeInput {
+  width: 200px;
+}
+
+#searchAddress {
+  margin-left: 10px;
+  width: 90px;
+  padding: 8px;
+  border: 1px solid var(--color-point);
+  border-radius: var(--border-radius-input);
+  cursor: pointer;
+  font-weight: var(--weight-regular);
+}
+
+#searchAddress:hover {
+  background-color: var(--color-light-gray);
+}
+
+#addressInput {
+  clear: both;
+}
+
+.error {
+  display: flex;
+  display: none;
+  color: var(--color-red);
+  font-size: var(--font-small);
+  margin: 5px 0 5px 3px;
+}
+
+.register-submit {
+  font-size: var(--font-medium);
+  background-color: var(--color-point);
+  margin: 60px 0 0 40px;
+
+  width: 250px;
+  height: 50px;
+  border: none;
+  border-radius: var(--border-radius-button);
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.register-submit:hover {
+  background-color: var(--color-dark-green);
+}
+
+.user-delete {
+  font-size: var(--font-medium);
+  background-color: var(--color-dark-gray);
+  margin-top: 60px;
+
+  width: 250px;
+  height: 50px;
+  border: none;
+  border-radius: var(--border-radius-button);
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.user-delete:hover {
+  background-color: var(--color-black);
 }

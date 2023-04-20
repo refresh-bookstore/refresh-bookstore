@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <title>Refresh Books</title>
   <link rel="stylesheet" href="user-mypage.css">
+  <script src="findAddress.js"></script>
+  <!-- 다음 지도 API -->
+  <!-- https:// 임의 추가 -->
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </head>
 <body>
   <header></header>
@@ -28,7 +33,122 @@
       </ul>
 
       <!-- 콘텐츠 영역 -->
-      <div class="content-area"></div>
+      <div class="content-area">
+        <p id="content-title">회원정보 수정</p>
+        <form class="register-form-box" method="post"> <!-- live server에선 post 방식을 지원하지 않음-->
+
+          <div class="field">
+            <label class="label" for="nameInput">이름</label>
+            <div class="control">
+              <input
+                class="input"
+                id="nameInput"
+                type="text"
+                placeholder="이름을 입력해주세요"
+                autocomplete="on"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="emailInput">이메일</label>
+            <div class="control">
+              <p id="emailText"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="passwordInput">비밀번호</label>
+            <div class="control">
+              <input
+                class="input"
+                id="passwordInput"
+                type="password"
+                placeholder="8 ~ 15자, 특수문자, 문자, 숫자 포함"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="passwordCheckInput">비밀번호 확인</label>
+            <div class="control">
+              <input
+                class="input"
+                id="passwordCheckInput"
+                type="password"
+                placeholder="비밀번호를 다시 입력해주세요"
+              />
+            </div>
+            <p class="error" id="passwordCheck-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="addressInput">주소</label>
+            <div class="control">
+              <input
+                class="input"
+                id="postalCodeInput"
+                type="text"
+                placeholder="우편주소"
+                readonly
+              />
+            </div>
+
+            <div class="control">
+              <input 
+                type="button" 
+                id="searchAddress" 
+                value="주소 검색" 
+                onclick="findAddress()"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="addressInput"></label>
+            <div class="control">
+              <input
+                class="input"
+                id="addressInput"
+                type="text"
+                placeholder="주소를 검색해주세요"
+                readonly
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="addressInput"></label>
+            <div class="control">
+              <input
+                class="input"
+                id="detailAddressInput"
+                type="text"
+                placeholder="상세주소를 입력해주세요"
+              />
+            </div>
+
+          </div>
+
+          <div class="field">
+            <label class="label" for="phoneInput">전화번호</label>
+            <div class="control">
+              <input
+                class="input"
+                id="phoneInput"
+                type="text"
+                placeholder="010-0000-0000"
+                autocomplete="on"
+              />
+            </div>
+            <p class="error" id="phone-error"></p>
+          </div>
+
+          <input type="submit" class="register-submit" id="submitButton" value="수정"/>
+          <input type="button" class="user-delete" id="deleteButton" value="삭제"/>
+        </form>
+
+      </div>
 
     </div>
   <footer></footer>
