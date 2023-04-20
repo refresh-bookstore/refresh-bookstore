@@ -95,7 +95,7 @@
 }
 
 .bookTitleArea p#detailedInfo {
-  color: var(--color-dark-gray);
+  color: var(--color-light-black);
 }
 
 .bookTitleArea .bookTitle {
@@ -124,7 +124,7 @@
 
 .purchaseInfo p {
   font-size: var(--font-micro);
-  color: var(--color-dark-gray);
+  color: var(--color-light-black);
   margin: 5px;
 }
 .purchaseInfo .bookTitle{
