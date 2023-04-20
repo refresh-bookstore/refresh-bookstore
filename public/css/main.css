@@ -49,4 +49,5 @@ a {
 .container {
   width: 1024px;
   margin: 70px auto auto auto;
+  padding: 20px 0;
 }
