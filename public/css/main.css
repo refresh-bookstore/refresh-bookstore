@@ -54,3 +54,6 @@ a {
   padding: 20px 0;
 }
 
+HTML {
+  overflow-y: scroll;
+}
