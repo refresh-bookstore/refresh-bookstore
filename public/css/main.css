@@ -49,7 +49,7 @@ a {
 
 .container {
   width: 1024px;
-  height: 100%;
+  min-height: 74vh;
   margin: 70px auto 130px auto;
   padding: 20px 0;
 }
