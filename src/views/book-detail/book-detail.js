@@ -1,3 +1,6 @@
+import { main } from '../../../public/js/main.js';
+main();
+
 const likeBtn = document.querySelector('#likeBtn');
 
 const bookTitle = document.querySelectorAll('.bookTitle');
