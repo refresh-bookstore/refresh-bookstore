@@ -4,6 +4,10 @@
 main {
   padding: 20px 0px;
 }
+
+input[type="checkbox"] {
+  width: 16px;
+}
 /* cartMenu */
 .cartMenu {
   display: flex;
@@ -54,6 +58,11 @@ main {
   position: relative;
   right: 30px;
 }
+
+img.book-img {
+  width: 100px;
+}
+
 .book-info {
   display: flex;
   flex-direction: column;
