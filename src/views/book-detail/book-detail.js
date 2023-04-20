@@ -1,5 +1,5 @@
 import { main } from '../../../public/js/main.js';
-main();
+
 
 const likeBtn = document.querySelector('#likeBtn');
 
@@ -71,4 +71,11 @@ totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
 
 //책 소개
 
+
 bookIntroduction.innerText = book.introduction;
+
+
+
+
+
+main();

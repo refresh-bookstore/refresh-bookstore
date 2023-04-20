@@ -1,6 +1,4 @@
-@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 @import url('../../../public/css/main.css');
-
 
 .upperArea {
   display: flex;
@@ -234,9 +232,8 @@
 }
 
 .detailArea{
-  margin: 30px;
-  padding: 50px;
-  width: 100%;
+  margin: 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -246,10 +243,39 @@
 
 }
 
-.detailArea h3{
+.detailArea .title{
   font-weight: 800;
-  font-size: 20px;
-  margin-bottom: 20px;
-  border-bottom:var(--color-light-gray) 0.3px solid;
+  font-size: var(--font-medium);
+  border-bottom: var(--color-light-gray) 0.3px solid;
   padding-bottom: 20px;
+  margin-bottom: 30px;
+
+}
+
+.detailArea .book-info-area{
+  width: 100%;
+  border: 0.3px var(--color-light-green) solid;
+  border-radius: var(--border-radius-button);
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  margin: 30px;
+
+}
+
+.detailArea .book-info-area .book-info-piece{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48%;
+  
+}
+
+.detailArea p{
+  font-weight: var(--weight-regular);
+  font-size: var(--font-regular);
 }
