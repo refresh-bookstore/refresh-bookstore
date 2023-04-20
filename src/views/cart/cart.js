@@ -84,3 +84,5 @@ deleteSelectedBtn.addEventListener('click', () => {
     if (box.checked) box.parentElement.setAttribute('style', 'display: none');
   });
 });
+
+main();
