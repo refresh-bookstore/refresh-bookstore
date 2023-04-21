@@ -1,5 +1,6 @@
 @import url('../../../public/css/main.css');
 
+/*-------------상단영역--------------*/
 .upper-area {
   display: flex;
   align-items: center;
@@ -17,6 +18,8 @@
   font-weight: var(--weight-bold);
 }
 
+
+/*-------------하단영역--------------*/
 .middle-area {
   width:100%;
   display: flex;
@@ -28,7 +31,7 @@
   border-bottom: var(--color-dark-gray) solid 0.5px;
 
 }
-
+/*-------목록영역--------*/
 .navigate-area {
   display: flex;
   width: 30%;
@@ -48,8 +51,15 @@
   text-align: center;
   font-size: var(--font-medium);
   padding: 15px;
+  cursor: pointer;
 }
 
+.navigate-area li:hover {
+  font-weight: var(--weight-bold);
+  color: var(--color-point)
+}
+
+/*-------본문영역--------*/
 .content-area {
   width: 70%;
   margin: 20px;
@@ -85,7 +95,34 @@
   display:flex;
 }
 
-.content .item {
+/*-----공통 사용 요소------*/
+
+.content .admin-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  height: 50px;
+}
+
+.content .admin-buttons .button{
+  width: 30%;
+  height: 30px;
+  padding: 2px;
+  opacity: 0.3;
+
+}
+
+.content .admin-buttons .button:hover{
+  width: 30%;
+  height: 30px;
+  padding: 2px;
+  opacity: 1;
+
+}
+
+.content .admin-items {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -99,7 +136,7 @@
   box-shadow: 3px 3px 3px var(--color-light-gray);
 }
 
-.content .item input[type="checkbox"] {
+.content .admin-items input[type="checkbox"] {
   width: 25px;
   height: 25px;
   margin: 10px;
@@ -108,7 +145,9 @@
   border: 1px var(--color-light-gray) solid;
 }
 
-.content .item .item-info {
+/*-----도서관리------*/
+
+.content .admin-items .item-info {
 
   width: 500px;
   display: flex;
@@ -117,7 +156,7 @@
   align-items: center;
 }
 
-.content .item .item-info .item-added-date {
+.content .admin-items .item-info .item-added-date {
 
   font-size: var(--font-small);
   font-weight: var(--weight-medium);
@@ -128,14 +167,14 @@
   margin: 5px;
 }
 
-.content .item .item-info .item-more-info{
+.content .admin-items .item-info .item-more-info{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 }
 
-.content .item .item-info .item-name {
+.content .admin-items .item-info .item-name {
 
   font-size: var(--font-small);
   font-weight: var(--weight-bold);
@@ -144,14 +183,14 @@
 
 }
 
-.content .item .item-info .item-detail {
+.content .admin-items .item-info .item-detail {
   font-size: var(--font-small);
   font-weight: var(--weight-regular);
   color: var(--color-light-black);
   text-align: right;
 }
 
-.content .item .item-info .item-cost {
+.content .admin-items .item-info .item-cost {
   font-size: var(--font-small);
   font-weight: var(--weight-bold);
   color: var(--color-black);
@@ -160,33 +199,81 @@
   padding: 0 10px;
 }
 
-.content .item .item-info .item-buttons {
+/*-----회원관리------*/
+
+.content .user-buttons {
+  width: 25%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 
-  height: 50px;
+  height: 20px;
 }
 
-.content .item .item-info .item-buttons .button{
-  width: 30%;
-  height: 30px;
+.content .user-buttons .button{
+  width: 25%;
+  height: 25px;
   padding: 2px;
   opacity: 0.3;
 
 }
 
-.content .item .item-info .item-buttons .button:hover{
-  width: 30%;
-  height: 30px;
+.content .user-buttons .button:hover{
+  width: 25%;
+  height: 25px;
   padding: 2px;
   opacity: 1;
 
 }
 
-.content .item .item-info .item-buttons button.red{
-  color: var(--color-white);
-  background-color: var(--color-red);
-  border: none;
+.content .user-buttons .button.admin-active{
+  width: 25%;
+  height: 25px;
+  padding: 2px;
+  opacity: 1;
+
+}
+
+/*-----주문관리------*/
+
+.content .admin-items.ordered-list {
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;  
+}
+
+.content .admin-items .item-info .order-status {
+  font-size: var(--font-small);
+  font-weight: var(--weight-bold);
+  color: var(--color-black);
+  text-align: right;
+  margin: 10px;
+  padding: 0 10px;
+}
+
+.content .admin-items .item-info .item-more-info.order{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;  
+  align-items: flex-start;
+}
+
+.content .admin-items .item-info .item-name.order{
+
+  font-size: var(--font-small);
+  font-weight: var(--weight-bold);
+  color: var(--color-black);
+  text-align: right;
+
+  margin-bottom: 10px; 
+
+}
+
+.content .admin-items .item-info .item-detail.order{
+  font-size: var(--font-micro); 
+  font-weight: var(--weight-regular);
+  color: var(--color-light-black);
+  text-align: right;
 }

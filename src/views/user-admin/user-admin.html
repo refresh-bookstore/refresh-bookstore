@@ -25,7 +25,7 @@
       <div class="content-area">
         <p class="title"></p>
         <div class = "content" id="admin-books"> 
-          <div class="item">
+          <div class="admin-items">
             <input type="checkbox">
             <div class="item-info">
               <p class="item-added-date"> 2022-05-14</p>
@@ -34,24 +34,68 @@
                 <p class="item-detail"> 한빛 출판사 | 고현민 | 2022</p>
               </div>
               <p class="item-cost"> 15,800원</p>
-              <span class="item-buttons">
-                <img class="button" src="../../../public/images/edit-icon.svg">
-                <img class="button red" src="../../../public/images/delete-icon.svg">
-            </span> 
+              <span class="admin-buttons">
+                <img class="button" src="../../../public/images/icon_edit.svg">
+                <img class="button red" src="../../../public/images/icon_delete.svg">
+              </span> 
             </div>
           </div>
         </div>
         <div class = "content" id="admin-users"> 
-          <div class = "user">
+          <div class="admin-items">
             <input type="checkbox">
-            <p class="user-name"> 혼자 공부하는 얄팍한 코딩지식</p>
-            <p class="user-email"> 혼자 공부하는 얄팍한 코딩지식</p>
-            <p class="item-name"> 혼자 공부하는 얄팍한 코딩지식</p>
-
+            <div class="item-info">
+              <p class="item-added-date"> 2022-05-14</p>
+              <div class="item-more-info">
+                <p class="item-name"> 김토끼</p>
+                <p class="item-detail"> elice@rabbit.com </p>
+              </div>
+              <span class="user-buttons">
+                <img class="button set-user-admin" src="../../../public/images/icon_user_admin.svg">
+                <img class="button edit-user" src="../../../public/images/icon_user_edit.svg">
+                <img class="button remove-user" src="../../../public/images/icon_user_remove.svg">
+              </span>
+            </div>
           </div>
         </div>
-        <div class = "content" id="admin-orders"> 주문 관리 페이지입니다.</div>
-        <div class = "content" id="admin-categories"> 카테고리 관리 페이지입니다.</div>
+        <div class = "content" id="admin-orders">
+          <div class="admin-items ordered-list">
+            <input type="checkbox">
+            <div class="item-info">
+              <div class="item-more-info order">
+                <span><p class="item-name order"> 혼자 공부하는 얄팍한 코딩지식 </p></span>
+                <p class="item-detail order"> 김토끼</p>
+                <p class="item-detail order"> 010-2323-2323</p>
+                <p class="item-detail order"> 서울시 양천구 오목로359 사무실</p>
+                
+              </div>
+              <p class="item-cost"> 1권 </p>
+              <p class="item-cost"> 23,400원</p>
+              <p class="order-status"> 배송중</p>
+              <span class="admin-buttons">
+                <img class="button" src="../../../public/images/icon_edit.svg">
+                <img class="button red" src="../../../public/images/icon_delete.svg">
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class = "content" id="admin-categories">
+          <div class="admin-items">
+            <input type="checkbox">
+            <div class="item-info">
+              <p class="item-added-date"> 2022-05-14</p>
+              <div class="item-more-info">
+                <p class="item-name"> 혼자 공부하는 얄팍한 코딩지식</p>
+                <p class="item-detail"> 한빛 출판사 | 고현민 | 2022</p>
+              </div>
+              <p class="item-cost"> 15,800원</p>
+              <span class="admin-buttons">
+                <img class="button" src="../../../public/images/edit-icon.svg">
+                <img class="button red" src="../../../public/images/delete-icon.svg">
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

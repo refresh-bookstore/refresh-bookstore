@@ -1,23 +1,32 @@
-import { dataLists } from './dummy-datas.js';
+//import { dataLists } from './dummy-datas.js';
 import { main } from '../../../public/js/main.js';
 
-main();
+
+
 const title = document.querySelector('.title');
+const adminBooks = document.querySelector('#list-books');
+const adminUsers = document.querySelector('#list-users');
+const adminOrders = document.querySelector('#list-orders');
+const adminCategories = document.querySelector('#list-categories');
+
+const adminContentBooks = document.querySelector('#admin-books');
+const adminContentUsers = document.querySelector('#admin-users');
+const adminContentOrders = document.querySelector('#admin-orders');
+const adminContentCategories = document.querySelector('#admin-categories');
+
 const lists = [
-  adminBooks = document.querySelector('#list-books'),
-  adminUsers = document.querySelector('#list-users'),
-  adminOrders = document.querySelector('#list-orders'),
-  adminCategories = document.querySelector('#list-categories'),
+  adminBooks,
+  adminUsers,
+  adminOrders,
+  adminCategories,
 ];
 
 const contents = [
-  adminContentBooks = document.querySelector('#admin-books'),
-  adminContentUsers = document.querySelector('#admin-users'),
-  adminContentOrders = document.querySelector('#admin-orders'),
-  adminContentCategories = document.querySelector('#admin-categories'),
+  adminContentBooks,
+  adminContentUsers,
+  adminContentOrders,
+  adminContentCategories,
 ];
-
-
 
 lists.forEach((e)=> {
   e.addEventListener('click', ()=>{
@@ -52,3 +61,5 @@ lists.forEach((e)=> {
 
   })
 })
+
+main();
