@@ -1,7 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-
-const saltRounds = 10;
 
 const userSchema = new mongoose.Schema(
   {
@@ -21,7 +18,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       minlength: 8,
-      maxlength: 15,
+      maxlength: 100,
     },
     postalCode: {
       type: String,
@@ -49,20 +46,13 @@ const userSchema = new mongoose.Schema(
         message: props => `${props.value} is not a valid phone number!`,
       },
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
-
-// 비밀번호 해싱
-userSchema.pre("save", async function (next) {
-  const user = this;
-
-  if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, saltRounds);
-  }
-
-  next();
-});
 
 const User = mongoose.model("User", userSchema);
 

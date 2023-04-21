@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { body, check, validationResult } = require("express-validator");
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const hashPassword = require("../middlewares/hashPassword");
 
 router.get("/", function (req, res, next) {
   res.render("register/register.html");
@@ -47,34 +49,33 @@ router.post(
       .trim()
       .notEmpty()
       .withMessage("상세주소를 입력해주세요."),
-  ],
+  ], // hashPassword 미들웨어 추가
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     try {
-      // 새로운 사용자 생성
+      const password = await bcrypt.hash(req.body.password, 10);
+
       const newUser = new User({
         name: req.body.name,
-        password: req.body.password,
+        password: password,
         address: req.body.address,
         phone: req.body.phone,
         email: req.body.email,
         postalCode: req.body.postalCode,
         detailAddress: req.body.detailAddress,
+        isAdmin: false,
       });
 
-      // 사용자 저장
       await newUser.save();
 
-      // 회원가입 완료 메시지 출력 후 메인 페이지로 이동
       res.status(201).json({ message: "회원가입이 완료되었습니다." });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
 );
-
 module.exports = router;

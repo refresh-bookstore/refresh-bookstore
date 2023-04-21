@@ -1,3 +1,4 @@
+require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -6,11 +7,17 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// const helmet = require("helmet");
+const jwt = require("jsonwebtoken");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const loginRouter = require("./routes/login");
+const dbHost = process.env.DB_HOST;
+const dbUser = process.env.DB_USER;
+const dbPass = process.env.DB_PASS;
+
 const hashPassword = require("./middlewares/hashPassword");
+const authenticate = require("./middlewares/authenticate");
 
 const app = express();
 
@@ -30,7 +37,6 @@ app.set("view engine", "html");
 app.use(express.static(path.join(__dirname, "views")));
 
 // middleware 추가
-// app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(
-  express.static(path.join(__dirname, "../public"), {
+  express.static(path.join(__dirname, "/public"), {
     setHeaders: (res, path, stat) => {
       if (path.endsWith(".css")) {
         res.set("Content-Type", "text/css");
@@ -52,6 +58,7 @@ app.use(
 // 라우팅 추가
 app.use("/", indexRouter);
 app.use("/register", usersRouter);
+app.use("/login", loginRouter);
 
 // 404 에러 핸들링
 app.use(function (req, res, next) {
@@ -69,7 +76,12 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
+// Secret Key 설정
+const secretKey = process.env.SECRET_KEY;
+
+// hashPassword, authenticate 미들웨어 사용
 app.use(hashPassword);
+app.use(authenticate);
 
 const port = 3000;
 app.listen(port, () => {
