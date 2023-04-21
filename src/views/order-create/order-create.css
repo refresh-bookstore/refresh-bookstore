@@ -1,0 +1,227 @@
+.order-create-title {
+  text-align: left;
+  font-size: var(--font-large);
+  margin: 20px 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-dark-gray);
+}
+
+main {
+  padding: 20px;
+  display: flex;
+  /* justify-content: space-between; */
+}
+main .leftSide { 
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /* width: 500px; */
+}
+main .rightSide {
+  display: flex; 
+  flex-grow: 1; 
+  flex-direction: column;
+}
+
+/* Left Side */
+.leftSide > p {
+  padding: 16px 0;
+  font-size: var(--font-medium);
+}
+.delivery__information {
+  width: 100%;
+}
+
+
+.delivery__information > div {
+  padding: 8px 0;
+}
+
+.delivery__information label {
+  width: 140px;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--color-dark-gray);
+  margin-right: 8px;
+  justify-content: center;
+  font-weight: var(--weight-semi-bold);
+}
+.userName {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.userName input {
+  padding: 8px;
+  width: 250px;
+  border: 1px solid var(--color-dark-gray);
+  border-radius: var(--border-radius-input);
+}
+
+.userPhoneNumber {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.userPhoneNumber input {
+  padding: 8px;
+  width: 250px;
+  border: 1px solid var(--color-dark-gray);
+  border-radius: var(--border-radius-input);
+  color: var(--color-light-black);
+}
+
+.userAddress {
+  padding-bottom: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+.userAddress input {
+  width: 250px;
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: var(--border-radius-input);
+  border: 1px solid var(--color-dark-gray);
+}
+
+.userAddress #sample6_postcode {
+  width: 140px;
+}
+
+input[type="button"] {
+  width: 100px;
+  color: gray;
+}
+
+.deliveryRequest {
+  display: flex;
+}
+
+.deliveryRequest p {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--color-dark-gray);
+  margin-right: 8px;
+  padding-left: 20px;
+  padding-right: 0;
+  justify-content: center;
+  font-weight: var(--weight-semi-bold);
+}
+
+.deliveryRequest select, input {
+  width: 250px;
+  margin: 4px 0;
+  padding: 8px;
+  border-radius: var(--border-radius-input);
+  border: 1px solid var(--color-dark-gray);
+  color: gray;
+}
+
+.customRequestContainer input {
+  width: 250px;
+  padding: 8px;
+}
+
+/* Right Side */
+/* 주문 상품 정보 */
+.rightSide {
+  width: 450px;
+}
+
+.rightSide p {
+  padding: 16px 0;
+  font-size: var(--font-medium);
+}
+
+.orderList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.bookInfo {
+  display: flex;
+  flex-direction: row;
+  /* width: 400px; */
+  border-bottom: 1px solid var(--color-light-gray);
+  padding: 0px 0;
+  /* border-radius: 12px; */
+}
+
+.bookInfo .book-img img {
+  border: 1px solid var(--color-light-gray);
+  scale: 80%;
+}
+
+.bookInfo .book__title__price {
+  padding: 18px 8px;
+  width: 100%;
+}
+
+.bookInfo .book-title {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  font-size: var(--font-medium);
+}
+
+.book-title div {
+  padding: 20px 0;
+}
+.bookInfo .amount {
+  font-size: var(--font-regular);
+  text-align: end;
+}
+
+.bookInfo .price {
+  padding-top: 4px;
+  font-size: var(--font-medium);
+  text-align: end;
+}
+
+/* 결제 금액 */
+
+.pay__detail__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.pay__detail {
+  display: flex;
+  padding: 4px 0;
+  font-size: var(--font-medium);
+}
+
+.pay__detail .booksPrice, .deliveryFee, .totalCost {
+  width: 140px;
+  text-align: right;
+}
+
+
+.pay__detail div {
+  padding-left: 12px;
+}
+
+.paymentButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.paymentButton button {
+  font-size: var(--font-medium);
+  background-color: #1DC078;
+  margin-top: 20px;
+
+  width: 300px;
+  height: 70px;
+  border: none;
+  border-radius: var(--border-radius-button);
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-white);
+}
+
+.hidden {
+  display: none;
+}
