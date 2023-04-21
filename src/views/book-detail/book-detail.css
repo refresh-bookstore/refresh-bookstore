@@ -1,0 +1,306 @@
+@import url('../../../public/css/main.css');
+
+/*---------상단영역-------*/
+.upperArea {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+
+  width: 100%;
+  padding: 10px 20px;
+  border-bottom: var(--color-dark-gray) solid 0.5px;
+}
+
+.upperArea span {
+  display: flex;
+  align-items: center;
+}
+
+.upperArea img {
+  width: 20px;
+  margin: 10px;
+}
+
+
+/*---------가운데 영역-------*/
+.middleArea {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: stretch;
+
+  padding: 10px 20px;
+  border-bottom: var(--color-dark-gray) solid 0.5px;
+
+}
+
+.imageArea {
+  width: 48%;
+  margin: 20px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-grow: 1;
+
+  border: var(--color-light-gray) 0.3px solid;
+
+}
+
+.imageArea img{
+  margin: 20px 0;
+  width: 48%;
+  align-items: center;
+  box-shadow: 10px 10px 20px var(--color-light-gray);
+}
+
+
+
+.purchaseArea {
+  width: 50%;
+  margin: 0;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.bookTitleArea {
+
+  padding-bottom: 20px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  border-bottom: var(--color-light-gray) solid 0.3px;
+
+}
+
+
+
+.bookTitleArea p {
+  font-size: var(--font-small);
+  color: var(--color-point);
+  margin: 5px;
+}
+
+.bookTitleArea p#detailedInfo {
+  color: var(--color-light-black);
+}
+
+.bookTitleArea .bookTitle {
+  font-size: var(--font-large);
+  font-weight: 900;
+
+  margin: 5px;
+}
+
+.bookTitleArea #bookSubtitle {
+  font-size: var(--font-regular);
+  font-weight: 400;
+  margin: 5px;
+}
+
+.purchaseInfo {
+  width: 100%;
+  padding: 15px 0;
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+
+.purchaseInfo p {
+  font-size: var(--font-micro);
+  color: var(--color-light-black);
+  margin: 5px;
+}
+.purchaseInfo .bookTitle{
+  width: 100%;
+  color: var(--color-point);
+  font-size: var(--font-regular);
+  font-weight: 800;
+}
+
+.purchaseInfo .costArea {
+  width: 100%;
+  background-color: var(--color-light-green);
+  padding: 15px;
+  margin: 30px, 0;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.purchaseInfo .costArea .amountArea {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+
+.purchaseInfo .costArea .amountArea button{
+  width: 35px;
+  height: 30px;
+
+  color: var(--color-point);
+  font-size: var(--font-regular);
+  font-weight: 200;
+  border: var(--color-point) 0.5px solid;
+  background-color: var(--color-light-green);
+}
+
+.purchaseInfo .costArea .amountArea button:hover{
+  color: var(--color-white);
+  font-size: var(--font-regular);
+  font-weight: 200;
+  border: var(--color-point) 0.5px solid;
+  background-color: var(--color-point);
+  cursor: pointer;
+}
+
+.purchaseInfo .costArea .amountArea input{
+  width: 35px;
+  height: 30px;
+
+  color:var(--color-point);
+  font-size: var(--font-regular);
+  font-weight: var(--weight-medium);
+  text-align: center;
+
+  border-top: var(--color-point) 0.5px solid;
+  border-bottom: var(--color-point) 0.5px solid;
+  border-left: 0;
+  border-right: 0;
+}
+
+#totalCost {
+  font-size: 20pt;
+  font-weight: 900;
+  color: var(--color-black);
+  
+  text-align: right;
+
+  margin: 5px;
+  margin-top: 20px;
+
+}
+
+.purchaseBtnArea {
+  padding: 20px 0;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.purchaseBtnArea #addToCartBtn{
+  width: 48%;
+  height: 30px;
+  background-color: var(--color-white);
+
+  color:var(--color-point);
+  font-size: 13pt;
+  font-weight: 700;
+  text-align: center;
+  border: 0.5px  var(--color-point) solid;
+  border-radius: 8px;
+
+}
+
+.purchaseBtnArea #addToCartBtn:hover{
+  background-color: var(--color-light-green);
+  cursor: pointer;
+}
+
+.purchaseBtnArea  #purchaseBtn{
+  width: 48%;
+  height: 30px;
+  background-color: #1DC078;
+
+  color:var(--color-white);
+  font-size: 13pt;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+
+}
+
+.purchaseBtnArea  #purchaseBtn:hover{
+  background-color: var(--color-dark-green);
+  cursor: pointer;
+}
+
+
+
+/*---------하단 영역-------*/
+.detailArea{
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  line-height: 25pt;
+
+}
+
+.detailArea .title{
+  font-weight: 800;
+  font-size: var(--font-medium);
+  border-bottom: var(--color-light-gray) 0.3px solid;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+
+}
+
+.detailArea .book-info-area{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  margin-bottom: 50px;
+  
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-button);
+  border: 0.3px var(--color-light-gray) solid;
+  box-shadow: 3px 3px 3px var(--color-light-gray);
+
+  color: var(--color-light-black);
+  font-size: var(--font-small);
+
+}
+
+.detailArea .book-info-area .book-info-piece{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48%;
+  
+}
+
+.detailArea p{
+  font-weight: var(--weight-regular);
+  font-size: var(--font-regular);
+}
