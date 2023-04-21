@@ -8,7 +8,7 @@ input[type=password]::placeholder {
 }
 
 .intro {
-  margin-bottom: 20px;
+  margin: 50px 0 20px 0;
 }
 
 #user-greeting {
@@ -22,19 +22,22 @@ input[type=password]::placeholder {
   border: none;
 }
 
+/* main */
 .main-contents {
   display: flex;
   margin-top: 20px;
   justify-content: center;
 }
 
+/* nav bar */
 .mypage__category.nav {
   padding: 6px 15px 6px 6px;
+  align-items: center;
 }
 
 .mypage__category.nav-item {
   width: 150px;
-  margin: 20px 0 30px 0;
+  margin: 20px 15px 30px 0;
 }
 
 .mypage__category__a {
@@ -43,6 +46,7 @@ input[type=password]::placeholder {
   padding: 10px;
   transition: all 0.2s;
   font-weight: var(--weight-semi-bold);
+  font-size: var(--font-medium);
 }
 
 .mypage__category__a.clicked {
@@ -61,10 +65,10 @@ input[type=password]::placeholder {
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--color-dark-gray);
-  padding: 20px 0 0 20px;
+  padding: 20px 0 90px 20px;
 }
 
-.register-form-box {
+.user-form-box {
   width: 800px;
 }
 
@@ -96,6 +100,10 @@ input[type=password]::placeholder {
   border-radius: var(--border-radius-input);
 }
 
+#emailText {
+  font-weight: var(--weight-semi-bold);
+}
+
 #postalCodeInput {
   width: 200px;
 }
@@ -123,10 +131,10 @@ input[type=password]::placeholder {
   display: none;
   color: var(--color-red);
   font-size: var(--font-small);
-  margin: 5px 0 5px 3px;
+  margin-left: 5px;
 }
 
-.register-submit {
+.user-update {
   font-size: var(--font-medium);
   background-color: var(--color-point);
   margin: 60px 0 0 40px;
@@ -140,7 +148,7 @@ input[type=password]::placeholder {
   cursor: pointer;
 }
 
-.register-submit:hover {
+.user-update:hover {
   background-color: var(--color-dark-green);
 }
 
@@ -159,5 +167,5 @@ input[type=password]::placeholder {
 }
 
 .user-delete:hover {
-  background-color: var(--color-black);
+  background-color: var(--color-light-black);
 }

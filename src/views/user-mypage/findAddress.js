@@ -29,6 +29,7 @@ function findAddress() {
 
       postalCodeInput.value = data.zonecode;
       addressInput.value = `${addr} ${extraAddr}`;
+      detailAddressInput.value = "";
       detailAddressInput.focus();
     }
   }).open({ autoClose: true });
