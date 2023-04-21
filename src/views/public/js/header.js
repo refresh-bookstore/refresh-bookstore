@@ -6,6 +6,7 @@ function headerFunc() {
   const searchInput = document.querySelector('.search-input');
   const searchBox = document.querySelector('.search-box');
   
+  const logoImage = document.querySelector('.logo');
 
   //검색창 애니메이션
 
@@ -53,6 +54,23 @@ function headerFunc() {
       }, 230);
   })
   
+  
+  /* (임시) 파일 이동  */
+
+  // 로고 클릭 이벤트
+  logoImage.addEventListener("click", () => {
+    location.replace("../home/home.html");
+  });
+
+  // 유저 아이콘 클릭 이벤트
+  userBtn.addEventListener("click", () => {
+    location.replace("../login/login.html");
+  });
+
+  // 장바구니 아이콘 클릭 이벤트
+  cartBtn.addEventListener("click", () => {
+    location.replace("../cart/cart.html");
+  })
   
 }
 
