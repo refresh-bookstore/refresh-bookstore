@@ -5,7 +5,7 @@ const author = document.querySelectorAll('.author')
 const bookPrice = document.querySelectorAll('.book-price');
 
 const minusBtn = document.querySelectorAll('.minusBtn');
-// const amountInput = document.querySelectorAll('.amountInput');
+const amountInput = document.querySelectorAll('.amountInput');
 const plusBtn = document.querySelectorAll('.plusBtn');
 
 const selectedPrice = document.querySelector('.selectedPrice');
@@ -70,6 +70,14 @@ minusBtn.forEach(btn => {
       btn.nextElementSibling.value = 1;
     } else {
       btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
+    }
+  });
+});
+// 수량 값을 없애면 1로 바뀌도록 함
+amountInput.forEach(amount => {
+  amount.addEventListener('change', () => {
+    if (amount.value === '' || amount.value === undefined) {
+      amount.value = 1;
     }
   });
 });
