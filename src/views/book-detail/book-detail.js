@@ -47,7 +47,12 @@ bookTitle.forEach((e)=>{
 bookSubtitle.innerText = book.subtitle;
 detailedInfo.innerText = `${book.author} | ${book.publisher} | ${book.published.getFullYear()}`;
 
+
+
 //구매 정보
+
+
+//////////////////////////// 수량 버튼//////////////////////
 minusBtn.addEventListener('click',(e)=>{
   e.preventDefault();
   if (Number(amountInput.value) <= 1){
@@ -68,8 +73,15 @@ plusBtn.addEventListener('click',(e)=>{
 
 totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
 
+amountInput.addEventListener('input', ()=>{
+  totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
+});
+
+
+
 
 //책 소개
+
 
 
 bookIntroduction.innerText = book.introduction;
