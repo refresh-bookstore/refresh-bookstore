@@ -1,3 +1,5 @@
+@import url("../../../public/css/main.css");
+
 /* Auto Image Slider */
 #slider {
   width: 1024px;
@@ -29,16 +31,16 @@
 
 .nav-item.category .nav-link {
   cursor: pointer;
-  color: var(--color-black);
-  border: 1px solid var(--color-black);
+  color: var(--color-point);
+  border: 1px solid var(--color-point);
   border-radius: 20px;
   font-size: var(--font-regular);
   padding: 5px;
 }
 
 .nav-item.category .nav-link:hover {
-  color: var(--color-point);
-  border-color: var(--color-point);
+  color: var(--color-dark-green);
+  border-color: var(--color-dark-green);
 }
 
 .nav-item.category .nav-link.clicked {
@@ -46,6 +48,7 @@
   background-color: var(--color-point);
   font-weight: var(--weight-regular);
   border-color: var(--color-point);
+  transition: all 0.2s;
 }
 
 .line {
@@ -63,24 +66,19 @@
 
 /* book list */
 .books {
-  margin: 10px 10px 0 0;
   display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .book {
   display: inline-block;
-  margin: 5px;
-  margin-bottom: 20px;
+  width: 20%;
   cursor: pointer;
+  padding: 0 0 20px 10px;
 }
 
-.book-body {
-  margin: 10px;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 5px;
+.img-container {
+  text-align: center;
 }
 
 .book-link {
@@ -88,19 +86,52 @@
   text-decoration: none;
 }
 
-.book-link:hover {
-  color: var(--color-dark-gray);
+.book-img {
+  width: auto;
+  height: 180px;
+  object-fit: cover;
+  justify-content: center
 }
 
 .book-text.title {
-  font-size: var(--font-medium);
-  font-weight: var(--weight-regular);
+  font-size: var(--font-regular);
+  font-weight: var(--weight-semi-bold);
+  margin-bottom: 5px;
+
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.2;
+  height: 2.4em;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.book-text.title:hover {
+  text-decoration: underline;
 }
 
 .book-text.category {
   font-size: var(--font-small);
+  color: var(--color-point);
+  margin-bottom: 5px;
 }
 
 .book-text.price {
   font-size: var(--font-small);
+}
+
+.books.empty {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+#empty-book-list {
+  font-size: var(--font-large);
+  color: var(--color-dark-gray);
 }
