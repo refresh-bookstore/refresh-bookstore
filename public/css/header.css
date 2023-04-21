@@ -23,7 +23,7 @@ header .header-container {
 }
 
 header .logo {
-  width: 130px;
+  width: 110px;
   height: 100px;
   background-image: url('../images/logo_green.svg');
   background-repeat: no-repeat;
@@ -50,7 +50,6 @@ header .icon{
   width: 40px;
 
   margin: 0 5px;
-
 }
 
 
@@ -67,12 +66,9 @@ header .search-box{
 
   overflow: hidden;
   border-radius: 6px;
-
-
 }
 
 header .search-input { 
-
   display: none;
   flex-direction: row;
   flex-flow: nowrap;
@@ -85,7 +81,6 @@ header .search-input {
   border-radius: 5px;
   border: none;
   outline: none;
-
 }
 
 header .search-input.activate {
@@ -102,14 +97,12 @@ header .search {
 }
 
 header .search.activate {
-
   position: absolute;
   background-color: #FFFFFF;
   background-image: url('../images/icon_search_green.svg');
   border-right: #1DC078 1px;
   border-radius: 5px;
   cursor: pointer;
-
 }
 
 header .cart {
@@ -132,7 +125,6 @@ header .user {
   cursor: pointer;
 }
 
-
 .white {
   fill: #FFFFFF;
 }
@@ -140,6 +132,3 @@ header .user {
 .green {
   fill: #1DC078;
 }
-
-
-
