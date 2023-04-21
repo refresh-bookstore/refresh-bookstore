@@ -10,15 +10,23 @@ const cors = require("cors");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const categoryRouter = require("./routes/category");
+const productRouter = require("./routes/product");
 const hashPassword = require("./middlewares/hashPassword");
 
 const app = express();
 
 mongoose.set("strictQuery", false);
 
-mongoose.connect("mongodb://localhost:27017/myapp", {
+mongoose.connect("mongodb+srv://ksoup3434:u6KlMbiDKNEgwr2Z@cluster0.4gp8bj5.mongodb.net/test", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('MongoDB connected!');
 });
 
 // view engine setup
@@ -52,6 +60,10 @@ app.use(
 // 라우팅 추가
 app.use("/", indexRouter);
 app.use("/register", usersRouter);
+app.use("/category", categoryRouter);
+app.use("/product", productRouter);
+app.use("/product/list", productRouter);
+app.use("/product/products", productRouter);
 
 // 404 에러 핸들링
 app.use(function (req, res, next) {
