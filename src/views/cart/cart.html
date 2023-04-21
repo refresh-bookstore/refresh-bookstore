@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Refresh Bookstore</title>
+  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="module" src="cart.js"></script>
+</head>
+<body>
+  <header></header>
+  <div class="container">
+
+    <main>
+      <div class="cartMenu">
+        <!-- 장바구니 타이틀 -->
+        <p class="cartTitle">장바구니</p>
+        <div class="selectMenu">
+          <div class="selectAll">
+            <input type="checkbox" name="checkAll" checked="">
+            <p>전체선택</p>
+          </div>
+          <button class="deleteSelected">선택 삭제</button>
+        </div>
+      </div>
+      <!-- <hr/> -->
+      <!-- 책 장바구니 -->
+      <div class="cart">
+        <div class="item">
+          <input type="checkbox" name="buy" checked="">
+          <!-- 책 이미지 -->
+          <div class="book-img">
+            <a class="book-link" href="#">
+              <img src="../../../public/images/sample_image.jpg" class="book-img" alt="bookImg1"/>
+            </a>
+          </div>
+          
+          <div class="book-info">
+            <a class="book-title" href="#">asdfasdfadfasdfasdfasdfadfadfadfadfas</a>
+            <div class="author">고현민</div>
+          </div>
+          <!-- 상품 금액 -->
+          <div class="price">
+            <p class="price-title">상품 금액</p>
+            <div class="book-price">20,000원</div>
+          </div>
+          <!-- 수량 변경 -->
+          <div class="amountArea">
+            <button class="minusBtn">-</button>
+            <input class ="amountInput" value="1">
+            <button class="plusBtn">+</button>
+          </div>
+          
+          <!-- 삭제 버튼 -->
+          <div class="delete">
+            <button class="deleteBtn">삭제</button>
+          </div>
+        </div>
+        <div class="item">
+          <input type="checkbox" name="buy" checked="">
+          <!-- 책 이미지 -->
+          <div class="book-img">
+            <a class="book-link" href="#">
+              <img src="../../../public/images/sample_image.jpg" class="book-img" alt="bookImg1"/>
+            </a>
+          </div>
+          
+          <div class="book-info">
+            <a class="book-title" href="#">asdfasdfadfasdfasdfasdfadfadfadfadfas</a>
+            <div class="author">고현민</div>
+          </div>
+          <!-- 상품 금액 -->
+          <div class="price">
+            <p class="price-title">상품 금액</p>
+            <div class="book-price">20,000원</div>
+          </div>
+          <!-- 수량 변경 -->
+          <div class="amountArea">
+            <button class="minusBtn">-</button>
+            <input class ="amountInput" value="1">
+            <button class="plusBtn">+</button>
+          </div>
+          
+          <!-- 삭제 버튼 -->
+          <div class="delete">
+            <button class="deleteBtn">삭제</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <hr/> -->
+      <!-- 금액 안내  -->
+      <div class="pay__list">
+        <p>50,000원 이상 구매 시 무료 배송</p>
+        <div class="pay__detail__container">
+          <div class="pay__detail">
+            <div>선택 상품 금액</div>
+            <div class="selectedPrice">49,000원</div>
+          </div>
+
+          <div class="pay__detail">
+            <div>배송비</div>
+            <div class="deliveryFee"></div>
+          </div>
+
+          <div class="pay__detail">
+            <div>총 결제 금액</div>
+            <div class="totalCost"></div>
+          </div>
+          <div class="order__button">
+            <button class="order__button">구매하기</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+  <footer></footer>
+</body>
+</html>
