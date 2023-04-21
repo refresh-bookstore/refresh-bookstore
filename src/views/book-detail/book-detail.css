@@ -1,5 +1,6 @@
 @import url('../../../public/css/main.css');
 
+/*---------상단영역-------*/
 .upperArea {
   display: flex;
   align-items: center;
@@ -22,6 +23,8 @@
   margin: 10px;
 }
 
+
+/*---------가운데 영역-------*/
 .middleArea {
   width:100%;
   display: flex;
@@ -163,6 +166,15 @@
   background-color: var(--color-light-green);
 }
 
+.purchaseInfo .costArea .amountArea button:hover{
+  color: var(--color-white);
+  font-size: var(--font-regular);
+  font-weight: 200;
+  border: var(--color-point) 0.5px solid;
+  background-color: var(--color-point);
+  cursor: pointer;
+}
+
 .purchaseInfo .costArea .amountArea input{
   width: 35px;
   height: 30px;
@@ -198,9 +210,6 @@
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  
-
-  
 }
 
 .purchaseBtnArea #addToCartBtn{
@@ -217,6 +226,11 @@
 
 }
 
+.purchaseBtnArea #addToCartBtn:hover{
+  background-color: var(--color-light-green);
+  cursor: pointer;
+}
+
 .purchaseBtnArea  #purchaseBtn{
   width: 48%;
   height: 30px;
@@ -231,6 +245,14 @@
 
 }
 
+.purchaseBtnArea  #purchaseBtn:hover{
+  background-color: var(--color-dark-green);
+  cursor: pointer;
+}
+
+
+
+/*---------하단 영역-------*/
 .detailArea{
   margin: 20px;
   padding: 20px;
