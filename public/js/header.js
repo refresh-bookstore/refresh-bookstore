@@ -53,7 +53,6 @@ function headerFunc() {
       }, 230);
   })
   
-
   
 }
 
