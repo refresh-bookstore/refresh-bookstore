@@ -1,3 +1,5 @@
+import { main } from '../../../public/js/main.js';
+
 const nameInput = document.getElementById("nameInput");
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
@@ -101,3 +103,5 @@ function checkValid() {
   
   return true;
 }
+
+main();
