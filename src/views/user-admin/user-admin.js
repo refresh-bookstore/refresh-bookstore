@@ -1,5 +1,5 @@
 //import { dataLists } from './dummy-datas.js';
-import { main } from '../../../public/js/main.js';
+import { main } from '../public/js/main.js';
 
 
 
@@ -44,7 +44,7 @@ lists.forEach((e)=> {
         const item = document.createElement('div').classList.add('item');
         item.innerHTML=`
         <div class="item-img">
-        <img src="../../../public/images/sample_image.jpg">
+        <img src="../public/images/sample_image.jpg">
         </div>
         <div class="item-info">
           <p class="item-name"> 혼자 공부하는 얄팍한 코딩지식</p>
