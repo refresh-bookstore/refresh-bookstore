@@ -4,23 +4,20 @@ const slider = document.querySelector("#slider");
 const slides = slider.querySelector(".slides");
 const slide = slides.querySelectorAll(".slide");
 
-const width = getImageWidth();
-let currentSlide = 0;
-
-// slide 5초씩 반복
-setInterval(slideImage, 5000);
-
 // slide 할 image width 구하기
 function getImageWidth() {
   const img = new Image();
   
-  img.src = "../../../public/images/img_sample.png";
+  img.src = "../../../public/images/img_sample_banner_1.png";
   return img.width;
 }
 
-// slide animation
-function slideImage() {
-  let from = -(width * currentSlide);
+const width = getImageWidth();
+let currentSlide = 0;
+
+// slide 5초씩 반복
+setInterval(function() {
+  let from = - (width * currentSlide);
   let to = from - width;   
 
   slides.animate({
@@ -33,11 +30,10 @@ function slideImage() {
   });
 
   currentSlide++;
-
   if (currentSlide === (slide.length - 1)) {
     currentSlide = 0;
   }
-}
+}, 3000);
 
 // 임시 카테고리 데이터
 const categoryList = ['웹 개발', '프론트엔드', '백엔드', '모바일 앱 개발', '게임 개발', '알고리즘·자료구조', '데이터베이스'];
@@ -121,6 +117,10 @@ const bookList = [{
   price: 29700
 }, {
   title: "데이터베이스 개론",
+  category: categoryList[6],
+  price: 29000
+}, {
+  title: "제목 길다 길어 엄청 길어 완전 길어 제목 길다 길어 엄청 길어 완전 길어",
   category: categoryList[6],
   price: 29000
 }, ];
