@@ -5,7 +5,7 @@ const author = document.querySelectorAll('.author')
 const bookPrice = document.querySelectorAll('.book-price');
 
 const minusBtn = document.querySelectorAll('.minusBtn');
-const amountInput = document.querySelectorAll('.amountInput');
+// const amountInput = document.querySelectorAll('.amountInput');
 const plusBtn = document.querySelectorAll('.plusBtn');
 
 const selectedPrice = document.querySelector('.selectedPrice');
@@ -57,22 +57,22 @@ function checkAll(selectAll) {
 selectAll.addEventListener('click', () => checkAll(selectAll));
 
 
-// 수량 변경 + 합계 자동 계산
-// minusBtn.forEach(btn => btn.addEventListener('click',(e) => {
-//   e.preventDefault();
-//   if (Number(amountInput.value) <= 1) {
-
-//   } else {
-//     amountInput.value -= 1;
-//     totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
-//   }
-// }));
-
-// plusBtn.forEach(btn => btn.addEventListener('click',(e)=>{
-//   e.preventDefault();
-//   amountInput.value = Number(amountInput.value) + 1;
-//   totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
-// }));
+// 수량 감소 클릭 이벤트
+plusBtn.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
+  });
+});  
+// 수량 감소 클릭 이벤트
+minusBtn.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (Number(btn.nextElementSibling.value) === 1) {
+      btn.nextElementSibling.value = 1;
+    } else {
+      btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
+    }
+  });
+});
 
 // 삭제 구현
 // 단일 상품 삭제
@@ -91,7 +91,36 @@ deleteSelectedBtn.addEventListener('click', () => {
 });
 
 // 가격 계산 구현
-// 선택 상품 금액 계산
-// 
+// 선택 상품 금액 계산(미완성)
+
+// 가격 문자열에서 숫자만 반환하는 함수
+function getPriceNumber(str) {
+  return Number(str.replace(/,/g, '').slice(0, -1));
+}
+
+// 배송비 계산
+function setDeliveryFee() {
+  if (getPriceNumber(selectedPrice.innerText) >= 50000) {
+    deliveryFee.innerText = '0원';
+  } else {
+    deliveryFee.innerText = '3,000원';
+  }
+}
+setDeliveryFee();
+
+// 총 결제 금액 계산
+function setTotalCost() {
+  const totalCostNum = getPriceNumber(selectedPrice.innerText) + getPriceNumber(deliveryFee.innerText);
+  totalCost.innerText = `${totalCostNum.toLocaleString()}원`;
+}
+setTotalCost();
+
+// 로컬스토리지 연동
+// localStorage.setItem('cart', '"title": "혼공얄코"');
+// function getCartFromLocal() {
+//   const existsCart = localStorage.getItem('cart');
+//   const cartList = existsCart;
+//   return JSON.parse(cartList);
+// }
 
 main();
