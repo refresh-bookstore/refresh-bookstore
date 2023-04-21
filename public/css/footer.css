@@ -31,7 +31,7 @@ footer .footer-container {
   width: 1024px;
 }
 
-footer .footer-container .upper-area {
+footer .footer-container .footer-upper-area {
 
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@ footer .footer-container .upper-area {
   width: 100%;
 }
 
-footer .footer-container .upper-area .logo{
+footer .footer-container .footer-upper-area .footer-logo{
   width: 100px;
   height: 50px;
   background-image: url('../images/logo_white.svg');
@@ -54,7 +54,7 @@ footer .footer-container .upper-area .logo{
 }
 
 
-footer .footer-container .lower-area {
+footer .footer-container .footer-lower-area {
 
   display: flex;
   flex-direction: column;
@@ -65,7 +65,7 @@ footer .footer-container .lower-area {
   width: 100%;
 }
 
-footer .footer-container .lower-area p{
+footer .footer-container .footer-lower-area p{
   color: var(--color-white);
   font-size: var(--font-small);
   font-weight: var(--weight-regular);

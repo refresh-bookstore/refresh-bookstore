@@ -3,13 +3,12 @@ function headerFunc() {
   const cartBtn = document.querySelector('#cart-icon');
   const userBtn = document.querySelector('#user-icon');
   
-  
-  
   const searchInput = document.querySelector('.search-input');
   const searchBox = document.querySelector('.search-box');
   
-  let cartItem = [];
-  
+
+  //검색창 애니메이션
+
   const searchInputAppear = [
     { transform: "translate(300px, 0px)" },
     { transform: "translate(0px, 0px)" },
@@ -25,10 +24,7 @@ function headerFunc() {
     iterations: 1,
   };
   
-  if(cartItem.length > 0) {
-    cartBtn.classList.add('full');
-  };
-  
+  //검색창 마우스오버 이벤트
   
   searchBtn.addEventListener('mouseover', ()=>{
     if(searchBtn.classList.contains('activate')){
@@ -44,6 +40,8 @@ function headerFunc() {
     }
   })
   
+  //검색창 마우스아웃 이벤트
+
   searchInput.addEventListener('mouseout', ()=>{
       searchInput.animate(searchInputDisappear,searchInputTiming);
       searchInput.placeholder = "";
@@ -55,18 +53,7 @@ function headerFunc() {
       }, 230);
   })
   
-  
-  
-  
-  //test
-  const purchaseBtn = document.querySelector('#purchase-button');
-  
-  purchaseBtn.addEventListener('click', ()=> {
-    cartItem.push('hi');
-    if(cartItem.length > 0) {
-    cartBtn.classList.add('full');
-  };
-  })
+
   
 }
 
