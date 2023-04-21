@@ -1,4 +1,4 @@
-import { main } from '../../../public/js/main.js';
+import { main } from '../public/js/main.js';
 
 const button = document.getElementById("button");
 

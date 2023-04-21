@@ -1,4 +1,4 @@
-import { main } from '../../../public/js/main.js';
+import { main } from '../public/js/main.js';
 import { checkValid } from './checkValid.js';
 
 const userGreeting = document.getElementById("user-greeting");
