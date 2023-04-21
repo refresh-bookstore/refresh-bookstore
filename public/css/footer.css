@@ -1,3 +1,8 @@
+main {
+  height: 1000px;
+}
+
+
 footer {
   display: flex;
   flex-direction: column;
