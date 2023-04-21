@@ -1,7 +1,7 @@
 @import url('../../../public/css/main.css');
 
 .intro {
-  margin-bottom: 20px;
+  margin: 50px 0 20px 0;
 }
 
 #user-greeting {
