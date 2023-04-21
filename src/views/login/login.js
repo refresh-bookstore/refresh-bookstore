@@ -1,3 +1,5 @@
+import { main } from '../../../public/js/main.js';
+
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
 const submitButton = document.getElementById("submitButton");
@@ -38,3 +40,5 @@ function checkValid() {
 
   return true;
 }
+
+main();

@@ -10,7 +10,7 @@ input[type=password]::placeholder {
 /* main */
 .title {
   font-size: var(--font-large);
-  margin-top: 60px;
+  padding-top: 100px;
   text-align: center;
 }
 
