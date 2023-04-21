@@ -34,13 +34,13 @@
   color: var(--color-point);
   border: 1px solid var(--color-point);
   border-radius: 20px;
-  font-size: var(--font-regular);
+  font-size: var(--font-small);
   padding: 5px;
 }
 
 .nav-item.category .nav-link:hover {
-  color: var(--color-dark-green);
-  border-color: var(--color-dark-green);
+  color: var(--color-point);
+  border-color: var(--color-point);
 }
 
 .nav-item.category .nav-link.clicked {
