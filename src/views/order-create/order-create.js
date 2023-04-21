@@ -1,4 +1,4 @@
-import { main } from '../../../public/js/main.js';
+import { main } from '../public/js/main.js';
 
 const requestSelectBox = document.querySelector('#request__Select__Box');
 const customRequestContainer = document.querySelector('.customRequestContainer');

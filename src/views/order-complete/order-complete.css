@@ -1,4 +1,4 @@
-@import "../../../public/css/main.css";
+@import "../public/css/main.css";
 
 .order-complete-title {
   text-align: left;
@@ -26,8 +26,14 @@
 
 .button__area button {
   font-size: var(--font-medium);
+  color: var(--color-point);
+  background-color: var(--color-white);
   padding: 4px;
   margin: 4px;
   border-radius: var(--border-radius-button);
-  border: 1px solid var(--color-dark-gray);
+  border: 1px solid var(--color-point);
+}
+
+.button__area button:hover {
+  background-color: var(--color-light-green);
 }

@@ -1,4 +1,4 @@
-@import url('../../../public/css/main.css');
+@import url('../public/css/main.css');
 
 .order-detail {
   text-align: left;
@@ -10,7 +10,6 @@
 
 main {
   padding: 20px;
-  /* justify-content: space-between; */
 }
 
 section {
@@ -50,12 +49,12 @@ p.label {
   border-radius: 8px;
 }
 
-.items {
+.books {
   width: 800px;
   padding: 4px 20px;
 }
 
-.items .item {
+.books .book {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -68,7 +67,7 @@ p.label {
   box-shadow: 5px 5px 5px var(--color-light-gray);
 }
 
-.item .item-img {
+.book .book-img {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,12 +76,11 @@ p.label {
   border: 0.3px var(--color-light-gray) solid;
 }
 
-.item .item-img img{
+.book .book-img img{
   width: 100px;
-  height: 100px;
 }
 
-.item .item-info {
+.book .book-info {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -91,8 +89,7 @@ p.label {
   width: 65%;
 }
 
-.item .item-info .item-name {
-
+.book .book-info .book-title {
   font-size: var(--font-medium);
   font-weight: var(--weight-bold);
   color: var(--color-black);
@@ -104,7 +101,7 @@ p.label {
   border-bottom: 0.3px var(--color-light-gray) solid;
 }
 
-.item .item-info .item-detail {
+.book .book-info .author {
   font-size: var(--font-regular);
   font-weight: var(--weight-regular);
   color: var(--color-black);
@@ -114,7 +111,7 @@ p.label {
 
 }
 
-.item .item-info .item-cost {
+.book .book-info .book-price {
   font-size: var(--font-medium);
   font-weight: var(--weight-bold);
   color: var(--color-black);
@@ -199,6 +196,8 @@ p.label {
 .buttonArea {
   position: relative;
   left: 70%;
+  margin: 0;
+  width: 300px;
 }
 
 .modifyButton {

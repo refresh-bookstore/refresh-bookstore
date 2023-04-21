@@ -1,3 +1,5 @@
+@import url('../public/css/main.css');
+
 .order-create-title {
   text-align: left;
   font-size: var(--font-large);
@@ -150,9 +152,13 @@ input[type="button"] {
   /* border-radius: 12px; */
 }
 
+.bookInfo .book-img {
+  display: flex;
+  align-items: center;
+}
 .bookInfo .book-img img {
   border: 1px solid var(--color-light-gray);
-  scale: 80%;
+  width: 100px;
 }
 
 .bookInfo .book__title__price {
@@ -161,14 +167,15 @@ input[type="button"] {
 }
 
 .bookInfo .book-title {
-  padding-top: 10px;
-  padding-bottom: 30px;
+  padding: 0 10px;
   font-size: var(--font-medium);
+  color: var(--color-black);
 }
 
-.book-title div {
-  padding: 20px 0;
+.book-title .author {
+  padding: 14px 0;
 }
+
 .bookInfo .amount {
   font-size: var(--font-regular);
   text-align: end;
