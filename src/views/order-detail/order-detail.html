@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Refresh Books</title>
+  <link rel="stylesheet" href="order-detail.css">
+  <script type="module" src="order-detail.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <!-- 
+      <img src="../../../public/images/img_sample_logo.png"></img>
+        <nav>
+          <ul>
+            <li><a href="#">검색</a></li>
+            <li><a href="#">로그인</a></li>
+            <li><a href="#">회원가입</a></li>
+            <li><a href="#">장바구니</a></li>
+          </ul>
+        </nav>
+      -->
+    </header>
+
+    <p class="order-detail">주문 상세</p>
+    <main>
+      <section class="products-detail">
+        <div class="orderDateArea">
+          <p class="label">주문일</p>
+          <div class="orderDate">2023-04-20</div>
+        </div>
+        <div class="shippingStatusArea">
+          <p class="label">배송 상태</p>
+          <div class="shippingStatus">배송전 > 배송중 > 배송완료</div>
+        </div>
+        <p class="label">주문 내역</p>
+        <div class="productInfoArea">
+          <div class="productInfo">
+            <ul class="items">
+              <li class="item">
+                  <div class="item-img">
+                    <img src="../../../public/images/sample_image.jpg">
+                  </div>
+                  <div class="item-info">
+                    <p class="item-name">혼자 공부하는 얄팍한 코딩지식</p>
+                    <p class="item-detail">한빛 출판사 | 고현민 | 2022</p>
+                    <p class="item-cost">15,800원 X 2권</p>
+                  </div>
+              </li>
+            </ul>
+          </div>
+          <div class="deliveryFeeArea">
+            <p class="label">배송비</p>
+            <div class="deliveryFee">3,000원</div>
+          </div>
+          <div class="entirePriceArea">
+            <p class="label">총 결제금액</p>
+            <div class="entirePrice">124,000원</div>
+          </div>
+        </div>
+      </section>
+      <section class="user-detail">
+        <div class="userInfoArea">
+          <p class="label">받는 사람 정보</p>
+          <div class="userInfo">
+            <div class="nameArea">
+              <p class="label">이름</p>
+              <div class="name">김토끼</div>
+            </div>
+            <div class="phoneNumberArea">
+              <p class="label">연락처</p>
+              <div class="phoneNumber">010-0000-0000</div>
+            </div>
+            <div class="addressArea">
+              <p class="label">주소</p>
+              <div class="address">(13536) 경기 성남시 분당구 판교역로 10 (백현동) 131</div>
+            </div>
+            <div class="deliveryRequestArea">
+              <p class="label">배송 요청 사항</p>
+              <div class="deliveryRequest">요청사항 없음.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="buttonArea">
+        <button class="modifyButton">주문정보 수정</button>
+        <button class="cancelButton">주문 취소</button>
+      </section>
+    </main>
+    <footer id="footer">
+      <!-- 
+      <div class="copyright">
+        <p>Copyright © 2023 refresh-store. All rights reserved.</p>
+      </div> 
+      -->
+    </footer>
+    
+  </div>
+  <script src="home.js"></script>
+</body>
+</html>
