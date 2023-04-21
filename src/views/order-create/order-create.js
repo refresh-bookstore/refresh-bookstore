@@ -1,52 +1,69 @@
-// import { findAddress } from './findAddress';
+import { main } from '../../../public/js/main.js';
 
-function sample6_execDaumPostcode() {
-  new daum.Postcode({
-  oncomplete: function (data) {
-    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+const requestSelectBox = document.querySelector('#request__Select__Box');
+const customRequestContainer = document.querySelector('.customRequestContainer');
+const customRequestInput = document.querySelector('.customRequestContainer input');
 
-    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-    var addr = ""; // 주소 변수
-    // var extraAddr = ''; // 참고항목 변수
+const bookTitle = document.querySelectorAll('.book-title a');
+const author = document.querySelectorAll('.author')
+const price = document.querySelectorAll('.price');
 
-    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-    if (data.userSelectedType === "R") {
-    // 사용자가 도로명 주소를 선택했을 경우
-    addr = data.roadAddress;
-    } else {
-    // 사용자가 지번 주소를 선택했을 경우(J)
-    addr = data.jibunAddress;
-    }
+const booksPrice = document.querySelector('.booksPrice');
+const deliveryFee = document.querySelector('.deliveryFee');
+const totalCost = document.querySelector('.totalCost');
 
-    // // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-    // if(data.userSelectedType === 'R'){
-    //     // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-    //     // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-    //     if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-    //         extraAddr += data.bname;
-    //     }
-    //     // 건물명이 있고, 공동주택일 경우 추가한다.
-    //     if(data.buildingName !== '' && data.apartment === 'Y'){
-    //         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-    //     }
-    //     // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-    //     if(extraAddr !== ''){
-    //         extraAddr = ' (' + extraAddr + ')';
-    //     }
-    //     // 조합된 참고항목을 해당 필드에 넣는다.
-    //     document.getElementById("sample6_extraAddress").value = extraAddr;
+//예시데이터
+const book = {
+  title: '혼자 공부하는 얄팍한 코딩지식',
+  subtitle: '비전공자도 1:1 과외하듯 배우는 IT 지식 입문서',
+  author: '고현민',
+  publisher: '한빛출판사',
+  published: new Date(2022, 4, 25),
+  cost: 14800,
+  category: '코딩입문서',
+  isbn: '1162245557',
+  introduction: `혼자 해도 충분합니다! 1:1 과외하듯 배우는 IT 지식 입문서! 이 책은 독학으로 IT 지식을 배우는 입문자가 ‘꼭 필요한 내용을 제대로 학습’할 수 있도록 구성했다. 뭘 모르는지조차 모르는 입문자의 막연한 마음에 십분 공감하여 과외 선생님이 알려주듯 친절하게, 핵심 내용만 콕콕 집어 준다. 1장에서는 IT 업계 용어를 알아보며 개발과 개발자를 이해하고, 2장에서는 개발자가 실제로 사용하는 용어를 배우며 개발자와 소통할 수 있는 발판을 마련해준다. 마지막 3장에서는 여러 가지 개발 용어를 바탕으로 개발자의 길로 들어설 수 있도록 친절하게 알려 준다. '개발이 뭔지 궁금했지만', '개발자와 소통해야 하지만', '개발자가 되고 싶지만'기존 IT 지식서에서는 시원하게 알 수 없었던 진짜 코딩 지식을 [혼공 얄코]에서 만나 보자!`,
+};
 
-    // } else {
-    //     document.getElementById("sample6_extraAddress").value = '';
-    // }
+// "직접 입력" 선택 시 input칸 보이게 함
+function handleRequestChange(e) {
+  const type = e.target.value;
 
-    // 우편번호와 주소 정보를 해당 필드에 넣는다.
-    document.getElementById("sample6_postcode").value = data.zonecode;
-    document.getElementById("sample6_address").value = addr;
-    // 커서를 상세주소 필드로 이동한다.
-    document.getElementById("sample6_detailAddress").focus();
-  },
-  }).open();
+  if (type === "5") {
+    customRequestContainer.style.display = "flex";
+    customRequestInput.focus();
+  } else {
+    customRequestContainer.style.display = "none";
+  }
 }
 
+requestSelectBox.addEventListener("change", handleRequestChange);
+
+// 책 정보
+bookTitle.forEach(e => e.innerText = book.title);
+author.forEach(e => e.innerText = book.author);
+price.forEach(e => e.innerText = `${book.cost.toLocaleString()}원`);
+
+// 가격 문자열에서 숫자만 반환하는 함수
+function getPriceNumber(str) {
+  return Number(str.replace(/,/g, '').slice(0, -1));
+}
+
+// 배송비 계산
+function setDeliveryFee() {
+  if (getPriceNumber(booksPrice.innerText) >= 50000) {
+    deliveryFee.innerText = '0원';
+  } else {
+    deliveryFee.innerText = '3,000원';
+  }
+}
+setDeliveryFee();
+
+// 총 결제 금액 계산
+function setTotalCost() {
+  const totalCostNum = getPriceNumber(booksPrice.innerText) + getPriceNumber(deliveryFee.innerText);
+  totalCost.innerText = `${totalCostNum.toLocaleString()}원`;
+}
+setTotalCost();
+
+main();

@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="../../../public/css/main.css">
   <link rel="stylesheet" href="order-create.css">
   <script type="module" src="order-create.js"></script>
+  <script src="findAddress.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
@@ -32,10 +33,11 @@
           <div class="userAddress">
             <label for="findAddress">주소</label>
             <div class="addressInput">
-              <input type="text" id="sample6_postcode" placeholder="우편번호">
-              <input type="button" class="findAddress" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-              <input type="text" id="sample6_address" placeholder="주소"><br>
+              <input type="text" onclick="sample6_execDaumPostcode()" id="sample6_postcode" placeholder="우편번호" readonly>
+              <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+              <input type="text" onclick="sample6_execDaumPostcode()" id="sample6_address" placeholder="주소" readonly><br>
               <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+              <!-- <input type="text" id="sample6_extraAddress" placeholder="참고항목"> -->
             </div>
           </div>
   
@@ -81,6 +83,7 @@
             <div class="book__title__price">
               <div class="book-title">
                 <a class="book-link" href="#">책 제목</a>
+                <div class="author"></div>
               </div>
               <div class="amount">총 1권</div>
               <div class="price">20,000원</div>
@@ -93,6 +96,7 @@
             <div class="book__title__price">
               <div class="book-title">
                 <a class="book-link" href="#">책 제목</a>
+                <div class="author"></div>
               </div>
               <div class="amount">총 1권</div>
               <div class="price">20,000원</div>
@@ -101,22 +105,22 @@
         </section>
   
         <p>결제 금액</p>
-        <section class="totalPrice">
+        <section class="totalPriceArea">
           <div class="pay__list">
             <div class="pay__detail__container">
               <div class="pay__detail">
                 <div>상품 가격</div>
-                <div class="total__price">40,000원</div>
+                <div class="booksPrice">40,000원</div>
               </div>
     
               <div class="pay__detail">
                 <div>배송비</div>
-                <div class="deliveryFee">3,000원</div>
+                <div class="deliveryFee"></div>
               </div>
     
               <div class="pay__detail">
                 <div>총 결제 금액</div>
-                <div class="total__sum">43,000원</div>
+                <div class="totalCost"></div>
               </div>
             </div>
           </div>

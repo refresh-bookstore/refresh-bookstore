@@ -44,6 +44,8 @@ main .rightSide {
   align-items: center;
   border-right: 1px solid var(--color-dark-gray);
   margin-right: 8px;
+  justify-content: center;
+  font-weight: var(--weight-semi-bold);
 }
 .userName {
   display: flex;
@@ -67,7 +69,7 @@ main .rightSide {
   width: 250px;
   border: 1px solid var(--color-dark-gray);
   border-radius: var(--border-radius-input);
-  color: var(--color-dark-gray);
+  color: var(--color-light-black);
 }
 
 .userAddress {
@@ -87,7 +89,7 @@ main .rightSide {
   width: 140px;
 }
 
-input.findAddress {
+input[type="button"] {
   width: 100px;
   color: gray;
 }
@@ -95,6 +97,7 @@ input.findAddress {
 .deliveryRequest {
   display: flex;
 }
+
 .deliveryRequest p {
   width: 140px;
   display: flex;
@@ -102,9 +105,11 @@ input.findAddress {
   border-right: 1px solid var(--color-dark-gray);
   margin-right: 8px;
   padding-left: 20px;
-  padding-right: 8px;
-  margin-bottom: 40px;
+  padding-right: 0;
+  justify-content: center;
+  font-weight: var(--weight-semi-bold);
 }
+
 .deliveryRequest select, input {
   width: 250px;
   margin: 4px 0;
@@ -151,17 +156,19 @@ input.findAddress {
 }
 
 .bookInfo .book__title__price {
-  padding: 0px 8px;
-  padding-top: 16px;
-  padding-left: 12px;
+  padding: 18px 8px;
   width: 100%;
 }
 
 .bookInfo .book-title {
-  padding-bottom: 80px;
+  padding-top: 10px;
+  padding-bottom: 30px;
   font-size: var(--font-medium);
 }
 
+.book-title div {
+  padding: 20px 0;
+}
 .bookInfo .amount {
   font-size: var(--font-regular);
   text-align: end;
@@ -187,7 +194,7 @@ input.findAddress {
   font-size: var(--font-medium);
 }
 
-.pay__detail .total__price, .deliveryFee, .total__sum {
+.pay__detail .booksPrice, .deliveryFee, .totalCost {
   width: 140px;
   text-align: right;
 }
@@ -213,4 +220,8 @@ input.findAddress {
   border-radius: var(--border-radius-button);
   font-weight: var(--weight-semi-bold);
   color: var(--color-white);
+}
+
+.hidden {
+  display: none;
 }
