@@ -68,9 +68,38 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: space-between;
+
+}
+
+.content-area .content-upper-area {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
 
+
+.content-area .title{
+  margin-right: 10px;
+  font-size: var(--font-medium);
+}
+
+.content-area #add-button{
+  display: none;
+  margin-left: 30px;
+  width: 25px;
+  height: 25px;
+  background-image: url(../public/images/icon_add.svg);
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.content-area #add-button.active{
+  display: flex;
 }
 
 .content {
@@ -84,11 +113,6 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-}
-
-.content-area .title{
-  margin-right: 30px;
-  font-size: var(--font-medium);
 }
 
 .active {

@@ -9,6 +9,7 @@ const adminUsers = document.querySelector('#list-users');
 const adminOrders = document.querySelector('#list-orders');
 const adminCategories = document.querySelector('#list-categories');
 
+const addBtn = document.querySelector('#add-button');
 const adminContentBooks = document.querySelector('#admin-books');
 const adminContentUsers = document.querySelector('#admin-users');
 const adminContentOrders = document.querySelector('#admin-orders');
@@ -39,7 +40,9 @@ lists.forEach((e)=> {
         el.classList.remove('active');
       }
     })
+    addBtn.classList.add('active');
     title.innerText = e.innerText;
+    
 
 
     //////////////////////도서관리///////////////////////
