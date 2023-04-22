@@ -23,7 +23,7 @@ const app = express();
 
 mongoose.set("strictQuery", false);
 
-mongoose.connect("mongodb://localhost:27017/myapp", {
+mongoose.connect("mongodb+srv://ksoup3434:u6KlMbiDKNEgwr2Z@cluster0.4gp8bj5.mongodb.net/test", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -61,6 +61,10 @@ app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/register", usersRouter);
 app.use("/mypage", checkSession, mypageRouter);
+app.use("/category", categoryRouter);
+app.use("/product", productRouter);
+app.use("/product/list", productRouter);
+app.use("/product/products", productRouter);
 
 // 404 에러 핸들링
 app.use(function (req, res, next) {

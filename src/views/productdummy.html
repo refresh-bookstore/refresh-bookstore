@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .control label.label {display:inline-block; width:20%;}
+    .control input {display:inline-block; width:70%; border-radius:5px;}
+  </style>
+</head>
+<body>
+  <form method="post" action="/product">
+    <div class="field">
+      <div class="control">
+        <label class="label">제목</label>
+        <input type="text" name="title" placeholder="테스트">
+      </div>
+      <div class="control">
+        <label class="label">저자</label>
+        <input type="text" name="author" placeholder="테스트">
+      </div>
+      <div class="control">
+        <label class="label">발행자</label>
+        <input type="text" name="publisher" placeholder="테스트">
+      </div>
+      <div class="control">
+        <label class="label">발행일</label>
+        <input type="text" name="publication_date" placeholder="테스트">
+      </div>
+      <div class="control">
+        <label class="label">국제표준도서번호</label>
+        <input type="text" name="isbn" placeholder="테스트">
+      </div>
+      <div class="control">
+        <label class="label">설명</label>
+        <input type="text" name="description" placeholder="테스트">
+      </div>
+      <div class="control">
+        <label class="label">가격</label>
+        <input type="text" name="price" placeholder="테스트">
+      </div>
+      <div class="control">
+        <label class="label">이미지</label>
+        <input type="text" name="image_path" placeholder="테스트">
+      </div>
+      <div class="control">
+        <label class="label">카테고리</label>
+        <input type="text" name="category" placeholder="테스트">
+      </div>
+      <input type="submit" value="등록하기"/>
+    </div>
+  </form>
+</body>
+<script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = {
+      title: form.title.value,
+      author: form.author.value,
+      publisher: form.publisher.value,
+      publication_date: form.publication_date.value,
+      isbn: form.isbn.value,
+      description: form.description.value,
+      price: form.price.value,
+      image_path: form.image_path.value,
+      category: form.category.value,
+    };
+    const response = await fetch('/product', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    console.log(result);
+  });
+</script>
+</html>

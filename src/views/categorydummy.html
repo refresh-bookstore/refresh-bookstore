@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form method="post" action="/category">
+    <div class="field">
+      <label class="label">이름</label>
+      <div class="control">
+        <input type="text" name="name" placeholder="테스트">
+      </div>
+      <input type="submit" value="등록하기"/>
+    </div>
+  </form>
+</body>
+<script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = {
+      name: form.name.value
+    };
+    const response = await fetch('/category', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    console.log(result);
+  });
+</script>
+</html>
