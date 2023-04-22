@@ -1,15 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { body, check, validationResult } = require("express-validator");
-const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const hashPassword = require("../middlewares/hashPassword");
+const { body, validationResult } = require("express-validator");
+const User = require("../models/User");
 
-router.get("/", function (req, res, next) {
+router.get("/", (req, res) => {
   res.render("register/register.html");
 });
 
-//추가적으로 묶을 필요가 있음 라우터부분
 router.post(
   "/",
   [
@@ -49,12 +47,14 @@ router.post(
       .trim()
       .notEmpty()
       .withMessage("상세주소를 입력해주세요."),
-  ], // hashPassword 미들웨어 추가
+  ],
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
+
     try {
       const password = await bcrypt.hash(req.body.password, 10);
 
@@ -78,4 +78,5 @@ router.post(
     }
   }
 );
+
 module.exports = router;

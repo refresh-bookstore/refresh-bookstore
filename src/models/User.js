@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema(
         validator: function (v) {
           return /\d{3}-\d{3,4}-\d{4}/.test(v);
         },
-        message: props => `${props.value} is not a valid phone number!`,
+        message: props => `${props.value}는 올바른 휴대폰 형식이 아님!`,
       },
     },
     isAdmin: {

@@ -1,6 +1,7 @@
 const axios = require("axios");
 const mongoose = require("mongoose");
 const fs = require("fs");
+const sharp = require("sharp");
 
 mongoose.connect("mongodb://localhost:27017/myapp", {
   useNewUrlParser: true,
@@ -25,8 +26,6 @@ const BOOKS_PER_PAGE = 30;
 const QUERY = "programming";
 const LANG = "ko";
 const MAX_RESULTS = 30;
-const IMAGE_WIDTH = 380;
-const IMAGE_HEIGHT = 560;
 
 const fetchBooks = async () => {
   try {
@@ -36,53 +35,76 @@ const fetchBooks = async () => {
     const books = response.data.items.slice(0, MAX_RESULTS);
 
     for (const book of books) {
-      const title = book.volumeInfo.title;
-      const author = book.volumeInfo.authors
-        ? book.volumeInfo.authors.join(", ")
-        : "Unknown";
-      const publisher = book.volumeInfo.publisher || "Unknown";
-      const publication_date = book.volumeInfo.publishedDate
-        ? new Date(book.volumeInfo.publishedDate)
-        : null;
-      const isbn = book.volumeInfo.industryIdentifiers
-        ? book.volumeInfo.industryIdentifiers[0].identifier
-        : "";
-      const description = book.volumeInfo.description || "";
-      const price = book.saleInfo.listPrice
-        ? book.saleInfo.listPrice.amount
-        : 0;
-      const category = book.volumeInfo.categories
-        ? book.volumeInfo.categories[0]
-        : "Unknown";
-      const image_url = book.volumeInfo.imageLinks
-        ? book.volumeInfo.imageLinks.thumbnail
-        : "";
-      const image_filename = `public/images/${isbn}.jpg`;
+      const {
+        volumeInfo: {
+          title,
+          authors,
+          publisher,
+          publishedDate,
+          industryIdentifiers,
+          description,
+          imageLinks,
+        },
+        saleInfo: { listPrice },
+      } = book;
 
-      const bookData = new Book({
-        title,
-        author,
-        publisher,
-        publication_date,
-        isbn,
-        description,
-        price,
-        image_path: image_filename,
-        category,
-      });
+      const author = authors ? authors.join(", ") : "Unknown";
+      const publication_date = publishedDate ? new Date(publishedDate) : null;
+      const isbn = industryIdentifiers ? industryIdentifiers[0].identifier : "";
+      const price = listPrice ? listPrice.amount : 0;
+      const category = "Programming";
+      const image_url = imageLinks ? imageLinks.thumbnail : "";
 
-      const imageResponse = await axios.get(image_url, {
-        responseType: "stream",
-      });
-      const imageStream = imageResponse.data.pipe(
-        fs.createWriteStream(image_filename)
+      if (!image_url) continue; // 이미지가 없는 경우 skip
+
+      const search_response = await axios.get(
+        `https://www.googleapis.com/customsearch/v1?q=${title}&cx=00849175fe6714227&imgSize=huge&imgType=photo&num=1&searchType=image&key=AIzaSyAc_qlqQrXuSllv628I5keWC0sdW3qkgAE`
       );
-      await new Promise((resolve, reject) => {
-        imageStream.on("finish", resolve);
-        imageStream.on("error", reject);
-      });
 
-      await bookData.save();
+      if (search_response.data.items.length > 0) {
+        const image_link = search_response.data.items[0].link;
+
+        const image_response = await axios.get(image_link, {
+          responseType: "stream",
+        });
+
+        const imageStream = image_response.data.pipe(
+          fs.createWriteStream(`public/images/${isbn}.jpg`)
+        );
+
+        await new Promise((resolve, reject) => {
+          imageStream.on("finish", resolve);
+          imageStream.on("error", reject);
+        });
+
+        const resized_filename = `public/images/${isbn}_resized.jpg`;
+
+        await sharp(`public/images/${isbn}.jpg`)
+          .resize({
+            width: 720,
+            fit: "contain",
+            background: { r: 255, g: 255, b: 255 },
+          })
+          .toFile(resized_filename);
+
+        fs.unlinkSync(`public/images/${isbn}.jpg`);
+
+        const bookData = new Book({
+          title,
+          author,
+          publisher,
+          publication_date,
+          isbn,
+          description,
+          price,
+          image_path: resized_filename,
+          category,
+        });
+
+        await bookData.save();
+      } else {
+        console.log(`No image found for book with title "${title}".`);
+      }
     }
 
     console.log(`${MAX_RESULTS} books added to database.`);
