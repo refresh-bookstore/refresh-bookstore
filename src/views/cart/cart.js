@@ -1,35 +1,113 @@
 import { main } from '../public/js/main.js';
 
-const bookTitle = document.querySelectorAll('.book-title');
-const author = document.querySelectorAll('.author')
-const bookPrice = document.querySelectorAll('.book-price');
+const cart = document.querySelector('.cart');
+// const bookTitle = document.querySelectorAll('.book-title');
+// const author = document.querySelectorAll('.author')
+// const bookPrice = document.querySelectorAll('.book-price');
 
-const minusBtn = document.querySelectorAll('.minusBtn');
-const amountInput = document.querySelectorAll('.amountInput');
-const plusBtn = document.querySelectorAll('.plusBtn');
 
 const selectedPrice = document.querySelector('.selectedPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
 
-//예시데이터
-const book = {
-  title: '혼자 공부하는 얄팍한 코딩지식',
-  subtitle: '비전공자도 1:1 과외하듯 배우는 IT 지식 입문서',
-  author: '고현민',
-  publisher: '한빛출판사',
-  published: new Date(2022, 4, 25),
-  cost: 14800,
-  category: '코딩입문서',
-  isbn: '1162245557',
-  introduction: `혼자 해도 충분합니다! 1:1 과외하듯 배우는 IT 지식 입문서! 이 책은 독학으로 IT 지식을 배우는 입문자가 ‘꼭 필요한 내용을 제대로 학습’할 수 있도록 구성했다. 뭘 모르는지조차 모르는 입문자의 막연한 마음에 십분 공감하여 과외 선생님이 알려주듯 친절하게, 핵심 내용만 콕콕 집어 준다. 1장에서는 IT 업계 용어를 알아보며 개발과 개발자를 이해하고, 2장에서는 개발자가 실제로 사용하는 용어를 배우며 개발자와 소통할 수 있는 발판을 마련해준다. 마지막 3장에서는 여러 가지 개발 용어를 바탕으로 개발자의 길로 들어설 수 있도록 친절하게 알려 준다. '개발이 뭔지 궁금했지만', '개발자와 소통해야 하지만', '개발자가 되고 싶지만'기존 IT 지식서에서는 시원하게 알 수 없었던 진짜 코딩 지식을 [혼공 얄코]에서 만나 보자!`,
+// 예시 주문데이터
+let order = [
+  {
+    title: '혼자 공부하는 얄팍한 코딩지식',
+    subtitle: '비전공자도 1:1 과외하듯 배우는 IT 지식 입문서',
+    author: '고현민',
+    publisher: '한빛출판사',
+    published: new Date(2022, 4, 25),
+    cost: 14800,
+    category: '코딩입문서',
+    isbn: '9791162245552',
+    introduction: `혼자 해도 충분합니다! 1:1 과외하듯 배우는 IT 지식 입문서! 이 책은 독학으로 IT 지식을 배우는 입문자가 ‘꼭 필요한 내용을 제대로 학습’할 수 있도록 구성했다. 뭘 모르는지조차 모르는 입문자의 막연한 마음에 십분 공감하여 과외 선생님이 알려주듯 친절하게, 핵심 내용만 콕콕 집어 준다. 1장에서는 IT 업계 용어를 알아보며 개발과 개발자를 이해하고, 2장에서는 개발자가 실제로 사용하는 용어를 배우며 개발자와 소통할 수 있는 발판을 마련해준다. 마지막 3장에서는 여러 가지 개발 용어를 바탕으로 개발자의 길로 들어설 수 있도록 친절하게 알려 준다. '개발이 뭔지 궁금했지만', '개발자와 소통해야 하지만', '개발자가 되고 싶지만'기존 IT 지식서에서는 시원하게 알 수 없었던 진짜 코딩 지식을 [혼공 얄코]에서 만나 보자!`,
+    amount: 2
+  },
+  {
+    title: '모던 자바스크립트 Deep Dive',
+    subtitle: '자바스크립트의 기본 개념과 동작 원리',
+    author: '이웅모',
+    publisher: '위키북스',
+    published: new Date(2020, 9, 25),
+    cost: 45000,
+    category: '웹 개발',
+    isbn: '9791158392239',
+    introduction: `『모던 자바스크립트 Deep Dive』에서는 자바스크립트를 둘러싼 기본 개념을 정확하고 구체적으로 설명하고, 자바스크립트 코드의 동작 원리를 집요하게 파헤친다. 따라서 여러분이 작성한 코드가 컴퓨터 내부에서 어떻게 동작할 것인지 예측하고, 명확히 설명할 수 있도록 돕는다. 또한 최신 자바스크립트 명세를 반영해 안정적이고 효율적인 코드를 작성할 수 있는 기본기를 다지고, 실전에서 쓰이는 모던 자바스크립트 프레임워크나 도구를 완벽하게 이해하고 활용할 수 있게 도와준다.`,
+    amount: 2
+  }
+];
+console.log(JSON.stringify(order));
+// 로컬스토리지에 데이터 저장
+const save = (data) => {
+  localStorage.setItem('cart', JSON.stringify(data));
+}
+save(order);
+
+let bookData = {
+  title: '모던 자바스크립트 Deep Dive',
+  subtitle: '자바스크립트의 기본 개념과 동작 원리',
+  author: '이웅모',
+  publisher: '위키북스',
+  published: new Date(2020, 9, 25),
+  cost: 45000,
+  category: '웹 개발',
+  isbn: '9791158392239',
+  introduction: `『모던 자바스크립트 Deep Dive』에서는 자바스크립트를 둘러싼 기본 개념을 정확하고 구체적으로 설명하고, 자바스크립트 코드의 동작 원리를 집요하게 파헤친다. 따라서 여러분이 작성한 코드가 컴퓨터 내부에서 어떻게 동작할 것인지 예측하고, 명확히 설명할 수 있도록 돕는다. 또한 최신 자바스크립트 명세를 반영해 안정적이고 효율적인 코드를 작성할 수 있는 기본기를 다지고, 실전에서 쓰이는 모던 자바스크립트 프레임워크나 도구를 완벽하게 이해하고 활용할 수 있게 도와준다.`,
+  amount: 5
+};
+order.push(bookData);
+save(order);
+
+// 로컬스토리지에서 불러오기
+const load = () => {
+  const data = localStorage.getItem('cart');
+  if (data !== null) {
+    console.log(JSON.parse(data));
+    return JSON.parse(data);
+  } else {
+    console.log('hi');
+  }
 };
 
-// 책 정보
-bookTitle.forEach(e => e.innerText = book.title);
-author.forEach(e => e.innerText = book.author);
-bookPrice.forEach(e => e.innerText = `${book.cost.toLocaleString()}원`);
-
+load().forEach(order => {
+  // imgLink는 isbn.png로 넘길 예정
+  const imgLink = '../public/images/sample_image.jpg';
+  const title = order.title;
+  const author = order.author;
+  const cost = `${order.cost.toLocaleString()}원`;
+  const amount = Number(order.amount);
+  
+  cart.innerHTML += `<div class="item">
+  <input type="checkbox" name="buy" checked="">
+  <!-- 책 이미지 -->
+  <div class="book-img">
+  <a class="book-link" href="#">
+  <img src="${imgLink}" class="book-img" alt="bookImg1"/>
+  </a>
+  </div>
+  
+  <div class="book-info">
+  <a class="book-title" href="#">${title}</a>
+  <div class="author">${author}</div>
+  </div>
+  <!-- 상품 금액 -->
+  <div class="price">
+  <p class="price-title">상품 금액</p>
+  <div class="book-price">${cost}</div>
+  </div>
+  <!-- 수량 변경 -->
+  <div class="amountArea">
+  <button class="minusBtn">-</button>
+  <input class ="amountInput" value="${amount}">
+  <button class="plusBtn">+</button>
+  </div>
+  
+  <!-- 삭제 버튼 -->
+  <div class="delete">
+  <button class="deleteBtn">삭제</button>
+  </div>`;
+});
 
 // 체크박스 구현
 
@@ -56,6 +134,10 @@ function checkAll(selectAll) {
 }
 selectAll.addEventListener('click', () => checkAll(selectAll));
 
+const minusBtn = document.querySelectorAll('.minusBtn');
+const amountInput = document.querySelectorAll('.amountInput');
+const plusBtn = document.querySelectorAll('.plusBtn');
+console.log(plusBtn);
 
 // 수량 감소 클릭 이벤트
 plusBtn.forEach(btn => {
@@ -123,12 +205,6 @@ function setTotalCost() {
 }
 setTotalCost();
 
-// 로컬스토리지 연동
-// localStorage.setItem('cart', '"title": "혼공얄코"');
-// function getCartFromLocal() {
-//   const existsCart = localStorage.getItem('cart');
-//   const cartList = existsCart;
-//   return JSON.parse(cartList);
-// }
+
 
 main();
