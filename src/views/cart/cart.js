@@ -165,9 +165,15 @@ amountInput.forEach(amount => {
 // 삭제 구현
 // 단일 상품 삭제
 const deleteBtn = document.querySelectorAll('.deleteBtn');
-deleteBtn.forEach(btn => {
+deleteBtn.forEach((btn, idx) => {
   const item = btn.parentElement.parentElement;
   btn.addEventListener('click', () => item.setAttribute('style', 'display: none'));
+  // btn.addEventListener('click', () => {
+  //   item.classList.add(`delete${idx}`);
+  //   const targetTitle = document.querySelector(`.delete${idx} .book-title`).innerText;
+  //   order = [];
+
+  // });
 });
 
 // 선택 삭제
