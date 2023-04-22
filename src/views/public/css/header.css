@@ -118,6 +118,7 @@ header .cart.full{
 }
 
 header .user {
+  position: relative;
   background-image: url('../images/icon_user_noface_green.svg');
   background-repeat: no-repeat;
   background-position: center left;
@@ -131,4 +132,28 @@ header .user {
 
 .green {
   fill: #1DC078;
+}
+
+a {
+  text-decoration: none;
+
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 48px;
+
+  transform: translateX(-70%);
+  
+  width: 150px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.menu-li {
+  font-size: 16px;
+  padding: 5px 5px 8px 5px;
 }

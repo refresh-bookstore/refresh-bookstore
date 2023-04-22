@@ -60,18 +60,48 @@ function headerFunc() {
   // 로고 클릭 이벤트
   logoImage.addEventListener("click", () => {
     location.replace("../home/home.html");
-  });
-
-  // 유저 아이콘 클릭 이벤트
-  userBtn.addEventListener("click", () => {
-    location.replace("../login/login.html");
-  });
+  })
 
   // 장바구니 아이콘 클릭 이벤트
   cartBtn.addEventListener("click", () => {
     location.replace("../cart/cart.html");
   })
+
+  // 드롬 다운 메뉴 생성
+  const dropdownMenu = document.createElement('div');
+    dropdownMenu.classList.add('dropdown-menu');
+    dropdownMenu.innerHTML = `
+      <ul class="menu-ul">
+        <li class="menu-li" id="menu-mypage">마이페이지</li>
+        <li class="menu-li" id="menu-logout">로그아웃</li>
+      </ul>
+    `;
   
+  // 드롭 다운 메뉴 HTML 추가
+  userBtn.appendChild(dropdownMenu);
+
+  // 유저 아이콘 클릭 이벤트
+  userBtn.addEventListener("click", () => {
+    if (dropdownMenu.style.display === "none") {
+      dropdownMenu.style.display = "flex";
+    } else {
+      dropdownMenu.style.display = "none";
+    }
+  })
+
+  const mypageBtn = document.querySelector("#menu-mypage");
+  const logoutBtn = document.querySelector("#menu-logout");
+
+  // 마이페이지 메뉴 클릭 이벤트
+  mypageBtn.addEventListener("click", () => {
+    location.replace("../user-mypage/user-mypage.html");
+  })
+
+  // 로그아웃 메뉴 클릭 이벤트
+  logoutBtn.addEventListener("click", () => {
+    console.log("로그아웃 성공");
+  })
+
 }
 
 export { headerFunc };
