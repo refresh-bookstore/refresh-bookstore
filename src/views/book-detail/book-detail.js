@@ -4,7 +4,6 @@ import { main } from '../public/js/main.js';
 const likeBtn = document.querySelector('#likeBtn');
 
 const bookTitle = document.querySelectorAll('.bookTitle');
-const bookSubtitle = document.querySelector('#bookSubtitle');
 const detailedInfo = document.querySelector('#detailedInfo');
 const bookCost = document.querySelector('#bookCost');
 const bookCategory = document.querySelector('#category');
@@ -14,6 +13,7 @@ const plusBtn = document.querySelector('#plusBtn');
 const amountInput = document.querySelector('#amountInput');
 const totalCost = document.querySelector('#totalCost');
 const addToCartBtn = document.querySelector('#addToCartBtn');
+const purchaseBtn = document.querySelector('#purchaseBtn');
 
 const bookIntroduction = document.querySelector('#bookIntroduction');
 
@@ -21,7 +21,6 @@ const bookIntroduction = document.querySelector('#bookIntroduction');
 //예시데이터
 const book = {
   title: '혼자 공부하는 얄팍한 코딩지식',
-  subtitle: '비전공자도 1:1 과외하듯 배우는 IT 지식 입문서',
   author: '고현민',
   publisher: '한빛출판사',
   published: new Date(2022, 4, 25),
@@ -45,7 +44,6 @@ bookTitle.forEach((e)=>{
   e.innerText = book.title;
 });
 
-bookSubtitle.innerText = book.subtitle;
 detailedInfo.innerText = `${book.author} | ${book.publisher} | ${book.published.getFullYear()}`;
 
 
@@ -93,6 +91,20 @@ addToCartBtn.addEventListener('click',()=>{
     });
   }
   localStorage.setItem('cart', JSON.stringify(cartItems));
+});
+
+
+//////////////////////////// 구매 버튼//////////////////////
+purchaseBtn.addEventListener('click',()=>{
+  localStorage.removeItem('purchase');
+  const purchaseItems = {
+      title: book.title,
+      author: book.author,
+      cost: book.cost,
+      amount: Number(amountInput.value),
+      isbn: book.isbn,
+    };
+  localStorage.setItem('purchase', JSON.stringify(purchaseItems));
 });
 
 
