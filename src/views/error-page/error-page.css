@@ -10,17 +10,26 @@
   align-items: center;
 }
 
+.error-img {
+  margin-top: 50px;
+  width:280px;
+}
+
 #error-message {
-  margin-top: 100px;
-  font-size: var(--font-large);
+  margin-top: 60px;
+  font-size: var(--font-medium);
+  color: var(--color-point);
+  font-weight: var(--weight-bold);
 }
 
 #button {
-  font-size: var(--font-medium);
+  font-size: var(--font-regular);
+  color: var(--color-point);
   margin-top: 30px;
+  margin-bottom: 60px;
 
-  width: 300px;
-  height: 50px;
+  width: 250px;
+  height: 40px;
   border: 1px solid var(--color-point);
   border-radius: var(--border-radius-button);
   font-weight: var(--weight-semi-bold);
@@ -29,5 +38,6 @@
 }
 
 #button:hover {
-  background-color: var(--color-light-gray);
+  color: var(--color-white);
+  background-color: var(--color-point);
 }
