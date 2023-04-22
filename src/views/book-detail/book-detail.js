@@ -13,6 +13,7 @@ const minusBtn = document.querySelector('#minusBtn');
 const plusBtn = document.querySelector('#plusBtn');
 const amountInput = document.querySelector('#amountInput');
 const totalCost = document.querySelector('#totalCost');
+const addToCartBtn = document.querySelector('#addToCartBtn');
 
 const bookIntroduction = document.querySelector('#bookIntroduction');
 
@@ -56,12 +57,10 @@ detailedInfo.innerText = `${book.author} | ${book.publisher} | ${book.published.
 minusBtn.addEventListener('click',(e)=>{
   e.preventDefault();
   if (Number(amountInput.value) <= 1){
-
   }else{
     amountInput.value -= 1;
     totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
   }
-  
 });
 
 plusBtn.addEventListener('click',(e)=>{
@@ -70,13 +69,31 @@ plusBtn.addEventListener('click',(e)=>{
   totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
 });
 
-
 totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
 
 amountInput.addEventListener('input', ()=>{
   totalCost.innerText = `${(book.cost * amountInput.value).toLocaleString()}원`;
 });
 
+
+//////////////////////////// 장바구니 버튼//////////////////////
+addToCartBtn.addEventListener('click',()=>{
+  let cartItems = JSON.parse(localStorage.getItem('cart'));
+  if(cartItems === null) cartItems = [];
+  const isAlreadyInCart = cartItems.findIndex(item=> item.isbn === book.isbn);
+  if(isAlreadyInCart !== -1){
+    cartItems[isAlreadyInCart].amount += Number(amountInput.value);
+  } else {
+    cartItems.push({
+      title: book.title,
+      author: book.author,
+      cost: book.cost,
+      amount: Number(amountInput.value),
+      isbn: book.isbn,
+    });
+  }
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+});
 
 
 
