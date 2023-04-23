@@ -10,7 +10,7 @@ const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
 
 // 예시 주문데이터
-let order = [
+const order = [
   {
     "title":"프론트엔드 성능 최적화 가이드",
     "author":"유동균",
@@ -36,14 +36,14 @@ let order = [
     "amount":2,
   }
 ];
-console.log(JSON.stringify(order));
-// 로컬스토리지에 데이터 저장
+
+// 로컬스토리지에 'cart'데이터 저장
 const save = (data) => {
   localStorage.setItem('cart', JSON.stringify(data));
 }
-save(order);
+// save(order);
 
-let bookData = {
+const bookData = {
   "title":"모던 자바스크립트 Deep Dive ",
   "author":"이웅모",
   "publisher":"위키북스",
@@ -59,53 +59,54 @@ order.push(bookData);
 save(order);
 
 // 로컬스토리지에서 불러오기
-const load = () => {
-  const data = localStorage.getItem('cart');
+function renderBooks() {
+  const data = JSON.parse(localStorage.getItem('cart'));
   if (data !== null) {
-    console.log(JSON.parse(data));
-    return JSON.parse(data);
+    data.forEach((order, idx) => {
+      const imgLink = order.image_path;
+      const title = order.title;
+      const author = order.author;
+      const amount = Number(order.amount);
+      const bookPrice = `${(order.price * amount).toLocaleString()}원`;
+      
+      cart.innerHTML += 
+      `<div class="item">
+      <input type="checkbox" name="buy" checked="">
+      <!-- 책 이미지 -->
+      <div class="book-img">
+      <a class="book-link" href="#">
+      <img src="${imgLink}" class="book-img" alt="bookImg1"/>
+      </a>
+      </div>
+      <!-- 책 정보 -->
+      <div class="book-info">
+      <a class="book-title" href="#">${title}</a>
+      <div class="author">${author}</div>
+      </div>
+      <!-- 수량 변경 -->
+      <div class="amountArea">
+      <button class="minusBtn">-</button>
+      <input class ="amountInput" value="${amount}">
+      <button class="plusBtn">+</button>
+      </div>
+      <!-- 상품 금액 -->
+      <div class="price">
+      <p class="price-title">상품 금액</p>
+      <div class="book-price${idx}">${bookPrice}</div>
+      </div>
+      <!-- 삭제 버튼 -->
+      <div class="delete">
+      <button class="deleteBtn">삭제</button>
+      </div>
+      </div>`;
+    });
+    activateDeleteBtn();
   } else {
-    console.log('hi');
+    // 장바구니에 상품이 없습니다
+    cart.innerHTML += `<p class="empty-cart">상품이 없습니다.</p>`;
   }
-};
-
-load().forEach((order, id) => {
-  const imgLink = order.image_path;
-  const title = order.title;
-  const author = order.author;
-  const amount = Number(order.amount);
-  const bookPrice = `${(order.price * amount).toLocaleString()}원`;
-
-  cart.innerHTML += `<div class="item">
-  <input type="checkbox" name="buy" checked="">
-  <!-- 책 이미지 -->
-  <div class="book-img">
-  <a class="book-link" href="#">
-  <img src="${imgLink}" class="book-img" alt="bookImg1"/>
-  </a>
-  </div>
-  
-  <div class="book-info">
-  <a class="book-title" href="#">${title}</a>
-  <div class="author">${author}</div>
-  </div>
-  <!-- 수량 변경 -->
-  <div class="amountArea">
-  <button class="minusBtn">-</button>
-  <input class ="amountInput" value="${amount}">
-  <button class="plusBtn">+</button>
-  </div>
-  <!-- 상품 금액 -->
-  <div class="price">
-  <p class="price-title">상품 금액</p>
-  <div class="book-price${id}">${bookPrice}</div>
-  </div>
-  
-  <!-- 삭제 버튼 -->
-  <div class="delete">
-  <button class="deleteBtn">삭제</button>
-  </div>`;
-});
+}
+renderBooks();
 
 // 체크박스 구현
 
@@ -137,56 +138,69 @@ const amountInput = document.querySelectorAll('.amountInput');
 const plusBtn = document.querySelectorAll('.plusBtn');
 
 // 수량 증가 클릭 이벤트
-plusBtn.forEach((btn, id) => {
+plusBtn.forEach((btn, idx) => {
   btn.addEventListener('click', () => {
     btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
-    // console.log(id);
-    order[id].amount += 1;
+    // console.log(idx);
+    order[idx].amount += 1;
     localStorage.removeItem('cart');
     save(order);
-    const bookPrice = document.querySelector(`.book-price${id}`);
-    bookPrice.innerText = `${(order[id].amount * order[id].price).toLocaleString()}원`;
+    const bookPrice = document.querySelector(`.book-price${idx}`);
+    bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
   });
 });  
 // 수량 감소 클릭 이벤트
-minusBtn.forEach((btn, id) => {
+minusBtn.forEach((btn, idx) => {
   btn.addEventListener('click', () => {
     if (Number(btn.nextElementSibling.value) === 1) {
       btn.nextElementSibling.value = 1;
     } else {
       btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
-      order[id].amount -= 1;
+      order[idx].amount -= 1;
       localStorage.removeItem('cart');
       save(order);
-      const bookPrice = document.querySelector(`.book-price${id}`);
-      bookPrice.innerText = `${(order[id].amount * order[id].price).toLocaleString()}원`;
+      const bookPrice = document.querySelector(`.book-price${idx}`);
+      bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
     }
   });
 });
 // 수량 값을 없애면 1로 바뀌도록 함
-amountInput.forEach(amount => {
+amountInput.forEach((amount, idx) => {
   amount.addEventListener('change', () => {
     if (amount.value === '' || amount.value === undefined) {
       amount.value = 1;
+      order[idx].amount = 1;
+      localStorage.removeItem('cart');
+      save(order);
+      const bookPrice = document.querySelector(`.book-price${idx}`);
+      bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
+    } else {
+      order[idx].amount = Number(amount.value);
+      localStorage.removeItem('cart');
+      save(order);
+      const bookPrice = document.querySelector(`.book-price${idx}`);
+      bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
     }
   });
 });
 
 // 삭제 구현
-// 단일 상품 삭제
-const deleteBtn = document.querySelectorAll('.deleteBtn');
-deleteBtn.forEach((btn, idx) => {
-  const item = btn.parentElement.parentElement;
-  btn.addEventListener('click', () => item.setAttribute('style', 'display: none'));
-  // btn.addEventListener('click', () => {
-  //   item.classList.add(`delete${idx}`);
-  //   const targetTitle = document.querySelector(`.delete${idx} .book-title`).innerText;
-  //   order = [];
 
-  // });
-});
+// 단일상품삭제 버튼 활성화 함수
+function activateDeleteBtn() {
+  const deleteBtn = document.querySelectorAll('.deleteBtn');
+  deleteBtn.forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+      order.splice(idx, 1);
+      localStorage.removeItem('cart');
+      save(order);
+      cart.innerHTML = '';
+      renderBooks();
+    });
+  });
+}
 
-// 선택 삭제
+// 선택삭제 버튼
 const deleteSelectedBtn = document.querySelector('.deleteSelected');
 deleteSelectedBtn.addEventListener('click', () => {
   checkboxes.forEach(box => {
@@ -197,6 +211,7 @@ deleteSelectedBtn.addEventListener('click', () => {
 // 가격 계산 구현
 // 단일 상품 금액 계산(미완성)
 // 선택 상품 금액 계산(미완성)
+
 
 
 // 가격 문자열에서 숫자만 반환하는 함수

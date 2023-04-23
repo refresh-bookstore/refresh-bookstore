@@ -54,6 +54,13 @@ input[type="checkbox"] {
   padding: 20px;
 }
 
+.empty-cart {
+  text-align: center;
+  padding: 100px;
+  font-size: var(--font-medium);
+  color: var(--color-light-black);
+}
+
 .cart div.book-img {
   position: relative;
   right: 30px;
