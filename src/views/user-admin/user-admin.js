@@ -1,5 +1,6 @@
 import { main } from '../public/js/main.js';
 import { books } from './books.js';
+import { users } from './users.js';
 
 const title = document.querySelector('.title');
 const adminBooks = document.querySelector('#list-books');
@@ -71,16 +72,16 @@ lists.forEach((e)=> {
     //////////////////////회원관리///////////////////////
     if(lists.indexOf(e) === 1){
       contents[1].innerHTML = ""; 
-      for(let i = 0; i < 5; i++){
+      for(let i = 0; i < users.length; i++){
         contents[1].innerHTML += 
         `
         <div class="admin-items">
           <input type="checkbox">
           <div class="item-info">
-            <p class="item-added-date"> 2022-05-14</p>
+            <p class="item-added-date"> ${users[i].registered_date.getFullYear()} / ${users[i].registered_date.getMonth()} / ${users[i].registered_date.getDate()}</p>
             <div class="item-more-info">
-              <p class="item-name"> 김토끼</p>
-              <p class="item-detail"> elice@rabbit.com </p>
+              <p class="item-name"> ${users[i].name}</p>
+              <p class="item-detail">${users[i].email}</p>
             </div>
             <span class="user-buttons">
               <img class="button set-user-admin" title="관리자 등록" src="../public/images/icon_user_admin.svg">
