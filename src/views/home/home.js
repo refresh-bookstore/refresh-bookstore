@@ -1,4 +1,4 @@
-import { main } from '../../../public/js/main.js';
+import { main } from '../public/js/main.js';
 
 const slider = document.querySelector("#slider");
 const slides = slider.querySelector(".slides");
@@ -8,7 +8,7 @@ const slide = slides.querySelectorAll(".slide");
 function getImageWidth() {
   const img = new Image();
   
-  img.src = "../../../public/images/img_sample_banner_1.png";
+  img.src = "../public/images/img_sample_banner_1.png";
   return img.width;
 }
 
@@ -67,7 +67,7 @@ const createBook = (book) => {
   return `<div class="book">
             <a class="book-link" href="#">
               <div class="img-container">
-                <img src="../../../public/images/sample_image.jpg" class="book-img" alt="${book.title}"/>
+                <img src="../public/images/sample_image.jpg" class="book-img" alt="${book.title}"/>
               </div>
               <div class="book-body">
                 <div class="book-text title">${book.title}</div>

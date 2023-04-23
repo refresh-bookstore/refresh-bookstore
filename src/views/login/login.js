@@ -1,4 +1,4 @@
-import { main } from "/js/main.js";
+import { main } from '../public/js/main.js';
 
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
@@ -10,17 +10,17 @@ registerButton.addEventListener("click", handlerRegister);
 
 function handlerSubmit(event) {
   event.preventDefault();
-
+  
   const isAllValid = checkValid();
 
   if (isAllValid) {
-    console.log("로그인 성공");
+    console.log('로그인 성공');
   }
 }
 
 function handlerRegister(event) {
   event.preventDefault();
-  console.log("회원가입 페이지로 이동");
+  console.log('회원가입 페이지로 이동');
 }
 
 function checkValid() {
