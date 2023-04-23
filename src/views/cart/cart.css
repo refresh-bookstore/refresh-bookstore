@@ -63,7 +63,7 @@ input[type="checkbox"] {
 
 .cart div.book-img {
   position: relative;
-  right: 30px;
+  right: 10px;
 }
 
 img.book-img {
@@ -76,8 +76,8 @@ img.book-img {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  right: 60px;
-  width: 300px;
+  right: 30px;
+  width: 400px;
   font-size: var(--font-medium);
   color: var(--color-black);
 }
@@ -98,13 +98,15 @@ img.book-img {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  width: 100px;
 }
 
 .price p {
   font-size: var(--font-small);
   text-align: center;
 }
-.book-price {
+
+.price div {
   padding: 8px 0;
   font-size: var(--font-medium);
 }

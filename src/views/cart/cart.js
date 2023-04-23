@@ -61,7 +61,11 @@ save(order);
 // 로컬스토리지에서 불러오기
 function renderBooks() {
   const data = JSON.parse(localStorage.getItem('cart'));
-  if (data !== null) {
+  if (data.length === 0) {
+    // 장바구니에 상품이 없습니다
+    cart.innerHTML = `<p class="empty-cart">상품이 없습니다.</p>`;
+    localStorage.clear();
+  } else {
     data.forEach((order, idx) => {
       const imgLink = order.image_path;
       const title = order.title;
@@ -104,9 +108,6 @@ function renderBooks() {
     activateAmountBtn();
     activateDeleteBtn();
     // activateDeleteSelectedBtn();
-  } else {
-    // 장바구니에 상품이 없습니다
-    cart.innerHTML += `<p class="empty-cart">상품이 없습니다.</p>`;
   }
 }
 renderBooks();
@@ -230,7 +231,7 @@ function activateDeleteSelectedBtn() {
 activateDeleteSelectedBtn();
 
 // 가격 계산 구현
-// 단일 상품 금액 계산(미완성)
+
 // 선택 상품 금액 계산(미완성)
 
 
