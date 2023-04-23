@@ -100,7 +100,10 @@ function renderBooks() {
       </div>
       </div>`;
     });
+    activateCheckboxes();
+    activateAmountBtn();
     activateDeleteBtn();
+    // activateDeleteSelectedBtn();
   } else {
     // 장바구니에 상품이 없습니다
     cart.innerHTML += `<p class="empty-cart">상품이 없습니다.</p>`;
@@ -109,80 +112,81 @@ function renderBooks() {
 renderBooks();
 
 // 체크박스 구현
-
-// 상품 체크박스들
-const checkboxes = document.querySelectorAll('input[name="buy"]');
-// 전체선택 체크박스
-const selectAll = document.querySelector('.selectAll > input');
-
-function checkSelectAll()  {
-  // 선택된 체크박스
-  const checked = document.querySelectorAll('input[name="buy"]:checked');
-  if (checkboxes.length === checked.length) {
-    selectAll.checked = true;
-    console.log(checked.length);
-    console.log(selectAll.checked);
-  } else selectAll.checked = false;
+function activateCheckboxes() {
+  // 상품 체크박스들
+  const checkboxes = document.querySelectorAll('input[name="buy"]');
+  // 전체선택 체크박스
+  const selectAll = document.querySelector('.selectAll > input');
+  
+  function checkSelectAll()  {
+    const checked = document.querySelectorAll('input[name="buy"]:checked');
+    if (checkboxes.length === checked.length) {
+      selectAll.checked = true;
+    } else selectAll.checked = false;
+  }
+  checkSelectAll();
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', () => checkSelectAll()));
+  
+  function checkAll(selectAll) {
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = selectAll.checked;
+    });
+  }
+  selectAll.addEventListener('click', () => checkAll(selectAll));
 }
-checkboxes.forEach(checkbox => checkbox.addEventListener('click', () => checkSelectAll()));
 
-function checkAll(selectAll) {
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = selectAll.checked;
+function activateAmountBtn() {
+  const minusBtn = document.querySelectorAll('.minusBtn');
+  const amountInput = document.querySelectorAll('.amountInput');
+  const plusBtn = document.querySelectorAll('.plusBtn');
+  
+  // 수량 증가 클릭 이벤트
+  plusBtn.forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+      btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
+      // console.log(idx);
+      order[idx].amount += 1;
+      localStorage.removeItem('cart');
+      save(order);
+      const bookPrice = document.querySelector(`.book-price${idx}`);
+      bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
+    });
+  });  
+  // 수량 감소 클릭 이벤트
+  minusBtn.forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+      if (Number(btn.nextElementSibling.value) === 1) {
+        btn.nextElementSibling.value = 1;
+      } else {
+        btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
+        order[idx].amount -= 1;
+        localStorage.removeItem('cart');
+        save(order);
+        const bookPrice = document.querySelector(`.book-price${idx}`);
+        bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
+      }
+    });
+  });
+  // 수량 값을 없애면 1로 바뀌도록 함
+  amountInput.forEach((amount, idx) => {
+    amount.addEventListener('change', () => {
+      if (amount.value === '' || amount.value === undefined) {
+        amount.value = 1;
+        order[idx].amount = 1;
+        localStorage.removeItem('cart');
+        save(order);
+        const bookPrice = document.querySelector(`.book-price${idx}`);
+        bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
+      } else {
+        order[idx].amount = Number(amount.value);
+        localStorage.removeItem('cart');
+        save(order);
+        const bookPrice = document.querySelector(`.book-price${idx}`);
+        bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
+      }
+    });
   });
 }
-selectAll.addEventListener('click', () => checkAll(selectAll));
-
-const minusBtn = document.querySelectorAll('.minusBtn');
-const amountInput = document.querySelectorAll('.amountInput');
-const plusBtn = document.querySelectorAll('.plusBtn');
-
-// 수량 증가 클릭 이벤트
-plusBtn.forEach((btn, idx) => {
-  btn.addEventListener('click', () => {
-    btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
-    // console.log(idx);
-    order[idx].amount += 1;
-    localStorage.removeItem('cart');
-    save(order);
-    const bookPrice = document.querySelector(`.book-price${idx}`);
-    bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
-  });
-});  
-// 수량 감소 클릭 이벤트
-minusBtn.forEach((btn, idx) => {
-  btn.addEventListener('click', () => {
-    if (Number(btn.nextElementSibling.value) === 1) {
-      btn.nextElementSibling.value = 1;
-    } else {
-      btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
-      order[idx].amount -= 1;
-      localStorage.removeItem('cart');
-      save(order);
-      const bookPrice = document.querySelector(`.book-price${idx}`);
-      bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
-    }
-  });
-});
-// 수량 값을 없애면 1로 바뀌도록 함
-amountInput.forEach((amount, idx) => {
-  amount.addEventListener('change', () => {
-    if (amount.value === '' || amount.value === undefined) {
-      amount.value = 1;
-      order[idx].amount = 1;
-      localStorage.removeItem('cart');
-      save(order);
-      const bookPrice = document.querySelector(`.book-price${idx}`);
-      bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
-    } else {
-      order[idx].amount = Number(amount.value);
-      localStorage.removeItem('cart');
-      save(order);
-      const bookPrice = document.querySelector(`.book-price${idx}`);
-      bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
-    }
-  });
-});
 
 // 삭제 구현
 
@@ -200,13 +204,30 @@ function activateDeleteBtn() {
   });
 }
 
-// 선택삭제 버튼
-const deleteSelectedBtn = document.querySelector('.deleteSelected');
-deleteSelectedBtn.addEventListener('click', () => {
-  checkboxes.forEach(box => {
-    if (box.checked) box.parentElement.setAttribute('style', 'display: none');
+// 선택삭제 버튼 활성화 함수
+function activateDeleteSelectedBtn() {
+  const deleteSelectedBtn = document.querySelector('.deleteSelected');
+  deleteSelectedBtn.addEventListener('click', () => {
+    let checkedIndex = [];
+    const checkboxes = document.querySelectorAll('input[name="buy"]');
+    if (checkboxes.length) {
+      checkboxes.forEach((box, idx) => {
+        if (box.checked) checkedIndex.unshift(idx);
+      });
+    }
+    if (checkedIndex.length) {
+      checkedIndex.forEach(indexNum => {
+        order.splice(indexNum, 1);
+      });
+      localStorage.removeItem('cart');
+      save(order);
+      cart.innerHTML = '';
+      renderBooks();
+    }
   });
-});
+}
+
+activateDeleteSelectedBtn();
 
 // 가격 계산 구현
 // 단일 상품 금액 계산(미완성)
