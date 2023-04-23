@@ -19,7 +19,7 @@ const app = express();
 mongoose.set("strictQuery", false);
 
 mongoose.connect(
-  "mongodb+srv://ksoup3434:u6KlMbiDKNEgwr2Z@cluster0.4gp8bj5.mongodb.net/test",
+  "mongodb://localhost:27017/myapp",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
