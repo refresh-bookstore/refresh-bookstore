@@ -69,7 +69,7 @@ const load = () => {
   }
 };
 
-load().forEach(order => {
+load().forEach((order, id) => {
   const imgLink = order.image_path;
   const title = order.title;
   const author = order.author;
@@ -98,7 +98,7 @@ load().forEach(order => {
   <!-- 상품 금액 -->
   <div class="price">
   <p class="price-title">상품 금액</p>
-  <div class="book-price">${bookPrice}</div>
+  <div class="book-price${id}">${bookPrice}</div>
   </div>
   
   <!-- 삭제 버튼 -->
@@ -137,18 +137,29 @@ const amountInput = document.querySelectorAll('.amountInput');
 const plusBtn = document.querySelectorAll('.plusBtn');
 
 // 수량 증가 클릭 이벤트
-plusBtn.forEach(btn => {
+plusBtn.forEach((btn, id) => {
   btn.addEventListener('click', () => {
     btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
+    // console.log(id);
+    order[id].amount += 1;
+    localStorage.removeItem('cart');
+    save(order);
+    const bookPrice = document.querySelector(`.book-price${id}`);
+    bookPrice.innerText = `${(order[id].amount * order[id].price).toLocaleString()}원`;
   });
 });  
 // 수량 감소 클릭 이벤트
-minusBtn.forEach(btn => {
+minusBtn.forEach((btn, id) => {
   btn.addEventListener('click', () => {
     if (Number(btn.nextElementSibling.value) === 1) {
       btn.nextElementSibling.value = 1;
     } else {
       btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
+      order[id].amount -= 1;
+      localStorage.removeItem('cart');
+      save(order);
+      const bookPrice = document.querySelector(`.book-price${id}`);
+      bookPrice.innerText = `${(order[id].amount * order[id].price).toLocaleString()}원`;
     }
   });
 });
