@@ -15,6 +15,10 @@ const adminContentOrders = document.querySelector('#admin-orders');
 const adminContentCategories = document.querySelector('#admin-categories');
 
 
+
+
+
+
 const lists = [
   adminBooks,
   adminUsers,
@@ -84,9 +88,9 @@ lists.forEach((e)=> {
               <p class="item-detail">${users[i].email}</p>
             </div>
             <span class="user-buttons">
-              <img class="button set-user-admin" title="관리자 등록" src="../public/images/icon_user_admin.svg">
               <img class="button edit-user" title="회원 정보 수정" src="../public/images/icon_user_edit.svg">
-              <img class="button remove-user" title="회원 탈퇴" src="../public/images/icon_user_remove.svg">
+              <img class="button check-user hidden" title="확인" src="../public/images/icon_check.svg">
+              <img class="button delete-user" title="회원 탈퇴" src="../public/images/icon_user_remove.svg">
             </span>
           </div>
         </div>
@@ -121,8 +125,9 @@ lists.forEach((e)=> {
               </div>
               <p class="item-cost"> 23,400원</p>
               <span class="admin-buttons">
-                <img class="button" title="수정" src="../public/images/icon_edit.svg">
-                <img class="button red" title="삭제" src="../public/images/icon_delete.svg">
+                <img class="button order-edit" title="수정" src="../public/images/icon_edit.svg">
+                <img class="button order-check hidden" title="확인" src="../public/images/icon_check.svg">
+                <img class="button order-delete" title="삭제" src="../public/images/icon_delete.svg">
               </span>
             </div>
           </div>
@@ -139,13 +144,74 @@ lists.forEach((e)=> {
         `
         <div class="category-box">
             <p class="category-name">프론트엔드</p>
-            <img class="button red" title="삭제" src="../public/images/icon_delete.svg">
+            <input class="category-edit-input hidden" type="text"/>
+            <img class="button category-edit" title="수정" src="../public/images/icon_edit.svg">
+            <img class="button hidden category-check" title="확인" src="../public/images/icon_check.svg">
+            <img class="button category-delete" title="삭제" src="../public/images/icon_delete.svg">
         </div>
         `
       }
     }
+    const categoryEditBtn = document.querySelectorAll('.category-edit');
+    const categoryDeleteBtn = document.querySelectorAll('.category-delete');
 
+    ///카테고리 수정버튼
+    categoryEditBtn.forEach((e)=> {
+      e.addEventListener('click', ()=>{
+        console.log('hi');
+        const categoryBox = e.closest('.category-box');
+        const categoryEditInput = categoryBox.querySelector('.category-edit-input');
+        const categoryName = categoryBox.querySelector('.category-name');
+        const categoryCheckBtn = categoryBox.querySelector('.category-check');
+
+        e.classList.add('hidden');
+        categoryName.classList.add('hidden');
+        categoryEditInput.classList.remove('hidden');
+        categoryCheckBtn.classList.remove('hidden');
+
+        categoryEditInput.value = categoryName.innerText;
+
+        categoryCheckBtn.addEventListener('click',()=>{
+          ///임시기능
+          categoryName.innerText = categoryEditInput.value;
+          ///
+
+          e.classList.remove('hidden');
+          categoryName.classList.remove('hidden');
+          categoryEditInput.classList.add('hidden');
+          categoryCheckBtn.classList.add('hidden');
+        })
+      });
+    })
+
+    ///카테고리 삭제버튼
+    categoryDeleteBtn.forEach((e)=> {
+      e.addEventListener('click', ()=>{
+        const categoryBox = e.closest('.category-box');
+        ///임시기능
+        categoryBox.remove();
+        ///
+
+      })
+    })
   })
 })
+
+
+//////////////////////추가/수정/삭제 버튼구현///////////////////////
+
+const bookEditBtn = document.querySelectorAll('.book-edit');
+const bookDeleteBtn = document.querySelectorAll('.book-delete');
+const bookCheckBtn = document.querySelectorAll('.book-check');
+
+const userEditBtn = document.querySelectorAll('.user-edit');
+const userDeleteBtn = document.querySelectorAll('.user-delete');
+const userCheckBtn = document.querySelectorAll('.user-check');
+
+const orderEditBtn = document.querySelectorAll('.order-edit');
+const orderDeleteBtn = document.querySelectorAll('.order-delete');
+const orderCheckBtn = document.querySelectorAll('.order-check');
+
+
 
 main();

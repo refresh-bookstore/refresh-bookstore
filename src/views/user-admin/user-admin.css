@@ -132,7 +132,7 @@
   align-items: center;
 
   height: 50px;
-  width: 80px;
+  width: 70px;
 }
 
 .content .admin-buttons .button{
@@ -236,13 +236,13 @@
 /*-----회원관리------*/
 
 .content .user-buttons {
-  width: 25%;
+  width: 110px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 
-  height: 20px;
+  height: 70px;
 }
 
 .content .user-buttons .button{
@@ -390,6 +390,19 @@
   box-shadow: 3px 3px 3px var(--color-light-gray);
 }
 
+
+.content .category-box .category-edit-input{
+  color:var(--color-point);
+  font-size: var(--font-medium);
+  font-weight: var(--weight-regular);
+  width: 150px;
+  height: 30px;
+
+  border-radius: var(--border-radius-input);
+  border: none;
+
+}
+
 .content .category-box .button{
   width: 20px;
   height: 20px;
@@ -403,3 +416,13 @@
   opacity: 1;
 
 }
+
+
+
+
+
+
+.hidden {
+  display: none;
+}
+
