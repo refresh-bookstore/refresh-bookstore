@@ -1,10 +1,11 @@
 import { main } from '../public/js/main.js';
 
+// 가격 문자열에서 숫자만 반환하는 함수
+function getPriceNumber(str) {
+  return Number(str.replace(/,/g, '').slice(0, -1));
+}
+
 const cart = document.querySelector('.cart');
-// const bookTitle = document.querySelectorAll('.book-title');
-// const author = document.querySelectorAll('.author')
-
-
 const selectedPrice = document.querySelector('.selectedPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
@@ -37,12 +38,10 @@ const order = [
   }
 ];
 
-// 로컬스토리지에 'cart'데이터 저장
+// 로컬스토리지에 'cart'데이터 저장(테스트)
 const save = (data) => {
   localStorage.setItem('cart', JSON.stringify(data));
 }
-// save(order);
-
 const bookData = {
   "title":"모던 자바스크립트 Deep Dive ",
   "author":"이웅모",
@@ -58,7 +57,7 @@ const bookData = {
 order.push(bookData);
 save(order);
 
-// 로컬스토리지에서 불러오기
+// 로컬스토리지에서 데이터 불러오기, 체크박스, 수량조절, 삭제버튼 활성화, 가격 출력 자동화
 function renderBooks() {
   const data = JSON.parse(localStorage.getItem('cart'));
   if (data.length === 0) {
@@ -107,35 +106,40 @@ function renderBooks() {
     activateCheckboxes();
     activateAmountBtn();
     activateDeleteBtn();
-    // activateDeleteSelectedBtn();
+    setPayList();
   }
 }
 renderBooks();
 
-// 체크박스 구현
+// 체크박스 활성화 함수
 function activateCheckboxes() {
-  // 상품 체크박스들
   const checkboxes = document.querySelectorAll('input[name="buy"]');
-  // 전체선택 체크박스
-  const selectAll = document.querySelector('.selectAll > input');
+  const selectAll = document.querySelector('input[name="checkAll"]');
   
   function checkSelectAll()  {
-    const checked = document.querySelectorAll('input[name="buy"]:checked');
-    if (checkboxes.length === checked.length) {
+    const checkedItems = document.querySelectorAll('input[name="buy"]:checked');
+    if (checkboxes.length === checkedItems.length) {
       selectAll.checked = true;
     } else selectAll.checked = false;
   }
-  checkSelectAll();
-  checkboxes.forEach(checkbox => checkbox.addEventListener('click', () => checkSelectAll()));
   
   function checkAll(selectAll) {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = selectAll.checked;
     });
   }
-  selectAll.addEventListener('click', () => checkAll(selectAll));
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', () => {
+    checkSelectAll();
+    setPayList();
+  }));
+  selectAll.addEventListener('click', () => {
+    checkAll(selectAll);
+    setPayList();
+  });
 }
 
+// 수량 조절 버튼 활성화 함수
 function activateAmountBtn() {
   const minusBtn = document.querySelectorAll('.minusBtn');
   const amountInput = document.querySelectorAll('.amountInput');
@@ -145,12 +149,12 @@ function activateAmountBtn() {
   plusBtn.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
       btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
-      // console.log(idx);
       order[idx].amount += 1;
       localStorage.removeItem('cart');
       save(order);
       const bookPrice = document.querySelector(`.book-price${idx}`);
       bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
+      setPayList();
     });
   });  
   // 수량 감소 클릭 이벤트
@@ -166,30 +170,25 @@ function activateAmountBtn() {
         const bookPrice = document.querySelector(`.book-price${idx}`);
         bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
       }
+      setPayList();
     });
   });
-  // 수량 값을 없애면 1로 바뀌도록 함
+  // 수량 직접 입력시 가격 계산
+  // 수량 값을 없애거나 0으로 만들면 1로 바뀌도록 함
   amountInput.forEach((amount, idx) => {
     amount.addEventListener('change', () => {
-      if (amount.value === '' || amount.value === undefined) {
+      if (amount.value <= 1 || amount.value === undefined) {
         amount.value = 1;
-        order[idx].amount = 1;
-        localStorage.removeItem('cart');
-        save(order);
-        const bookPrice = document.querySelector(`.book-price${idx}`);
-        bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
-      } else {
-        order[idx].amount = Number(amount.value);
-        localStorage.removeItem('cart');
-        save(order);
-        const bookPrice = document.querySelector(`.book-price${idx}`);
-        bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
-      }
+      } 
+      order[idx].amount = Number(amount.value);
+      localStorage.removeItem('cart');
+      save(order);
+      const bookPrice = document.querySelector(`.book-price${idx}`);
+      bookPrice.innerText = `${(order[idx].amount * order[idx].price).toLocaleString()}원`;
+      setPayList();
     });
   });
 }
-
-// 삭제 구현
 
 // 단일상품삭제 버튼 활성화 함수
 function activateDeleteBtn() {
@@ -225,38 +224,49 @@ function activateDeleteSelectedBtn() {
       cart.innerHTML = '';
       renderBooks();
     }
+    setPayList();
   });
 }
-
 activateDeleteSelectedBtn();
 
-// 가격 계산 구현
-
-// 선택 상품 금액 계산(미완성)
-
-
-
-// 가격 문자열에서 숫자만 반환하는 함수
-function getPriceNumber(str) {
-  return Number(str.replace(/,/g, '').slice(0, -1));
+// 금액 리스트 세팅 함수
+function setPayList() {
+  setSelectedPrice();
+  setDeliveryFee();
+  setTotalCost();
 }
 
-// 배송비 계산
+// 선택 상품 금액 계산 함수
+function setSelectedPrice() {
+  const items = document.querySelectorAll('.item input[type="checkbox"]');
+  console.log(items);
+  let bookPriceSum = 0;
+  if (items.length) {
+    items.forEach((item, idx) => {
+      if (item.checked) {
+        const price = document.querySelector(`.book-price${idx}`);
+        bookPriceSum += getPriceNumber(price.innerText);
+      }
+    });
+    selectedPrice.innerText = `${bookPriceSum.toLocaleString()}원`;
+  } else selectedPrice.innerText = '0원';
+}
+
+
+// 배송비 계산 함수
 function setDeliveryFee() {
-  if (getPriceNumber(selectedPrice.innerText) >= 50000) {
+  if (getPriceNumber(selectedPrice.innerText) >= 50000 || selectedPrice.innerText === '0원') {
     deliveryFee.innerText = '0원';
   } else {
     deliveryFee.innerText = '3,000원';
   }
 }
-setDeliveryFee();
 
-// 총 결제 금액 계산
+// 총 결제 금액 계산 함수
 function setTotalCost() {
   const totalCostNum = getPriceNumber(selectedPrice.innerText) + getPriceNumber(deliveryFee.innerText);
   totalCost.innerText = `${totalCostNum.toLocaleString()}원`;
 }
-setTotalCost();
 
 
 
