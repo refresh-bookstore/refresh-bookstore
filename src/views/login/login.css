@@ -1,10 +1,10 @@
-@import url("/css/main.css");
+@import url("../public/css/main.css");
 
-input[type="password"] {
-  font-family: "Nanum Gothic", sans-serif !important;
+input[type=password] {
+	font-family:"Nanum Gothic", sans-serif !important;
 }
-input[type="password"]::placeholder {
-  font-family: "NanumSquare";
+input[type=password]::placeholder {
+	font-family: "NanumSquare"; 
 }
 
 /* main */
