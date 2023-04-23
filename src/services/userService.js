@@ -1,14 +1,14 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-exports.getUserById = async id => {
-  const user = await User.findById(id);
+exports.getUserByEmail = async email => {
+  const user = await User.findOne({ email: email });
   return user;
 };
 
-exports.updateUserById = async (id, data) => {
+exports.updateUserById = async (email, data) => {
   try {
-    const user = await User.findById(id);
+    const user = await User.findOne({ email: email });
 
     if (data.password) {
       user.password = await bcrypt.hash(data.password, 10);

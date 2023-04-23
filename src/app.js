@@ -10,6 +10,7 @@ const cors = require("cors");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/userRouters");
+const mypageRouter = require("./routes/mypageRouters");
 
 const hashPassword = require("./middlewares/hashPassword");
 const sessionMiddleware = require("./middlewares/session");
@@ -54,6 +55,7 @@ app.use(
 
 app.use("/", indexRouter);
 app.use("/", usersRouter);
+app.use("/", mypageRouter);
 
 // 404 에러 핸들링
 app.use(function (req, res, next) {
