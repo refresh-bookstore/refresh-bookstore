@@ -1,7 +1,5 @@
-//import { dataLists } from './dummy-datas.js';
 import { main } from '../public/js/main.js';
-
-
+import { books } from './books.js';
 
 const title = document.querySelector('.title');
 const adminBooks = document.querySelector('#list-books');
@@ -14,6 +12,7 @@ const adminContentBooks = document.querySelector('#admin-books');
 const adminContentUsers = document.querySelector('#admin-users');
 const adminContentOrders = document.querySelector('#admin-orders');
 const adminContentCategories = document.querySelector('#admin-categories');
+
 
 const lists = [
   adminBooks,
@@ -48,18 +47,17 @@ lists.forEach((e)=> {
     //////////////////////도서관리///////////////////////
     if(lists.indexOf(e) === 0){
       contents[0].innerHTML = ""; 
-      for(let i = 0; i < 5; i++){
+      for(let i = 0; i < books.length; i++){
         contents[0].innerHTML += 
         `
         <div class="admin-items">
             <input type="checkbox">
             <div class="item-info">
-              <p class="item-added-date"> 2022-05-14</p>
               <div class="item-more-info">
-                <p class="item-name"> 혼자 공부하는 얄팍한 코딩지식</p>
-                <p class="item-detail"> 한빛 출판사 | 고현민 | 2022</p>
+                <p class="item-name"> ${books[i].title}</p>
+                <p class="item-detail"> ${books[i].author} | ${books[i].publisher} | ${books[i].publication_date.getFullYear()} </p>
               </div>
-              <p class="item-cost"> 15,800원</p>
+              <p class="item-cost">${books[i].price.toLocaleString()}원</p>
               <span class="admin-buttons">
                 <img class="button" src="../public/images/icon_edit.svg">
                 <img class="button red" src="../public/images/icon_delete.svg">

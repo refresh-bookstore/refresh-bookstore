@@ -93,9 +93,13 @@
   margin-left: 30px;
   width: 25px;
   height: 25px;
-  background-image: url(../public/images/icon_add.svg);
   margin-right: 30px;
   cursor: pointer;
+  opacity: 0.6;
+}
+
+.content-area #add-button:hover {
+  opacity: 1;
 }
 
 .content-area #add-button.active{
@@ -128,20 +132,20 @@
   align-items: center;
 
   height: 50px;
+  width: 80px;
 }
 
 .content .admin-buttons .button{
-  width: 30%;
+  width: 15px;
   height: 30px;
   padding: 2px;
   opacity: 0.3;
 
+  cursor: pointer;
+
 }
 
 .content .admin-buttons .button:hover{
-  width: 30%;
-  height: 30px;
-  padding: 2px;
   opacity: 1;
 
 }
@@ -164,7 +168,6 @@
 .content .admin-items input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  margin: 0 10px 0 0;
 
   background-color: var(--color-dark-gray);
 
@@ -186,14 +189,15 @@
 
   font-size: var(--font-small);
   font-weight: var(--weight-medium);
-  color: var(--color-black);
+  color: var(--color-light-black);
   text-align: right;
 
-  padding: 5px;
   margin: 5px;
+  width: 150px
 }
 
 .content .admin-items .item-info .item-more-info{
+  width: 450px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -214,12 +218,16 @@
   font-weight: var(--weight-regular);
   color: var(--color-light-black);
   text-align: right;
+  margin-top: 5px;
+
 }
 
 .content .admin-items .item-info .item-cost {
+  width: 150px;
   font-size: var(--font-small);
   font-weight: var(--weight-bold);
   color: var(--color-black);
+
   text-align: right;
   margin: 10px;
   padding: 0 10px;
