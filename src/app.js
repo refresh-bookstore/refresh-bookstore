@@ -18,13 +18,10 @@ const app = express();
 
 mongoose.set("strictQuery", false);
 
-mongoose.connect(
-  "mongodb://localhost:27017/myapp",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect("mongodb://localhost:27017/myapp", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 //  뷰 엔진
 app.set("views", path.join(__dirname, "views"));
@@ -32,7 +29,7 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
 // 뷰 폴더 정적 추가
-app.use(express.static(path.join(__dirname, "views")));
+app.use(express.static(path.join(__dirname, "views/home")));
 
 // middleware 추가
 app.use(logger("dev"));
@@ -43,9 +40,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(sessionMiddleware);
+// app.use(express.static(path.join(__dirname, "views")));
 
 app.use(
-  express.static(path.join(__dirname, "/public"), {
+  express.static(path.join(__dirname, "/views"), {
     setHeaders: (res, path, stat) => {
       if (path.endsWith(".css")) {
         res.set("Content-Type", "text/css");
@@ -56,14 +54,6 @@ app.use(
 
 app.use("/", indexRouter);
 app.use("/", usersRouter);
-//app.use("/mypage", checkSession, mypageRouter);
-app.use("/login", loginRouter);
-app.use("/register", usersRouter);
-app.use("/mypage", checkSession, mypageRouter);
-app.use("/category", categoryRouter);
-app.use("/product", productRouter);
-app.use("/product/list", productRouter);
-app.use("/product/products", productRouter);
 
 // 404 에러 핸들링
 app.use(function (req, res, next) {
