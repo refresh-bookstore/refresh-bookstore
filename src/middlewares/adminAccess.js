@@ -1,5 +1,7 @@
-const adminAcess = async (req, res, next) => {
+const User = require("../models/User");
 
+const adminAcess = async (req, res, next) => {
+  
   
 };
 
