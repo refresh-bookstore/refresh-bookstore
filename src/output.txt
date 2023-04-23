@@ -1,54 +1,59 @@
-.
+/home/hojun/문서/refresh-bookstore/src
 ├── app.js
 ├── bin
 │   └── www
-├── booksdummy.js
-├── contollers
+├── controllers
+│   ├── categoryController.js
 │   ├── loginController.js
-│   └── userContoller.js
+│   ├── orderController.js
+│   ├── productController.js
+│   └── userController.js
 ├── middlewares
+│   ├── adminAccess.js
 │   ├── authenticate.js
 │   ├── checkSession.js
 │   ├── hashPassword.js
 │   ├── session.js
-│   └── validationMiddleware.js
+│   └── userValidation.js
 ├── models
-│   └── User.js
+│   ├── Category.js
+│   ├── Order.js
+│   ├── Product.js
+│   ├── User.js
+│   └── types
 ├── output.txt
 ├── package-lock.json
 ├── package.json
 ├── public
-│   ├── css
-│   │   └── main.css
-│   ├── images
-│   │   ├── img_sample.png
-│   │   ├── img_sample_book.png
-│   │   ├── img_sample_logo.png
-│   │   └── img_sample_logo_2.png
-│   └── js
-│       ├── findAddress.js
-│       └── register.js
+│   └── images
 ├── routes
+│   ├── category.js
 │   ├── index.js
-│   ├── mypage.js
+│   ├── mypageRouters.js
+│   ├── order.js
+│   ├── product.js
 │   └── userRouters.js
 ├── services
+│   ├── authService.js
+│   ├── categoryService.js
+│   ├── productService.js
 │   └── userService.js
 └── views
+    ├── book-detail
+    ├── cart
+    ├── error-page
     ├── error.html
     ├── home
-    │   ├── home.css
-    │   └── home.html
     ├── index.html
     ├── login
-    │   ├── login.css
-    │   ├── login.html
-    │   ├── login.js
-    │   └── logindummy.html
-    └── register
-        ├── findAddress.js
-        ├── register.css
-        ├── register.html
-        └── register.js
+    ├── order-complete
+    ├── order-create
+    ├── order-detail
+    ├── order-list
+    ├── product-images
+    ├── public
+    ├── register
+    ├── user-admin
+    └── user-mypage
 
-14 directories, 37 files
+24 directories, 32 files
