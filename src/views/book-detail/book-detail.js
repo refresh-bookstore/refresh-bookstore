@@ -91,6 +91,11 @@ addToCartBtn.addEventListener('click',()=>{
     });
   }
   localStorage.setItem('cart', JSON.stringify(cartItems));
+
+  const cartCheckout = confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?");
+  if(cartCheckout){
+    location.replace('/src/views/cart/cart.html');
+}
 });
 
 
@@ -104,7 +109,8 @@ purchaseBtn.addEventListener('click',()=>{
       amount: Number(amountInput.value),
       isbn: book.isbn,
     };
-  localStorage.setItem('purchase', JSON.stringify(purchaseItems));
+    localStorage.setItem('purchase', JSON.stringify(purchaseItems));
+    location.replace('/src/views/order-create/order-create.html');
 });
 
 
