@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>상품 주문하기</h2>
+  <form method="post" action="/order">
+    <div class="field">
+      <ul class="product">
+        <li>
+          <label class="label">제품명</label>
+          <div class="control">
+            <input type="text" name="product" placeholder="테스트">
+          </div>
+        </li>
+        <li>
+          <label class="label">가격</label>
+          <div class="control">
+            <input type="text" name="price" placeholder="테스트">
+          </div>
+        </li>
+      </ul>
+
+      <input type="submit" value="등록하기"/>
+    </div>
+  </form>
+</body>
+<script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = {
+      name: form.name.value,
+      price: form.price.value,
+    };
+    const response = await fetch('/order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    console.log(result);
+  });
+</script>
+</html>
