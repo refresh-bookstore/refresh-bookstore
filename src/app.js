@@ -7,17 +7,12 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
 
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const loginRouter = require("./routes/login");
-const mypageRouter = require("./routes/mypage");
+const usersRouter = require("./routes/userRouters");
 
-const authenticate = require("./middlewares/authenticate");
 const hashPassword = require("./middlewares/hashPassword");
 const sessionMiddleware = require("./middlewares/session");
-const checkSession = require("./middlewares/checkSession");
 
 const app = express();
 
@@ -56,11 +51,9 @@ app.use(
   })
 );
 
-// 라우팅 추가
 app.use("/", indexRouter);
-app.use("/login", loginRouter);
-app.use("/register", usersRouter);
-app.use("/mypage", checkSession, mypageRouter);
+app.use("/", usersRouter);
+//app.use("/mypage", checkSession, mypageRouter);
 
 // 404 에러 핸들링
 app.use(function (req, res, next) {
@@ -78,11 +71,11 @@ app.use(function (err, req, res, next) {
 
 // hashPassword, authenticate 미들웨어 사용
 app.use(hashPassword);
-app.use(authenticate);
+
+// 라우팅 추가
 
 const port = 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
 
-module.exports = app;
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});

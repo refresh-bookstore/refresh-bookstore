@@ -1,0 +1,54 @@
+.
+├── app.js
+├── bin
+│   └── www
+├── booksdummy.js
+├── contollers
+│   ├── loginController.js
+│   └── userContoller.js
+├── middlewares
+│   ├── authenticate.js
+│   ├── checkSession.js
+│   ├── hashPassword.js
+│   ├── session.js
+│   └── validationMiddleware.js
+├── models
+│   └── User.js
+├── output.txt
+├── package-lock.json
+├── package.json
+├── public
+│   ├── css
+│   │   └── main.css
+│   ├── images
+│   │   ├── img_sample.png
+│   │   ├── img_sample_book.png
+│   │   ├── img_sample_logo.png
+│   │   └── img_sample_logo_2.png
+│   └── js
+│       ├── findAddress.js
+│       └── register.js
+├── routes
+│   ├── index.js
+│   ├── mypage.js
+│   └── userRouters.js
+├── services
+│   └── userService.js
+└── views
+    ├── error.html
+    ├── home
+    │   ├── home.css
+    │   └── home.html
+    ├── index.html
+    ├── login
+    │   ├── login.css
+    │   ├── login.html
+    │   ├── login.js
+    │   └── logindummy.html
+    └── register
+        ├── findAddress.js
+        ├── register.css
+        ├── register.html
+        └── register.js
+
+14 directories, 37 files
