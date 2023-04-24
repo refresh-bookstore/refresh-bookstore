@@ -1,7 +1,7 @@
-//import { dataLists } from './dummy-datas.js';
 import { main } from '../public/js/main.js';
-
-
+import { books } from './books.js';
+import { users } from './users.js';
+import { categories } from './categories.js';
 
 const title = document.querySelector('.title');
 const adminBooks = document.querySelector('#list-books');
@@ -9,10 +9,15 @@ const adminUsers = document.querySelector('#list-users');
 const adminOrders = document.querySelector('#list-orders');
 const adminCategories = document.querySelector('#list-categories');
 
+const addBtn = document.querySelector('#add-button');
 const adminContentBooks = document.querySelector('#admin-books');
 const adminContentUsers = document.querySelector('#admin-users');
 const adminContentOrders = document.querySelector('#admin-orders');
 const adminContentCategories = document.querySelector('#admin-categories');
+
+const adminAddBooks = document.querySelector('#admin-add-books');
+const adminAddCategories = document.querySelector('#admin-add-categories');
+
 
 const lists = [
   adminBooks,
@@ -34,32 +39,36 @@ lists.forEach((e)=> {
   e.addEventListener('click', ()=>{
     contents.map((el) => {
       if (contents.indexOf(el) === lists.indexOf(e)) {
+        adminAddCategories.classList.add('hidden');
+        adminAddBooks.classList.add('hidden');
         el.classList.add('active');
       } else {
         el.classList.remove('active');
       }
     })
+    addBtn.classList.add('active');
     title.innerText = e.innerText;
+    
 
 
     //////////////////////도서관리///////////////////////
     if(lists.indexOf(e) === 0){
       contents[0].innerHTML = ""; 
-      for(let i = 0; i < 5; i++){
+      adminAddBooks.classList.add('active');
+      for(let i = 0; i < books.length; i++){
         contents[0].innerHTML += 
         `
         <div class="admin-items">
             <input type="checkbox">
             <div class="item-info">
-              <p class="item-added-date"> 2022-05-14</p>
               <div class="item-more-info">
-                <p class="item-name"> 혼자 공부하는 얄팍한 코딩지식</p>
-                <p class="item-detail"> 한빛 출판사 | 고현민 | 2022</p>
+                <p class="item-name"> ${books[i].title}</p>
+                <p class="item-detail"> ${books[i].author} | ${books[i].publisher} | ${books[i].publication_date.getFullYear()} </p>
               </div>
-              <p class="item-cost"> 15,800원</p>
+              <p class="item-cost">${books[i].price.toLocaleString()}원</p>
               <span class="admin-buttons">
-                <img class="button" src="../public/images/icon_edit.svg">
-                <img class="button red" src="../public/images/icon_delete.svg">
+                <img class="admin-button" src="../public/images/icon_edit.svg">
+                <img class="admin-button" src="../public/images/icon_delete.svg">
               </span> 
             </div>
 
@@ -70,21 +79,21 @@ lists.forEach((e)=> {
     //////////////////////회원관리///////////////////////
     if(lists.indexOf(e) === 1){
       contents[1].innerHTML = ""; 
-      for(let i = 0; i < 5; i++){
+      for(let i = 0; i < users.length; i++){
         contents[1].innerHTML += 
         `
         <div class="admin-items">
           <input type="checkbox">
           <div class="item-info">
-            <p class="item-added-date"> 2022-05-14</p>
+            <p class="item-added-date"> ${users[i].registered_date.getFullYear()} / ${users[i].registered_date.getMonth()} / ${users[i].registered_date.getDate()}</p>
             <div class="item-more-info">
-              <p class="item-name"> 김토끼</p>
-              <p class="item-detail"> elice@rabbit.com </p>
+              <p class="item-name"> ${users[i].name}</p>
+              <p class="item-detail">${users[i].email}</p>
             </div>
             <span class="user-buttons">
-              <img class="button set-user-admin" title="관리자 등록" src="../public/images/icon_user_admin.svg">
-              <img class="button edit-user" title="회원 정보 수정" src="../public/images/icon_user_edit.svg">
-              <img class="button remove-user" title="회원 탈퇴" src="../public/images/icon_user_remove.svg">
+              <img class="admin-button edit-user" title="회원 정보 수정" src="../public/images/icon_user_edit.svg">
+              <img class="admin-button check-user hidden" title="확인" src="../public/images/icon_check.svg">
+              <img class="admin-button delete-user" title="회원 탈퇴" src="../public/images/icon_user_remove.svg">
             </span>
           </div>
         </div>
@@ -119,8 +128,9 @@ lists.forEach((e)=> {
               </div>
               <p class="item-cost"> 23,400원</p>
               <span class="admin-buttons">
-                <img class="button" title="수정" src="../public/images/icon_edit.svg">
-                <img class="button red" title="삭제" src="../public/images/icon_delete.svg">
+                <img class="admin-button order-edit" title="수정" src="../public/images/icon_edit.svg">
+                <img class="admin-button order-check hidden" title="확인" src="../public/images/icon_check.svg">
+                <img class="admin-button order-delete" title="삭제" src="../public/images/icon_delete.svg">
               </span>
             </div>
           </div>
@@ -132,18 +142,121 @@ lists.forEach((e)=> {
     //////////////////////카테고리관리///////////////////////
     if(lists.indexOf(e) === 3){
       contents[3].innerHTML = ""; 
-      for(let i = 0; i < 5; i++){
+      for(let i = 0; i < categories.length; i++){
         contents[3].innerHTML += 
         `
         <div class="category-box">
-            <p class="category-name">프론트엔드</p>
-            <img class="button red" title="삭제" src="../public/images/icon_delete.svg">
+            <p class="category-name">${categories[i].name}</p>
+            <input class="category-edit-input hidden" type="text"/>
+            <img class="admin-button category-edit" title="수정" src="../public/images/icon_edit.svg">
+            <img class="admin-button hidden category-check" title="확인" src="../public/images/icon_check.svg">
+            <img class="admin-button category-delete" title="삭제" src="../public/images/icon_delete.svg">
         </div>
         `
       }
     }
 
+
+    ///카테고리 추가버튼
+    addBtn.addEventListener('click', () => {
+      adminAddCategories.innerHTML ='';
+      adminAddCategories.classList.remove('hidden');
+      adminAddCategories.innerHTML += `
+        <input class="add-page-input" id="add-category-input" type="text" placeholder="추가하실 카테고리명을 입력해주세요."/>
+        <img class="admin-button" id="add-category-check" title="확인" src="../public/images/icon_check.svg">
+        <img class="admin-button" id="add-category-delete" title="삭제" src="../public/images/icon_delete.svg">
+      `;
+      const addCategoryCheck = document.querySelector('#add-category-check')
+      const addCategoryDelete = document.querySelector('#add-category-delete')
+
+      addCategoryCheck.addEventListener('click', ()=> {
+        const addCategoryInput = document.querySelector('#add-category-input')
+        ///임시기능///
+        contents[3].innerHTML += 
+        `
+        <div class="category-box">
+            <p class="category-name">${addCategoryInput.value}</p>
+            <input class="category-edit-input hidden" type="text"/>
+            <img class="admin-button category-edit" title="수정" src="../public/images/icon_edit.svg">
+            <img class="admin-button hidden category-check" title="확인" src="../public/images/icon_check.svg">
+            <img class="admin-button category-delete" title="삭제" src="../public/images/icon_delete.svg">
+        </div>
+        `
+        adminAddCategories.innerHTML ='';
+        adminAddCategories.classList.add('hidden');
+        addCategoryBtns();
+        /////////////
+      })
+
+      addCategoryDelete.addEventListener('click', ()=> {
+        adminAddCategories.innerHTML ='';
+        adminAddCategories.classList.add('hidden');
+      })
+      
+    })
+
+
+    const categoryEditBtn = document.querySelectorAll('.category-edit');
+    const categoryDeleteBtn = document.querySelectorAll('.category-delete');
+
+
+    ///카테고리 수정버튼
+    categoryEditBtn.forEach((e)=> {
+      e.addEventListener('click', ()=>{
+        console.log('hi');
+        const categoryBox = e.closest('.category-box');
+        const categoryEditInput = categoryBox.querySelector('.category-edit-input');
+        const categoryName = categoryBox.querySelector('.category-name');
+        const categoryCheckBtn = categoryBox.querySelector('.category-check');
+
+        e.classList.add('hidden');
+        categoryName.classList.add('hidden');
+        categoryEditInput.classList.remove('hidden');
+        categoryCheckBtn.classList.remove('hidden');
+
+        categoryEditInput.value = categoryName.innerText;
+
+        categoryCheckBtn.addEventListener('click',()=>{
+          ///임시기능
+          categoryName.innerText = categoryEditInput.value;
+          ///
+
+          e.classList.remove('hidden');
+          categoryName.classList.remove('hidden');
+          categoryEditInput.classList.add('hidden');
+          categoryCheckBtn.classList.add('hidden');
+        })
+      });
+    })
+
+    ///카테고리 삭제버튼
+    categoryDeleteBtn.forEach((e)=> {
+      e.addEventListener('click', ()=>{
+        const categoryBox = e.closest('.category-box');
+        ///임시기능
+        categoryBox.remove();
+        ///
+
+      })
+    })
   })
 })
+
+
+//////////////////////추가/수정/삭제 버튼구현///////////////////////
+
+const bookEditBtn = document.querySelectorAll('.book-edit');
+const bookDeleteBtn = document.querySelectorAll('.book-delete');
+const bookCheckBtn = document.querySelectorAll('.book-check');
+
+const userEditBtn = document.querySelectorAll('.user-edit');
+const userDeleteBtn = document.querySelectorAll('.user-delete');
+const userCheckBtn = document.querySelectorAll('.user-check');
+
+const orderEditBtn = document.querySelectorAll('.order-edit');
+const orderDeleteBtn = document.querySelectorAll('.order-delete');
+const orderCheckBtn = document.querySelectorAll('.order-check');
+
+
 
 main();

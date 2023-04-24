@@ -3,14 +3,14 @@ function renderHeader() {
 
   header.innerHTML = `
     <div class="header-container">
-      <span class="logo"></span>
-      <span class="icons">
-        <div class="search-box">
-          <input class="search-input" type="text">
-          <span class="icon search" id="search-icon"> </span>
+      <span class="header-logo"></span>
+      <span class="header-icons">
+        <div class="header-search-box">
+          <input class="header-search-input" type="text">
+          <span class="header-icon header-search" id="search-icon"> </span>
         </div>
-        <span class="icon cart" id="cart-icon"> </span>
-        <span class="icon user" id="user-icon"> </span>
+        <span class="header-icon header-cart" id="cart-icon"> </span>
+        <span class="header-icon header-user" id="user-icon"> </span>
       </span>
     </div>
     `;

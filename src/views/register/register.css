@@ -57,12 +57,12 @@ input[type=password]::placeholder {
   margin: 5px 0 5px 3px;
 }
 
-#postalCodeInput {
+.input.postal-code-input {
   float: left;
   width: 60%;
 }
 
-#searchAddress {
+.button.search-address {
   float: right;
   width: 39%;
   padding: 8px;
@@ -72,11 +72,11 @@ input[type=password]::placeholder {
   font-weight: var(--weight-regular);
 }
 
-#searchAddress:hover {
+.button.search-address:hover {
   background-color: var(--color-light-gray);
 }
 
-#addressInput {
+.input.address-input {
   clear: both;
   margin-top: 5px;
 }
