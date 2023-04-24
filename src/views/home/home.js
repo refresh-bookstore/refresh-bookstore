@@ -1,6 +1,6 @@
 import { main } from '../public/js/main.js';
 
-const slider = document.querySelector("#slider");
+const slider = document.querySelector(".slider");
 const slides = slider.querySelector(".slides");
 const slide = slides.querySelectorAll(".slide");
 
@@ -39,7 +39,7 @@ setInterval(function() {
 const categoryList = ['웹 개발', '프론트엔드', '백엔드', '모바일 앱 개발', '게임 개발', '알고리즘·자료구조', '데이터베이스'];
 
 // 해당 카테고리 책 권수 
-const productCounter = document.getElementById("product-counter");
+const productCounter = document.querySelector(".product-counter");
 
 // 카테고리 html 생성
 const createCategory = (category) => {
@@ -48,7 +48,7 @@ const createCategory = (category) => {
           </li>`
 }
 
-const categoryWrap = document.querySelector("#category");
+const categoryWrap = document.querySelector(".category");
 
 // 카테고리 html 추가
 categoryList.forEach(category => {
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (findBookListByCategory.length === 0) {
         books.classList.add("empty");
         books.innerHTML = `<div></div>
-                          <div id="empty-book-list">상품이 없습니다</div>`;
+                          <div class="empty-book-list">상품이 없습니다</div>`;
       } else {
         books.classList.remove("empty");
         findBookListByCategory.forEach(book => {

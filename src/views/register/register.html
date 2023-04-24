@@ -80,7 +80,7 @@
             <label class="label" for="addressInput">주소</label>
             <div class="control">
               <input
-                class="input"
+                class="input postal-code-input"
                 id="postalCodeInput"
                 type="text"
                 placeholder="우편주소"
@@ -89,9 +89,10 @@
             </div>
 
             <div class="control">
-              <input 
-                type="button" 
-                id="searchAddress" 
+              <input
+                class="button search-address"
+                id="searchAddress"
+                type="button"
                 value="주소 검색" 
                 onclick="findAddress()"
               />
@@ -99,7 +100,7 @@
 
             <div class="control">
               <input
-                class="input"
+                class="input address-input"
                 id="addressInput"
                 type="text"
                 placeholder="주소를 검색해주세요"
