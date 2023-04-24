@@ -48,7 +48,7 @@ data.forEach((data, idx) => {
   orderList.innerHTML +=
     `<div class="item">
     <a class="book-img" href="#">
-      <img src="../public/product-images/${data.isbn}" class="book-img" alt="${data.title}"/>
+      <img src="${data.image_path}" class="book-img" alt="${data.title}"/>
     </a>
     <div class="book__title__price">
       <div class="book-title">

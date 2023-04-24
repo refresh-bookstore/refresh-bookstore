@@ -225,6 +225,7 @@ function activateDeleteSelectedBtn() {
       cart.innerHTML = '';
       renderBooks();
     }
+    activateCheckboxes();
     setPayList();
   });
 }
