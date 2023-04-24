@@ -3,10 +3,10 @@ function headerFunc() {
   const cartBtn = document.querySelector('#cart-icon');
   const userBtn = document.querySelector('#user-icon');
   
-  const searchInput = document.querySelector('.search-input');
-  const searchBox = document.querySelector('.search-box');
+  const searchInput = document.querySelector('.header-search-input');
+  const searchBox = document.querySelector('.header-search-box');
   
-  const logoImage = document.querySelector('.logo');
+  const logoImage = document.querySelector('.header-logo');
 
   //검색창 애니메이션
 
@@ -69,11 +69,11 @@ function headerFunc() {
 
   // 드롬 다운 메뉴 생성
   const dropdownMenu = document.createElement('div');
-    dropdownMenu.classList.add('dropdown-menu');
+    dropdownMenu.classList.add('header-dropdown-menu');
     dropdownMenu.innerHTML = `
-      <ul class="menu-ul">
-        <li class="menu-li" id="menu-mypage">마이페이지</li>
-        <li class="menu-li" id="menu-logout">로그아웃</li>
+      <ul class="header-menu-ul">
+        <li class="header-menu-li" id="menu-mypage">마이페이지</li>
+        <li class="header-menu-li" id="menu-logout">로그아웃</li>
       </ul>
     `;
   

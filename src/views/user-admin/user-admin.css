@@ -68,10 +68,100 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: flex-end;
-
+  align-items: space-between;
 
 }
+
+.content-area .content-upper-area {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.content-area .upper-upper-area {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+
+.content-area .title{
+  margin-right: 10px;
+  font-size: var(--font-medium);
+}
+
+/*-----컨텐츠 추가------*/
+
+.content-area #add-button{
+  display: none;
+  margin-left: 30px;
+  width: 25px;
+  height: 25px;
+  margin-right: 30px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.content-area #add-button:hover {
+  opacity: 1;
+}
+
+.content-area #add-button.active{
+  display: flex;
+}
+
+.content-area #add-button.deactive{
+  opacity: 0.3;
+}
+
+.content-area .add-page {
+  display: flex;
+  width: 95%;
+  height: auto;
+  padding: 10px;
+  margin: 20px;
+  margin-left: 30px;
+
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-button);
+  border: 0.3px var(--color-light-gray) solid;
+  box-shadow: 3px 3px 3px var(--color-light-gray);
+}
+
+.add-page .add-page-input {
+  width: 60%;
+  height: 30px;
+  font-size: var(--font-regular);
+  margin-right: 60px;
+
+  border-radius: var(--border-radius-input);
+  border: 0.3px var(--color-dark-gray) solid;
+
+}
+
+.content-area .add-page.hidden{
+  display: none;
+}
+
+.content-area .add-page .admin-button{
+  margin: 10px;
+  width: 20px;
+  height: 20px;
+}
+
 
 .content {
   display: none;
@@ -86,14 +176,17 @@
   align-items: center;
 }
 
-.content-area .title{
-  margin-right: 30px;
-  font-size: var(--font-medium);
-}
-
 .active {
   display:flex;
 }
+
+
+
+
+
+
+
+
 
 /*-----공통 사용 요소------*/
 
@@ -104,22 +197,20 @@
   align-items: center;
 
   height: 50px;
+  width: 80px;
 }
 
-.content .admin-buttons .button{
-  width: 30%;
+.admin-button{
+  width: 15px;
   height: 30px;
   padding: 2px;
   opacity: 0.3;
 
+  cursor: pointer;
 }
 
-.content .admin-buttons .button:hover{
-  width: 30%;
-  height: 30px;
-  padding: 2px;
+.admin-button:hover{
   opacity: 1;
-
 }
 
 .content .admin-items {
@@ -140,7 +231,6 @@
 .content .admin-items input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  margin: 0 10px 0 0;
 
   background-color: var(--color-dark-gray);
 
@@ -162,14 +252,15 @@
 
   font-size: var(--font-small);
   font-weight: var(--weight-medium);
-  color: var(--color-black);
+  color: var(--color-light-black);
   text-align: right;
 
-  padding: 5px;
   margin: 5px;
+  width: 150px
 }
 
 .content .admin-items .item-info .item-more-info{
+  width: 450px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -190,12 +281,16 @@
   font-weight: var(--weight-regular);
   color: var(--color-light-black);
   text-align: right;
+  margin-top: 5px;
+
 }
 
 .content .admin-items .item-info .item-cost {
+  width: 150px;
   font-size: var(--font-small);
   font-weight: var(--weight-bold);
   color: var(--color-black);
+
   text-align: right;
   margin: 10px;
   padding: 0 10px;
@@ -204,13 +299,13 @@
 /*-----회원관리------*/
 
 .content .user-buttons {
-  width: 25%;
+  width: 110px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 
-  height: 20px;
+  height: 70px;
 }
 
 .content .user-buttons .button{
@@ -348,7 +443,7 @@
   padding: 20px;
   color: var(--color-white);
   font-size: var(--font-medium);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-semi-bold);
   margin: 5px;
 
 
@@ -358,16 +453,38 @@
   box-shadow: 3px 3px 3px var(--color-light-gray);
 }
 
-.content .category-box .button{
+
+.content .category-box .category-edit-input{
+  color:var(--color-point);
+  font-size: var(--font-medium);
+  font-weight: var(--weight-regular);
+  width: 150px;
+  height: 30px;
+
+  border-radius: var(--border-radius-input);
+  border: none;
+
+}
+
+.content .category-box .admin-button{
   width: 20px;
   height: 20px;
-  padding: 2px;
-  margin-left: 20px;
+  margin-left: 8px;
   opacity: 0.3;
 
 }
 
-.content .category-box .button:hover{
+.content .category-box .admin-button:hover{
   opacity: 1;
 
 }
+
+
+
+
+
+
+.hidden {
+  display: none;
+}
+
