@@ -15,19 +15,15 @@ function headerFunc() {
     { transform: "translate(0px, 0px)" },
   ];
   
-  const searchInputDisappear = [
-    { transform: "translate(0px, 0px)" },
-    { transform: "translate(300px, 0px)" },
-  ];
   
   const searchInputTiming = {
     duration: 250,
     iterations: 1,
   };
   
-  //검색창 마우스오버 이벤트
+  //검색창 클릭 이벤트
   
-  searchBtn.addEventListener('mouseover', ()=>{
+  searchBtn.addEventListener('click', ()=>{
     if(searchBtn.classList.contains('activate')){
       searchBtn.addEventListener('click', ()=>{
       })
@@ -40,20 +36,6 @@ function headerFunc() {
     }, 230);
     }
   })
-  
-  //검색창 마우스아웃 이벤트
-
-  searchInput.addEventListener('mouseout', ()=>{
-      searchInput.animate(searchInputDisappear,searchInputTiming);
-      searchInput.placeholder = "";
-      searchInput.value = "";
-      setTimeout(()=>{
-        searchBtn.classList.remove('activate');
-      
-        searchInput.classList.remove('activate');
-      }, 230);
-  })
-  
   
   /* (임시) 파일 이동  */
 
