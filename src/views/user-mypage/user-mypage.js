@@ -51,7 +51,7 @@ submitButton.addEventListener("click", updateUser);
 deleteButton.addEventListener("click", deleteUser);
 
 function loadUserData(user) {
-  userGreeting.innerText = `안녕하세요 ${user.name}님`;
+  userGreeting.innerText = `안녕하세요 ${user.name}님\u{1F49A}`;
   nameText.innerText = user.name;
   emailText.innerText = user.email;
   postalCodeInput.value = user.postalCode;
