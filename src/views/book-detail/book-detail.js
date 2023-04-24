@@ -1,7 +1,7 @@
 
 
-import { main } from '../public/js/main.js';
-import { books } from './books.js';
+import { main } from '/public/js/main.js';
+import { books } from '.books.js';
 
 const likeBtn = document.querySelector('#likeBtn');
 
@@ -26,7 +26,7 @@ const book = books[0];
 //찜하기 버튼
 
 likeBtn.addEventListener('click',()=>{
-  likeBtn.src = "../public/images/like_2.svg";
+  likeBtn.src = "/public/images/like_2.svg";
 });
 
 
