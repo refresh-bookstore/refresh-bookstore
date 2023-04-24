@@ -87,7 +87,7 @@ function headerFunc() {
     const mypageBtn = document.querySelector("#menu-mypage");
     const logoutBtn = document.querySelector("#menu-logout");
 
-      // 마이페이지 메뉴 클릭 이벤트
+    // 마이페이지 메뉴 클릭 이벤트
     mypageBtn.addEventListener("click", () => {
       location.href = "/user-mypage";
     })
@@ -96,7 +96,9 @@ function headerFunc() {
     logoutBtn.addEventListener("click", () => {
       //임시 alert -> 나중엔 삭제
       alert("로그아웃 성공");
-      console.log("로그아웃 성공");
+      
+      sessionStorage.removeItem('token');
+      location.href = '/';
     })
   } else {
     // 로그인한 유저가 아닐 때
