@@ -61,14 +61,12 @@ try {
 
     //카테고리 html 추가
     categories.forEach(category => {
-      console.log(category)
       const categoryEl = createCategory(category.name);
       categoryWrap.innerHTML += categoryEl;
     });
   }
 } catch (error) {
   console.log(error.message);
-  alert(error.message);
 }
 
 const books = document.querySelector(".books");
@@ -89,70 +87,79 @@ const createBook = (book) => {
           </div>`;
 };
 
-import DATA from './bookData.js';
-
-// 임시 책 데이터
-const bookList = DATA;
-
-// 책 html 추가
-bookList.forEach(book => {
-  const bookEl = createBook(book);
-  books.innerHTML += bookEl;
-});
-
-// 페이지가 로드되면 실행
-document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll(".nav-link");
-  let isFirst = true;
-
-  navLinks.forEach(link => {
-    // 페이지가 로드 됐을 때 전체 카테고리로 보여줌
-    if (isFirst) {
-      link.classList.add("clicked");
-      productCounter.textContent = `전체 (${bookList.length})`;
-      isFirst = false;
-    } else {
-      link.classList.remove("clicked");
+try {
+  const response = await fetch("/product", {
+    method: "GET",
+    headers: {
+      'content-Type': 'application/json'
     }
+  });
 
-    // 카테고리 누르면 해당 카테고리로 선택
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
+  if (response.ok) {
+    const data = await response.json();
+    const products = data.data;
 
-      const clickedLink = document.querySelector(".nav-link.clicked");
-      if (clickedLink) {
-        clickedLink.classList.remove("clicked");
+    // 책 html 추가
+    products.forEach(book => {
+      const bookEl = createBook(book);
+      books.innerHTML += bookEl;
+    });
+
+    const navLinks = document.querySelectorAll(".nav-link");
+    let isFirst = true;
+
+    navLinks.forEach(link => {
+      // 페이지가 로드 됐을 때 전체 카테고리로 보여줌
+      if (isFirst) {
+        link.classList.add("clicked");
+        productCounter.textContent = `전체 (${products.length})`;
+        isFirst = false;
+      } else {
+        link.classList.remove("clicked");
       }
-      link.classList.add("clicked");
 
-      // 책 초기화
-      books.innerHTML = "";
+      // 카테고리 누르면 해당 카테고리로 선택
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
 
-      const findBookListByCategory = [];
-      const clickedCategory = event.target.textContent;
+        const clickedLink = document.querySelector(".nav-link.clicked");
+        if (clickedLink) {
+          clickedLink.classList.remove("clicked");
+        }
+        link.classList.add("clicked");
 
-      // 클릭한 카테고리별 책 배열에 담기
-      bookList.forEach((book) => {
-        if (book.category.includes(clickedCategory) || clickedCategory === "전체") {
-          findBookListByCategory.push(book);
+        // 책 초기화
+        books.innerHTML = "";
+
+        const findBookListByCategory = [];
+        const clickedCategory = event.target.textContent;
+
+        // 클릭한 카테고리별 책 배열에 담기
+        products.forEach((book) => {
+          if (book.category.includes(clickedCategory) || clickedCategory === "전체") {
+            findBookListByCategory.push(book);
+          }
+        });
+
+        // 선택한 카테고리와 수량 표시
+        productCounter.textContent = `${clickedCategory} (${findBookListByCategory.length})`;
+
+        if (findBookListByCategory.length === 0) {
+          books.classList.add("empty");
+          books.innerHTML = `<div></div>
+                            <div class="empty-book-list">상품이 없습니다</div>`;
+        } else {
+          books.classList.remove("empty");
+          findBookListByCategory.forEach(book => {
+            const newBook = createBook(book);
+            books.innerHTML += newBook;
+          });
         }
       });
-
-      productCounter.textContent = `${clickedCategory} (${findBookListByCategory.length})`;
-
-      if (findBookListByCategory.length === 0) {
-        books.classList.add("empty");
-        books.innerHTML = `<div></div>
-                          <div class="empty-book-list">상품이 없습니다</div>`;
-      } else {
-        books.classList.remove("empty");
-        findBookListByCategory.forEach(book => {
-          const newBook = createBook(book);
-          books.innerHTML += newBook;
-        });
-      }
     });
-  });
-});
+  }
+} catch (error) {
+  console.log(error.message);
+}
 
 main();
