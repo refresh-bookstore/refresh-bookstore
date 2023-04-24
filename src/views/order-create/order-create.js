@@ -1,35 +1,65 @@
 import { main } from '../public/js/main.js';
 
+// 가격 문자열에서 숫자만 반환하는 함수
+function getPriceNumber(str) {
+  return Number(str.replace(/,/g, '').slice(0, -1));
+}
+
+// 로컬스토리지에 'cart'데이터 저장(테스트)
+const saveToCart = (data) => {
+  localStorage.setItem('cart', JSON.stringify(data));
+}
+const saveToPurchase = (data) => {
+  localStorage.setItem('purchase', JSON.stringify(data));
+}
+
+const orderList = document.querySelector('.orderList');
 const bookTitle = document.querySelectorAll('.book-title a');
 const author = document.querySelectorAll('.author')
-const price = document.querySelectorAll('.price');
+const itemPrice = document.querySelectorAll('.item-price');
 
 const booksPrice = document.querySelector('.booksPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
 
 //예시데이터
-const book = {
-  title: '혼자 공부하는 얄팍한 코딩지식',
-  subtitle: '비전공자도 1:1 과외하듯 배우는 IT 지식 입문서',
-  author: '고현민',
-  publisher: '한빛출판사',
-  published: new Date(2022, 4, 25),
-  cost: 14800,
-  category: '코딩입문서',
-  isbn: '1162245557',
-  introduction: `혼자 해도 충분합니다! 1:1 과외하듯 배우는 IT 지식 입문서! 이 책은 독학으로 IT 지식을 배우는 입문자가 ‘꼭 필요한 내용을 제대로 학습’할 수 있도록 구성했다. 뭘 모르는지조차 모르는 입문자의 막연한 마음에 십분 공감하여 과외 선생님이 알려주듯 친절하게, 핵심 내용만 콕콕 집어 준다. 1장에서는 IT 업계 용어를 알아보며 개발과 개발자를 이해하고, 2장에서는 개발자가 실제로 사용하는 용어를 배우며 개발자와 소통할 수 있는 발판을 마련해준다. 마지막 3장에서는 여러 가지 개발 용어를 바탕으로 개발자의 길로 들어설 수 있도록 친절하게 알려 준다. '개발이 뭔지 궁금했지만', '개발자와 소통해야 하지만', '개발자가 되고 싶지만'기존 IT 지식서에서는 시원하게 알 수 없었던 진짜 코딩 지식을 [혼공 얄코]에서 만나 보자!`,
-};
+let order = [
+  {
+    "title":"이펙티브 타입스크립트",
+    "author":"댄 밴더캄",
+    "publisher":"인사이트",
+    "publication_date":"2021-06-08T15:00:00.000Z",
+    "isbn":"9788966263134",
+    "description":"타입스크립트는 타입 정보를 지닌 자바스크립트의 상위 집합으로, 자바스크립트의 골치 아픈 문제점들을 해결해 준다. 이 책은 《이펙티브 C++》와 《이펙티브 자바》의 형식을 차용해 타입스크립트의 동작 원리, 해야 할 것과 하지 말아야 할 것에 대한 구체적인 조언을 62가지 항목으로 나누어 담았다. 각 항목의 조언을 실제로 적용한 예제를 통해 연습하다 보면 타입스크립트를 효율적으로 사용하는 방법을 익힐 수 있다.",
+    "price":25000,
+    "image_path":"../product-images/9788966263134.png",
+    "category":"프론트엔드",
+    "amount":2,
+  }
+];
+saveToCart(order);
 
+let data = JSON.parse(localStorage.getItem('cart'));
 // 책 정보
-bookTitle.forEach(e => e.innerText = book.title);
-author.forEach(e => e.innerText = book.author);
-price.forEach(e => e.innerText = `${book.cost.toLocaleString()}원`);
-
-// 가격 문자열에서 숫자만 반환하는 함수
-function getPriceNumber(str) {
-  return Number(str.replace(/,/g, '').slice(0, -1));
-}
+// bookTitle.forEach(e => e.innerText = order.title);
+// author.forEach(e => e.innerText = order.author);
+// itemPrice.forEach(e => e.innerText = `${order.price.toLocaleString()}원`);
+data.forEach((data, idx) => {
+  orderList.innerHTML +=
+    `<div class="item">
+    <a class="book-img" href="#">
+      <img src="../public/product-images/${data.isbn}" class="book-img" alt="${data.title}"/>
+    </a>
+    <div class="book__title__price">
+      <div class="book-title">
+        <a class="book-link" href="#">${data.title}</a>
+        <div class="author">${data.author}</div>
+      </div>
+      <div class="amount">총 ${data.amount}권</div>
+      <div class="item-price">${data.price.toLocaleString()}원</div>
+    </div>
+  </div>`
+})
 
 // 배송비 계산
 function setDeliveryFee() {
@@ -197,6 +227,8 @@ const payBtn = document.querySelector(".paymentButton button");
 // 버튼클릭이벤트 함수(임시)
 function payBtnClick() {
   alert("결제 및 주문이 정상적으로 완료되었습니다.\n감사합니다.");
+  saveToPurchase(localStorage.getItem('cart'));
+  localStorage.removeItem('cart');
   window.location.href = "/orders/complete";
 }
 payBtn.addEventListener("click", payBtnClick);
