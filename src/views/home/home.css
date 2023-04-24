@@ -1,26 +1,26 @@
 @import url("../public/css/main.css");
 
 /* Auto Image Slider */
-#slider {
+.slider {
   width: 1024px;
   height: 300px;
   overflow: hidden;
 }
 
-#slider .slides {
+.slider .slides {
   display: block;
   width: 8000px;
   height: 100%;
 }
 
-#slider .slide {
+.slider .slide {
   float: left;
   width: 1024px;
   height: 300px;
 }
 
 /* main */
-#category {
+.category {
   margin: 20px 0px;
 }
 
@@ -57,7 +57,7 @@
   border: none;
 }
 
-#product-counter {
+.product-counter {
   margin: 20px;
   color: var(--color-black);
   font-size: var(--font-medium);
@@ -131,7 +131,7 @@
   margin-top: 100px;
 }
 
-#empty-book-list {
+.empty-book-list {
   font-size: var(--font-large);
   color: var(--color-dark-gray);
 }
