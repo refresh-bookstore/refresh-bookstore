@@ -39,12 +39,15 @@ exports.createUser = async (req, res, next) => {
 
 exports.getUserInfo = async (req, res) => {
   try {
+    if (!req.session.user) {
+      // 유저가 로그인하지 않은 경우
+      return res.status(401).send("Unauthorized");
+    }
     const user = await userService.getUserByEmail(req.session.user.email);
     if (user === null) {
       // 유저가 존재하지 않는 경우
       return res.status(404).send("User not found");
     }
-    console.log("사용자 정보 불러오기 성공!");
     res.render("user-mypage", {
       name: user.name,
       email: user.email,

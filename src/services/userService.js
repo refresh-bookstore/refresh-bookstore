@@ -24,7 +24,7 @@ exports.updateUserByEmail = async (email, data) => {
   }
 };
 
-// 모든 사용자 정보 조회
+// 모든 사용자 정보 조회W
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
