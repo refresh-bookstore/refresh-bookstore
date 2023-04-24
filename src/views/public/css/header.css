@@ -7,7 +7,7 @@ header {
 
   width: 100%;
   height: 70px;
-  background-color: #b5ffde;
+  background-color: var(--color-light-green);
 
   padding: 10px 20px;
 }
@@ -22,7 +22,7 @@ header .header-container {
   width: 1024px;
 }
 
-header .logo {
+header .header-logo {
   width: 110px;
   height: 100px;
   background-image: url('../images/logo_green.svg');
@@ -33,7 +33,7 @@ header .logo {
   overflow: visible;
 }
 
-header .icons {
+header .header-icons {
   width: 400px;
   height: 70px;
   display: flex;
@@ -44,7 +44,7 @@ header .icons {
   float:none;
 }
 
-header .icon{
+header .header-icon {
   display: flex;
   height: 40px;
   width: 40px;
@@ -53,7 +53,7 @@ header .icon{
 }
 
 
-header .search-box{
+header .header-search-box{
   position: relative;
   width: 300px;
   height: 60%;
@@ -68,7 +68,7 @@ header .search-box{
   border-radius: 6px;
 }
 
-header .search-input { 
+header .header-search-input { 
   display: none;
   flex-direction: row;
   flex-flow: nowrap;
@@ -83,12 +83,12 @@ header .search-input {
   outline: none;
 }
 
-header .search-input.activate {
+header .header-search-input.activate {
   display: flex;
   border: #1DC078 1px;
 }
 
-header .search {
+header .header-search {
   background-image: url('../images/icon_search_green.svg');
   background-repeat: no-repeat;
   background-position: center left;
@@ -96,7 +96,7 @@ header .search {
   cursor: pointer;
 }
 
-header .search.activate {
+header .header-search.activate {
   position: absolute;
   background-color: #FFFFFF;
   background-image: url('../images/icon_search_green.svg');
@@ -105,7 +105,7 @@ header .search.activate {
   cursor: pointer;
 }
 
-header .cart {
+header .header-cart {
   background-image: url('../images/icon_cart_mt_green.svg');
   background-repeat: no-repeat;
   background-position: center left;
@@ -113,11 +113,12 @@ header .cart {
   cursor: pointer;
 }
 
-header .cart.full{
+header .header-cart.full{
   background-image: url('../images/icon_cart_full_green.svg');
 }
 
-header .user {
+header .header-user {
+  position: relative;
   background-image: url('../images/icon_user_noface_green.svg');
   background-repeat: no-repeat;
   background-position: center left;
@@ -125,10 +126,30 @@ header .user {
   cursor: pointer;
 }
 
-.white {
-  fill: #FFFFFF;
+a {
+  text-decoration: none;
+
 }
 
-.green {
-  fill: #1DC078;
+.header-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 48px;
+
+  transform: translateX(-70%);
+  
+  width: 150px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.header-menu-li {
+  font-size: 16px;
+  padding: 5px 5px 8px 5px;
+}
+
+.header-menu-li:hover {
+  color: #bfbfbf;
 }

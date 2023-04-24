@@ -143,45 +143,45 @@ input[type="button"] {
   width: 100%;
 }
 
-.bookInfo {
+.item {
   display: flex;
   flex-direction: row;
   /* width: 400px; */
   border-bottom: 1px solid var(--color-light-gray);
   padding: 0px 0;
-  /* border-radius: 12px; */
+  border-radius: 12px;
 }
 
-.bookInfo .book-img {
+.item .book-img {
   display: flex;
   align-items: center;
 }
-.bookInfo .book-img img {
+.item .book-img img {
   border: 1px solid var(--color-light-gray);
   width: 100px;
 }
 
-.bookInfo .book__title__price {
+.item .book__title__price {
   padding: 18px 8px;
   width: 100%;
 }
 
-.bookInfo .book-title {
+.item .book-title {
   padding: 0 10px;
   font-size: var(--font-medium);
   color: var(--color-black);
 }
 
-.book-title .author {
+.item .book-title .author {
   padding: 14px 0;
 }
 
-.bookInfo .amount {
+.item .amount {
   font-size: var(--font-regular);
   text-align: end;
 }
 
-.bookInfo .price {
+.item .item-price {
   padding-top: 4px;
   font-size: var(--font-medium);
   text-align: end;
