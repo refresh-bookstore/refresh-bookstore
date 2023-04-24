@@ -35,39 +35,50 @@ setInterval(function() {
   }
 }, 3000);
 
-// 임시 카테고리 데이터
-const categoryList = ['웹 개발', '프론트엔드', '백엔드', '모바일 앱 개발', '게임 개발', '알고리즘·자료구조', '데이터베이스'];
-
 // 해당 카테고리 책 권수 
 const productCounter = document.querySelector(".product-counter");
 
 // 카테고리 html 생성
 const createCategory = (category) => {
   return `<li class="nav-item category">
-            <a class="nav-link clicked" href="#">${category}</a>
+            <a class="nav-link clicked">${category}</a>
           </li>`
 }
 
 const categoryWrap = document.querySelector(".category");
 
-// 카테고리 html 추가
-categoryList.forEach(category => {
-  const categoryEl = createCategory(category);
-  categoryWrap.innerHTML += categoryEl;
-});
+try {
+  const response = await fetch("/category", {
+    method: "GET",
+    headers: {
+      'content-Type': 'application/json'
+    }
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    const categories = data.data;
+
+    //카테고리 html 추가
+    categories.forEach(category => {
+      console.log(category)
+      const categoryEl = createCategory(category.name);
+      categoryWrap.innerHTML += categoryEl;
+    });
+  }
+} catch (error) {
+  console.log(error.message);
+  alert(error.message);
+}
 
 const books = document.querySelector(".books");
-const bookTitle = document.querySelector(".book-text.title");
-const bookCategory = document.querySelector(".book-text.category");
-const bookPrice = document.querySelector(".book-text.price");
 
 // 책 html 생성
-// href는 예시: /books/${book._id}
 const createBook = (book) => {
   return `<div class="book">
             <a class="book-link" href="#">
               <div class="img-container">
-                <img src="../public/images/sample_image.jpg" class="book-img" alt="${book.title}"/>
+                <img src="${book.image_path}" class="book-img" alt="${book.title}"/>
               </div>
               <div class="book-body">
                 <div class="book-text title">${book.title}</div>
@@ -78,52 +89,10 @@ const createBook = (book) => {
           </div>`;
 };
 
+import DATA from './bookData.js';
+
 // 임시 책 데이터
-const bookList = [{
-  title: "프론트엔드 성능 최적화 가이드",
-  category: categoryList[1],
-  price: 19800
-}, {
-  title: "Hello IT 프론트엔드 개발을 시작하려고 해: 입문편",
-  category: categoryList[1],
-  price: 26550
-}, {
-  title: "Node.js 백엔드 개발자 되기",
-  category: categoryList[2],
-  price: 34200
-}, {
-  title: "백엔드를 위한 Django REST Framework with 파이썬",
-  category: categoryList[2],
-  price: 16200
-}, {
-  title: "인사이드 안드로이드 OS",
-  category: categoryList[3],
-  price: 25200
-}, {
-  title: "iOS 앱 개발을 위한 Swift 3",
-  category: categoryList[3],
-  price: 38700
-}, {
-  title: "유니티 2D 게임 개발",
-  category: categoryList[4],
-  price: 27000
-}, {
-  title: "Do it! 첫 알고리즘",
-  category: categoryList[5],
-  price: 16200
-}, {
-  title: "누구나 자료 구조와 알고리즘",
-  category: categoryList[5],
-  price: 29700
-}, {
-  title: "데이터베이스 개론",
-  category: categoryList[6],
-  price: 29000
-}, {
-  title: "제목 길다 길어 엄청 길어 완전 길어 제목 길다 길어 엄청 길어 완전 길어",
-  category: categoryList[6],
-  price: 29000
-}, ];
+const bookList = DATA;
 
 // 책 html 추가
 bookList.forEach(book => {
