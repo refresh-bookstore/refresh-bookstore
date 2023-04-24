@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const {
-  validateUserRegistration,
-  updateUserValidator,
-} = require("../middlewares/userValidation");
+const { validateUserRegistration } = require("../middlewares/userValidation");
 const loginController = require("../controllers/loginController");
 const checkSession = require("../middlewares/checkSession");
-const { createUser, updateUserInfo } = require("../controllers/userController");
+const {
+  createUser,
+  getUsers,
+  updateUsers,
+} = require("../controllers/userController");
 
 // 회원가입 페이지 보여주기
 router.get("/register", (req, res) => {
@@ -23,5 +24,9 @@ router.post("/register", validateUserRegistration, createUser);
 
 // 로그인 처리하기
 router.post("/login", checkSession, loginController.login);
+
+// 관리자 페이지에서, 회원 관리, 회원 수정
+router.get("user-admin/list-users", checkSession, isAdmin, getUsers);
+router.put("user-admin/list-users", checkSession, isAdmin, updateUsers);
 
 module.exports = router;
