@@ -5,7 +5,8 @@
   <title>Refresh Books</title>
   <!-- 커스텀 css, js -->
   <link rel="stylesheet" href="register.css">
-  <script src="findAddress.js"></script>
+  <script src="/public/js/findAddress.js"></script>
+  <script src="/public/js/autoHyphen.js"></script>
   <!-- 다음 지도 API -->
   <!-- https:// 임의 추가 -->
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -128,6 +129,8 @@
                 type="text"
                 placeholder="전화번호를 입력해주세요"
                 autocomplete="on"
+                oninput="autoHyphen(this)"
+                maxlength="13"
               />
             </div>
             <p class="error" id="phone-error"></p>
