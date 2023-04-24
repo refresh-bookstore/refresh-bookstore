@@ -1,8 +1,5 @@
 const User = require("../models/User");
 
-const adminAcess = async (req, res, next) => {
-  
-  
-};
+const adminAcess = async (req, res, next) => {};
 
 module.exports = adminAcess;

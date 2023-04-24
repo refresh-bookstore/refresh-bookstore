@@ -7,11 +7,14 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const PORT = process.env.PORT;
 
+///라우터 가지고오기
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/userRouters");
 const pageRouter = require("./routes/pageRouters");
 
+//미들웨어 가지고 오기
 const hashPassword = require("./middlewares/hashPassword");
 const sessionMiddleware = require("./middlewares/session");
 
@@ -74,10 +77,6 @@ app.use(function (err, req, res, next) {
 // hashPassword, authenticate 미들웨어 사용
 app.use(hashPassword);
 
-// 라우팅 추가
-
-const port = 3000;
-
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });

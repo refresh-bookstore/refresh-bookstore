@@ -1,6 +1,13 @@
 const { Router } = require("express");
-const { createProduct, getProductList, getProductById, getProductByISBN,
-  getProductByCategory, updateProduct, deleteProduct} = require("../controllers/productController");
+const {
+  createProduct,
+  getProductList,
+  getProductById,
+  getProductByISBN,
+  getProductByCategory,
+  updateProduct,
+  deleteProduct,
+} = require("../controllers/productController");
 const router = Router();
 
 // Admin :: 제품 생성하기
