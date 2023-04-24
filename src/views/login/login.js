@@ -45,6 +45,7 @@ async function handlerSubmit(event) {
 function handlerRegister(event) {
   event.preventDefault();
   console.log('회원가입 페이지로 이동');
+  location.href = "/register/register.html"
 }
 
 function checkValid() {
