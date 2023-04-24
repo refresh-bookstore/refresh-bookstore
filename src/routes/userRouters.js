@@ -27,7 +27,10 @@ router.post("/register", validateUserRegistration, createUser);
 router.post("/login", checkSession, loginController.login);
 
 // 관리자 페이지에서, 회원 관리, 회원 수정
-router.get("/user-admin/list-users", checkSession, isAdmin, getUsers);
+router.get("/user-admin", checkSession, getUsers, (req, res) => {
+  res.json(req);
+});
+
 router.put("/", checkSession, isAdmin, updateUsers);
 
 module.exports = router;
