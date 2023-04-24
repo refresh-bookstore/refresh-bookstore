@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const PORT = process.env.PORT;
+const SERVER_LINK = process.env.SERVER_LINK;
 
 ///라우터 가지고오기
 const indexRouter = require("./routes/index");
@@ -22,7 +23,7 @@ const app = express();
 
 mongoose.set("strictQuery", false);
 
-mongoose.connect("mongodb://localhost:27017/myapp", {
+mongoose.connect(SERVER_LINK, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
