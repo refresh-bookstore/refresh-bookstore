@@ -25,31 +25,22 @@
       <!-- 내비게이션 -->
       <ul class="mypage-category nav flex-column">
         <li class="mypage__category nav-item">
-          <a class="mypage__category__a clicked" href="#">회원정보수정</a>
+          <a class="mypage__category__a clicked">회원정보수정</a>
         </li>
         <li class="mypage__category nav-item">
-          <a class="mypage__category__a" href="#">주문조회</a>
+          <a class="mypage__category__a">주문조회</a>
         </li>
       </ul>
 
       <!-- 콘텐츠 영역 -->
       <div class="content-area">
         <p id="content-title">회원정보 수정</p>
-        <form class="user-form-box" method="post"> <!-- live server에선 post 방식을 지원하지 않음-->
+        <form class="user-form-box" method="post">
 
           <div class="field">
             <label class="label" for="nameInput">이름</label>
             <div class="control">
-              <input
-                class="input"
-                id="nameInput"
-                type="text"
-                placeholder="이름을 입력해주세요"
-                autocomplete="on"
-              />
-            </div>
-            <div class="error-control">
-              <p class="error" id="name-error"></p>
+              <p id="nameText"></p>
             </div>
           </div>
 
