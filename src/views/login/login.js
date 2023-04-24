@@ -31,7 +31,7 @@ async function handlerSubmit(event) {
         const data = await response.json();
 
         sessionStorage.setItem('token', data);
-        window.location.href = '/';
+        location.href = '/';
       } else {
         throw new Error('로그인 실패했습니다.');
       }
@@ -42,10 +42,11 @@ async function handlerSubmit(event) {
   }
 }
 
+// 회원가입으로 이동
 function handlerRegister(event) {
   event.preventDefault();
-  console.log('회원가입 페이지로 이동');
-  location.href = "/register/register.html"
+
+  location.href = "/register"
 }
 
 function checkValid() {
