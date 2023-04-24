@@ -6,7 +6,16 @@ const {
   updateUserInfo,
 } = require("../controllers/userController");
 
-router.get("/user-mypage", getUserInfo);
+// 사용자 정보 페이지
+router.get("/user-mypage", getUserInfo, (req, res) => {
+  res.render("user-mypage");
+});
+
+// 사용자 정보 업데이트
 router.post("/use-mypage/update", updateUserValidator, updateUserInfo);
+
+router.get("/order-create", getUserInfo, (req, res) => {
+  res.render("order-create");
+});
 
 module.exports = router;
