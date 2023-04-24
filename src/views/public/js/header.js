@@ -71,23 +71,52 @@ function headerFunc() {
   const dropdownMenu = document.createElement('div');
     dropdownMenu.classList.add('header-dropdown-menu');
 
-    // 로그인 하지 않은 유저라면 로그인, 회원가입만
-    dropdownMenu.innerHTML = `
-      <ul class="header-menu-ul">
-        <li class="header-menu-li" id="menu-login">로그인</li>
-        <li class="header-menu-li" id="menu-register">회원가입</li>
-        <li class="header-menu-li" id="menu-mypage">마이페이지</li>
-        <li class="header-menu-li" id="menu-logout">로그아웃</li>
-      </ul>
-    `;
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      // 로그인한 유저일 때
+      dropdownMenu.innerHTML = `
+        <ul class="header-menu-ul">
+          <li class="header-menu-li" id="menu-mypage">마이페이지</li>
+          <li class="header-menu-li" id="menu-logout">로그아웃</li>
+        </ul>
+      `;
 
-    // 로그인 한 유저라면 마이페이지와 로그아웃
-    // dropdownMenu.innerHTML = `
-    //   <ul class="header-menu-ul">
-    //     <li class="header-menu-li" id="menu-mypage">마이페이지</li>
-    //     <li class="header-menu-li" id="menu-logout">로그아웃</li>
-    //   </ul>
-    // `;
+      const mypageBtn = document.querySelector("#menu-mypage");
+      const logoutBtn = document.querySelector("#menu-logout");
+
+       // 마이페이지 메뉴 클릭 이벤트
+      mypageBtn.addEventListener("click", () => {
+        location.href = "/user-mypage";
+      })
+
+      // 로그아웃 메뉴 클릭 이벤트
+      logoutBtn.addEventListener("click", () => {
+        //임시 alert -> 나중엔 삭제
+        alert("로그아웃 성공");
+        console.log("로그아웃 성공");
+      })
+    } else {
+      // 로그인한 유저가 아닐 때
+      dropdownMenu.innerHTML = `
+        <ul class="header-menu-ul">
+          <li class="header-menu-li" id="menu-login">로그인</li>
+          <li class="header-menu-li" id="menu-register">회원가입</li>
+        </ul>
+      `;
+
+      const loginBtn = document.querySelector("#menu-login");
+      const registerBtn = document.querySelector("#menu-register");
+
+      // 로그인 메뉴 클릭 이벤트
+      loginBtn.addEventListener("click", () => {
+        location.href = "/login";
+      })
+
+      // 회원가입 메뉴 클릭 이벤트
+      registerBtn.addEventListener("click", () => {
+        location.href = "/register";
+      })
+    }
   
   // 드롭 다운 메뉴 HTML 추가
   userBtn.appendChild(dropdownMenu);
@@ -100,34 +129,6 @@ function headerFunc() {
       dropdownMenu.style.display = "none";
     }
   })
-
-  const loginBtn = document.querySelector("#menu-login");
-  const registerBtn = document.querySelector("#menu-register");
-  const mypageBtn = document.querySelector("#menu-mypage");
-  const logoutBtn = document.querySelector("#menu-logout");
-
-  // 로그인 메뉴 클릭 이벤트
-  loginBtn.addEventListener("click", () => {
-    location.href = "/login";
-  })
-
-  // 회원가입 메뉴 클릭 이벤트
-  registerBtn.addEventListener("click", () => {
-    location.href = "/register";
-  })
-
-  // 마이페이지 메뉴 클릭 이벤트
-  mypageBtn.addEventListener("click", () => {
-    location.href = "/user-mypage";
-  })
-
-  // 로그아웃 메뉴 클릭 이벤트
-  logoutBtn.addEventListener("click", () => {
-    //임시 alert -> 나중엔 삭제
-    alert("로그아웃 성공");
-    console.log("로그아웃 성공");
-  })
-
 }
 
 export { headerFunc };
