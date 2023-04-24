@@ -23,50 +23,6 @@ exports.createProduct = async (
     image_path: image_path,
     category: category,
   });
-  const User = require("../models/User");
-  const bcrypt = require("bcrypt");
-
-  exports.getUserByEmail = async email => {
-    const user = await User.findOne({ email: email });
-    return user;
-  };
-
-  exports.updateUserById = async (email, data) => {
-    try {
-      const user = await User.findOne({ email: email });
-
-      if (data.password) {
-        user.password = await bcrypt.hash(data.password, 10);
-      }
-      user.postalCode = data.postalCode;
-      user.address = data.address;
-      user.detailAddress = data.detailAddress;
-      user.phone = data.phone;
-      await user.save();
-      return user;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
-
-  // 모든 사용자 정보 조회
-  exports.getAllUsers = async () => {
-    const users = await User.find();
-    return users;
-  };
-
-  // 사용자 정보 수정
-  exports.updateUser = async (email, Data) => {
-    const user = await User.findByIdAndUpdate(userId, userData, { new: true });
-    return user;
-  };
-
-  // 사용자 정보 삭제
-  exports.deleteUser = async email => {
-    await User.findByIdAndDelete(userId);
-  };
-
-  console.log(post);
 
   //ISBN 중복 필터링 :: 중복 시 책 등록 불가
   const isFindisbn = await Product.findOne({ isbn });
@@ -110,17 +66,17 @@ exports.getProductISBN = async productIsbn => {
   return findCategory;
 };
 
-exports.searchwordProduct = async (keyword) => {
+exports.searchwordProduct = async keyword => {
   let contents = [];
-  if(keyword){
+  if (keyword) {
     contents = await Product.find({
-      title : {
-        $regex: new RegExp('${keyword}', "i"),
+      title: {
+        $regex: new RegExp("${keyword}", "i"),
       },
-    })
+    });
   }
   return contents;
-}
+};
 
 exports.updateProduct = async (
   { _id },
