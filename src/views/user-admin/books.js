@@ -63,8 +63,8 @@ export const books = [
     category: '알고리즘·자료구조',
   },
   {
-    title: 'Do it! 자료구조와 함께 배우는 알고리즘 입문: 자바 편',
-    author: '김현숙, 황숙희',
+    title: '누구나 쉽게 자료구조와 알고리즘 with 파이썬',
+    author: '김현정, 황숙희',
     publisher: '길벗캠퍼스',
     publication_date: new Date(2023, 0, 10),
     isbn: '9791140702688',

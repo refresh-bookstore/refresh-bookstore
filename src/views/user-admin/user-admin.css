@@ -76,6 +76,16 @@
   width: 100%;
 
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.content-area .upper-upper-area {
+  width: 100%;
+
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -87,6 +97,8 @@
   margin-right: 10px;
   font-size: var(--font-medium);
 }
+
+/*-----컨텐츠 추가------*/
 
 .content-area #add-button{
   display: none;
@@ -106,6 +118,51 @@
   display: flex;
 }
 
+.content-area #add-button.deactive{
+  opacity: 0.3;
+}
+
+.content-area .add-page {
+  display: flex;
+  width: 95%;
+  height: auto;
+  padding: 10px;
+  margin: 20px;
+  margin-left: 30px;
+
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-button);
+  border: 0.3px var(--color-light-gray) solid;
+  box-shadow: 3px 3px 3px var(--color-light-gray);
+}
+
+.add-page .add-page-input {
+  width: 60%;
+  height: 30px;
+  font-size: var(--font-regular);
+  margin-right: 60px;
+
+  border-radius: var(--border-radius-input);
+  border: 0.3px var(--color-dark-gray) solid;
+
+}
+
+.content-area .add-page.hidden{
+  display: none;
+}
+
+.content-area .add-page .admin-button{
+  margin: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+
 .content {
   display: none;
   width: 100%;
@@ -123,6 +180,14 @@
   display:flex;
 }
 
+
+
+
+
+
+
+
+
 /*-----공통 사용 요소------*/
 
 .content .admin-buttons {
@@ -132,22 +197,20 @@
   align-items: center;
 
   height: 50px;
-  width: 70px;
+  width: 80px;
 }
 
-.content .admin-buttons .button{
+.admin-button{
   width: 15px;
   height: 30px;
   padding: 2px;
   opacity: 0.3;
 
   cursor: pointer;
-
 }
 
-.content .admin-buttons .button:hover{
+.admin-button:hover{
   opacity: 1;
-
 }
 
 .content .admin-items {
@@ -380,7 +443,7 @@
   padding: 20px;
   color: var(--color-white);
   font-size: var(--font-medium);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-semi-bold);
   margin: 5px;
 
 
@@ -403,16 +466,15 @@
 
 }
 
-.content .category-box .button{
+.content .category-box .admin-button{
   width: 20px;
   height: 20px;
-  padding: 2px;
-  margin-left: 20px;
+  margin-left: 8px;
   opacity: 0.3;
 
 }
 
-.content .category-box .button:hover{
+.content .category-box .admin-button:hover{
   opacity: 1;
 
 }
