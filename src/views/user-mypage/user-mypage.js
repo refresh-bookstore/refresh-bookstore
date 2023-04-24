@@ -1,8 +1,8 @@
-import { main } from '../public/js/main.js';
+import { main } from '/public/js/main.js';
 import { checkValid } from './checkValid.js';
 
 const userGreeting = document.getElementById("user-greeting");
-const nameInput = document.getElementById("nameInput");
+const nameText = document.getElementById("nameText");
 const emailText = document.getElementById("emailText");
 const passwordInput = document.getElementById("passwordInput");
 const postalCodeInput = document.getElementById("postalCodeInput");
@@ -24,7 +24,7 @@ const userData = {
 };
 
 /**
- * 이름: 수정 가능, db에서 가져와서 nameInput.value 에 미리 띄움
+ * 이름: 수정 불가, 바로 db에서 가져와서 띄움
  * 이메일: 수정 불가, 바로 db에서 가져와서 띄움
  * 비밀번호: 수정 가능, 미리 안 띄움, 입력 필수
  * 비밀번호 확인: 미리 안 띄움, 입력 필수
@@ -45,7 +45,7 @@ deleteButton.addEventListener("click", deleteUser);
 
 function loadUserData(user) {
   userGreeting.innerText = `안녕하세요 ${user.name}님`;
-  nameInput.value = user.name;
+  nameText.innerText = user.name;
   emailText.innerText = user.email;
   postalCodeInput.value = user.postalCode;
   addressInput.value = user.address;
@@ -55,7 +55,7 @@ function loadUserData(user) {
 
 function updateUserData() {
   return {
-    name: nameInput.value,
+    name: nameText.innerText,
     email: emailText.innerText,
     password: passwordInput.value,
     postalCode: postalCodeInput.value,
