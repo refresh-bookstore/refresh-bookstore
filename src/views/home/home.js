@@ -1,4 +1,4 @@
-import { main } from '../public/js/main.js';
+import { main } from '/public/js/main.js';
 
 const slider = document.querySelector(".slider");
 const slides = slider.querySelector(".slides");
@@ -8,7 +8,7 @@ const slide = slides.querySelectorAll(".slide");
 function getImageWidth() {
   const img = new Image();
   
-  img.src = "../public/images/img_sample_banner_1.png";
+  img.src = "/public/images/img_sample_banner_1.png";
   return img.width;
 }
 
