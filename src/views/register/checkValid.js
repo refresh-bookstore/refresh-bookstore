@@ -7,6 +7,11 @@ const addressInput = document.getElementById("addressInput");
 const phoneInput = document.getElementById("phoneInput");
 
 function checkValid() {
+  // 전화번호 자동 하이픈 추가
+  phoneInput.value = phoneInput.value.replace(
+    /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,
+    "$1-$2-$3");
+
   const name = nameInput.value;
   const email = emailInput.value;
   const password = passwordInput.value;
