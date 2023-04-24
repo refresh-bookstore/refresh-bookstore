@@ -48,7 +48,7 @@ exports.getUserInfo = async (req, res) => {
       // 유저가 존재하지 않는 경우
       return res.status(404).send("User not found");
     }
-    res.render("user-mypage", {
+    res.status(200).json({
       name: user.name,
       email: user.email,
       address: user.address,
@@ -77,8 +77,8 @@ exports.updateUserInfo = [
 
       //재활성화시, body안에 password를 가지고 와야함.
       const { password, postalCode, address, detailAddress, phone } = req.body;
-      const updatedUser = await userService.updateUserById(
-        req.session.user._id,
+      const updatedUser = await userService.updateUserByEmail(
+        req.session.user.email,
         {
           password,
           postalCode,
@@ -100,8 +100,10 @@ exports.updateUserInfo = [
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password");
+    console.log(users);
     res.status(200).json(users);
   } catch (err) {
+    console.log(err);
     console.error(err);
     res.status(500).json({ message: "서버 오류" });
   }
