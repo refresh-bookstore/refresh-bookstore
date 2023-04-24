@@ -14,32 +14,44 @@ async function handlerSubmit(event) {
   const isAllValid = checkValid();
 
   if (isAllValid) {
-    try {
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: {
-          'content-Type': 'application/json',
-          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({
-          email: emailInput.value,
-          password: passwordInput.value
-        })
-      });
+    console.log("임시 로그인 성공");
+    const data = JSON.stringify({
+      email: emailInput.value,
+      password: passwordInput.value
+    });
 
-      if (response.ok) {
-        const data = await response.json();
-
-        sessionStorage.setItem('token', data);
-        location.href = '/';
-      } else {
-        throw new Error('로그인 실패했습니다.');
-      }
-    } catch (error) {
-      console.log(error);
-      alert("로그인 실패");
-    }
+    sessionStorage.setItem('token', data);
+    location.href = '/';
   }
+
+  // 로그인 수정이 완료된 다면 아래 주석 해제
+  // if (isAllValid) {
+  //   try {
+  //     const response = await fetch("/login", {
+  //       method: "POST",
+  //       headers: {
+  //         'content-Type': 'application/json',
+  //         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+  //       },
+  //       body: JSON.stringify({
+  //         email: emailInput.value,
+  //         password: passwordInput.value
+  //       })
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+
+  //       sessionStorage.setItem('token', data);
+  //       location.href = '/';
+  //     } else {
+  //       throw new Error('로그인 실패했습니다.');
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     alert("로그인 실패");
+  //   }
+  // }
 }
 
 // 회원가입으로 이동
