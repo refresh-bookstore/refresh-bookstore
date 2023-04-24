@@ -7,12 +7,12 @@ exports.createCategory = async (req, res, next) => {
     const result = await categoryService.createCategory(categoryName);
 
     res.status(200).json({
-      message: "Upload success!",
+      message: "카테고리 생성이 완료되었습니다.",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "생성 오류입니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
@@ -22,12 +22,12 @@ exports.getCategoryList = async (req, res, next) => {
     const result = await categoryService.getCategories();
     //res.render("categorydummy.html");
     res.status(200).json({
-      message: "Read success!",
+      message: "카테고리를 조회하였습니다.",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "데이터를 조회할 수 없습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
@@ -38,12 +38,12 @@ exports.getCategoryById = async (req, res) => {
   try {
     const result = await categoryService.getCategory(id);
     res.status(200).json({
-      message: "Detail success!",
+      message: "카테고리를 조회합니다.",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "카테고리를 조회할 수 없습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
@@ -55,12 +55,12 @@ exports.updateCategory = async (req, res, next) => {
     const result = await categoryService.updateCategory(id, name);
 
     res.status(200).json({
-      message: "Update Success!",
+      message: "카테고리를 수정하였습니다.",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "업데이트를 실패하였습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
@@ -71,12 +71,12 @@ exports.deleteCategory = async (req, res, next) => {
     const result = await categoryService.removeCategory(id);
 
     res.status(200).json({
-      message: "Delete Success!",
+      message: "카테고리를 삭제했습니다.",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "삭제를 실패하였습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };

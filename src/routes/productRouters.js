@@ -3,6 +3,7 @@ const {
   createProduct,
   getProductList,
   getProductById,
+  keywordProduct,
   getProductByISBN,
   getProductByCategory,
   updateProduct,
@@ -11,27 +12,27 @@ const {
 const router = Router();
 
 // Admin :: 제품 생성하기
-router.post("/", createProduct);
+router.post("/product", createProduct);
 
 //제품 전체 조회하기
-router.get("/", getProductList);
+router.get("/product", getProductList);
 
 //id - 제품 조회하기
-router.get("/:_id", getProductById);
+//router.get("/product/:_id", getProductById);
 
 //isbn - 제품 조회하기
-router.get("/book_detail/:isbn", getProductByISBN);
+router.get("/product/:isbn", getProductByISBN);
 
 //[search] keyword로 책 조회하기
-router.get("/search", getProductByISBN);
+router.get("/product/:search", keywordProduct);
 
 //category - 제품 조회하기
-router.get("/list/:category", getProductByCategory);
+router.get("/product/list/:category", getProductByCategory);
 
 //Admin :: 제품 수정하기
-router.put("/:_id", updateProduct);
+router.put("/product/:_id", updateProduct);
 
 //Admin :: 제품 삭제하기
-router.delete("/:_id", deleteProduct);
+router.delete("/product/:_id", deleteProduct);
 
 module.exports = router;

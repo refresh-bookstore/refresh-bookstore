@@ -14,6 +14,9 @@ const SERVER_LINK = process.env.SERVER_LINK;
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/userRouters");
 const pageRouter = require("./routes/pageRouters");
+const productRouter = require("./routes/productRouters");
+const categoryRouter = require("./routes/categoryRouters");
+
 
 //미들웨어 가지고 오기
 const hashPassword = require("./middlewares/hashPassword");
@@ -60,6 +63,8 @@ app.use(
 app.use("/", indexRouter);
 app.use("/", usersRouter);
 app.use("/", pageRouter);
+app.use("/", productRouter);
+app.use("/", categoryRouter);
 
 // 404 에러 핸들링
 app.use(function (req, res, next) {

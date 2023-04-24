@@ -27,7 +27,10 @@ exports.createProduct = async (
   //ISBN 중복 필터링 :: 중복 시 책 등록 불가
   const isFindisbn = await Product.findOne({ isbn });
   if (isFindisbn) {
-    throw new Error(error.message);
+    throw { 
+      status: 400, 
+      message: "등록된 ISBN입니다." 
+    };
   }
   const book = await Product.create(post);
   return book;
@@ -35,13 +38,25 @@ exports.createProduct = async (
 
 exports.getProducts = async () => {
   const products = await Product.find({});
+
+  console.log(products);
+  if (products.length === 0) {
+    throw { 
+      status: 400, 
+      message: "데이터를 찾을 수 없습니다." 
+    };
+  }
+
   return products;
 };
 
 exports.getProduct = async id => {
   const product = await Product.findById(id);
   if (product.length === 0) {
-    throw new Error(401, "데이터를 찾을 수 없습니다.");
+    throw { 
+      status: 400, 
+      message: "데이터를 찾을 수 없습니다." 
+    };
   }
 
   return product;
@@ -52,7 +67,10 @@ exports.getProductCategory = async categoryName => {
   const products = await Product.find({ category: findCategory[0].name });
 
   if (products.length === 0) {
-    throw new Error(401, "데이터를 찾을 수 없습니다.");
+    throw { 
+      status: 400, 
+      message: "데이터를 찾을 수 없습니다." 
+    };
   }
   return products;
 };
@@ -60,19 +78,24 @@ exports.getProductCategory = async categoryName => {
 exports.getProductISBN = async productIsbn => {
   const findCategory = await Product.find({ isbn: productIsbn });
   if (findCategory.length === 0) {
-    throw new Error(401, "데이터를 찾을 수 없습니다.");
+    throw { 
+      status: 400, 
+      message: "데이터를 찾을 수 없습니다." 
+    };
   }
-  9;
   return findCategory;
 };
 
-exports.searchwordProduct = async keyword => {
+
+exports.searchwordProduct = async (keyword)=> {
   let contents = [];
   if (keyword) {
+    console.log(keyword);
     contents = await Product.find({
-      title: {
-        $regex: new RegExp("${keyword}", "i"),
-      },
+      $or: [
+        { title: {$regex: new RegExp(`${keyword}`, "i")}},
+        { author: {$regex: new RegExp(`${keyword}`, "i")}},
+      ],
     });
   }
   return contents;
@@ -111,12 +134,18 @@ exports.updateProduct = async (
   );
 
   if (!product) {
-    throw new Error(401, "데이터를 찾을 수 없습니다.");
+    throw { 
+      status: 400, 
+      message: "데이터를 찾을 수 없습니다." 
+    };
   }
 
   const isFindisbn = await Product.find({ isbn });
   if (isFindisbn.length > 1) {
-    throw new Error(401, "이미 등록된 도서입니다.");
+    throw { 
+      status: 400, 
+      message: "데이터를 찾을 수 없습니다." 
+    };
   }
   return product;
 };
