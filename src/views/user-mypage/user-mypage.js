@@ -34,6 +34,13 @@ const userData = {
  * 전화번호: 수정 가능, db에서 가져와서 phoneInput.value 에 미리 띄움
  */
 
+// // 번호 자동 하이픈 
+// passwordInput.addEventListener("input", (target) => {
+//   passwordInput.value = target.value.replace(/[^0-9]/g, '')
+//   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+// })
+
+
 // 회원 정보 로드
 loadUserData(userData);
 
