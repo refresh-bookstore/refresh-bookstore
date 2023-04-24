@@ -8,6 +8,7 @@ const {
   getUsers,
   updateUsers,
 } = require("../controllers/userController");
+const { isAdmin } = require("../middlewares/isAdmin.js");
 
 // 회원가입 페이지 보여주기
 router.get("/register", (req, res) => {
@@ -26,7 +27,7 @@ router.post("/register", validateUserRegistration, createUser);
 router.post("/login", checkSession, loginController.login);
 
 // 관리자 페이지에서, 회원 관리, 회원 수정
-router.get("user-admin/list-users", checkSession, isAdmin, getUsers);
-router.put("user-admin/list-users", checkSession, isAdmin, updateUsers);
+router.get("/user-admin/list-users", checkSession, isAdmin, getUsers);
+router.put("/", checkSession, isAdmin, updateUsers);
 
 module.exports = router;

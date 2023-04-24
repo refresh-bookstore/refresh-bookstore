@@ -62,7 +62,7 @@ exports.getProductISBN = async productIsbn => {
   if (findCategory.length === 0) {
     throw new Error(401, "데이터를 찾을 수 없습니다.");
   }
-
+  9;
   return findCategory;
 };
 

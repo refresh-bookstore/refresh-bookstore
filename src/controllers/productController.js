@@ -101,22 +101,21 @@ exports.getProductByISBN = async (req, res) => {
 };
 
 //키워드 검색 기능
-exports.keywordProduct = async(req, res) => {
-  try{
+exports.keywordProduct = async (req, res) => {
+  try {
     const { keyword } = req.query.title;
     const result = await productService.serchProduct(keyword);
 
     res.status(200).json({
-      message:"키워드 검색이 완료되었습니다.",
+      message: "키워드 검색이 완료되었습니다.",
       data: result,
     });
-  } catch(error){
+  } catch (error) {
     res.status(500).json({
-      message:"데이터를 조회할 수 없습니다.",
+      message: "데이터를 조회할 수 없습니다.",
     });
   }
-}
-
+};
 
 //Product 업데이트
 exports.updateProduct = async (req, res) => {

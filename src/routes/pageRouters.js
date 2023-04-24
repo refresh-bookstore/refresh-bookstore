@@ -8,7 +8,7 @@ const {
 
 // 사용자 정보 페이지
 router.get("/user-mypage", getUserInfo, (req, res) => {
-  res.render("user-mypage");
+  res.json(req.user);
 });
 
 // 사용자 정보 업데이트
