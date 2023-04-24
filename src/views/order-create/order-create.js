@@ -5,24 +5,31 @@ function getPriceNumber(str) {
   return Number(str.replace(/,/g, '').slice(0, -1));
 }
 
-// 로컬스토리지에 'cart'데이터 저장(테스트)
+// 로컬스토리지 'cart'데이터 저장 함수
 const saveToCart = (data) => {
   localStorage.setItem('cart', JSON.stringify(data));
 }
+// 로컬스토리지 'purchase'데이터 저장 함수
 const saveToPurchase = (data) => {
   localStorage.setItem('purchase', JSON.stringify(data));
 }
 
 const orderList = document.querySelector('.orderList');
-const bookTitle = document.querySelectorAll('.book-title a');
-const author = document.querySelectorAll('.author')
-const itemPrice = document.querySelectorAll('.item-price');
-
 const booksPrice = document.querySelector('.booksPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
 
-//예시데이터
+// 사용자 기본정보 출력
+// async function loadUserInfo() {
+//   await fetch("/order-create").then(response => {
+//       response.text().then(text => {
+//         alert(text);
+//       });
+//     }
+//   );
+// }
+
+//예시데이터 로컬스토리지 저장
 let order = [
   {
     "title":"이펙티브 타입스크립트",
@@ -39,27 +46,28 @@ let order = [
 ];
 saveToCart(order);
 
+let bookPriceSum = 0;
 let data = JSON.parse(localStorage.getItem('cart'));
-// 책 정보
-// bookTitle.forEach(e => e.innerText = order.title);
-// author.forEach(e => e.innerText = order.author);
-// itemPrice.forEach(e => e.innerText = `${order.price.toLocaleString()}원`);
-data.forEach((data, idx) => {
+data.forEach((data) => {
+  const { title, author, isbn, price, image_path, amount } = data;
+
   orderList.innerHTML +=
     `<div class="item">
-    <a class="book-img" href="#">
-      <img src="${data.image_path}" class="book-img" alt="${data.title}"/>
+    <a class="book-img" href="/book-detail/${isbn}">
+      <img src="${image_path}" class="book-img" alt="${title}"/>
     </a>
     <div class="book__title__price">
       <div class="book-title">
-        <a class="book-link" href="#">${data.title}</a>
-        <div class="author">${data.author}</div>
+        <a class="book-link" href="/book-detail/${isbn}">${title}</a>
+        <div class="author">${author}</div>
       </div>
-      <div class="amount">총 ${data.amount}권</div>
-      <div class="item-price">${data.price.toLocaleString()}원</div>
+      <div class="amount">총 ${amount}권</div>
+      <div class="item-price">${(price * amount).toLocaleString()}원</div>
     </div>
-  </div>`
-})
+  </div>`;
+  bookPriceSum += price * amount;
+});
+
 
 // 배송비 계산
 function setDeliveryFee() {
@@ -107,9 +115,16 @@ function handleRequestChange(e) {
 
 requestSelectBox.addEventListener("change", handleRequestChange);
 
+// 상품 가격, 배송비, 총 결제 금액 출력
+booksPrice.innerText = `${bookPriceSum.toLocaleString()}원`;
+if (bookPriceSum >= 50000) {
+  deliveryFee.innerText = '0원'
+  totalCost.innerText = booksPrice.innerText;
+} else {
+  deliveryFee.innerText = '3,000원';
+  totalCost.innerText = `${(bookPriceSum + 3000).toLocaleString()}원`;
+}
 
-// 결제하기 버튼 클릭
-const payBtn = document.querySelector(".paymentButton button");
 
 // function payBtnClick() {
 //   // if (
@@ -224,12 +239,15 @@ const payBtn = document.querySelector(".paymentButton button");
 // }
 
 
-// 버튼클릭이벤트 함수(임시)
+
+// 결제하기 버튼 클릭 이벤트
+const payBtn = document.querySelector(".paymentButton button");
+// 버튼클릭이벤트 함수
 function payBtnClick() {
   alert("결제 및 주문이 정상적으로 완료되었습니다.\n감사합니다.");
-  saveToPurchase(localStorage.getItem('cart'));
+  saveToPurchase(JSON.parse(localStorage.getItem('cart')));
   localStorage.removeItem('cart');
-  window.location.href = "/orders/complete";
+  window.location.href = "/order-complete";
 }
 payBtn.addEventListener("click", payBtnClick);
 

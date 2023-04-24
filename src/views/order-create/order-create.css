@@ -149,7 +149,6 @@ input[type="button"] {
   /* width: 400px; */
   border-bottom: 1px solid var(--color-light-gray);
   padding: 0px 0;
-  border-radius: 12px;
 }
 
 .item .book-img {
@@ -174,15 +173,16 @@ input[type="button"] {
 
 .item .book-title .author {
   padding: 14px 0;
+  font-size: var(--font-regular);
 }
 
 .item .amount {
-  font-size: var(--font-regular);
+  font-size: var(--font-medium);
   text-align: end;
 }
 
 .item .item-price {
-  padding-top: 4px;
+  padding-top: 8px;
   font-size: var(--font-medium);
   text-align: end;
 }
@@ -193,6 +193,7 @@ input[type="button"] {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  padding-right: 8px;
 }
 
 .pay__detail {
@@ -217,16 +218,17 @@ input[type="button"] {
 }
 
 .paymentButton button {
+  width: 250px;
+  height: 50px;
+  margin-top: 10px;
+  margin-right: 8px;
+  background-color: var(--color-point);
+  color: var(--color-white);
   font-size: var(--font-medium);
-  background-color: #1DC078;
-  margin-top: 20px;
-
-  width: 300px;
-  height: 70px;
+  font-weight: 700;
+  text-align: center;
   border: none;
   border-radius: var(--border-radius-button);
-  font-weight: var(--weight-semi-bold);
-  color: var(--color-white);
 }
 
 .hidden {
