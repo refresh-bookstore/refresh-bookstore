@@ -9,6 +9,7 @@ const postalCodeInput = document.getElementById("postalCodeInput");
 const addressInput = document.getElementById("addressInput");
 const detailAddressInput = document.getElementById("detailAddressInput");
 const phoneInput = document.getElementById("phoneInput");
+const orderListButton = document.getElementById("order-list-button");
 const submitButton = document.getElementById("submitButton");
 const deleteButton = document.getElementById("deleteButton");
 
@@ -34,12 +35,8 @@ const userData = {
  * 전화번호: 수정 가능, db에서 가져와서 phoneInput.value 에 미리 띄움
  */
 
-// // 번호 자동 하이픈 
-// passwordInput.addEventListener("input", (target) => {
-//   passwordInput.value = target.value.replace(/[^0-9]/g, '')
-//   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
-// })
-
+// 주문 조회 버튼 이벤트 리스너
+orderListButton.addEventListener("click", handleOrderList);
 
 // 회원 정보 로드
 loadUserData(userData);
@@ -50,8 +47,15 @@ submitButton.addEventListener("click", updateUser);
 // 회원 탈퇴 버튼 이벤트 리스너
 deleteButton.addEventListener("click", deleteUser);
 
+function handleOrderList(event) {
+  event.preventDefault();
+
+  // user-mypage/order-list 로 수정할지?
+  location.href = "/order-list/order-list.html";
+}
+
 function loadUserData(user) {
-  userGreeting.innerText = `안녕하세요 ${user.name}님\u{1F49A}`;
+  userGreeting.innerText = `안녕하세요, ${user.name}님\u{1F49A}`;
   nameText.innerText = user.name;
   emailText.innerText = user.email;
   postalCodeInput.value = user.postalCode;
