@@ -13,16 +13,19 @@ const router = Router();
 // Admin :: 제품 생성하기
 router.post("/", createProduct);
 
-// 제품 조회하기
+//제품 전체 조회하기
 router.get("/", getProductList);
 
-//id로 제품 조회하기
+//id - 제품 조회하기
 router.get("/:_id", getProductById);
 
-//isbn 제품 조회하기
+//isbn - 제품 조회하기
 router.get("/book_detail/:isbn", getProductByISBN);
 
-//카테고리 아이디로 조회하기
+//[search] keyword로 책 조회하기
+router.get("/search", getProductByISBN);
+
+//category - 제품 조회하기
 router.get("/list/:category", getProductByCategory);
 
 //Admin :: 제품 수정하기

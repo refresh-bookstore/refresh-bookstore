@@ -110,6 +110,18 @@ exports.getProductISBN = async productIsbn => {
   return findCategory;
 };
 
+exports.searchwordProduct = async (keyword) => {
+  let contents = [];
+  if(keyword){
+    contents = await Product.find({
+      title : {
+        $regex: new RegExp('${keyword}', "i"),
+      },
+    })
+  }
+  return contents;
+}
+
 exports.updateProduct = async (
   { _id },
   {
