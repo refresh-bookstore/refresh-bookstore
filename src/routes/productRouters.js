@@ -1,37 +1,44 @@
 const { Router } = require("express");
+const checkSession = require("../middlewares/checkSession");
 const {
   createProduct,
   getProductList,
   getProductById,
+  getProductQueryById,
+  keywordProduct,
   getProductByISBN,
   getProductByCategory,
   updateProduct,
   deleteProduct,
 } = require("../controllers/productController");
+const { isAdmin } = require("../middlewares/isAdmin.js");
 const router = Router();
 
 // Admin :: 제품 생성하기
-router.post("/", createProduct);
+router.post("/user-admin/product", checkSession, isAdmin, createProduct);
 
-//제품 전체 조회하기
-router.get("/", getProductList);
+// 제품 전체 조회하기
+router.get("/product", getProductList);
 
-//id - 제품 조회하기
-router.get("/:_id", getProductById);
+// isbn - 제품 조회하기
+router.get("/book-detail/:isbn", getProductByISBN);
 
-//isbn - 제품 조회하기
-router.get("/book_detail/:isbn", getProductByISBN);
+// [search] keyword로 책 조회하기
+router.get("/product/:search", keywordProduct);
 
-//[search] keyword로 책 조회하기
-router.get("/search", getProductByISBN);
+// category - 제품 조회하기
+router.get("/product/list/:category", getProductByCategory);
 
-//category - 제품 조회하기
-router.get("/list/:category", getProductByCategory);
+// Admin ::제품 전체 조회하기
+router.get("/user-admin/products", checkSession, isAdmin, getProductList);
 
-//Admin :: 제품 수정하기
-router.put("/:_id", updateProduct);
+// Admin :: isbn 제품 조회하기
+router.get("/user-admin/product", checkSession, isAdmin, getProductQueryById);
 
-//Admin :: 제품 삭제하기
-router.delete("/:_id", deleteProduct);
+// Admin :: 제품 수정하기
+router.put("/user-admin/product", checkSession, isAdmin, updateProduct);
+
+// Admin :: 제품 삭제하기
+router.delete("/user-admin/product", checkSession, isAdmin, deleteProduct);
 
 module.exports = router;
