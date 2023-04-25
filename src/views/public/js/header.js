@@ -52,7 +52,6 @@ function headerFunc() {
     }
   })
   
-  /* (임시) 파일 이동  */
 
   // 로고 클릭 이벤트
   logoImage.addEventListener("click", () => {
@@ -86,8 +85,31 @@ function headerFunc() {
     const logoutBtn = document.querySelector("#menu-logout");
 
     // 마이페이지 메뉴 클릭 이벤트
-    mypageBtn.addEventListener("click", () => {
-      location.href = "/user-mypage";
+    mypageBtn.addEventListener("click", async () => {
+      try {
+        const response = await fetch ("/mypage-menu", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+
+          // 데이터를 sessionStorage에 저장
+          sessionStorage.setItem("userData", JSON.stringify(data));
+
+          // 마이페이지로 이동
+          location.href = "/user-mypage";
+        } else if (response.status === 404 || response.status === 500) {
+          throw new Error("사용자를 찾을 수 없습니다.");
+        }
+      } catch (error) {
+        alert(error.message);
+      }
     })
 
     // 로그아웃 메뉴 클릭 이벤트

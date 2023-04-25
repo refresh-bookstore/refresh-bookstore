@@ -13,33 +13,20 @@ const orderListButton = document.getElementById("order-list-button");
 const submitButton = document.getElementById("submitButton");
 const deleteButton = document.getElementById("deleteButton");
 
-// 임시 유저 데이터
-const userData = {
-    name: "김토끼",
-    email: "elice@hello.com",
-    password: "~1234qwer",
-    postalCode: "13529",
-    address: "경기 성남시 분당구 판교역로 166  (백현동)",
-    detailAddress: "123동 456호",
-    phone: "010-1234-5678",
-};
+// 유저 데이터
+const userData = JSON.parse(sessionStorage.getItem("userData"));
 
-/**
- * 이름: 수정 불가, 바로 db에서 가져와서 띄움
- * 이메일: 수정 불가, 바로 db에서 가져와서 띄움
- * 비밀번호: 수정 가능, 미리 안 띄움, 입력 필수
- * 비밀번호 확인: 미리 안 띄움, 입력 필수
- * 우편주소: 수정 가능, db에서 가져와서 postalCodeInput.value 에 미리 띄움
- * 주소: 수정 가능, db에서 가져와서 addressInput.value 에 미리 띄움
- * 상세주소: 수정 가능, db에서 가져와서 detail...Input.value 에 미리 띄움
- * 전화번호: 수정 가능, db에서 가져와서 phoneInput.value 에 미리 띄움
- */
+// 회원 정보 로드
+if (userData) {
+  loadUserData(userData);
+} else {
+  alert("회원 정보가 없습니다.");
+  // 홈으로 돌아가기
+  location.replace("/");
+}
 
 // 주문 조회 버튼 이벤트 리스너
 orderListButton.addEventListener("click", handleOrderList);
-
-// 회원 정보 로드
-loadUserData(userData);
 
 // 회원 수정 버튼 이벤트 리스너
 submitButton.addEventListener("click", updateUser);
@@ -50,8 +37,7 @@ deleteButton.addEventListener("click", deleteUser);
 function handleOrderList(event) {
   event.preventDefault();
 
-  // user-mypage/order-list 로 수정할지?
-  location.href = "/order-list/order-list.html";
+  location.href = "/order-list";
 }
 
 function loadUserData(user) {
@@ -82,7 +68,6 @@ function updateUser(event) {
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
-    console.log("수정 완료");
 
     loadUserData(updateUserData());
   } else {

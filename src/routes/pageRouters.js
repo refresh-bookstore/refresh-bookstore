@@ -19,7 +19,11 @@ router.get("/login", checkSession, (req, res) => {
   }
 });
 
-router.get("/user-mypage", checkSession, getUserInfo, (req, res) => {
+router.get("/mypage-menu", checkSession, getUserInfo, (req, res) => {
+  res.json(req.user);
+});
+
+router.get("/user-mypage", checkSession, (req, res) => {
   res.render("user-mypage/user-mypage.html");
 });
 

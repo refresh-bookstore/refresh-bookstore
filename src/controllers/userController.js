@@ -47,14 +47,19 @@ exports.getUserInfo = async (req, res, next) => {
       // 유저가 존재하지 않는 경우
       return res.status(404).send("User not found");
     }
-    res.status(200).json({
+
+    // req.user 객체 생성 후 res.locals에 저장
+    req.user = {
       name: user.name,
       email: user.email,
       address: user.address,
       detailAddress: user.detailAddress,
       postalCode: user.postalCode,
       phone: user.phone,
-    });
+    };
+    
+    return res.status(200).send(req.user);
+
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
