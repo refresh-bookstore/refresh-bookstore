@@ -13,12 +13,24 @@ const orderListButton = document.getElementById("order-list-button");
 const submitButton = document.getElementById("submitButton");
 const deleteButton = document.getElementById("deleteButton");
 
-// 유저 데이터
+// 세션스토리지의 유저 데이터
 const userData = JSON.parse(sessionStorage.getItem("userData"));
 
+const setUserData = {
+  name: userData.name,
+  email: userData.email,
+  postalCode: userData.postalCode,
+  address: userData.address,
+  detailAddress: userData.detailAddress,
+  phone: userData.phone
+}
+
+// 세션스토리지의 유저 정보 삭제
+sessionStorage.removeItem("userData");
+
 // 회원 정보 로드
-if (userData) {
-  loadUserData(userData);
+if (setUserData) {
+  loadUserData(setUserData);
 } else {
   alert("회원 정보가 없습니다.");
   // 홈으로 돌아가기
@@ -62,16 +74,37 @@ function updateUserData() {
   };
 }
 
-function updateUser(event) {
+async function updateUser(event) {
   event.preventDefault();
 
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
+    try {
+      const response = await fetch("/user-mypage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          password: passwordInput.value,
+          postalCode: postalCodeInput.value,
+          address: addressInput.value,
+          detailAddress: detailAddressInput.value,
+          phone: phoneInput.value
+        })
+      });
 
-    loadUserData(updateUserData());
-  } else {
-    console.log("수정 취소");
+      if (response.ok) {
+        loadUserData(updateUserData());
+      } else {
+        const data = response.json();
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      alert("회원 정보 수정을 실패했습니다.");
+    }
   }
 }
 
