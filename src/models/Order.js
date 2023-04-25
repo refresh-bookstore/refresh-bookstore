@@ -2,10 +2,27 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const productService = require("../services/productService");
 
+function generateOrderId() {
+  let result = "";
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const length = chars.length;
+  for (let i = 0; i < 10; i++) {
+    result += chars.charAt(Math.floor(Math.random() * length));
+  }
+  return result;
+}
+
 const orderSchema = new Schema(
   {
     orderId: {
-      type: Number,
+      type: String,
+      required: true,
+      unique: true,
+      default: generateOrderId,
+    },
+    email: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     shippingStatus: {
@@ -14,13 +31,28 @@ const orderSchema = new Schema(
       enum: ["상품 준비중", "배송중", "배송완료", "주문취소"],
       default: "상품 준비중",
     },
+    deliverytFee: {
+      type: Number,
+      required: true,
+    },
     userName: {
       type: String,
       required: true,
     },
-    userAddress: {
+    postalCode: {
       type: String,
       required: true,
+      trim: true,
+    },
+    address: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    detailAddress: {
+      type: String,
+      required: true,
+      trim: true,
     },
     userPhone: {
       type: String,
@@ -37,7 +69,7 @@ const orderSchema = new Schema(
           ref: "Product",
           required: true,
         },
-        quantity: {
+        amount: {
           type: Number,
           required: true,
         },
@@ -53,14 +85,16 @@ const orderSchema = new Schema(
   }
 );
 
-orderSchema.pre("save", async next => {
+orderSchema.pre("save", async function (next) {
   try {
     let totalPrice = 0;
     const order = this;
 
     for (let i = 0; i < order.orderList.length; i++) {
-      let getPrice = await productService.getProduct(price);
-      totalPrice += orderList[i].quantity * getPrice;
+      let getPrice = await productService.getPrice(
+        order.orderList[i].product.price
+      );
+      totalPrice += order.orderList[i].quantity * getPrice;
     }
 
     order.totalPrice = totalPrice;
@@ -69,6 +103,3 @@ orderSchema.pre("save", async next => {
     next(error);
   }
 });
-
-const Order = mongoose.model("Order", orderSchema);
-module.exports = Order;

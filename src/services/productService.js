@@ -125,3 +125,11 @@ exports.deleteProduct = async _id => {
   const product = await Product.findByIdAndDelete(_id);
   return product;
 };
+
+exports.getPrice = async id => {
+  const product = await Product.findById(id);
+  if (!product) {
+    throw new Error(401, "데이터를 찾을 수 없습니다.");
+  }
+  return product.price;
+};
