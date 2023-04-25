@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>Refresh Books</title>
-  <link rel="stylesheet" href="error-page.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Refresh Books</title>
+    <link rel="stylesheet" href="error-page.css" />
+  </head>
+  <body>
+    <header></header>
 
-  <header></header>
-
-  <div class="container">
-    <div class="error-container">
-      <img class="error-img" src="../public/images/ERROR.svg">
-      <p class="error-message">로그인 한 사용자만 접근할 수 있는 페이지 입니다. </p>
+    <div class="container">
+      <div class="error-container">
+        <img class="error-img" src="../public/images/ERROR.svg" />
+        <p class="error-message">
+          로그인 한 사용자만 접근할 수 있는 페이지 입니다.
+        </p>
+      </div>
+      <div class="error-container">
+        <button class="return-home-button" id="return-home-button">
+          홈으로 돌아가기
+        </button>
+      </div>
     </div>
-    <div class="error-container">
-      <button class="return-home-button" id="return-home-button">홈으로 돌아가기</button>
-    </div>
-  </div>
 
-  <footer></footer>
+    <footer></footer>
 
-  <script type="module" src="error-page.js"></script>
-</body>
+    <script type="module" src="error-page.js"></script>
+  </body>
 </html>
