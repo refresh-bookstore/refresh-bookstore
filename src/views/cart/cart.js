@@ -55,7 +55,7 @@ let data = JSON.parse(localStorage.getItem('cart'));
 // 로컬스토리지에서 데이터 불러오기, 체크박스, 수량조절, 삭제버튼 활성화, 가격 출력 자동화
 function renderBooks() {
   data = JSON.parse(localStorage.getItem('cart'));
-  if (data.length === 0) {
+  if (data === null) {
     // 장바구니에 상품이 없습니다
     cart.innerHTML = `<p class="empty-cart">상품이 없습니다.</p>`;
     localStorage.clear();

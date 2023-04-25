@@ -10,6 +10,8 @@ const booksPrice = document.querySelector('.booksPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
 
+const userDeliveryInfo =  document.querySelectorAll('.user_delivery_info');
+const [ nameInput , phoneNumberInput , postalCodeInput , addressInput , detailAddressInput ] = userDeliveryInfo;
 // 사용자 기본정보 출력
 // async function loadUserInfo() {
 //   await fetch("/order-create").then(response => {
@@ -118,14 +120,14 @@ if (bookPriceSum >= 50000) {
 
 
 // function payBtnClick() {
-//   // if (
-//   //   !userName.value.trim() ||
-//   //   !userPhoneNumber.value ||
-//   //   !userPostCode.value ||
-//   //   !userStreetAddress.value
-//   // ) {
-//   //   return alert("배송지 정보를 모두 입력해주세요");
-//   // }
+//   if (
+//     !nameInput.value.trim() ||
+//     !phoneNumberInput.value ||
+//     !postalCodeInput.value ||
+//     !addressInput.value
+//   ) {
+//     return alert("배송지 정보를 모두 입력해주세요");
+//   }
 
 //   const requestType = requestSelectBox.value;
 //   let request;
@@ -138,7 +140,7 @@ if (bookPriceSum >= 50000) {
 //     request = requestOption[requestType];
 //   }
 
-//   // 기존에 휴대폰번호와 주소가 없다면 주문할 때 배송지와 휴대폰번호로 기존 유저정보 업데이트
+  // 기존에 휴대폰번호와 주소가 없다면 주문할 때 배송지와 휴대폰번호로 기존 유저정보 업데이트
 
 //   if (!phoneNumber || !postCode) {
 //     // 전화번호
@@ -241,45 +243,45 @@ function payBtnClick() {
 }
 payBtn.addEventListener("click", payBtnClick);
 
-async function handleSubmit(e) {
-  e.preventDefault();
-  const isAllValid = checkValid();
+// async function handleSubmit(e) {
+//   e.preventDefault();
+//   const isAllValid = checkValid();
 
-  if (isAllValid) {
-    await fetch("/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: nameInput.value,
-        email: emailInput.value,
-        password: passwordInput.value,
-        passwordCheck: passwordCheckInput.value,
-        postalCode: postalCodeInput.value,
-        address: addressInput.value,
-        detailAddress: detailAddressInput.value,
-        phone: phoneInput.value,
-      }),
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("서버 오류");
-        }
-      })
-      .then(data => {
-        alert(data.message);
-        location.replace("/");
-      })
-      .catch(error => {
-        console.error(error);
-        alert("회원가입에 실패했습니다. 다시 시도해주세요.");
-      });
-  } else {
-    checkValid();
-  }
-}
+//   if (isAllValid) {
+//     await fetch("/register", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         name: nameInput.value,
+//         email: emailInput.value,
+//         password: passwordInput.value,
+//         passwordCheck: passwordCheckInput.value,
+//         postalCode: postalCodeInput.value,
+//         address: addressInput.value,
+//         detailAddress: detailAddressInput.value,
+//         phone: phoneInput.value,
+//       }),
+//     })
+//       .then(response => {
+//         if (response.ok) {
+//           return response.json();
+//         } else {
+//           throw new Error("서버 오류");
+//         }
+//       })
+//       .then(data => {
+//         alert(data.message);
+//         location.replace("/");
+//       })
+//       .catch(error => {
+//         console.error(error);
+//         alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+//       });
+//   } else {
+//     checkValid();
+//   }
+// }
 
 main();
