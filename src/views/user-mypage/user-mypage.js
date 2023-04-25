@@ -94,10 +94,9 @@ async function updateUser(event) {
       });
 
       if (response.ok) {
-        console.log(response.json())
         loadUserData(updateUserData());
       } else {
-        const data = response.json();
+        const data = await response.json();
         throw new Error(data.message);
       }
     } catch (error) {
@@ -107,11 +106,33 @@ async function updateUser(event) {
   }
 }
 
-function deleteUser(event) {
+async function deleteUser(event) {
   event.preventDefault();
 
   if (confirm("정말 탈퇴하시겠습니까?")) {
-    console.log("탈퇴 완료");
+    try {
+      const response = await fetch("/user-mypage/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(`탈퇴하셨습니다.\n함께해서 즐거웠어요.`);
+        
+        // 세션스토리지 전부 삭제
+        sessionStorage.clear();
+        
+        // 홈 이동
+        location.replace("/");
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   } else {
     console.log("탈퇴 취소");
   }
