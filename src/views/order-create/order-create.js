@@ -1,4 +1,4 @@
-import { main } from '../public/js/main.js';
+import { main } from '/public/js/main.js';
 
 // 가격 문자열에서 숫자만 반환하는 함수
 function getPriceNumber(str) {
@@ -13,14 +13,29 @@ const totalCost = document.querySelector('.totalCost');
 const userDeliveryInfo =  document.querySelectorAll('.user_delivery_info');
 const [ nameInput , phoneNumberInput , postalCodeInput , addressInput , detailAddressInput ] = userDeliveryInfo;
 // 사용자 기본정보 출력
-// async function loadUserInfo() {
-//   await fetch("/order-create").then(response => {
-//       response.text().then(text => {
-//         alert(text);
-//       });
-//     }
-//   );
-// }
+
+async function loadUserData() {
+  try {
+    const response = await fetch("/order-create", {
+      method: "GET",
+      headers: {
+        'content-Type': 'application/json'
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      // 인풋 창에 사용자 정보 불러오기
+      nameInput.value = data.name;
+      phoneNumberInput.value = data.phone;
+      postalCodeInput.value = data.postalCode;
+      addressInput.value = data.address;
+      detailAddressInput.value = data.detailAddress;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+loadUserData();
 
 //예시데이터 로컬스토리지 저장
 // let order = [
@@ -40,27 +55,28 @@ const [ nameInput , phoneNumberInput , postalCodeInput , addressInput , detailAd
 // saveToCart(order);
 
 let bookPriceSum = 0;
-let data = JSON.parse(localStorage.getItem('purchase'));
-data.forEach((data) => {
-  const { title, author, isbn, price, image_path, amount } = data;
-
-  orderList.innerHTML +=
-    `<div class="item">
-    <a class="book-img" href="/book-detail/${isbn}">
-      <img src="${image_path}" class="book-img" alt="${title}"/>
-    </a>
-    <div class="book__title__price">
-      <div class="book-title">
-        <a class="book-link" href="/book-detail/${isbn}">${title}</a>
-        <div class="author">${author}</div>
+let purchaseData = JSON.parse(localStorage.getItem('purchase'));
+if (purchaseData.length !== 0) {
+  purchaseData.forEach((data) => {
+    const { title, author, isbn, price, image_path, amount } = data;
+  
+    orderList.innerHTML +=
+      `<div class="item">
+      <a class="book-img" href="/book-detail/${isbn}">
+        <img src="${image_path}" class="book-img" alt="${title}"/>
+      </a>
+      <div class="book__title__price">
+        <div class="book-title">
+          <a class="book-link" href="/book-detail/${isbn}">${title}</a>
+          <div class="author">${author}</div>
+        </div>
+        <div class="amount">총 ${amount}권</div>
+        <div class="item-price">${(price * amount).toLocaleString()}원</div>
       </div>
-      <div class="amount">총 ${amount}권</div>
-      <div class="item-price">${(price * amount).toLocaleString()}원</div>
-    </div>
-  </div>`;
-  bookPriceSum += price * amount;
-});
-
+    </div>`;
+    bookPriceSum += price * amount;
+  });
+}
 
 // 배송비 계산
 function setDeliveryFee() {
@@ -86,13 +102,13 @@ const customRequestContainer = document.querySelector('.customRequestContainer')
 const customRequestInput = document.querySelector(".customRequest");
 const requestSelectBox = document.querySelector("#request__Select__Box");
 
-// const requestOption = {
-//   1: "배송 전 연락바랍니다.",
-//   2: "부재 시 경비실에 맡겨주세요.",
-//   3: "부재 시 문 앞에 놓아주세요.",
-//   4: "부재 시 택배함에 넣어주세요.",
-//   5: "직접 입력",
-// };
+const requestOption = {
+  1: "배송 전 연락바랍니다.",
+  2: "부재 시 경비실에 맡겨주세요.",
+  3: "부재 시 문 앞에 놓아주세요.",
+  4: "부재 시 택배함에 넣어주세요.",
+  5: "직접 입력",
+};
 
 // "직접 입력" 선택 시 input칸 보이게 함
 function handleRequestChange(e) {
@@ -105,7 +121,6 @@ function handleRequestChange(e) {
     customRequestContainer.style.display = "none";
   }
 }
-
 requestSelectBox.addEventListener("change", handleRequestChange);
 
 // 상품 가격, 배송비, 총 결제 금액 출력
@@ -118,27 +133,62 @@ if (bookPriceSum >= 50000) {
   totalCost.innerText = `${(bookPriceSum + 3000).toLocaleString()}원`;
 }
 
+async function payBtnClick() {
+  if (
+    !nameInput.value.trim() ||
+    !phoneNumberInput.value ||
+    !postalCodeInput.value ||
+    !addressInput.value
+  ) {
+    return alert("배송지 정보를 모두 입력해주세요");
+  }
+  
+  const requestType = requestSelectBox.value;
+  let request;
+  // 요청사항의 종류에 따라 request 문구가 달라짐
+  if (requestType === "0") {
+    request = "요청사항 없음.";
+  } else if (requestType === "5") {
+    request = customRequestInput.value;
+  } else {
+    request = requestOption[requestType];
+  }
+  let ISBN = purchaseData[0].isbn;
+  let amount = purchaseData[0].amount;
+  try {
+    const response = await fetch("/order-create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: nameInput.value,
+        postalCode: postalCodeInput.value,
+        address: addressInput.value,
+        detailAddress: detailAddressInput.value,
+        userPhone: phoneNumberInput.value,
+        orderRequest: request,
+        orderList: [ISBN, amount], // ISBN, amount
+        deliveryFee: getPriceNumber(deliveryFee.innerText),
+        totalPrice: getPriceNumber(totalCost.innerText),
+      }),
+    });
+  
+    if (response.ok) {
+      const data = await response.json();
+      alert(data.message);
+      location.href = "/order-complete";
+    } else {
+      throw new Error("결제에 실패했습니다.");
+    }
+  } catch (error) {
+    console.log(error.message);
+    alert("결제에 실패했습니다. 다시 시도해주세요.");
+  }
+}
+
 
 // function payBtnClick() {
-//   if (
-//     !nameInput.value.trim() ||
-//     !phoneNumberInput.value ||
-//     !postalCodeInput.value ||
-//     !addressInput.value
-//   ) {
-//     return alert("배송지 정보를 모두 입력해주세요");
-//   }
-
-//   const requestType = requestSelectBox.value;
-//   let request;
-//   // 요청사항의 종류에 따라 request 문구가 달라짐
-//   if (requestType === "0") {
-//     request = "요청사항 없음.";
-//   } else if (requestType === "5") {
-//     request = customRequestInput.value;
-//   } else {
-//     request = requestOption[requestType];
-//   }
 
   // 기존에 휴대폰번호와 주소가 없다면 주문할 때 배송지와 휴대폰번호로 기존 유저정보 업데이트
 
@@ -236,11 +286,11 @@ if (bookPriceSum >= 50000) {
 // 결제하기 버튼 클릭 이벤트
 const payBtn = document.querySelector(".paymentButton button");
 // 버튼클릭이벤트 함수
-function payBtnClick() {
-  alert("결제 및 주문이 정상적으로 완료되었습니다.\n감사합니다.");
-  localStorage.removeItem('cart');
-  window.location.href = "/order-complete";
-}
+// function payBtnClick() {
+//   alert("결제 및 주문이 정상적으로 완료되었습니다.\n감사합니다.");
+//   localStorage.removeItem('cart');
+//   window.location.href = "/order-complete";
+// }
 payBtn.addEventListener("click", payBtnClick);
 
 // async function handleSubmit(e) {
