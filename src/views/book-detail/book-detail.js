@@ -1,13 +1,13 @@
 
 
 import { main } from '/public/js/main.js';
-import { books } from '.books.js';
+import { books } from '/book-detail/books.js';
 
 const likeBtn = document.querySelector('#likeBtn');
 
+const bookImageArea = document.querySelectorAll('.imageArea');
 const bookTitle = document.querySelectorAll('.bookTitle');
 const detailedInfo = document.querySelector('#detailedInfo');
-const bookCost = document.querySelector('#bookCost');
 const bookCategory = document.querySelector('#category');
 
 const minusBtn = document.querySelector('#minusBtn');
@@ -17,7 +17,10 @@ const totalCost = document.querySelector('#totalCost');
 const addToCartBtn = document.querySelector('#addToCartBtn');
 const purchaseBtn = document.querySelector('#purchaseBtn');
 
-const bookIntroduction = document.querySelector('#bookIntroduction');
+const bookInfoIsbn = document.querySelector('#info-isbn');
+const bookInfoAuthor = document.querySelector('#info-author');
+const bookInfoPublisher = document.querySelector('#info-publisher');
+const bookInfoDate = document.querySelector('#info-published');
 
 
 //예시데이터
@@ -32,6 +35,7 @@ likeBtn.addEventListener('click',()=>{
 
 //책 정보
 
+bookImageArea.innerHTML = `<img src="${book.image_path}">`;
 bookCategory.innerText = `#${book.category}`;
 bookTitle.forEach((e)=>{
   e.innerText = book.title;
@@ -125,13 +129,13 @@ purchaseBtn.addEventListener('click',()=>{
 
 
 //책 소개
-
+bookInfoIsbn.innerText = `ISBN | ${book.isbn}`;
+bookInfoAuthor.innerText = `저자 | ${book.author}`;
+bookInfoPublisher.innerText = `출판사 | ${book.publisher}`;
+bookInfoDate.innerText = `발행일 | ${book.publication_date.getFullYear()}년 ${book.publication_date.getMonth()}월 ${book.publication_date.getDate()}일`;
 
 
 bookIntroduction.innerText = book.description;
-
-
-
 
 
 main();
