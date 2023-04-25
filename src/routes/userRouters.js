@@ -1,9 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { validateUserRegistration } = require("../middlewares/userValidation");
+const {
+  validateUserRegistration,
+  updateUserValidator,
+} = require("../middlewares/userValidation");
 const { login, logout } = require("../controllers/loginController");
 const checkSession = require("../middlewares/checkSession");
-const { createUser, updateUserInfo } = require("../controllers/userController");
+const {
+  getUserInfo,
+  createUser,
+  updateUserInfo,
+} = require("../controllers/userController");
 const { deleteUserByEmail } = require("../services/userService");
 const { isAdmin } = require("../middlewares/isAdmin.js");
 
@@ -13,9 +20,11 @@ router.post("/register", validateUserRegistration, createUser);
 router.post("/login", login);
 //로그아웃
 router.post("/logout", checkSession, logout);
+//사용자 정보 조회
+router.post("/userinfo", checkSession, getUserInfo);
 //사용자 정보 업데이트
-router.post("/users/:id", checkSession, updateUserInfo);
+router.post("/update", checkSession, updateUserValidator, updateUserInfo);
 //사용자 정보 삭제
-router.delete("/users/:id", checkSession, deleteUserByEmail);
+router.delete("/delete", checkSession, deleteUserByEmail);
 
 module.exports = router;
