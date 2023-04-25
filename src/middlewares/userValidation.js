@@ -59,13 +59,9 @@ exports.updateUserValidator = [
 
 exports.validate = (req, res, next) => {
   const errors = validationResult(req);
-  if (errors.isEmpty()) {
-    return next();
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+    throw new Error("Validation error occurred");
   }
-  const extractedErrors = [];
-  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }));
-
-  return res.status(400).json({
-    errors: extractedErrors,
-  });
+  return errors;
 };
