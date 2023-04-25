@@ -11,7 +11,7 @@ router.get("/user-mypage", getUserInfo, (req, res) => {
 });
 
 router.get("/order-create", getUserInfo, (req, res) => {
-  res.json("order-create");
+  res.json(req.user);
 });
 
 // // 사용자 정보 업데이트

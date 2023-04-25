@@ -11,7 +11,7 @@ const orderSchema = new Schema(
     shippingStatus: {
       type: String,
       required: true,
-      enum: ["상품준비중", "배송중", "배송완료", "주문취소"],
+      enum: ["상품 준비중", "배송중", "배송완료", "주문취소"],
       default: "상품 준비중",
     },
     userName: {
@@ -23,6 +23,10 @@ const orderSchema = new Schema(
       required: true,
     },
     userPhone: {
+      type: String,
+      required: true,
+    },
+    orderRequest: {
       type: String,
       required: true,
     },
