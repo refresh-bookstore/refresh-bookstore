@@ -1,4 +1,5 @@
-const Order = require("../models/order");
+const Order = require("../models/Order");
+const product = require("../models/Product");
 
 // 주문 하기
 exports.createOrder = async (req, res, next) => {
@@ -60,5 +61,49 @@ exports.getUserOrders = async (req, res, next) => {
     res.status(200).json({ orders });
   } catch (error) {
     next(error);
+  }
+};
+
+exports.getOrderList = async (req, res) => {
+  try {
+    const orders = await Order.find({ email: userEmail }).populate(
+      "orderList.product"
+    );
+
+    const orderList = orders.map(order => {
+      return {
+        orderId: order.orderId,
+        email: order.email,
+        shippingStatus: order.shippingStatus,
+        deliveryFee: order.deliverytFee,
+        userName: order.userName,
+        postalCode: order.postalCode,
+        address: order.address,
+        detailAddress: order.detailAddress,
+        userPhone: order.userPhone,
+        orderRequest: order.orderRequest,
+        itemList: order.orderList.map(item => {
+          const Product = item.product;
+          return {
+            title: product.title,
+            author: product.author,
+            publisher: product.publisher,
+            publication_date: product.publication_date,
+            isbn: product.isbn,
+            description: product.description,
+            price: product.price,
+            image_path: product.image_path,
+            category: product.category,
+            amount: item.amount,
+          };
+        }),
+        totalPrice: order.totalPrice,
+      };
+    });
+
+    res.status(200).json({ orderList });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
 };
