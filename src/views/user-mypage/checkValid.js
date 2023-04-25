@@ -1,29 +1,21 @@
+const passwordInput = document.getElementById("passwordInput");
+const passwordCheckInput = document.getElementById("passwordCheckInput");
+const phoneInput = document.getElementById("phoneInput");
+
 function checkValid() {
-  const name = nameInput.value;
   const password = passwordInput.value;
   const passwordCheck = passwordCheckInput.value;
   const phone = phoneInput.value;
 
-  // 이름 길이 확인
-  const isNameValid = name.length >= 2;
   // 비밀번호 확인 (8 ~ 15자, 특수문자, 문자, 숫자 포함)
   const isPasswordValid = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
   const isPasswordSame = password === passwordCheck;
   // 전화번호 확인 (가운데 - 기호 포함)
   const isPhoneValid = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
 
-  const nameError = document.getElementById("name-error");
   const passwordError = document.getElementById("password-error");
   const passwordCheckError = document.getElementById("passwordCheck-error");
   const phoneError = document.getElementById("phone-error");
- 
-  if (!isNameValid) {
-    nameError.style.display = "flex";
-    nameError.innerText = "이름은 2글자 이상 입력해주세요";
-    return false;
-  } else {
-    nameError.style.display = "none";
-  }
 
   if (!isPasswordValid.test(password)) {
     passwordError.style.display = "flex";
