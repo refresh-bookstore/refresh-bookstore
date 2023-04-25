@@ -23,19 +23,19 @@
         <section class="delivery__information">
           <div class="userName">
             <label for="userName">이름</label>
-            <input type="text" class="userName" placeholder="이름을 입력해주세요.">
+            <input type="text" class="userName user_delivery_info" placeholder="이름을 입력해주세요.">
           </div>
           <div class="userPhoneNumber">
             <label for="userPhoneNumber">연락처</label>
-            <input type="text" class="userPhoneNumber" placeholder="'-' 제외 입력해주세요.">
+            <input type="text" class="userPhoneNumber user_delivery_info" placeholder="'-' 제외 입력해주세요.">
           </div>
           <div class="userAddress">
             <label for="findAddress">주소</label>
             <div class="addressInput">
-              <input type="text" onclick="findAddress()" id="postalCodeInput" placeholder="우편번호" readonly>
+              <input type="text" onclick="findAddress()" class="user_delivery_info" id="postalCodeInput" placeholder="우편번호" readonly>
               <input type="button" onclick="findAddress()" value="주소 검색"><br>
-              <input type="text" onclick="findAddress()" id="addressInput" placeholder="주소" readonly><br>
-              <input type="text" id="detailAddressInput" placeholder="상세주소">
+              <input type="text" onclick="findAddress()" class="user_delivery_info" id="addressInput" placeholder="주소" readonly><br>
+              <input type="text" class="user_delivery_info" id="detailAddressInput" placeholder="상세주소">
               <!-- <input type="text" id="sample6_extraAddress" placeholder="참고항목"> -->
             </div>
           </div>
