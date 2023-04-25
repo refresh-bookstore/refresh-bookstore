@@ -107,13 +107,10 @@ exports.getProductByISBN = async (req, res) => {
     const productIsbn = req.params.isbn;
     const result = await productService.getProductISBN(productIsbn);
 
-/*    res.status(200).json({
+    res.status(200).json({
       message: "성공적으로 업로드되었습니다.",
       data: result,
-    }); */
-
-    // FE-황반석 수정함
-    res.render("book-detail/book-detail.html");
+    }); 
 
   } catch (error) {
     res.status(error.status || 500).json({
