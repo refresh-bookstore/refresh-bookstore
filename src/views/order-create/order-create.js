@@ -5,15 +5,6 @@ function getPriceNumber(str) {
   return Number(str.replace(/,/g, '').slice(0, -1));
 }
 
-// 로컬스토리지 'cart'데이터 저장 함수
-const saveToCart = (data) => {
-  localStorage.setItem('cart', JSON.stringify(data));
-}
-// 로컬스토리지 'purchase'데이터 저장 함수
-const saveToPurchase = (data) => {
-  localStorage.setItem('purchase', JSON.stringify(data));
-}
-
 const orderList = document.querySelector('.orderList');
 const booksPrice = document.querySelector('.booksPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
@@ -30,24 +21,24 @@ const totalCost = document.querySelector('.totalCost');
 // }
 
 //예시데이터 로컬스토리지 저장
-let order = [
-  {
-    "title":"이펙티브 타입스크립트",
-    "author":"댄 밴더캄",
-    "publisher":"인사이트",
-    "publication_date":"2021-06-08T15:00:00.000Z",
-    "isbn":"9788966263134",
-    "description":"타입스크립트는 타입 정보를 지닌 자바스크립트의 상위 집합으로, 자바스크립트의 골치 아픈 문제점들을 해결해 준다. 이 책은 《이펙티브 C++》와 《이펙티브 자바》의 형식을 차용해 타입스크립트의 동작 원리, 해야 할 것과 하지 말아야 할 것에 대한 구체적인 조언을 62가지 항목으로 나누어 담았다. 각 항목의 조언을 실제로 적용한 예제를 통해 연습하다 보면 타입스크립트를 효율적으로 사용하는 방법을 익힐 수 있다.",
-    "price":25000,
-    "image_path":"../product-images/9788966263134.png",
-    "category":"프론트엔드",
-    "amount":2,
-  }
-];
-saveToCart(order);
+// let order = [
+//   {
+//     "title":"이펙티브 타입스크립트",
+//     "author":"댄 밴더캄",
+//     "publisher":"인사이트",
+//     "publication_date":"2021-06-08T15:00:00.000Z",
+//     "isbn":"9788966263134",
+//     "description":"타입스크립트는 타입 정보를 지닌 자바스크립트의 상위 집합으로, 자바스크립트의 골치 아픈 문제점들을 해결해 준다. 이 책은 《이펙티브 C++》와 《이펙티브 자바》의 형식을 차용해 타입스크립트의 동작 원리, 해야 할 것과 하지 말아야 할 것에 대한 구체적인 조언을 62가지 항목으로 나누어 담았다. 각 항목의 조언을 실제로 적용한 예제를 통해 연습하다 보면 타입스크립트를 효율적으로 사용하는 방법을 익힐 수 있다.",
+//     "price":25000,
+//     "image_path":"../product-images/9788966263134.png",
+//     "category":"프론트엔드",
+//     "amount":2,
+//   }
+// ];
+// saveToCart(order);
 
 let bookPriceSum = 0;
-let data = JSON.parse(localStorage.getItem('cart'));
+let data = JSON.parse(localStorage.getItem('purchase'));
 data.forEach((data) => {
   const { title, author, isbn, price, image_path, amount } = data;
 
@@ -245,11 +236,50 @@ const payBtn = document.querySelector(".paymentButton button");
 // 버튼클릭이벤트 함수
 function payBtnClick() {
   alert("결제 및 주문이 정상적으로 완료되었습니다.\n감사합니다.");
-  saveToPurchase(JSON.parse(localStorage.getItem('cart')));
   localStorage.removeItem('cart');
   window.location.href = "/order-complete";
 }
 payBtn.addEventListener("click", payBtnClick);
 
+async function handleSubmit(e) {
+  e.preventDefault();
+  const isAllValid = checkValid();
+
+  if (isAllValid) {
+    await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: nameInput.value,
+        email: emailInput.value,
+        password: passwordInput.value,
+        passwordCheck: passwordCheckInput.value,
+        postalCode: postalCodeInput.value,
+        address: addressInput.value,
+        detailAddress: detailAddressInput.value,
+        phone: phoneInput.value,
+      }),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("서버 오류");
+        }
+      })
+      .then(data => {
+        alert(data.message);
+        location.replace("/");
+      })
+      .catch(error => {
+        console.error(error);
+        alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      });
+  } else {
+    checkValid();
+  }
+}
 
 main();

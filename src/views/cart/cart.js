@@ -6,14 +6,19 @@ function getPriceNumber(str) {
 }
 
 // 로컬스토리지에 'cart'데이터 저장(테스트)
-const save = (data) => {
+const saveToCart = (data) => {
   localStorage.setItem('cart', JSON.stringify(data));
+}
+// 로컬스토리지 'purchase'에 데이터 저장 함수
+const saveToPurchase = (data) => {
+  localStorage.setItem('purchase', JSON.stringify(data));
 }
 
 const cart = document.querySelector('.cart');
 const selectedPrice = document.querySelector('.selectedPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
+const orderButton = document.querySelector('.order__button');
 
 // 예시 주문데이터
 // const order = [
@@ -44,7 +49,7 @@ const totalCost = document.querySelector('.totalCost');
 //   "amount":1,
 // };
 // order.push(bookData);
-// save(order);
+// saveToCart(order);
 
 let data = JSON.parse(localStorage.getItem('cart'));
 // 로컬스토리지에서 데이터 불러오기, 체크박스, 수량조절, 삭제버튼 활성화, 가격 출력 자동화
@@ -56,24 +61,25 @@ function renderBooks() {
     localStorage.clear();
   } else {
     data.forEach((order, idx) => {
-      const imgLink = order.image_path;
+      const image_path = order.image_path;
       const title = order.title;
       const author = order.author;
       const amount = order.amount;
       const bookPrice = `${(order.price * amount).toLocaleString()}원`;
-      
+      const isbn = order.isbn;
+
       cart.innerHTML += 
       `<div class="item">
       <input type="checkbox" name="buy" checked="">
       <!-- 책 이미지 -->
       <div class="book-img">
-      <a class="book-link" href="#">
-      <img src="${imgLink}" class="book-img" alt="bookImg1"/>
+      <a class="book-link" href="/book-detail/${isbn}">
+      <img src="${image_path}" class="book-img" alt="${title}"/>
       </a>
       </div>
       <!-- 책 정보 -->
       <div class="book-info">
-      <a class="book-title" href="#">${title}</a>
+      <a class="book-title" href="/book-detail/${isbn}">${title}</a>
       <div class="author">${author}</div>
       </div>
       <!-- 수량 변경 -->
@@ -141,7 +147,7 @@ function activateAmountBtn() {
       btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
       data[idx].amount += 1;
       localStorage.removeItem('cart');
-      save(data);
+      saveToCart(data);
       const bookPrice = document.querySelector(`.book-price${idx}`);
       bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
       setPayList();
@@ -156,7 +162,7 @@ function activateAmountBtn() {
         btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
         data[idx].amount -= 1;
         localStorage.removeItem('cart');
-        save(data);
+        saveToCart(data);
         const bookPrice = document.querySelector(`.book-price${idx}`);
         bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
       }
@@ -172,7 +178,7 @@ function activateAmountBtn() {
       } 
       data[idx].amount = Number(amount.value);
       localStorage.removeItem('cart');
-      save(data);
+      saveToCart(data);
       const bookPrice = document.querySelector(`.book-price${idx}`);
       bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
       setPayList();
@@ -187,7 +193,7 @@ function activateDeleteBtn() {
     btn.addEventListener('click', () => {
       data.splice(idx, 1);
       localStorage.removeItem('cart');
-      save(data);
+      saveToCart(data);
       renderBooks();
     });
   });
@@ -209,7 +215,7 @@ function activateDeleteSelectedBtn() {
         data.splice(indexNum, 1);
       });
       localStorage.removeItem('cart');
-      save(data);
+      saveToCart(data);
       cart.innerHTML = '';
       renderBooks();
     }
@@ -257,6 +263,10 @@ function setTotalCost() {
   totalCost.innerText = `${totalCostNum.toLocaleString()}원`;
 }
 
-
+orderButton.addEventListener('click', () => {
+  saveToPurchase(JSON.parse(localStorage.getItem('cart')));
+  localStorage.removeItem('cart');
+  location.href = '/order-create/order-create.html'; // (임시)
+});
 
 main();

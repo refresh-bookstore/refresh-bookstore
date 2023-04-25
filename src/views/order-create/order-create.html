@@ -5,7 +5,7 @@
   <title>Refresh Books</title>
   <link rel="stylesheet" href="order-create.css">
   <script type="module" src="order-create.js"></script>
-  <script src="findAddress.js"></script>
+  <script src="/public/js/findAddress.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
@@ -32,10 +32,10 @@
           <div class="userAddress">
             <label for="findAddress">주소</label>
             <div class="addressInput">
-              <input type="text" onclick="sample6_execDaumPostcode()" id="sample6_postcode" placeholder="우편번호" readonly>
-              <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-              <input type="text" onclick="sample6_execDaumPostcode()" id="sample6_address" placeholder="주소" readonly><br>
-              <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+              <input type="text" onclick="findAddress()" id="postalCodeInput" placeholder="우편번호" readonly>
+              <input type="button" onclick="findAddress()" value="주소 검색"><br>
+              <input type="text" onclick="findAddress()" id="addressInput" placeholder="주소" readonly><br>
+              <input type="text" id="detailAddressInput" placeholder="상세주소">
               <!-- <input type="text" id="sample6_extraAddress" placeholder="참고항목"> -->
             </div>
           </div>

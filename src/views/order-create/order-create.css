@@ -87,7 +87,7 @@ main .rightSide {
   border: 1px solid var(--color-dark-gray);
 }
 
-.userAddress #sample6_postcode {
+.userAddress #postalCodeInput {
   width: 140px;
 }
 
