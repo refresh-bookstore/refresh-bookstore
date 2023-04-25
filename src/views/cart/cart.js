@@ -1,4 +1,4 @@
-import { main } from '../public/js/main.js';
+import { main } from '/public/js/main.js';
 
 // 가격 문자열에서 숫자만 반환하는 함수
 function getPriceNumber(str) {
