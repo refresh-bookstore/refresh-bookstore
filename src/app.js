@@ -16,6 +16,7 @@ const usersRouter = require("./routes/userRouters");
 const pageRouter = require("./routes/pageRouters");
 const productRouter = require("./routes/productRouters");
 const categoryRouter = require("./routes/categoryRouters");
+const orderRouter = require("./routes/orderRouters");
 
 //미들웨어 가지고 오기
 const hashPassword = require("./middlewares/hashPassword");
@@ -64,6 +65,7 @@ app.use("/", usersRouter);
 app.use("/", pageRouter);
 app.use("/", productRouter);
 app.use("/", categoryRouter);
+app.use("/", orderRouter);
 
 // 404 에러 핸들링
 app.use(function (req, res, next) {
