@@ -27,12 +27,12 @@ exports.createProduct = async (req, res) => {
     );
 
     res.status(200).json({
-      message: "성공적으로 업로드되었습니다.",
+      message: "상품이 업로드되었습니다.",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "생성 오류입니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
@@ -42,15 +42,33 @@ exports.getProductList = async (req, res) => {
     const result = await productService.getProducts();
     //res.render("productdummy");
     res.status(200).json({
+      message: "상품이 업로드되었습니다.",
+      data: result,
+    });
+  } catch (error) {
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
+    });
+  }
+};
+
+exports.getProductQueryById = async (req, res) => {
+  try {
+    const { book } = req.query;
+
+    const result = await productService.getProductQuery(book);
+
+    res.status(200).json({
       message: "성공적으로 업로드되었습니다.",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "데이터를 조회할 수 없습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
+
 
 exports.getProductById = async (req, res) => {
   try {
@@ -62,8 +80,8 @@ exports.getProductById = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "데이터를 조회할 수 없습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
@@ -77,8 +95,8 @@ exports.getProductByCategory = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "데이터를 조회할 수 없습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
@@ -94,33 +112,37 @@ exports.getProductByISBN = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "데이터를 조회할 수 없습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
 
 //키워드 검색 기능
-exports.keywordProduct = async (req, res) => {
-  try {
-    const { keyword } = req.query.title;
-    const result = await productService.serchProduct(keyword);
+exports.keywordProduct = async(req, res) => {
+  try{
+    const { keyword } = req.query;
+
+    console.log(keyword);
+    const result = await productService.searchwordProduct(keyword);
 
     res.status(200).json({
-      message: "키워드 검색이 완료되었습니다.",
+      message:"키워드 검색이 완료되었습니다.",
       data: result,
     });
-  } catch (error) {
-    res.status(500).json({
-      message: "데이터를 조회할 수 없습니다.",
+  } catch(error){
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
-};
+}
 
 //Product 업데이트
 exports.updateProduct = async (req, res) => {
   try {
-    const { _id } = req.params;
+    const { book } = req.query;
+
+    console.log(book);
     const {
       title,
       author,
@@ -134,7 +156,7 @@ exports.updateProduct = async (req, res) => {
     } = req.body;
 
     const result = await productService.updateProduct(
-      { _id },
+      { book },
       {
         title,
         author,
@@ -153,8 +175,8 @@ exports.updateProduct = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "업데이트를 실패하였습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };
@@ -162,16 +184,16 @@ exports.updateProduct = async (req, res) => {
 //Product 삭제하기
 exports.deleteProduct = async (req, res) => {
   try {
-    const { _id } = req.params;
-    const result = await productService.deleteProduct(_id);
+    const { book } = req.query;
+    const result = await productService.deleteProduct(book);
 
     res.status(200).json({
       message: "삭제되었습니다.",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "삭제를 실패하였습니다.",
+    res.status(error.status || 500).json({
+      message: error.message || "서버 오류가 발생했습니다.",
     });
   }
 };

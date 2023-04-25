@@ -14,10 +14,6 @@ router.post("/register", validateUserRegistration, createUser);
 
 router.post("/login", loginController.login);
 
-// router.get("/user-admin", checkSession, getUsers, (req, res) => {
-//   res.json(req);
-// });
-
 router.put("/", checkSession, isAdmin, updateUsers);
 
 module.exports = router;
