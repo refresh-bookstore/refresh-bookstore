@@ -74,7 +74,7 @@ const books = document.querySelector(".books");
 // 책 html 생성
 const createBook = (book) => {
   return `<div class="book">
-            <a class="book-link" href="/product/${book.isbn}">
+            <a class="book-link" href="/book-detail/${book.isbn}">
               <div class="img-container">
                 <img src="${book.image_path}" class="book-img" alt="${book.title}"/>
               </div>
