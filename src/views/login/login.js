@@ -1,4 +1,4 @@
-import { main } from '../public/js/main.js';
+import { main } from "/public/js/main.js";
 
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
@@ -20,8 +20,8 @@ async function handlerSubmit(event) {
       const response = await fetch("/login", {
         method: "POST",
         headers: {
-          'content-Type': 'application/json',
-          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+          "content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           email: emailInput.value,
@@ -32,7 +32,7 @@ async function handlerSubmit(event) {
       if (response.ok) {
         const data = await response.json();
 
-        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem("token", data.token);
         location.replace("/");
       } else if (response.status === 401 || response.status === 500) {
         // 로그인 서버 오류
@@ -40,7 +40,7 @@ async function handlerSubmit(event) {
         joinError.style.display = "flex";
         joinError.innerText = "이메일 또는 비밀번호가 일치하지 않습니다.";  
       } else {
-        throw new Error('로그인 실패했습니다.');
+        throw new Error("로그인 실패했습니다.");
       }
     } catch (error) {
       console.log(error.message);
