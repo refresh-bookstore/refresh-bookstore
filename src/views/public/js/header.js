@@ -15,7 +15,12 @@ function headerFunc() {
     { transform: "translate(0px, 0px)" },
   ];
   
+  const searchInputDisappear = [
+    { transform: "translate(0px, 0px)" },
+    { transform: "translate(300px, 0px)" },
+  ];
   
+
   const searchInputTiming = {
     duration: 250,
     iterations: 1,
@@ -25,8 +30,18 @@ function headerFunc() {
   
   searchBtn.addEventListener('click', ()=>{
     if(searchBtn.classList.contains('activate')){
-      searchBtn.addEventListener('click', ()=>{
-      })
+        if(searchInput.value){
+          
+          ///검색기능
+
+        }else{
+          searchInput.placeholder = "";
+          searchInput.animate(searchInputDisappear,searchInputTiming);
+          setTimeout(()=>{
+            searchBtn.classList.remove('activate');
+            searchInput.classList.remove('activate');
+          }, 230)
+        }
     }else{
     searchBtn.classList.add('activate');
     searchInput.classList.add('activate');
