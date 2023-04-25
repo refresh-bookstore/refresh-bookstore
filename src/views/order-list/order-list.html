@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <title>Refresh Books</title>
   <link rel="stylesheet" href="order-list.css">
-  <script type="module" src="order-list"></script>
+  <script type="module" src="order-list.js"></script>
 </head>
 <body>
   <header></header>
 
   <div class="container">
     <div class="intro">
-      <p id="user-greeting">안녕하세요 elice님</p>
+      <p id="user-greeting">안녕하세요, elice님</p>
     </div>
 
     <!-- 구분선 -->
@@ -20,10 +20,10 @@
     <div class="main-contents">
       <!-- 내비게이션 -->
       <ul class="mypage-category nav flex-column">
-        <li class="mypage__category nav-item">
+        <li class="mypage__category nav-item" id="mypage-button">
           <a class="mypage__category__a" href="#">회원정보수정</a>
         </li>
-        <li class="mypage__category nav-item">
+        <li class="mypage__category nav-item" id="order-list-button">
           <a class="mypage__category__a clicked" href="#">주문조회</a>
         </li>
       </ul>
@@ -32,18 +32,66 @@
       <div class="content-area">
         <p>주문 내역</p>
         <div class = "content"> 
-          <div class="item">
-            <div class="item-img">
-              <img src="../public/images/sample_image.jpg">
+          <div class="order">
+            <p class="order-date">2023-04-25</p>
+            <div class="order-view">
+              <div class="order-items-area">
+                <div class="order-item">
+                  <div class="item-img">
+                    <img src="../public/images/sample_image.jpg">
+                  </div>
+                  <div class="item-info">
+                    <p class="item-title">혼자 공부하는 얄팍한 코딩지식</p>
+                    <p class="item-author">고현민</p>
+                    <p class="item-cost">15,800원 X 2권</p>
+                  </div>
+                </div>
+                <div class="order-item">
+                  <div class="item-img">
+                    <img src="../public/images/sample_image.jpg">
+                  </div>
+                  <div class="item-info">
+                    <p class="item-title">혼자 공부하는 얄팍한 코딩지식</p>
+                    <p class="item-author">고현민</p>
+                    <p class="item-cost">15,800원 X 2권</p>
+                  </div>
+                </div>
+              </div>
+              <div class="order-info">
+                <span class="shipping-status">배송 준비 중</span>
+                <a class="order-detail" href="/order-detail/:orderId">주문 상세</a>
+              </div>
             </div>
-            <div class="item-info">
-              <p class="item-name"> 혼자 공부하는 얄팍한 코딩지식</p>
-              <p class="item-detail"> 한빛 출판사 | 고현민 | 2022</p>
-              <p class="item-cost"> 15,800원 X 2권</p>
-            </div>
-            <div class="order-detail">
-              <span>배송 준비 중</span>
-              <button class="red">주문 상세</button>
+          </div>
+          <div class="order">
+            <p class="order-date">2023-04-25</p>
+            <div class="order-view">
+              <div class="order-items-area">
+                <div class="order-item">
+                  <div class="item-img">
+                    <img src="../public/images/sample_image.jpg">
+                  </div>
+                  <div class="item-info">
+                    <p class="item-title">혼자 공부하는 얄팍한 코딩지식</p>
+                    <p class="item-author">고현민</p>
+                    <p class="item-cost">15,800원 X 2권</p>
+                  </div>
+                </div>
+                <div class="order-item">
+                  <div class="item-img">
+                    <img src="../public/images/sample_image.jpg">
+                  </div>
+                  <div class="item-info">
+                    <p class="item-title">혼자 공부하는 얄팍한 코딩지식</p>
+                    <p class="item-author">고현민</p>
+                    <p class="item-cost">15,800원 X 2권</p>
+                  </div>
+                </div>
+              </div>
+              <div class="order-info">
+                <span class="shipping-status">배송 준비 중</span>
+                <a class="order-detail" href="/order-detail/:orderId">주문 상세</a>
+              </div>
             </div>
           </div>
         </div>

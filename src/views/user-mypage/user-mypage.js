@@ -1,41 +1,43 @@
-import { main } from '../public/js/main.js';
+import { main } from '/public/js/main.js';
 import { checkValid } from './checkValid.js';
 
 const userGreeting = document.getElementById("user-greeting");
-const nameInput = document.getElementById("nameInput");
+const nameText = document.getElementById("nameText");
 const emailText = document.getElementById("emailText");
 const passwordInput = document.getElementById("passwordInput");
 const postalCodeInput = document.getElementById("postalCodeInput");
 const addressInput = document.getElementById("addressInput");
 const detailAddressInput = document.getElementById("detailAddressInput");
 const phoneInput = document.getElementById("phoneInput");
+const orderListButton = document.getElementById("order-list-button");
 const submitButton = document.getElementById("submitButton");
 const deleteButton = document.getElementById("deleteButton");
 
-// 임시 유저 데이터
-const userData = {
-    name: "김토끼",
-    email: "elice@hello.com",
-    password: "~1234qwer",
-    postalCode: "13529",
-    address: "경기 성남시 분당구 판교역로 166  (백현동)",
-    detailAddress: "123동 456호",
-    phone: "010-1234-5678",
-};
+// 세션스토리지의 유저 데이터
+const userData = JSON.parse(sessionStorage.getItem("userData"));
 
-/**
- * 이름: 수정 가능, db에서 가져와서 nameInput.value 에 미리 띄움
- * 이메일: 수정 불가, 바로 db에서 가져와서 띄움
- * 비밀번호: 수정 가능, 미리 안 띄움, 입력 필수
- * 비밀번호 확인: 미리 안 띄움, 입력 필수
- * 우편주소: 수정 가능, db에서 가져와서 postalCodeInput.value 에 미리 띄움
- * 주소: 수정 가능, db에서 가져와서 addressInput.value 에 미리 띄움
- * 상세주소: 수정 가능, db에서 가져와서 detail...Input.value 에 미리 띄움
- * 전화번호: 수정 가능, db에서 가져와서 phoneInput.value 에 미리 띄움
- */
+const setUserData = () => {
+   return {
+    name: userData.name,
+    email: userData.email,
+    postalCode: userData.postalCode,
+    address: userData.address,
+    detailAddress: userData.detailAddress,
+    phone: userData.phone
+  }
+}
 
 // 회원 정보 로드
-loadUserData(userData);
+if (userData) {
+  loadUserData(setUserData());
+} else {
+  alert("회원 정보가 없습니다.");
+  // 홈으로 돌아가기
+  location.replace("/");
+}
+
+// 주문 조회 버튼 이벤트 리스너
+orderListButton.addEventListener("click", handleOrderList);
 
 // 회원 수정 버튼 이벤트 리스너
 submitButton.addEventListener("click", updateUser);
@@ -43,9 +45,15 @@ submitButton.addEventListener("click", updateUser);
 // 회원 탈퇴 버튼 이벤트 리스너
 deleteButton.addEventListener("click", deleteUser);
 
+function handleOrderList(event) {
+  event.preventDefault();
+
+  location.href = "/order-list";
+}
+
 function loadUserData(user) {
-  userGreeting.innerText = `안녕하세요 ${user.name}님`;
-  nameInput.value = user.name;
+  userGreeting.innerText = `안녕하세요, ${user.name}님\u{1F49A}`;
+  nameText.innerText = user.name;
   emailText.innerText = user.email;
   postalCodeInput.value = user.postalCode;
   addressInput.value = user.address;
@@ -55,7 +63,7 @@ function loadUserData(user) {
 
 function updateUserData() {
   return {
-    name: nameInput.value,
+    name: nameText.innerText,
     email: emailText.innerText,
     password: passwordInput.value,
     postalCode: postalCodeInput.value,
@@ -65,25 +73,66 @@ function updateUserData() {
   };
 }
 
-function updateUser(event) {
-  event.preventDefault();
-
+async function updateUser(event) {
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
-    console.log("수정 완료");
+    try {
+      const response = await fetch("/user-mypage/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          password: passwordInput.value,
+          postalCode: postalCodeInput.value,
+          address: addressInput.value,
+          detailAddress: detailAddressInput.value,
+          phone: phoneInput.value
+        })
+      });
 
-    loadUserData(updateUserData());
-  } else {
-    console.log("수정 취소");
+      if (response.ok) {
+        loadUserData(updateUserData());
+      } else {
+        const data = await response.json();
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      alert(error.message);
+      location.href = "/";
+    }
   }
 }
 
-function deleteUser(event) {
+async function deleteUser(event) {
   event.preventDefault();
 
   if (confirm("정말 탈퇴하시겠습니까?")) {
-    console.log("탈퇴 완료");
+    try {
+      const response = await fetch("/user-mypage/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(`탈퇴하셨습니다.\n함께해서 즐거웠어요.`);
+        
+        // 세션스토리지 전부 삭제
+        sessionStorage.clear();
+        
+        // 홈 이동
+        location.replace("/");
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   } else {
     console.log("탈퇴 취소");
   }

@@ -106,6 +106,10 @@ header .header-search.activate {
   cursor: pointer;
 }
 
+header .header-search.activate:hover {
+  background-image: url('../images/icon_search_black.svg');
+}
+
 header .header-cart {
   background-image: url('../images/icon_cart_mt_green.svg');
   background-repeat: no-repeat;

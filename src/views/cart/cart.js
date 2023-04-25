@@ -6,14 +6,19 @@ function getPriceNumber(str) {
 }
 
 // 로컬스토리지에 'cart'데이터 저장(테스트)
-const save = (data) => {
+const saveToCart = (data) => {
   localStorage.setItem('cart', JSON.stringify(data));
+}
+// 로컬스토리지 'purchase'에 데이터 저장 함수
+const saveToPurchase = (data) => {
+  localStorage.setItem('purchase', JSON.stringify(data));
 }
 
 const cart = document.querySelector('.cart');
 const selectedPrice = document.querySelector('.selectedPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
+const orderButton = document.querySelector('.order__button');
 
 // 예시 주문데이터
 // const order = [
@@ -28,18 +33,6 @@ const totalCost = document.querySelector('.totalCost');
 //     "image_path":"../product-images/9788966263745.png",
 //     "category":"프론트엔드",
 //     "amount":1,
-//   },
-//   {
-//     "title":"이펙티브 타입스크립트",
-//     "author":"댄 밴더캄",
-//     "publisher":"인사이트",
-//     "publication_date":"2021-06-08T15:00:00.000Z",
-//     "isbn":"9788966263134",
-//     "description":"타입스크립트는 타입 정보를 지닌 자바스크립트의 상위 집합으로, 자바스크립트의 골치 아픈 문제점들을 해결해 준다. 이 책은 《이펙티브 C++》와 《이펙티브 자바》의 형식을 차용해 타입스크립트의 동작 원리, 해야 할 것과 하지 말아야 할 것에 대한 구체적인 조언을 62가지 항목으로 나누어 담았다. 각 항목의 조언을 실제로 적용한 예제를 통해 연습하다 보면 타입스크립트를 효율적으로 사용하는 방법을 익힐 수 있다.",
-//     "price":25000,
-//     "image_path":"../product-images/9788966263134.png",
-//     "category":"프론트엔드",
-//     "amount":2,
 //   }
 // ];
 
@@ -56,36 +49,37 @@ const totalCost = document.querySelector('.totalCost');
 //   "amount":1,
 // };
 // order.push(bookData);
-// save(order);
+// saveToCart(order);
 
 let data = JSON.parse(localStorage.getItem('cart'));
 // 로컬스토리지에서 데이터 불러오기, 체크박스, 수량조절, 삭제버튼 활성화, 가격 출력 자동화
 function renderBooks() {
   data = JSON.parse(localStorage.getItem('cart'));
-  if (data.length === 0) {
+  if (data === null) {
     // 장바구니에 상품이 없습니다
     cart.innerHTML = `<p class="empty-cart">상품이 없습니다.</p>`;
     localStorage.clear();
   } else {
     data.forEach((order, idx) => {
-      const imgLink = order.image_path;
+      const image_path = order.image_path;
       const title = order.title;
       const author = order.author;
       const amount = order.amount;
       const bookPrice = `${(order.price * amount).toLocaleString()}원`;
-      
+      const isbn = order.isbn;
+
       cart.innerHTML += 
       `<div class="item">
       <input type="checkbox" name="buy" checked="">
       <!-- 책 이미지 -->
       <div class="book-img">
-      <a class="book-link" href="#">
-      <img src="${imgLink}" class="book-img" alt="bookImg1"/>
+      <a class="book-link" href="/book-detail/${isbn}">
+      <img src="${image_path}" class="book-img" alt="${title}"/>
       </a>
       </div>
       <!-- 책 정보 -->
       <div class="book-info">
-      <a class="book-title" href="#">${title}</a>
+      <a class="book-title" href="/book-detail/${isbn}">${title}</a>
       <div class="author">${author}</div>
       </div>
       <!-- 수량 변경 -->
@@ -153,7 +147,7 @@ function activateAmountBtn() {
       btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
       data[idx].amount += 1;
       localStorage.removeItem('cart');
-      save(data);
+      saveToCart(data);
       const bookPrice = document.querySelector(`.book-price${idx}`);
       bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
       setPayList();
@@ -168,7 +162,7 @@ function activateAmountBtn() {
         btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
         data[idx].amount -= 1;
         localStorage.removeItem('cart');
-        save(data);
+        saveToCart(data);
         const bookPrice = document.querySelector(`.book-price${idx}`);
         bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
       }
@@ -184,7 +178,7 @@ function activateAmountBtn() {
       } 
       data[idx].amount = Number(amount.value);
       localStorage.removeItem('cart');
-      save(data);
+      saveToCart(data);
       const bookPrice = document.querySelector(`.book-price${idx}`);
       bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
       setPayList();
@@ -199,7 +193,7 @@ function activateDeleteBtn() {
     btn.addEventListener('click', () => {
       data.splice(idx, 1);
       localStorage.removeItem('cart');
-      save(data);
+      saveToCart(data);
       renderBooks();
     });
   });
@@ -221,7 +215,7 @@ function activateDeleteSelectedBtn() {
         data.splice(indexNum, 1);
       });
       localStorage.removeItem('cart');
-      save(data);
+      saveToCart(data);
       cart.innerHTML = '';
       renderBooks();
     }
@@ -269,6 +263,10 @@ function setTotalCost() {
   totalCost.innerText = `${totalCostNum.toLocaleString()}원`;
 }
 
-
+orderButton.addEventListener('click', () => {
+  saveToPurchase(JSON.parse(localStorage.getItem('cart')));
+  localStorage.removeItem('cart');
+  location.href = '/order-create/order-create.html'; // (임시)
+});
 
 main();

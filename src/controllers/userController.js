@@ -2,13 +2,12 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const userService = require("../services/userService");
 const {
-  validateUserRegistration,
   updateUserValidator,
   validate,
 } = require("../middlewares/userValidation");
 
 exports.createUser = async (req, res, next) => {
-  const errors = validateUserRegistration(req);
+  const errors = validate(req, res, next);
   if (!errors.isEmpty()) {
     console.log(errors.array());
     return res.status(400).json({ errors: errors.array() });
@@ -37,25 +36,30 @@ exports.createUser = async (req, res, next) => {
   }
 };
 
-exports.getUserInfo = async (req, res) => {
+exports.getUserInfo = async (req, res, next) => {
   try {
     if (!req.session.user) {
-      // 유저가 로그인하지 않은 경우
       return res.status(401).send("Unauthorized");
     }
+
     const user = await userService.getUserByEmail(req.session.user.email);
     if (user === null) {
       // 유저가 존재하지 않는 경우
       return res.status(404).send("User not found");
     }
-    res.status(200).json({
+
+    // req.user 객체 생성 후 res.locals에 저장
+    req.user = {
       name: user.name,
       email: user.email,
       address: user.address,
       detailAddress: user.detailAddress,
       postalCode: user.postalCode,
       phone: user.phone,
-    });
+    };
+    
+    return res.status(200).send(req.user);
+
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
