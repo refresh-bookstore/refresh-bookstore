@@ -10,6 +10,7 @@ const {
   getUserInfo,
   createUser,
   updateUserInfo,
+  getUsers,
 } = require("../controllers/userController");
 const { deleteUserByEmail } = require("../services/userService");
 const { isAdmin } = require("../middlewares/isAdmin.js");
@@ -26,5 +27,7 @@ router.post("/userinfo", checkSession, getUserInfo);
 router.post("/update", checkSession, updateUserValidator, updateUserInfo);
 //사용자 정보 삭제
 router.delete("/delete", checkSession, deleteUserByEmail);
+//회원 정보들 불러오기
+rotuer.get("/users", checkSession, inAdmin, getUsers);
 
 module.exports = router;
