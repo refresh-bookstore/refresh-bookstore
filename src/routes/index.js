@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getCategoryList } = require("../controllers/categoryController.js");
-const { getProductList } = require("../controllers/productController.js");
+const { getCategoryList } = require("../controllers/categoryController");
+const { getProductList } = require("../controllers/productController");
 
 // router.get("/", function (req, res, next) {
 //   res.render("/home/home", { title: "Express" });

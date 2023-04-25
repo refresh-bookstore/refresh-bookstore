@@ -51,6 +51,7 @@ function headerFunc() {
 
   // 드롭 다운 메뉴 생성
   const dropdownMenu = document.createElement('div');
+  dropdownMenu.style.display = "none";
   dropdownMenu.classList.add('header-dropdown-menu');
 
   const token = sessionStorage.getItem('token');
