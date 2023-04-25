@@ -85,37 +85,11 @@ function headerFunc() {
     const logoutBtn = document.querySelector("#menu-logout");
 
     // 마이페이지 메뉴 클릭 이벤트
-    mypageBtn.addEventListener("click", async () => {
-      try {
-        const response = await fetch ("/mypage-menu", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "authorization": `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-
-          // 데이터를 sessionStorage에 저장
-          sessionStorage.setItem("userData", JSON.stringify(data));
-
-          // 마이페이지로 이동
-          location.href = "/user-mypage";
-        } else if (response.status === 404 || response.status === 500) {
-          throw new Error("사용자를 찾을 수 없습니다.");
-        }
-      } catch (error) {
-        alert(error.message);
-      }
-    })
+    mypageBtn.addEventListener("click", moveToMypage);
 
     // 로그아웃 메뉴 클릭 이벤트
     logoutBtn.addEventListener("click", () => {
-      //임시 alert -> 나중엔 삭제
-      alert("로그아웃 성공");
+      alert("다음에 만나요 꼬옥\u{1F49A}");
       
       sessionStorage.removeItem('token');
       location.href = '/';
@@ -154,6 +128,40 @@ function headerFunc() {
       dropdownMenu.style.display = "none";
     }
   })
+
+  // 마이페이지 메뉴 이동
+  async function moveToMypage () {
+    try {
+      const response = await fetch ("/mypage-menu", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+
+        // 데이터를 sessionStorage에 저장
+        sessionStorage.setItem("userData", JSON.stringify(data));
+
+        // 마이페이지로 이동
+        location.href = "/user-mypage";
+      } else {
+        alert("사용자를 찾을 수 없습니다.");
+
+        // 토큰 제거
+        sessionStorage.removeItem('token');
+        location.href = '/';
+
+        throw new Error("사용자를 찾을 수 없습니다.");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }
 
 export { headerFunc };
