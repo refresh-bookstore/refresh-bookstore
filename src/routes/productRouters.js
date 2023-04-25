@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const checkSession = require("../middlewares/checkSession");
 const {
   createProduct,
   getProductList,
@@ -10,10 +11,11 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/productController");
+const { isAdmin } = require("../middlewares/isAdmin.js");
 const router = Router();
 
 // Admin :: 제품 생성하기
-router.post("/user-admin/product", createProduct);
+router.post("/user-admin/product", checkSession, isAdmin, createProduct);
 
 // 제품 전체 조회하기
 router.get("/product", getProductList);
@@ -28,15 +30,15 @@ router.get("/product/:search", keywordProduct);
 router.get("/product/list/:category", getProductByCategory);
 
 // Admin ::제품 전체 조회하기
-router.get("/user-admin/products", getProductList);
+router.get("/user-admin/products", checkSession, isAdmin, getProductList);
 
 // Admin :: isbn 제품 조회하기
-router.get("/user-admin/product", getProductQueryById);
+router.get("/user-admin/product", checkSession, isAdmin, getProductQueryById);
 
 // Admin :: 제품 수정하기
-router.put("/user-admin/product", updateProduct);
+router.put("/user-admin/product", checkSession, isAdmin, updateProduct);
 
 // Admin :: 제품 삭제하기
-router.delete("/user-admin/product", deleteProduct);
+router.delete("/user-admin/product", checkSession, isAdmin, deleteProduct);
 
 module.exports = router;
