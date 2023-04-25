@@ -91,7 +91,7 @@ function headerFunc() {
     logoutBtn.addEventListener("click", () => {
       alert("다음에 만나요 꼬옥\u{1F49A}");
       
-      sessionStorage.removeItem('token');
+      sessionStorage.clear();
       location.href = '/';
     })
   } else {
@@ -152,8 +152,8 @@ function headerFunc() {
       } else {
         alert("사용자를 찾을 수 없습니다.");
 
-        // 토큰 제거
-        sessionStorage.removeItem('token');
+        // 세션스토리지 아이템 제거
+        sessionStorage.clear();
         location.href = '/';
 
         throw new Error("사용자를 찾을 수 없습니다.");
