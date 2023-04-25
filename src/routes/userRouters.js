@@ -16,15 +16,21 @@ router.get("/register", (req, res) => {
 });
 
 // 로그인 페이지 보여주기
-router.get("/login", (req, res) => {
-  res.render("login/login.html");
+router.get("/login", checkSession, (req, res) => {
+  if (req.user) {
+    // 이미 로그인한 경우
+    res.send("이미 로그인 하였습니다!");
+  } else {
+    // 로그인 페이지 보여주기
+    res.render("login/login.html");
+  }
 });
 
 // 회원가입 처리하기
 router.post("/register", validateUserRegistration, createUser);
 
 // 로그인 처리하기
-router.post("/login", checkSession, loginController.login);
+router.post("/login", loginController.login);
 
 // 관리자 페이지에서, 회원 관리, 회원 수정
 router.get("/user-admin", checkSession, getUsers, (req, res) => {

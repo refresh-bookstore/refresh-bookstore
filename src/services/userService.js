@@ -24,7 +24,7 @@ exports.updateUserByEmail = async (email, data) => {
   }
 };
 
-// 모든 사용자 정보 조회W
+// 모든 사용자 정보 조회
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -37,10 +37,18 @@ exports.getAllUsers = async (req, res) => {
 // 사용자 정보 삭제
 exports.deleteUserByEmail = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.params.email });
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "사용자를 찾을 수 없습니다." });
     }
+
+    // 기존 비밀번호를 인증하는 과정
+    const isValidPassword = await user.checkPassword(password);
+    if (!isValidPassword) {
+      return res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
+    }
+
     await user.delete();
     res.status(200).json({ message: "사용자 정보를 삭제하였습니다." });
   } catch (error) {
