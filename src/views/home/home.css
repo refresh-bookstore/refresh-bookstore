@@ -128,7 +128,7 @@
 .books.empty {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin: 100px auto;
 }
 
 .empty-book-list {
