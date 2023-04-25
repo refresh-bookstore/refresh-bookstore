@@ -92,7 +92,7 @@ addToCartBtn.addEventListener('click',()=>{
 
   const cartCheckout = confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?");
   if(cartCheckout){
-    location.href = '/src/views/cart/cart.html';
+    location.href = '/cart';
 }
 });
 
@@ -108,7 +108,7 @@ purchaseBtn.addEventListener('click',()=>{
       isbn: book.isbn,
     };
     localStorage.setItem('purchase', JSON.stringify(purchaseItems));
-    location.href = '/src/views/order-create/order-create.html';
+    location.href = '/order-create';
 });
 
 
