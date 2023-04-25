@@ -98,17 +98,28 @@ addToCartBtn.addEventListener('click',()=>{
 
 
 //////////////////////////// 구매 버튼//////////////////////
+//// 로그인 필요 ////
 purchaseBtn.addEventListener('click',()=>{
-  localStorage.removeItem('purchase');
-  const purchaseItems = {
-      title: book.title,
-      author: book.author,
-      cost: book.cost,
-      amount: Number(amountInput.value),
-      isbn: book.isbn,
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    localStorage.removeItem('purchase');
+    const purchaseItems = {
+        title: book.title,
+        author: book.author,
+        publisher: book.publisher,
+        publication_date: book.publication_date,
+        isbn: book.isbn,
+        description: book.description,
+        price: book.price,
+        image_path: book.image_path,
+        category: book.category,
+        amount: Number(amountInput.value),
     };
     localStorage.setItem('purchase', JSON.stringify(purchaseItems));
     location.href = '/order-create';
+  } else {
+    window.alert('로그인을 해주세요.')
+  }
 });
 
 
