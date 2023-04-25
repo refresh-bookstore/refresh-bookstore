@@ -64,6 +64,7 @@ exports.getUserOrders = async (req, res, next) => {
   }
 };
 
+// 주문 정보 리스트 불러오기
 exports.getOrderList = async (req, res) => {
   try {
     const orders = await Order.find({ email: userEmail }).populate(

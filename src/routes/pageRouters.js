@@ -19,32 +19,24 @@ router.get("/login", checkSession, (req, res) => {
   }
 });
 
-router.get("/mypage-menu", checkSession, getUserInfo, (req, res) => {
-  res.json(req.user);
-});
-
 router.get("/user-mypage", checkSession, (req, res) => {
   res.render("user-mypage/user-mypage.html");
 });
 
-router.get(
-  "/user-mypage/order-detail",
-  checkSession,
-  /*getOrderInfo*/ (req, res) => {
-    res.render("user-mypage/order-detail.html");
-  }
-);
+router.get("/user-mypage/order-detail", checkSession, (req, res) => {
+  res.render("user-mypage/order-detail.html");
+});
 
-router.get("/book-detail", (req, res) => {
-  res.render("book-detail/book-detail.html");
+router.get("/order-create", checkSession, (req, res) => {
+  res.render("order-create/order-create.html");
 });
 
 router.get("/cart", (req, res) => {
   res.render("cart/cart.html");
 });
 
-router.get("/order-create", getUserInfo, (req, res) => {
-  res.render("order-create/order-create.html");
+router.get("/book-detail", (req, res) => {
+  res.render("book-detail/book-detail.html");
 });
 
 module.exports = router;
