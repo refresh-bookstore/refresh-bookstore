@@ -16,21 +16,20 @@ const deleteButton = document.getElementById("deleteButton");
 // 세션스토리지의 유저 데이터
 const userData = JSON.parse(sessionStorage.getItem("userData"));
 
-const setUserData = {
-  name: userData.name,
-  email: userData.email,
-  postalCode: userData.postalCode,
-  address: userData.address,
-  detailAddress: userData.detailAddress,
-  phone: userData.phone
+const setUserData = () => {
+   return {
+    name: userData.name,
+    email: userData.email,
+    postalCode: userData.postalCode,
+    address: userData.address,
+    detailAddress: userData.detailAddress,
+    phone: userData.phone
+  }
 }
 
-// 세션스토리지의 유저 정보 삭제
-sessionStorage.removeItem("userData");
-
 // 회원 정보 로드
-if (setUserData) {
-  loadUserData(setUserData);
+if (userData) {
+  loadUserData(setUserData());
 } else {
   alert("회원 정보가 없습니다.");
   // 홈으로 돌아가기
@@ -75,13 +74,11 @@ function updateUserData() {
 }
 
 async function updateUser(event) {
-  event.preventDefault();
-
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
     try {
-      const response = await fetch("/user-mypage", {
+      const response = await fetch("/user-mypage/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,13 +94,15 @@ async function updateUser(event) {
       });
 
       if (response.ok) {
+        console.log(response.json())
         loadUserData(updateUserData());
       } else {
         const data = response.json();
         throw new Error(data.message);
       }
     } catch (error) {
-      alert("회원 정보 수정을 실패했습니다.");
+      alert(error.message);
+      location.href = "/";
     }
   }
 }
