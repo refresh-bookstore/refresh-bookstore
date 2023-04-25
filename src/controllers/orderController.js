@@ -1,50 +1,64 @@
-const Order = require("../models/Order");
-const { orderService } = require("../services/orderService");
+const Order = require("../models/order");
 
-const orderController = {
-  async createOrder(req, res) {
-    const { shippingStatus, orderList } = req.body;
-    const { name, address, phone } = req.session.user;
-
-    const orderRandom = Math.floor(Math.random() * 10000000000) + 10000000000;
-    const data = new Order({
-      orderId: orderRandom,
-      shippingStatus,
+// 주문 하기
+exports.createOrder = async (req, res, next) => {
+  try {
+    const {
+      userName,
+      postalCode,
+      address,
+      detailAddress,
+      userPhone,
+      orderRequest,
       orderList,
-      userName: name,
-      userAddress: address,
-      userPhone: phone,
+      deliveryFee,
+      totalPrice,
+    } = req.body;
+
+    // 주문 상품 목록이 없을 경우 에러 발생
+    if (!orderList || orderList.length === 0) {
+      throw new Error("주문 상품 목록이 없습니다.");
+    }
+
+    // 주문 상품 목록에서 상품 수량이 0 이하일 경우 에러 발생
+    for (let i = 0; i < orderList.length; i++) {
+      if (orderList[i].quantity <= 0) {
+        throw new Error("상품 수량은 1개 이상이어야 합니다.");
+      }
+    }
+
+    const order = new Order({
+      userName,
+      postalCode,
+      address,
+      detailAddress,
+      userPhone,
+      orderRequest,
+      orderList,
+      deliveryFee,
+      userEmail: req.session.email,
+      totalPrice: deliveryFee,
     });
 
-    console.log(data);
+    await order.save();
 
-    try {
-      const result = await Order.create(data);
-      res.status(200).json({
-        message: "Upload success!",
-        data: result,
-      });
-    } catch (error) {
-      res.status(500).json({
-        message: "생성 오류입니다.",
-      });
-    }
-  },
-
-  async getOrderList(req, res) {
-    try {
-      const result = await Order.find({});
-      res.render("orderdummy.html");
-      // res.status(200).json({
-      //   message: "Read success!",
-      //   data: result,
-      // });
-    } catch (error) {
-      res.status(500).json({
-        message: "데이터를 조회할 수 없습니다.",
-      });
-    }
-  },
+    res.status(201).json({ message: "주문이 생성되었습니다.", order });
+  } catch (error) {
+    next(error);
+  }
 };
 
-module.exports = orderController;
+// 주문 조회
+exports.getUserOrders = async (req, res, next) => {
+  try {
+    const userEmail = req.params.userEmail;
+
+    const orders = await Order.find({ email: userEmail }).populate(
+      "orderList.product"
+    );
+
+    res.status(200).json({ orders });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -23,6 +23,10 @@ router.get("/user-mypage", checkSession, getUserInfo, (req, res) => {
   res.render("user-mypage/user-mypage.html");
 });
 
+router.get("/order-create", getUserInfo, (req, res) => {
+  res.render("order-create/order-create.html");
+});
+
 router.get(
   "/user-mypage/order-detail",
   checkSession,
@@ -37,10 +41,6 @@ router.get("/book-detail", (req, res) => {
 
 router.get("/cart", (req, res) => {
   res.render("cart/cart.html");
-});
-
-router.get("/order-create", getUserInfo, (req, res) => {
-  res.render("order-create/order-create.html");
 });
 
 module.exports = router;
