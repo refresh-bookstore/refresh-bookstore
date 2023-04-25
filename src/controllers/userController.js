@@ -2,13 +2,12 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const userService = require("../services/userService");
 const {
-  validateUserRegistration,
   updateUserValidator,
   validate,
 } = require("../middlewares/userValidation");
 
 exports.createUser = async (req, res, next) => {
-  const errors = validateUserRegistration(req);
+  const errors = validate(req, res, next);
   if (!errors.isEmpty()) {
     console.log(errors.array());
     return res.status(400).json({ errors: errors.array() });
