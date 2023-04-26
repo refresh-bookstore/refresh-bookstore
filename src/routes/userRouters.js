@@ -26,12 +26,10 @@ router.get("/userinfo", checkSession, getUserInfo);
 
 //사용자 정보 업데이트
 router.post("/update", checkSession, updateUserValidator, updateUserInfo);
+
 //사용자 정보 삭제
-<<<<<<< HEAD
 router.delete("/user", checkSession, deleteUserByEmail);
-=======
-router.delete("/delete", checkSession, deleteUserByEmail);
->>>>>>> a8c89d8306a77c63a311e3a5cb1b14253c9a9545
+
 //회원 정보들 불러오기
 router.get("/users", checkSession, isAdmin, getUsers);
 
