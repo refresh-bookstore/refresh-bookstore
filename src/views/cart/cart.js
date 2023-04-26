@@ -240,7 +240,7 @@ function setTotalCost() {
 orderButton.addEventListener('click', () => {
   saveToPurchase(JSON.parse(localStorage.getItem('cart')));
   localStorage.removeItem('cart');
-  location.href = '/order-create/order-create.html'; // (임시)
+  location.href = '/order-create';
 });
 
 main();

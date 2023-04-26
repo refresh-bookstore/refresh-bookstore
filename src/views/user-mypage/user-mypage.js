@@ -25,6 +25,11 @@ submitButton.addEventListener("click", updateUser);
 // 회원 탈퇴 버튼 이벤트 리스너
 deleteButton.addEventListener("click", deleteUser);
 
+// 페이지를 떠날 때 세션 스토리지의 userData 삭제
+window.addEventListener("beforeunload", function() {
+  sessionStorage.removeItem("userData");
+});
+
 function loadUserData() {
   // 세션스토리지의 유저 데이터
   const userData = JSON.parse(sessionStorage.getItem("userData"));
@@ -38,6 +43,18 @@ function loadUserData() {
     addressInput.value = userData.address;
     detailAddressInput.value = userData.detailAddress;
     phoneInput.value = userData.phone;
+
+    if (postalCodeInput.value === "undefined" ||
+      addressInput.value === "undefined" ||
+      detailAddressInput.value === "undefined") {
+      postalCodeInput.value = "";
+      addressInput.value = "";
+      detailAddressInput.value = "";
+    }
+
+    if (phoneInput.value === "undefined") {
+      phoneInput.value = "";
+    }
 
   } else {
     alert("회원 정보가 없습니다.");
@@ -56,63 +73,68 @@ async function updateUser(event) {
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
+    document.querySelector('.user-form-box').action = '/update';
     try {
       const response = await fetch("/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "authorization": `Bearer ${sessionStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           password: passwordInput.value,
           postalCode: postalCodeInput.value,
           address: addressInput.value,
           detailAddress: detailAddressInput.value,
-          phone: phoneInput.value
-        })
+          phone: phoneInput.value,
+        }),
       });
-
-      console.log(response)
 
       if (response.ok) {
         const updated = JSON.stringify({
           name: nameText.innerText,
           email: emailText.innerText,
+          password: passwordInput.value,
           postalCode: postalCodeInput.value,
           address: addressInput.value,
           detailAddress: detailAddressInput.value,
-          phone: phoneInput.value
+          phone: phoneInput.value,
         });
 
         sessionStorage.removeItem("userData");
         sessionStorage.setItem("userData", updated);
 
-        //location.href = "/user-mypage";
+        alert("회원정보가 수정되었습니다.");
       } else {
-        const data = await response.json();
-        throw new Error(data.message);
+        throw new Error(response.message);
       }
     } catch (error) {
       console.log(error.message);
-      
-      //location.href = "/user-mypage";
     }
+  } else {
+    event.preventDefault();
+    checkValid();
   }
 }
 
 async function deleteUser(event) {
   event.preventDefault();
+  const isAllValid = checkValid();
 
-  if (confirm("정말 탈퇴하시겠습니까?")) {
+  if (isAllValid && confirm("정말 탈퇴하시겠습니까?")) {
+    document.querySelector('.user-form-box').action = '/delete';
     try {
       const response = await fetch("/delete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+          email: emailText.innerText
+        })
       });
 
       const data = await response.json();
+      console.log(data)
       if (response.ok) {
         alert(`탈퇴하셨습니다.\n함께해서 즐거웠어요.\u{2764}`);
         
@@ -129,6 +151,7 @@ async function deleteUser(event) {
       alert(error.message);
     }
   } else {
+    checkValid();
     console.log("탈퇴 취소");
   }
 }

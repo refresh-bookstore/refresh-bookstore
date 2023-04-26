@@ -11,24 +11,27 @@
   <header></header>
   <div class="container">
 
-    <p class="order-detail">주문 상세</p>
-    <main>
+    <p class="order-detail-title">주문 상세</p>
+    <main class="order-container empty">
       <section class="products-detail">
-        <div class="orderDateArea">
+
+        <div class="field orderDateArea">
           <p class="label">주문일</p>
           <div class="orderDate">2023-04-20</div>
         </div>
-        <div class="shippingStatusArea">
+
+        <div class="field shippingStatusArea">
           <p class="label">배송 상태</p>
           <div class="shippingStatus">배송전 > 배송중 > 배송완료</div>
         </div>
-        <p class="label">주문 내역</p>
+
+        <p class="label order-content">주문 내역</p>
         <div class="productInfoArea">
           <div class="productInfo">
             <ul class="books">
               <li class="book">
                   <div class="book-img">
-                    <img src="../public/images/sample_image.jpg">
+                    <img src="/public/images/sample_image.jpg">
                   </div>
                   <div class="book-info">
                     <p class="book-title">혼자 공부하는 얄팍한 코딩지식</p>
@@ -36,39 +39,52 @@
                     <p class="book-price">15,800원 X 2권</p>
                   </div>
               </li>
+              <li class="book">
+                <div class="book-img">
+                  <img src="../public/images/sample_image.jpg">
+                </div>
+                <div class="book-info">
+                  <p class="book-title">혼자 공부하는 얄팍한 코딩지식</p>
+                  <p class="author">고현민</p>
+                  <p class="book-price">15,800원 X 2권</p>
+                </div>
+              </li>
             </ul>
           </div>
-          <div class="deliveryFeeArea">
+          <div class="field deliveryFeeArea">
             <p class="label">배송비</p>
             <div class="deliveryFee">3,000원</div>
           </div>
-          <div class="entirePriceArea">
+          <div class="field entirePriceArea">
             <p class="label">총 결제금액</p>
             <div class="entirePrice">124,000원</div>
           </div>
         </div>
       </section>
       <section class="user-detail">
+        <p class="label">받는 사람 정보</p>
         <div class="userInfoArea">
-          <p class="label">받는 사람 정보</p>
-          <div class="userInfo">
+          <form class="userInfo">
             <div class="nameArea">
-              <p class="label">이름</p>
-              <div class="name">김토끼</div>
+              <label class="label" for="nameInput">이름</label>
+              <input readonly class="name" id="nameInput" value="김토끼">
             </div>
             <div class="phoneNumberArea">
-              <p class="label">연락처</p>
-              <div class="phoneNumber">010-0000-0000</div>
+              <label class="label" for="phoneNumberInput">연락처</label>
+              <input readonly class="phoneNumber" for="phoneNumberInput" value="010-0000-0000">
             </div>
             <div class="addressArea">
-              <p class="label">주소</p>
-              <div class="address">(13536) 경기 성남시 분당구 판교역로 10 (백현동) 131</div>
+              <label class="label" for="addressInput">주소</label>
+              <input  type="button" id="searchAddress" class="button search-address" value="주소 검색" onclick="findAddress()">
+              <input readonly type="text" id="postalCodeInput" class="postalCode" value="(13536)">
+              <input readonly type="text" class="address" value="경기 성남시 분당구 판교역로 10 (백현동)">
+              <input readonly type="text" class="detailAddress" value="131">
             </div>
             <div class="deliveryRequestArea">
-              <p class="label">배송 요청 사항</p>
-              <div class="deliveryRequest">요청사항 없음.</div>
+              <label class="label">배송 요청 사항</label>
+              <input readonly class="deliveryRequest" value="요청사항 없음.">
             </div>
-          </div>
+          </form>
         </div>
       </section>
       <section class="buttonArea">
@@ -78,6 +94,6 @@
     </main>
     
   </div>
-  <footer id="footer"></footer>
+  <footer></footer>
 </body>
 </html>
