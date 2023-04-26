@@ -108,7 +108,6 @@ section {
 
 .book .book-info .book-price {
   font-size: var(--font-medium);
-  font-weight: var(--weight-bold);
   color: var(--color-black);
   text-align: right;
   width: 100%;
@@ -122,7 +121,6 @@ section {
 
 .deliveryFee {
   padding: 8px;
-  color: var(--color-light-black);
 }
 
 .entirePriceArea {
@@ -131,7 +129,9 @@ section {
 
 .entirePrice {
   padding: 8px;
-  color: var(--color-light-black);
+  font-weight: 700;
+  font-size: var(--font-medium);
+  color: var(--color-point);
 }
 
 .userInfo {
@@ -141,48 +141,71 @@ section {
   padding: 4px 20px;
 }
 
+input {
+  height: 35px;
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--border-radius-input);
+  color: var(--color-black);
+  font-size: var(--font-regular);
+  padding: 0 10px;
+  margin-right: 4px;
+}
+
+input:focus {
+  outline: 1px solid var(--color-point);
+}
+
+input:read-only {
+  border: 1px solid var(--color-light-gray);
+}
+input:read-only:focus {
+  outline: none;
+}
+
 .nameArea {
   display: flex;
+  align-items: center;
 }
 
 .name {
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  color: var(--color-light-black);
 }
 
 .phoneNumberArea {
   display: flex;
+  align-items: center;
 }
 
 .phoneNumber {
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  color: var(--color-light-black);
 }
 
 .addressArea {
   display: flex;
+  align-items: center;
+}
+
+.postalCode {
+  width: 80px;
 }
 
 .address {
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  color: var(--color-light-black);
+  width: 350px;
 }
 
 .deliveryRequestArea {
   display: flex;
+  align-items: center;
 }
 
 .deliveryRequest {
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  color: var(--color-light-black);
+  width: 300px;
 }
 
 .buttonArea {

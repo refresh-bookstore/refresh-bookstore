@@ -62,26 +62,29 @@
         </div>
       </section>
       <section class="user-detail">
+        <p class="label">받는 사람 정보</p>
         <div class="userInfoArea">
-          <p class="label">받는 사람 정보</p>
-          <div class="userInfo">
+          <form class="userInfo">
             <div class="nameArea">
-              <p class="label">이름</p>
-              <div class="name">김토끼</div>
+              <label class="label" for="nameInput">이름</label>
+              <input readonly class="name" id="nameInput" value="김토끼">
             </div>
             <div class="phoneNumberArea">
-              <p class="label">연락처</p>
-              <div class="phoneNumber">010-0000-0000</div>
+              <label class="label" for="phoneNumberInput">연락처</label>
+              <input readonly class="phoneNumber" for="phoneNumberInput" value="010-0000-0000">
             </div>
             <div class="addressArea">
-              <p class="label">주소</p>
-              <div class="address">(13536) 경기 성남시 분당구 판교역로 10 (백현동) 131</div>
+              <label class="label" for="addressInput">주소</label>
+              <input  type="button" id="searchAddress" class="button search-address" value="주소 검색" onclick="findAddress()">
+              <input readonly type="text" id="postalCodeInput" class="postalCode" value="(13536)">
+              <input readonly type="text" class="address" value="경기 성남시 분당구 판교역로 10 (백현동)">
+              <input readonly type="text" class="detailAddress" value="131">
             </div>
             <div class="deliveryRequestArea">
-              <p class="label">배송 요청 사항</p>
-              <div class="deliveryRequest">요청사항 없음.</div>
+              <label class="label">배송 요청 사항</label>
+              <input readonly class="deliveryRequest" value="요청사항 없음.">
             </div>
-          </div>
+          </form>
         </div>
       </section>
       <section class="buttonArea">

@@ -23,8 +23,8 @@ router.get("/user-mypage", checkSession, (req, res) => {
   res.render("user-mypage/user-mypage.html");
 });
 
-router.get("/user-mypage/order-detail", checkSession, (req, res) => {
-  res.render("user-mypage/order-detail.html");
+router.get("/order-detail", checkSession, (req, res) => {
+  res.render("order-detail/order-detail.html");
 });
 
 router.get("/order-create", checkSession, (req, res) => {
