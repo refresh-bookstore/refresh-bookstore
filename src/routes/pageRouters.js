@@ -47,4 +47,13 @@ router.get("/user-admin", (req, res) => {
   res.render("user-admin/user-admin.html");
 });
 
+router.get("/order-detail", (req, res) => {
+  res.render("order-detail/order-detail.html");
+});
+
+router.get("/order-list", (req, res) => {
+  res.render("order-list/order-list.html");
+});
+
+
 module.exports = router;
