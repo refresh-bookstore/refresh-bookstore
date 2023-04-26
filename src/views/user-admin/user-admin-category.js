@@ -1,21 +1,31 @@
-import { categories } from './categories.js';
+
 
 const adminContentCategories = document.querySelector('#admin-categories');
 
 
 const createCategoryList = () => {
-  for(let i = 0; i < categories.length; i++){
-    adminContentCategories.innerHTML += 
-    `
-    <div class="category-box">
-        <p class="category-name">${categories[i].name}</p>
-        <input class="category-edit-input hidden" type="text"/>
-        <img class="admin-button category-edit" title="수정" src="/public/images/icon_edit.svg">
-        <img class="admin-button hidden category-check" title="확인" src="/public/images/icon_check.svg">
-        <img class="admin-button category-delete" title="삭제" src="/public/images/icon_delete.svg">
-    </div>
-    `
-  }
+  fetch('/user-admin/categories')
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+    listingCategories(data.data);
+  })
+  .catch((err) => console.log(err));
+
+  const listingCategories = (categories) => {
+    for(let i = 0; i < categories.length; i++){
+      adminContentCategories.innerHTML += 
+      `
+      <div class="category-box">
+          <p class="category-name">${categories[i].name}</p>
+          <input class="category-edit-input hidden" type="text"/>
+          <img class="admin-button category-edit" title="수정" src="/public/images/icon_edit.svg">
+          <img class="admin-button hidden category-check" title="확인" src="/public/images/icon_check.svg">
+          <img class="admin-button category-delete" title="삭제" src="/public/images/icon_delete.svg">
+      </div>
+      `
+    }
+  } 
 }
 
 const addCategory = () => {
