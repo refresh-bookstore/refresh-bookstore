@@ -1,4 +1,4 @@
-import { main } from '../public/js/main.js';
+import { main } from '/public/js/main.js';
 
 import { createBookList } from './user-admin-book.js';
 import { createUserList } from './user-admin-user.js';
@@ -68,7 +68,7 @@ lists.forEach((e)=> {
     //////////////////////카테고리관리///////////////////////
     if(lists.indexOf(e) === 3){
       contents[3].innerHTML = `
-      <img class="add-button" id="category-add-button" src="../public/images/icon_add.svg">
+      <img class="add-button" id="category-add-button" src="/public/images/icon_add.svg">
       <div class="add-page hidden" id="admin-add-categories"></div>
       `; 
       createCategoryList();
