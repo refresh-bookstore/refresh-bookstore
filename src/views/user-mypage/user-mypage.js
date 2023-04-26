@@ -93,7 +93,8 @@ async function updateUser(event) {
         throw new Error(data.message);
       }
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
+      
       //location.href = "/user-mypage";
     }
   }
@@ -104,7 +105,7 @@ async function deleteUser(event) {
 
   if (confirm("정말 탈퇴하시겠습니까?")) {
     try {
-      const response = await fetch("delete", {
+      const response = await fetch("/delete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
