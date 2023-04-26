@@ -13,8 +13,6 @@ const createBookList = () => {
   .catch((err) => console.log(err));
 
   const listingBooks = (books) => {
-    adminAddBooks.classList.add('active');
-    bookAddBtn.classList.add('active');
     for(let i = 0; i < books.length; i++){
       const published = new Date(books[i].publication_date);
       adminContentBooks.innerHTML += 
