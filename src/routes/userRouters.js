@@ -25,12 +25,7 @@ router.post("/logout", checkSession, logout);
 router.get("/userinfo", checkSession, getUserInfo);
 
 //사용자 정보 업데이트
-router.post(
-  "user-mypage/update",
-  checkSession,
-  updateUserValidator,
-  updateUserInfo
-);
+router.post("/update", checkSession, updateUserValidator, updateUserInfo);
 //사용자 정보 삭제
 router.delete("user-mypage/delete", checkSession, deleteUserByEmail);
 //회원 정보들 불러오기
