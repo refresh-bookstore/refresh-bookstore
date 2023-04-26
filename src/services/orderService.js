@@ -75,6 +75,28 @@ exports.cancelOrder = async orderId => {
   }
 };
 
+exports.changeShippingAddress = async (req, res) => {
+  try {
+    const { postalCode, address, detailAddress } = req.body;
+    const email = req.session.email; // 세션에서 이메일 값을 가져옴
+
+    const order = await Order.findOneAndUpdate(
+      { email },
+      { $set: { postalCode, address, detailAddress } },
+      { new: true }
+    );
+
+    if (!order) {
+      return res.status(404).send({ error: "Order not found" });
+    }
+
+    res.send(order);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: "Server error" });
+  }
+};
+
 //  주문 상태 변경
 exports.updateShippingStatus = async (req, res, next) => {
   try {
