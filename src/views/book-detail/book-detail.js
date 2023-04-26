@@ -136,7 +136,7 @@ const renderBookDetail = (book) => {
   bookInfoIsbn.innerText = `ISBN | ${book.isbn}`;
   bookInfoAuthor.innerText = `저자 | ${book.author}`;
   bookInfoPublisher.innerText = `출판사 | ${book.publisher}`;
-  bookInfoDate.innerText = `발행일 | ${published.getFullYear()}년 ${published.getMonth()}월 ${published.getDate()}일`;
+  bookInfoDate.innerText = `발행일 | ${published.getFullYear()}년 ${published.getMonth() + 1}월 ${published.getDate()}일`;
   
   
   bookIntroduction.innerText = book.description;
