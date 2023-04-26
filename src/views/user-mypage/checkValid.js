@@ -1,10 +1,16 @@
 const passwordInput = document.getElementById("passwordInput");
 const passwordCheckInput = document.getElementById("passwordCheckInput");
+const postalCodeInput = document.getElementById("postalCodeInput");
+const addressInput = document.getElementById("addressInput");
+const detailAddressInput = document.getElementById("detailAddressInput");
 const phoneInput = document.getElementById("phoneInput");
 
 function checkValid() {
   const password = passwordInput.value;
   const passwordCheck = passwordCheckInput.value;
+  const postalCode = postalCodeInput.value;
+  const address = addressInput.value;
+  const detailAddress = detailAddressInput.value;
   const phone = phoneInput.value;
 
   // 비밀번호 확인 (8 ~ 15자, 특수문자, 문자, 숫자 포함)
@@ -15,6 +21,8 @@ function checkValid() {
 
   const passwordError = document.getElementById("password-error");
   const passwordCheckError = document.getElementById("passwordCheck-error");
+  const addressError = document.getElementById("address-error");
+  const detailAddressError = document.getElementById("detailAddress-error");
   const phoneError = document.getElementById("phone-error");
 
   if (!isPasswordValid.test(password)) {
@@ -31,6 +39,22 @@ function checkValid() {
     return false;
   } else {
     passwordCheckError.style.display = "none";
+  }
+
+  if (!postalCode || !address) {
+    addressError.style.display = "flex";
+    addressError.innerText = "주소를 검색하세요";
+    return false;
+  } else {
+    addressError.style.display = "none";
+  }
+
+  if (!detailAddress) {
+    detailAddressError.style.display = "flex";
+    detailAddressError.innerText = "상세 주소를 입력하세요";
+    return false;
+  } else {
+    detailAddressError.style.display = "none";
   }
 
   if (!isPhoneValid.test(phone)) {

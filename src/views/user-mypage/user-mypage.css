@@ -1,4 +1,4 @@
-@import url('../public/css/main.css');
+@import url('/public/css/main.css');
 
 input[type=password] {
 	font-family:"Nanum Gothic", sans-serif !important;
@@ -11,7 +11,7 @@ input[type=password]::placeholder {
   margin: 50px 0 20px 0;
 }
 
-#user-greeting {
+.user-greeting {
   font-size: var(--font-large);
   color: var(--color-black);
 }
@@ -72,7 +72,7 @@ input[type=password]::placeholder {
   width: 800px;
 }
 
-#content-title {
+.content-title {
   font-size: var(--font-medium);
   font-weight: var(--weight-semi-bold);
   color: var(--color-black);
@@ -100,15 +100,15 @@ input[type=password]::placeholder {
   border-radius: var(--border-radius-input);
 }
 
-#emailText {
+.emailText {
   font-weight: var(--weight-semi-bold);
 }
 
-#postalCodeInput {
+.postalCodeInput {
   width: 200px;
 }
 
-#searchAddress {
+.searchAddress {
   margin-left: 10px;
   width: 90px;
   padding: 8px;
@@ -118,11 +118,11 @@ input[type=password]::placeholder {
   font-weight: var(--weight-regular);
 }
 
-#searchAddress:hover {
+.searchAddress:hover {
   background-color: var(--color-light-gray);
 }
 
-#addressInput {
+.addressInput {
   clear: both;
 }
 

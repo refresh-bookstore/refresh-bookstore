@@ -1,28 +1,70 @@
-import { users } from './users.js';
-
 const adminContentUsers = document.querySelector('#admin-users');
 
+
+const expandTiming = {
+  duration: 100,
+  iteration: 1,
+};
+
 const createUserList = () => {
-  for(let i = 0; i < users.length; i++){
-    adminContentUsers.innerHTML += 
-    `
-    <div class="admin-items">
-      <input type="checkbox">
-      <div class="item-info">
-        <p class="item-added-date"> ${users[i].registered_date.getFullYear()} / ${users[i].registered_date.getMonth()} / ${users[i].registered_date.getDate()}</p>
-        <div class="item-more-info">
-          <p class="item-name"> ${users[i].name}</p>
-          <p class="item-detail">${users[i].email}</p>
+  fetch('/users')
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+    listingUsers(data);
+  })
+  .catch((err) => console.log(err));
+
+  const listingUsers = (users) => {
+    adminContentUsers.innerHTML = ""; 
+    for(let i = 0; i < users.length; i++){
+      const registered = new Date(users[i].createdAt);
+      adminContentUsers.innerHTML += 
+      `
+      <div class="admin-items">
+        <div class="admin-user-info">
+          <p class="admin-user-added-date"> ${registered.getFullYear()} / ${registered.getMonth() + 1} / ${registered.getDate()}</p>
+          <div class="admin-info-block">
+            <p class="admin-user-name"> ${users[i].name}</p>    
+            <p class="admin-user-email">${users[i].email}</p>
+          </div>
         </div>
-        <span class="user-buttons">
-          <img class="admin-button edit-user" title="회원 정보 수정" src="../public/images/icon_user_edit.svg">
-          <img class="admin-button check-user hidden" title="확인" src="../public/images/icon_check.svg">
-          <img class="admin-button delete-user" title="회원 탈퇴" src="../public/images/icon_user_remove.svg">
-        </span>
       </div>
-    </div>
-    `
+      `
+
+      adminUserCloserLook(users);
+
+
+    }
   }
+}
+const adminUserCloserLook = (users) => {
+  const userInfoBlocks = adminContentUsers.querySelectorAll('.admin-items');
+  userInfoBlocks.forEach((e)=> {
+    e.addEventListener('click', ()=>{
+      const moreInfo = e.querySelector('.user-more-infos');
+      if(moreInfo){
+        moreInfo.remove();
+        e.style.height = "40px";
+      }else{
+        const userEmailPart = e.querySelector('.admin-user-email')
+        const thisUser = users.find((e) =>  e.email === userEmailPart.innerText );
+        console.log(thisUser);
+        e.style.height = "130px";
+        setTimeout(()=>{
+          e.innerHTML += `
+            <div class="user-more-infos">
+              <p>전화번호 | ${thisUser.phone}</p>
+              <p>우편번호 | ${thisUser.postalCode}</p>
+              <p>주소 | ${thisUser.address} ${thisUser.detailAddress}</p>
+            </div>
+            `
+        }, 230);
+      }
+    })
+  })
+
+
 }
 
 export { createUserList };
