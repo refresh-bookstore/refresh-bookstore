@@ -38,7 +38,7 @@ exports.createOrder = async (req, res, next) => {
       orderList,
       deliveryFee,
       userEmail: req.session.email,
-      totalPrice: deliveryFee,
+      totalPrice,
     });
 
     await order.save();
