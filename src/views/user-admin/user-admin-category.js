@@ -1,18 +1,18 @@
-
-
 const adminContentCategories = document.querySelector('#admin-categories');
-
 
 const createCategoryList = () => {
   fetch('/user-admin/categories')
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
     listingCategories(data.data);
   })
   .catch((err) => console.log(err));
 
   const listingCategories = (categories) => {
+    adminContentCategories.innerHTML = `
+      <img class="add-button" id="category-add-button" src="/public/images/icon_add.svg">
+      <div class="add-page hidden" id="admin-add-categories"></div>
+      `; 
     for(let i = 0; i < categories.length; i++){
       adminContentCategories.innerHTML += 
       `
@@ -24,6 +24,10 @@ const createCategoryList = () => {
           <img class="admin-button category-delete" title="삭제" src="/public/images/icon_delete.svg">
       </div>
       `
+
+      addCategory(categories);
+      editCategory(categories);
+      deleteCategory(categories);
     }
   } 
 }
@@ -31,6 +35,7 @@ const createCategoryList = () => {
 const addCategory = () => {
   const categoryAddBtn = document.querySelector('#category-add-button');
   const adminAddCategories = document.querySelector('#admin-add-categories');
+
   categoryAddBtn.addEventListener('click', () => {
     adminAddCategories.innerHTML ='';
     adminAddCategories.classList.remove('hidden');
@@ -45,20 +50,30 @@ const addCategory = () => {
 
     addCategoryCheck.addEventListener('click', ()=> {
       const addCategoryInput = document.querySelector('#add-category-input')
-      ///임시기능///
-      adminContentCategories.innerHTML += 
-      `
-      <div class="category-box">
-          <p class="category-name">${addCategoryInput.value}</p>
-          <input class="category-edit-input hidden" type="text"/>
-          <img class="admin-button category-edit" title="수정" src="/public/images/icon_edit.svg">
-          <img class="admin-button hidden category-check" title="확인" src="/public/images/icon_check.svg">
-          <img class="admin-button category-delete" title="삭제" src="/public/images/icon_delete.svg">
-      </div>
-      `
+
+      fetch('/user-admin/category', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          name: addCategoryInput.value,
+          categoryId: 1, // 카테고리 아이디가 어떻게 되는건지 몰라서 일단 1
+        }),
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        console.log('카테고리 추가 성공');
+      })
+      .catch(err => {
+        console.error('카테고리 추가 실패', err);
+      });
+
       adminAddCategories.innerHTML ='';
       adminAddCategories.classList.add('hidden');
-      /////////////
+
     })
   
     addCategoryDelete.addEventListener('click', ()=> {
@@ -68,7 +83,7 @@ const addCategory = () => {
   })
 }
 
-const editCategory = () => {
+const editCategory = (categories) => {
   const categoryEditBtn = document.querySelectorAll('.category-edit');
   categoryEditBtn.forEach((e)=> {
     e.addEventListener('click', ()=>{
@@ -82,13 +97,36 @@ const editCategory = () => {
       categoryName.classList.add('hidden');
       categoryEditInput.classList.remove('hidden');
       categoryCheckBtn.classList.remove('hidden');
+
+      const thisCategory = categories.find((e) => e.name === categoryName.innerText)
   
       categoryEditInput.value = categoryName.innerText;
-  
+      console.log(thisCategory);
+
       categoryCheckBtn.addEventListener('click',()=>{
-        ///임시기능
-        categoryName.innerText = categoryEditInput.value;
-        ///
+
+        const categoryIdValue = thisCategory._id;
+        const data = {
+          name: categoryEditInput.value,
+          categoryId: thisCategory.categoryId,
+        };
+
+        fetch(`/user-admin/category?id=${categoryIdValue}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          console.log('카테고리 수정 성공');
+        })
+        .catch(err => {
+          console.error('카테고리 수정 실패', err);
+        });
   
         e.classList.remove('hidden');
         categoryName.classList.remove('hidden');
@@ -100,18 +138,34 @@ const editCategory = () => {
 }
 
 
-const deleteCategory = () => {
+const deleteCategory = (categories) => {
   const categoryDeleteBtn = document.querySelectorAll('.category-delete');
   categoryDeleteBtn.forEach((e)=> {
     e.addEventListener('click', ()=>{
       const categoryBox = e.closest('.category-box');
-      ///임시기능
+      const categoryName = categoryBox.querySelector('.category-name');
+      const thisCategory = categories.find((e) => e.name === categoryName.innerText)
+      console.log(thisCategory);
+      const categoryIdValue = thisCategory._id;
+      fetch(`/user-admin/category?id=${categoryIdValue}`, {
+        method: 'DELETE',
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        console.log('카테고리 삭제 성공');
+      })
+      .catch(err => {
+        console.error('카테고리 삭제 실패', err);
+      });
       categoryBox.remove();
-      ///
     })
   })
 }
 
 
 
-export { createCategoryList, addCategory, deleteCategory, editCategory };
+
+
+export { createCategoryList };
