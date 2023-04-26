@@ -88,12 +88,7 @@ function headerFunc() {
     mypageBtn.addEventListener("click", moveToMypage);
 
     // 로그아웃 메뉴 클릭 이벤트
-    logoutBtn.addEventListener("click", () => {
-      alert("다음에 만나요 꼬옥\u{1F49A}");
-      
-      sessionStorage.clear();
-      location.href = '/';
-    })
+    logoutBtn.addEventListener("click", logout);
   } else {
     // 로그인한 유저가 아닐 때
     dropdownMenu.innerHTML = `
@@ -160,6 +155,34 @@ function headerFunc() {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  }
+
+  async function logout() {
+    try {
+      const response = await fetch("/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Cookie"
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("다음에 만나요 꼬옥\u{1F49A}");
+        
+        // 스토리지 초기화
+        sessionStorage.clear();
+        localStorage.clear();
+
+        location.href = '/';
+      } else { 
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      alert(error.message);
     }
   }
 }
