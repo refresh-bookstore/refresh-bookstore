@@ -209,3 +209,15 @@ section {
   padding: 8px 12px;
   cursor: pointer;
 }
+
+.order-container.empty {
+  display: flex;
+  justify-content: center;
+  padding: 230px;
+}
+
+.empty-order-list {
+  font-size: var(--font-large);
+  color: var(--color-dark-gray);
+  justify-content: center;
+}
