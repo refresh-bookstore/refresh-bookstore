@@ -37,7 +37,7 @@ exports.createOrder = async (req, res, next) => {
       orderRequest,
       orderList,
       deliveryFee,
-      userEmail: req.session.email,
+      email: req.session.email,
       totalPrice,
     });
 
