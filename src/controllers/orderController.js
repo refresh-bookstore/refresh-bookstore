@@ -23,7 +23,7 @@ exports.createOrder = async (req, res, next) => {
 
     // 주문 상품 목록에서 상품 수량이 0 이하일 경우 에러 발생
     for (let i = 0; i < orderList.length; i++) {
-      if (orderList[i].quantity <= 0) {
+      if (orderList[i].amount <= 0) {
         throw new Error("상품 수량은 1개 이상이어야 합니다.");
       }
     }

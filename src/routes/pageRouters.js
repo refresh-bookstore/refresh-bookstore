@@ -31,7 +31,7 @@ router.get("/order-create", checkSession, (req, res) => {
   res.render("order-create/order-create.html");
 });
 
-router.get("/order-create/order-complete", checkSession, (req, res) => {
+router.get("/order-complete", checkSession, (req, res) => {
   res.render("order-complete/order-complete.html");
 });
 
