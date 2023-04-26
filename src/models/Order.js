@@ -40,7 +40,7 @@ const orderSchema = new Schema(
       enum: ["상품 준비중", "배송중", "배송완료", "주문취소"],
       default: "상품 준비중",
     },
-    deliverytFee: {
+    deliveryFee: {
       type: Number,
       required: true,
     },
