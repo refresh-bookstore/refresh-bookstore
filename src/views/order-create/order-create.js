@@ -13,7 +13,7 @@ const totalCost = document.querySelector('.totalCost');
 const userDeliveryInfo =  document.querySelectorAll('.user_delivery_info');
 const [ nameInput , phoneNumberInput , postalCodeInput , addressInput , detailAddressInput ] = userDeliveryInfo;
 // 사용자 기본정보 출력
-
+let email;
 async function loadUserData() {
   try {
     const response = await fetch("/userinfo", {
@@ -32,6 +32,7 @@ async function loadUserData() {
       postalCodeInput.value = data.postalCode;
       addressInput.value = data.address;
       detailAddressInput.value = data.detailAddress;
+      email = data.email;
     }
   } catch (error) {
     console.log(error.message);
@@ -148,10 +149,10 @@ async function payBtnClick() {
   }
 
   let orderArr = [];
-  for(let i = 0; i < purchaseData.length; i++){
+  for (let i = 0; i < purchaseData.length; i++) {
     let ISBN = purchaseData[i].isbn;
     let amount = purchaseData[i].amount;
-    orderArr.push({ISBN, amount});
+    orderArr.push({product: ISBN, amount: amount});
   }
 
   try {
@@ -161,13 +162,14 @@ async function payBtnClick() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        email: email,
         userName: nameInput.value,
         postalCode: postalCodeInput.value,
         address: addressInput.value,
         detailAddress: detailAddressInput.value,
         userPhone: phoneNumberInput.value,
         orderRequest: request,
-        orderList: orderArr, // [{ISBN, amount}, {ISBN, amount}]
+        orderList: orderArr, // [{product: ISBN, amount: n}, {product: ISBN, amount: n}]
         deliveryFee: getPriceNumber(deliveryFee.innerText),
         totalPrice: getPriceNumber(totalCost.innerText),
       }),
