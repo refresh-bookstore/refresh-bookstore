@@ -4,7 +4,7 @@ const adminContentBooks = document.querySelector('#admin-books');
 
 
 const createBookList = () => {
-  fetch('/product')
+  fetch('/user-admin/products')
   .then((res) => res.json())
   .then((data) => {
     console.log(data);
