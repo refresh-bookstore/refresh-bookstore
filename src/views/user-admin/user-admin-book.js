@@ -20,7 +20,6 @@ const createBookList = () => {
       adminContentBooks.innerHTML += 
       `
       <div class="admin-items">
-          <input type="checkbox">
           <div class="item-info">
             <div class="item-more-info">
               <p class="item-name"> ${books[i].title}</p>
