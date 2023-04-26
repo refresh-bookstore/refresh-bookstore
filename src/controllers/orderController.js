@@ -1,5 +1,6 @@
 const Order = require("../models/Order");
-const product = require("../models/Product");
+const Product = require("../models/Product");
+
 
 // 주문 하기
 exports.createOrder = async (req, res, next) => {
@@ -13,6 +14,7 @@ exports.createOrder = async (req, res, next) => {
       orderRequest,
       orderList,
       deliveryFee,
+      email,
       totalPrice,
     } = req.body;
 
@@ -37,7 +39,7 @@ exports.createOrder = async (req, res, next) => {
       orderRequest,
       orderList,
       deliveryFee,
-      email: req.session.email,
+      email, 
       totalPrice,
     });
 
@@ -49,62 +51,28 @@ exports.createOrder = async (req, res, next) => {
   }
 };
 
-// 주문 조회
-exports.getUserOrders = async (req, res, next) => {
+// 주문 전체 조회
+exports.getOrderList = async (req, res, next) => {
   try {
-    const userEmail = req.params.userEmail;
+    const order = await Order.find({});
+    console.log(order);
 
-    const orders = await Order.find({ email: userEmail }).populate(
-      "orderList.product"
-    );
-
-    res.status(200).json({ orders });
+    res.status(200).json(order);
   } catch (error) {
     next(error);
   }
 };
 
-// 주문 정보 리스트 불러오기
-exports.getOrderList = async (req, res) => {
+exports.getOrderId = async (req, res, next) => {
   try {
-    const orders = await Order.find({ email: userEmail }).populate(
-      "orderList.product"
-    );
+    const orderId = req.params.orderId;
+    console.log(orderId);
 
-    const orderList = orders.map(order => {
-      return {
-        orderId: order.orderId,
-        email: order.email,
-        shippingStatus: order.shippingStatus,
-        deliveryFee: order.deliverytFee,
-        userName: order.userName,
-        postalCode: order.postalCode,
-        address: order.address,
-        detailAddress: order.detailAddress,
-        userPhone: order.userPhone,
-        orderRequest: order.orderRequest,
-        itemList: order.orderList.map(item => {
-          const Product = item.product;
-          return {
-            title: product.title,
-            author: product.author,
-            publisher: product.publisher,
-            publication_date: product.publication_date,
-            isbn: product.isbn,
-            description: product.description,
-            price: product.price,
-            image_path: product.image_path,
-            category: product.category,
-            amount: item.amount,
-          };
-        }),
-        totalPrice: order.totalPrice,
-      };
-    });
+    const order = await Order.find({orderId : orderId});
+    console.log(order);
 
-    res.status(200).json({ orderList });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(200).json(order);
+  } catch (error) {
+    next(error);
   }
 };

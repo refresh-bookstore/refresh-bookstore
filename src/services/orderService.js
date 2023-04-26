@@ -19,40 +19,24 @@ exports.getOrder = async (req, res, next) => {
   }
 };
 
-// 주문 취소
-exports.cancelOrder = async orderId => {
+exports.cancelOrder = async (req, res) => {
   try {
-    const order = await Order.findOne({ orderId });
+    const { shippingStatus } = req.body;
+    const orderId = req.params.orderId;
 
-    if (
-      order.shippingStatus === "배송 완료" ||
-      order.shippingStatus === "주문 취소"
-    ) {
+    const findOrderId = await Order.findOne({ orderId });
+
+    if(findOrderId.shippingStatus === "배송 완료" || findOrderId.shippingStatus === "주문 취소"){
       throw new Error("이미 배송 완료된 상품이거나 취소된 주문입니다.");
     }
 
-    order.shippingStatus = "주문 취소";
-    await order.save();
-
-    return { success: true };
-  } catch (error) {
-    return { success: false, message: error.message };
-  }
-};
-
-// 배송지 변경
-exports.changeShippingAddress = async (req, res) => {
-  try {
-    const { postalCode, address, detailAddress } = req.body;
-    const email = req.session.email; // 세션에서 이메일 값을 가져옴
-
     const order = await Order.findOneAndUpdate(
-      { email },
-      { $set: { postalCode, address, detailAddress } },
+      { orderId },
+      { shippingStatus},
       { new: true }
     );
 
-    if (!order) {
+    if (!orderId) {
       return res.status(404).send({ error: "Order not found" });
     }
 
@@ -63,20 +47,70 @@ exports.changeShippingAddress = async (req, res) => {
   }
 };
 
+// Admin :: 주문 삭제하기
+exports.deleteOrder = async (req, res) => {
+  try {
+
+    const orderId = req.params.orderId;
+    const order = await Order.deleteOne({ orderId: orderId});
+
+    if (!orderId) {
+      return res.status(404).send({ error: "Order not found" });
+    }
+
+    res.send(order);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: "Server error" });
+  }
+};
+
+
+// 사용자 전용 :: 주문정보 변경
+exports.changeShippingAddress = async (req, res) => {
+  try {
+    const { postalCode, address, detailAddress } = req.body;
+    const orderId = req.params.orderId;
+
+    console.log(orderId);
+
+    const order = await Order.findOneAndUpdate(
+      { orderId },
+      { postalCode,
+        address, 
+        detailAddress},
+      { new: true }
+    );
+
+    if (!orderId) {
+      return res.status(404).send({ error: "Order not found" });
+    }
+
+    res.send(order);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: "Server error" });
+  }
+};
+
+
 //  주문 상태 변경
 exports.updateShippingStatus = async (req, res, next) => {
   try {
-    const { orderId, status } = req.body;
+    const { shippingStatus } = req.body;
+    const orderId = req.params.orderId;
+    console.log(orderId);
 
-    const updatedOrder = await orderService.updateShippingStatus(
-      orderId,
-      status
+    const order = await Order.findOneAndUpdate(
+      { orderId },
+      { shippingStatus },
+      { new: true }
     );
 
     res.status(200).json({
       success: true,
       message: "주문 배송 상태가 성공적으로 업데이트되었습니다.",
-      data: updatedOrder,
+      data: order,
     });
   } catch (error) {
     next(error);
