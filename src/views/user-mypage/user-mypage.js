@@ -1,5 +1,5 @@
-import { main } from '/public/js/main.js';
-import { checkValid } from './checkValid.js';
+import { main } from "/public/js/main.js";
+import { checkValid } from "./checkValid.js";
 
 const userGreeting = document.getElementById("user-greeting");
 const nameText = document.getElementById("nameText");
@@ -38,7 +38,6 @@ function loadUserData() {
     addressInput.value = userData.address;
     detailAddressInput.value = userData.detailAddress;
     phoneInput.value = userData.phone;
-
   } else {
     alert("회원 정보가 없습니다.");
     // 홈으로 돌아가기
@@ -61,19 +60,17 @@ async function updateUser(event) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "credentials": 'include'
         },
         body: JSON.stringify({
           password: passwordInput.value,
           postalCode: postalCodeInput.value,
           address: addressInput.value,
           detailAddress: detailAddressInput.value,
-          phone: phoneInput.value
-        })
+          phone: phoneInput.value,
+        }),
       });
 
-      const data = await response.json();
-      alert(data);
+      console.log(response);
 
       if (response.ok) {
         const updated = JSON.stringify({
@@ -82,7 +79,7 @@ async function updateUser(event) {
           postalCode: postalCodeInput.value,
           address: addressInput.value,
           detailAddress: detailAddressInput.value,
-          phone: phoneInput.value
+          phone: phoneInput.value,
         });
 
         sessionStorage.removeItem("userData");
@@ -90,11 +87,12 @@ async function updateUser(event) {
 
         //location.href = "/user-mypage";
       } else {
+        const data = await response.json();
         throw new Error(data.message);
       }
     } catch (error) {
-      alert(error.message);
-      
+      console.log(error.message);
+
       //location.href = "/user-mypage";
     }
   }
@@ -109,17 +107,17 @@ async function deleteUser(event) {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
 
       const data = await response.json();
       if (response.ok) {
         alert(`탈퇴하셨습니다.\n함께해서 즐거웠어요.\u{2764}`);
-        
+
         // 스토리지 전부 삭제
         sessionStorage.clear();
         localStorage.clear();
-        
+
         // 홈 이동
         location.replace("/");
       } else {
