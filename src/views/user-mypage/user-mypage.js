@@ -73,7 +73,7 @@ async function updateUser(event) {
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
-    
+    document.querySelector('.user-form-box').action = '/update';
     try {
       const response = await fetch("/update", {
         method: "POST",
@@ -118,17 +118,23 @@ async function updateUser(event) {
 
 async function deleteUser(event) {
   event.preventDefault();
+  const isAllValid = checkValid();
 
-  if (confirm("정말 탈퇴하시겠습니까?")) {
+  if (isAllValid && confirm("정말 탈퇴하시겠습니까?")) {
+    document.querySelector('.user-form-box').action = '/delete';
     try {
       const response = await fetch("/delete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+          email: emailText.innerText
+        })
       });
 
       const data = await response.json();
+      console.log(data)
       if (response.ok) {
         alert(`탈퇴하셨습니다.\n함께해서 즐거웠어요.\u{2764}`);
         
@@ -145,6 +151,7 @@ async function deleteUser(event) {
       alert(error.message);
     }
   } else {
+    checkValid();
     console.log("탈퇴 취소");
   }
 }
