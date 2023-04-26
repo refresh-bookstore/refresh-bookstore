@@ -53,7 +53,6 @@ lists.forEach((e)=> {
 
     //////////////////////회원관리///////////////////////
     if(lists.indexOf(e) === 1){
-      contents[1].innerHTML = ""; 
       createUserList();
       
     }
@@ -71,24 +70,6 @@ lists.forEach((e)=> {
     }
   })
 })
-
-
-
-
-//////////////////////추가/수정/삭제 버튼구현///////////////////////
-
-const bookEditBtn = document.querySelectorAll('.book-edit');
-const bookDeleteBtn = document.querySelectorAll('.book-delete');
-const bookCheckBtn = document.querySelectorAll('.book-check');
-
-const userEditBtn = document.querySelectorAll('.user-edit');
-const userDeleteBtn = document.querySelectorAll('.user-delete');
-const userCheckBtn = document.querySelectorAll('.user-check');
-
-const orderEditBtn = document.querySelectorAll('.order-edit');
-const orderDeleteBtn = document.querySelectorAll('.order-delete');
-const orderCheckBtn = document.querySelectorAll('.order-check');
-
 
 
 main();
