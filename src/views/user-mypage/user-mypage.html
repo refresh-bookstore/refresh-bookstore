@@ -16,7 +16,7 @@
   <header></header>
   <div class="container">
     <div class="intro">
-      <p id="user-greeting"></p>
+      <p class="user-greeting" id="user-greeting"></p>
     </div>
 
     <!-- 구분선 -->
@@ -36,7 +36,7 @@
 
       <!-- 콘텐츠 영역 -->
       <div class="content-area">
-        <p id="content-title">회원정보 수정</p>
+        <p class="content-title">회원정보 수정</p>
         <form class="user-form-box" method="post">
 
           <div class="field">
@@ -49,7 +49,7 @@
           <div class="field">
             <label class="label" for="emailInput">이메일</label>
             <div class="control">
-              <p id="emailText"></p>
+              <p class="emailText" id="emailText"></p>
             </div>
           </div>
 
@@ -84,7 +84,7 @@
             <label class="label" for="addressInput">주소</label>
             <div class="control">
               <input
-                class="input"
+                class="input postalCodeInput"
                 id="postalCodeInput"
                 type="text"
                 placeholder="우편주소"
@@ -94,6 +94,7 @@
 
             <div class="control">
               <input 
+                class="searchAddress"
                 type="button" 
                 id="searchAddress" 
                 value="주소 검색" 
@@ -107,7 +108,7 @@
             <label class="label" for="addressInput"></label>
             <div class="control">
               <input
-                class="input"
+                class="input addressInput"
                 id="addressInput"
                 type="text"
                 placeholder="주소를 검색해주세요"
