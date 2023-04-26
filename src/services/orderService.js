@@ -1,4 +1,4 @@
-const Order = require("../models/order");
+const Order = require("../models/Order");
 
 // 주문 조회
 exports.getOrder = async (req, res, next) => {
