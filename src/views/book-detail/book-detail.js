@@ -1,8 +1,6 @@
-
-
 import { main } from '/public/js/main.js';
 
-const likeBtn = document.querySelector('#likeBtn');
+// const likeBtn = document.querySelector('#likeBtn');
 
 const bookImageArea = document.querySelector('.imageArea');
 const bookTitle = document.querySelectorAll('.bookTitle');
@@ -22,7 +20,7 @@ const bookInfoPublisher = document.querySelector('#info-publisher');
 const bookInfoDate = document.querySelector('#info-published');
 
 
-//예시데이터
+// 데이터 불러옴
 const urlParams = new URLSearchParams(window.location.search);
 const isbn = urlParams.get('isbn');
 fetch(`/book-detail/${isbn}`)
@@ -34,17 +32,17 @@ fetch(`/book-detail/${isbn}`)
   .catch((err) => console.error(err));
 
 
-//찜하기 버튼
+// 페이지 렌더
 
 const renderBookDetail = (book) => {
-  const published = new Date(book.publication_date);
+   const published = new Date(book.publication_date);
 
-  likeBtn.addEventListener('click',()=>{
-    likeBtn.src = "/public/images/like_2.svg";
-  });
+//   likeBtn.addEventListener('click',()=>{
+//     likeBtn.src = "/public/images/like_2.svg";
+//   });
   
   
-  //책 정보
+  // 책 정보
   
   bookImageArea.innerHTML = `<img src="${book.image_path}">`;
   bookCategory.innerText = `#${book.category}`;
@@ -56,10 +54,7 @@ const renderBookDetail = (book) => {
   
   
   
-  //구매 정보
-  
-  
-  //////////////////////////// 수량 버튼//////////////////////
+  // 수량 버튼
   minusBtn.addEventListener('click',(e)=>{
     e.preventDefault();
     if (Number(amountInput.value) <= 1){
@@ -82,7 +77,7 @@ const renderBookDetail = (book) => {
   });
   
   
-  //////////////////////////// 장바구니 버튼//////////////////////
+  // 장바구니 버튼
   addToCartBtn.addEventListener('click',()=>{
     let cartItems = JSON.parse(localStorage.getItem('cart'));
     if(cartItems === null) cartItems = [];
@@ -111,9 +106,7 @@ const renderBookDetail = (book) => {
   }
   });
   
-  
-  //////////////////////////// 구매 버튼//////////////////////
-  //// 로그인 필요 ////
+  // 구매 버튼
   purchaseBtn.addEventListener('click',()=>{
     const token = sessionStorage.getItem('token');
     if (token) {
@@ -139,7 +132,7 @@ const renderBookDetail = (book) => {
   
   
   
-  //책 소개
+  // 책 소개 부분
   bookInfoIsbn.innerText = `ISBN | ${book.isbn}`;
   bookInfoAuthor.innerText = `저자 | ${book.author}`;
   bookInfoPublisher.innerText = `출판사 | ${book.publisher}`;
