@@ -27,9 +27,9 @@ const createOrderList = () => {
           </div>
           <p class="item-cost"> 23,400원</p>
           <span class="admin-buttons">
-            <img class="admin-button order-edit" title="수정" src="../public/images/icon_edit.svg">
-            <img class="admin-button order-check hidden" title="확인" src="../public/images/icon_check.svg">
-            <img class="admin-button order-delete" title="삭제" src="../public/images/icon_delete.svg">
+            <img class="admin-button order-edit" title="수정" src="/public/images/icon_edit.svg">
+            <img class="admin-button order-check hidden" title="확인" src="/public/images/icon_check.svg">
+            <img class="admin-button order-delete" title="삭제" src="/public/images/icon_delete.svg">
           </span>
         </div>
       </div>

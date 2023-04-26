@@ -10,9 +10,9 @@ const createCategoryList = () => {
     <div class="category-box">
         <p class="category-name">${categories[i].name}</p>
         <input class="category-edit-input hidden" type="text"/>
-        <img class="admin-button category-edit" title="수정" src="../public/images/icon_edit.svg">
-        <img class="admin-button hidden category-check" title="확인" src="../public/images/icon_check.svg">
-        <img class="admin-button category-delete" title="삭제" src="../public/images/icon_delete.svg">
+        <img class="admin-button category-edit" title="수정" src="/public/images/icon_edit.svg">
+        <img class="admin-button hidden category-check" title="확인" src="/public/images/icon_check.svg">
+        <img class="admin-button category-delete" title="삭제" src="/public/images/icon_delete.svg">
     </div>
     `
   }
@@ -26,8 +26,8 @@ const addCategory = () => {
     adminAddCategories.classList.remove('hidden');
     adminAddCategories.innerHTML += `
       <input class="add-page-input" id="add-category-input" type="text" placeholder="추가하실 카테고리명을 입력해주세요."/>
-      <img class="admin-button" id="add-category-check" title="확인" src="../public/images/icon_check.svg">
-      <img class="admin-button" id="add-category-delete" title="삭제" src="../public/images/icon_delete.svg">
+      <img class="admin-button" id="add-category-check" title="확인" src="/public/images/icon_check.svg">
+      <img class="admin-button" id="add-category-delete" title="삭제" src="/public/images/icon_delete.svg">
     `;
     const addCategoryCheck = document.querySelector('#add-category-check');
     const addCategoryDelete = document.querySelector('#add-category-delete');
@@ -41,9 +41,9 @@ const addCategory = () => {
       <div class="category-box">
           <p class="category-name">${addCategoryInput.value}</p>
           <input class="category-edit-input hidden" type="text"/>
-          <img class="admin-button category-edit" title="수정" src="../public/images/icon_edit.svg">
-          <img class="admin-button hidden category-check" title="확인" src="../public/images/icon_check.svg">
-          <img class="admin-button category-delete" title="삭제" src="../public/images/icon_delete.svg">
+          <img class="admin-button category-edit" title="수정" src="/public/images/icon_edit.svg">
+          <img class="admin-button hidden category-check" title="확인" src="/public/images/icon_check.svg">
+          <img class="admin-button category-delete" title="삭제" src="/public/images/icon_delete.svg">
       </div>
       `
       adminAddCategories.innerHTML ='';

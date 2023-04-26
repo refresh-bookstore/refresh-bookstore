@@ -19,8 +19,8 @@ const createBookList = () => {
           </div>
           <p class="item-cost">${books[i].price.toLocaleString()}원</p>
           <span class="admin-buttons">
-            <img class="admin-button" src="../public/images/icon_edit.svg">
-            <img class="admin-button" src="../public/images/icon_delete.svg">
+            <img class="admin-button" src="/public/images/icon_edit.svg">
+            <img class="admin-button" src="/public/images/icon_delete.svg">
           </span> 
         </div>
     `
