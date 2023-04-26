@@ -24,7 +24,6 @@ const createCategoryList = () => {
           <img class="admin-button category-delete" title="삭제" src="/public/images/icon_delete.svg">
       </div>
       `
-
       addCategory(categories);
       editCategory(categories);
       deleteCategory(categories);
@@ -169,12 +168,6 @@ const deleteCategory = (categories) => {
     })
   })
 }
-
-
-
-
-
-
 
 
 
