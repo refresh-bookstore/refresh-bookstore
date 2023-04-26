@@ -22,7 +22,7 @@ router.post("/login", login);
 //로그아웃
 router.post("/logout", checkSession, logout);
 //사용자 정보 조회
-router.post("/userinfo", checkSession, getUserInfo);
+router.get("/userinfo", checkSession, getUserInfo);
 //사용자 정보 업데이트
 router.post("/update", checkSession, updateUserValidator, updateUserInfo);
 //사용자 정보 삭제

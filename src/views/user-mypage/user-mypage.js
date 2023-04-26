@@ -57,10 +57,10 @@ async function updateUser(event) {
 
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
     try {
-      const response = await fetch("user-mypage/update", {
+      const response = await fetch("/update", {
         method: "POST",
         headers: {
-          "Content-Type": "text/html",
+          "Content-Type": "application/json",
           "authorization": `Bearer ${sessionStorage.getItem("token")}`,
         },
         body: JSON.stringify({

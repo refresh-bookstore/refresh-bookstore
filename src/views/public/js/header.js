@@ -132,7 +132,7 @@ function headerFunc() {
   // 마이페이지 메뉴 이동
   async function moveToMypage () {
     try {
-      const response = await fetch ("/mypage-menu", {
+      const response = await fetch ("/userinfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
