@@ -1,5 +1,5 @@
-import { main } from "/public/js/main.js";
-import { checkValid } from "./checkValid.js";
+import { main } from '/public/js/main.js';
+import { checkValid } from './checkValid.js';
 
 const userGreeting = document.getElementById("user-greeting");
 const nameText = document.getElementById("nameText");
@@ -25,6 +25,11 @@ submitButton.addEventListener("click", updateUser);
 // 회원 탈퇴 버튼 이벤트 리스너
 deleteButton.addEventListener("click", deleteUser);
 
+// 페이지를 떠날 때 세션 스토리지의 userData 삭제
+window.addEventListener("beforeunload", function() {
+  sessionStorage.removeItem("userData");
+});
+
 function loadUserData() {
   // 세션스토리지의 유저 데이터
   const userData = JSON.parse(sessionStorage.getItem("userData"));
@@ -38,6 +43,19 @@ function loadUserData() {
     addressInput.value = userData.address;
     detailAddressInput.value = userData.detailAddress;
     phoneInput.value = userData.phone;
+
+    if (postalCodeInput.value === "undefined" ||
+      addressInput.value === "undefined" ||
+      detailAddressInput.value === "undefined") {
+      postalCodeInput.value = "";
+      addressInput.value = "";
+      detailAddressInput.value = "";
+    }
+
+    if (phoneInput.value === "undefined") {
+      phoneInput.value = "";
+    }
+
   } else {
     alert("회원 정보가 없습니다.");
     // 홈으로 돌아가기
@@ -55,6 +73,7 @@ async function updateUser(event) {
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
+    
     try {
       const response = await fetch("/update", {
         method: "POST",
@@ -70,12 +89,11 @@ async function updateUser(event) {
         }),
       });
 
-      console.log(response);
-
       if (response.ok) {
         const updated = JSON.stringify({
           name: nameText.innerText,
           email: emailText.innerText,
+          password: passwordInput.value,
           postalCode: postalCodeInput.value,
           address: addressInput.value,
           detailAddress: detailAddressInput.value,
@@ -85,16 +103,16 @@ async function updateUser(event) {
         sessionStorage.removeItem("userData");
         sessionStorage.setItem("userData", updated);
 
-        //location.href = "/user-mypage";
+        alert("회원정보가 수정되었습니다.");
       } else {
-        const data = await response.json();
-        throw new Error(data.message);
+        throw new Error(response.message);
       }
     } catch (error) {
       console.log(error.message);
-
-      //location.href = "/user-mypage";
     }
+  } else {
+    event.preventDefault();
+    checkValid();
   }
 }
 
@@ -107,17 +125,17 @@ async function deleteUser(event) {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-        },
+        }
       });
 
       const data = await response.json();
       if (response.ok) {
         alert(`탈퇴하셨습니다.\n함께해서 즐거웠어요.\u{2764}`);
-
+        
         // 스토리지 전부 삭제
         sessionStorage.clear();
         localStorage.clear();
-
+        
         // 홈 이동
         location.replace("/");
       } else {
