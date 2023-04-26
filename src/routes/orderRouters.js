@@ -2,6 +2,7 @@ const { Router } = require("express");
 const checkSession = require("../middlewares/checkSession");
 const { createOrder, getOrderList, getOrderId } = require("../controllers/orderController");
 const { changeShippingAddress, updateShippingStatus, cancelOrder, deleteOrder} = require("../services/orderService");
+const { isAdmin } = require("../middlewares/isAdmin.js");
 const router = Router();
 
 //주문 목록을 기쟈오기 위한 API
