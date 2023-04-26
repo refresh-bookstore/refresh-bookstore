@@ -43,4 +43,8 @@ router.get("/book-detail", (req, res) => {
   res.render("book-detail/book-detail.html");
 });
 
+router.get("/user-admin", (req, res) => {
+  res.render("user-admin/user-admin.html");
+});
+
 module.exports = router;
