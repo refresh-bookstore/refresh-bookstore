@@ -61,7 +61,7 @@ async function updateUser(event) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+          "credentials": 'include'
         },
         body: JSON.stringify({
           password: passwordInput.value,
@@ -72,7 +72,8 @@ async function updateUser(event) {
         })
       });
 
-      console.log(response)
+      const data = await response.json();
+      alert(data);
 
       if (response.ok) {
         const updated = JSON.stringify({
@@ -89,11 +90,10 @@ async function updateUser(event) {
 
         //location.href = "/user-mypage";
       } else {
-        const data = await response.json();
         throw new Error(data.message);
       }
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
       
       //location.href = "/user-mypage";
     }
