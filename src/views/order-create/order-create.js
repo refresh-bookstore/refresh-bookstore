@@ -153,8 +153,18 @@ async function payBtnClick() {
   } else {
     request = requestOption[requestType];
   }
-  let ISBN = purchaseData[0].isbn;
-  let amount = purchaseData[0].amount;
+
+  let orderArr = []
+
+  for(let i = 0; i < purchaseData.lenght; i++){
+    let ISBN = purchaseData[i].isbn;
+    let amount = purchaseData[i].amount;
+    orderArr.push({ISBN, amount})
+  }
+
+  // let ISBN = purchaseData[0].isbn;
+  // let amount = purchaseData[0].amount;
+
   try {
     const response = await fetch("/order-create", {
       method: "POST",
@@ -168,7 +178,7 @@ async function payBtnClick() {
         detailAddress: detailAddressInput.value,
         userPhone: phoneNumberInput.value,
         orderRequest: request,
-        orderList: [ISBN, amount], // ISBN, amount
+        orderList: orderArr, // ISBN, amount
         deliveryFee: getPriceNumber(deliveryFee.innerText),
         totalPrice: getPriceNumber(totalCost.innerText),
       }),
