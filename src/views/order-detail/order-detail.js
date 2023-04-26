@@ -1,6 +1,7 @@
 import { main } from '/public/js/main.js';
+import { order } from './temp.js';
 
-const orderData = document.querySelector('.orderDate');
+const orderDate = document.querySelector('.orderDate');
 const shippingStatus = document.querySelector('.shippingStatus');
 
 const bookTitle = document.querySelectorAll('.book-title');
@@ -18,19 +19,12 @@ const deliveryRequest = document.querySelector('.deliveryRequest');
 const modifyButton = document.querySelector('.modifyButton'); 
 const cancelButton = document.querySelector('.cancelButton'); 
 
-// 지금 실험해볼 수 있는 로컬스토리지가 카트 뿐이라 카트로 담음
-// cart -> purchase로 수정해야 함
-const purchaseData = JSON.parse(localStorage.getItem('cart'));
+const purchaseData = JSON.parse(localStorage.getItem('purchase'));
 const orderContainer = document.querySelector('.order-container');
 
 // 로컬스토리지에 purchase가 없다면 주문 내역이 없습니다 띄우기
-// 혹은 alert만 띄워도 괜찮을듯
 if (!purchaseData) {
-  orderContainer.classList.add('empty');
-  orderContainer.innerHTML = `<div></div>
-                <div class="empty-order-list">주문 내역이 없습니다</div>`;
-} else {
-  orderContainer.classList.remove('empty');
+  alert('주문 내역이 없습니다');
 }
 
 // 주문 정보 조회
@@ -44,7 +38,17 @@ cancelButton.addEventListener('click', cancelOrder);
 
 // 주문 정보 조회
 async function loadOrder() {
-  
+  // 주문 일, 배송 상태 가져오기
+
+  // 임의로 현재 날짜
+  const orderDay = new Date().toLocaleDateString().split('/');
+  orderDate.innerText = orderDay;
+  shippingStatus.innerText = order[0].shipingStatus;
+
+  // 주문한 책 상품 가져오기
+
+  // 배송비, 총 결제금액 가져오기
+
 }
 
 // 주문 정보 수정
