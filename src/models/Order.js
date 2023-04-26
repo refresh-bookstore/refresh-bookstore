@@ -3,13 +3,22 @@ const Schema = mongoose.Schema;
 const productService = require("../services/productService");
 
 function generateOrderId() {
-  let result = "";
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  const length = chars.length;
-  for (let i = 0; i < 10; i++) {
-    result += chars.charAt(Math.floor(Math.random() * length));
+  const randomChars =
+    String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
+    String.fromCharCode(65 + Math.floor(Math.random() * 26));
+  let randomNums = "0000" + Math.floor(Math.random() * 10000);
+  randomNums = randomNums.slice(-4);
+  let randomMid = "";
+  for (let i = 0; i < 4; i++) {
+    if (i % 2 === 0) {
+      randomMid += Math.floor(Math.random() * 10);
+    } else {
+      randomMid += chars.charAt(Math.floor(Math.random() * 36) + 26);
+    }
   }
-  return result;
+  const randomId = randomChars + randomMid + randomNums;
+  return randomId;
 }
 
 const orderSchema = new Schema(
@@ -85,21 +94,25 @@ const orderSchema = new Schema(
   }
 );
 
-orderSchema.pre("save", async function (next) {
-  try {
-    let totalPrice = 0;
-    const order = this;
+// orderSchema.pre("save", async function (next) {
+//   try {
+//     let totalPrice = 0;
+//     const order = this;
 
-    for (let i = 0; i < order.orderList.length; i++) {
-      let getPrice = await productService.getPrice(
-        order.orderList[i].product.price
-      );
-      totalPrice += order.orderList[i].quantity * getPrice;
-    }
+//     for (let i = 0; i < order.orderList.length; i++) {
+//       let getPrice = await productService.getPrice(
+//         order.orderList[i].product.price
+//       );
+//       totalPrice += order.orderList[i].quantity * getPrice;
+//     }
 
-    order.totalPrice = totalPrice;
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
+//     order.totalPrice = totalPrice;
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+const Order = mongoose.model("Order", orderSchema);
+
+module.exports = Order;
