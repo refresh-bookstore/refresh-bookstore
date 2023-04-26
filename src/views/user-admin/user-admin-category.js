@@ -66,13 +66,15 @@ const addCategory = () => {
           throw new Error(res.statusText);
         }
         console.log('카테고리 추가 성공');
+        adminAddCategories.innerHTML ='';
+        adminAddCategories.classList.add('hidden');
+        createCategoryList();
       })
       .catch(err => {
         console.error('카테고리 추가 실패', err);
       });
 
-      adminAddCategories.innerHTML ='';
-      adminAddCategories.classList.add('hidden');
+
 
     })
   
@@ -123,15 +125,17 @@ const editCategory = (categories) => {
             throw new Error(res.statusText);
           }
           console.log('카테고리 수정 성공');
+          e.classList.remove('hidden');
+          categoryName.classList.remove('hidden');
+          categoryEditInput.classList.add('hidden');
+          categoryCheckBtn.classList.add('hidden');
+          createCategoryList();
         })
         .catch(err => {
           console.error('카테고리 수정 실패', err);
         });
   
-        e.classList.remove('hidden');
-        categoryName.classList.remove('hidden');
-        categoryEditInput.classList.add('hidden');
-        categoryCheckBtn.classList.add('hidden');
+
       })
     });
   })
@@ -155,14 +159,20 @@ const deleteCategory = (categories) => {
           throw new Error(res.statusText);
         }
         console.log('카테고리 삭제 성공');
+        categoryBox.remove();
+        createCategoryList();
       })
       .catch(err => {
         console.error('카테고리 삭제 실패', err);
       });
-      categoryBox.remove();
+
     })
   })
 }
+
+
+
+
 
 
 
