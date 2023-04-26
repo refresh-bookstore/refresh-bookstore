@@ -118,7 +118,7 @@ const renderBookDetail = (book) => {
     const token = sessionStorage.getItem('token');
     if (token) {
       localStorage.removeItem('purchase');
-      const purchaseItems = {
+      const purchaseItems = [{
           title: book.title,
           author: book.author,
           publisher: book.publisher,
@@ -129,7 +129,7 @@ const renderBookDetail = (book) => {
           image_path: book.image_path,
           category: book.category,
           amount: Number(amountInput.value),
-      };
+      }];
       localStorage.setItem('purchase', JSON.stringify(purchaseItems));
       location.href = '/order-create';
     } else {

@@ -16,7 +16,7 @@ const [ nameInput , phoneNumberInput , postalCodeInput , addressInput , detailAd
 
 async function loadUserData() {
   try {
-    const response = await fetch("/order-create", {
+    const response = await fetch("/userinfo", {
       method: "GET",
       headers: {
         'content-Type': 'application/json'
@@ -156,17 +156,32 @@ async function payBtnClick() {
 
   let orderArr = []
 
-  for(let i = 0; i < purchaseData.lenght; i++){
+  for(let i = 0; i < purchaseData.length; i++){
     let ISBN = purchaseData[i].isbn;
     let amount = purchaseData[i].amount;
     orderArr.push({ISBN, amount})
+    console.log(orderArr);
   }
 
   // let ISBN = purchaseData[0].isbn;
   // let amount = purchaseData[0].amount;
 
+  const test = {
+    userName: nameInput.value,
+    postalCode: postalCodeInput.value,
+    address: addressInput.value,
+    detailAddress: detailAddressInput.value,
+    userPhone: phoneNumberInput.value,
+    orderRequest: request,
+    orderList: orderArr, // ISBN, amount
+    deliveryFee: getPriceNumber(deliveryFee.innerText),
+    totalPrice: getPriceNumber(totalCost.innerText),
+  };
+
+  console.log(test);
+
   try {
-    const response = await fetch("/order-create", {
+    const response = await fetch("/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
