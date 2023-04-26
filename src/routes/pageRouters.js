@@ -31,6 +31,10 @@ router.get("/order-create", checkSession, (req, res) => {
   res.render("order-create/order-create.html");
 });
 
+router.get("/order-create/order-complete", checkSession, (req, res) => {
+  res.render("order-complete/order-complete.html");
+});
+
 router.get("/cart", (req, res) => {
   res.render("cart/cart.html");
 });
