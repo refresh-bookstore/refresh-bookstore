@@ -28,6 +28,6 @@ router.post("/update", checkSession, updateUserValidator, updateUserInfo);
 //사용자 정보 삭제
 router.delete("/delete", checkSession, deleteUserByEmail);
 //회원 정보들 불러오기
-rotuer.get("/users", checkSession, inAdmin, getUsers);
+router.get("/users", checkSession, isAdmin, getUsers);
 
 module.exports = router;
