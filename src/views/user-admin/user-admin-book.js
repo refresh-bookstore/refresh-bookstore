@@ -184,7 +184,7 @@ const adminAddBook = (books) => {
             const bookPublished = bookAddBlock.querySelector('#dateInput');
             const bookPrice = bookAddBlock.querySelector('#priceInput');
             const bookDescription = bookAddBlock.querySelector('#descriptionInput');
-            if(!bookTitle.value || bookAuthor.value || bookPublisher.value || bookIsbn.value || bookPublished.value || bookPrice.value){
+            if(!bookTitle.value || !bookAuthor.value || !bookPublisher.value || !bookIsbn.value || !bookPublished.value || !bookPrice.value){
               window.alert('정보를 모두 입력해주세요.')
             }else{
               const bookData = {

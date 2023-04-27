@@ -49,7 +49,7 @@ if (purchaseData.length !== 0) {
   
     orderList.innerHTML +=
       `<div class="item">
-      <a class="book-img" href="/book-detail/${isbn}">
+      <a class="book-img" href="/book-detail/?isbn=${isbn}">
         <img src="${image_path}" class="book-img" alt="${title}"/>
       </a>
       <div class="book__title__price">
