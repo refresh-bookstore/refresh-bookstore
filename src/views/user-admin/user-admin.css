@@ -88,7 +88,6 @@
 /*-----컨텐츠 추가------*/
 
 
-
 .content-area .add-button {
   width: 40px;
   height: 40px;
@@ -126,7 +125,6 @@
   box-shadow: 3px 3px 3px var(--color-light-gray);
 }
 
-
 .add-page .add-page-input {
   color:var(--color-point);
   font-size: var(--font-medium);
@@ -149,7 +147,6 @@
   height: 20px;
 }
 
-
 .content {
   display: none;
   width: 100%;
@@ -167,12 +164,6 @@
 
 
 
-
-
-
-
-
-
 /*-----공통 사용 요소------*/
 
 .content .admin-buttons {
@@ -186,6 +177,7 @@
 }
 
 .admin-button{
+  display: flex;
   width: 15px;
   height: 30px;
   padding: 2px;
@@ -194,35 +186,55 @@
   cursor: pointer;
 }
 
+.admin-button.hidden{
+  display: none;
+}
+
 .admin-button:hover{
   opacity: 1;
 }
 
 .content .admin-items {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   width: 90%;
   height: 60px;
-  margin: 8px 0;
+  margin: 5px;
+  padding-top: 5px;
 
   background-color: var(--color-white);
   border-radius: var(--border-radius-button);
   border: 0.3px var(--color-light-gray) solid;
-  box-shadow: 3px 3px 3px var(--color-light-gray);
+  box-shadow: 2px 2px 2px var(--color-light-gray);
+  transition: all 0.4s ease;
 }
 
-.content .admin-items input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-
-  background-color: var(--color-dark-gray);
-
-  border: 1px var(--color-light-gray) solid;
-}
 
 /*-----도서관리------*/
+
+.content .add-books-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+  height: 30px;
+  margin: 5px;
+  font-size: var(--font-regular);
+  font-weight: var(--weight-medium);
+
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-button);
+  border: 0.3px var(--color-light-gray) solid;
+  box-shadow: 2px 2px 2px var(--color-light-gray);
+  transition: all 0.2s ease;
+
+  cursor: pointer;
+}
+
+
 
 .content .admin-items .item-info {
 
@@ -279,6 +291,80 @@
   text-align: right;
   margin: 10px;
   padding: 0 10px;
+}
+
+
+.content .book-more-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  width: 100%;
+  margin: 0 10px;
+  padding: 10px 30px;
+  border-top: 0.3px var(--color-light-gray) solid;
+
+  font-size: var(--font-small);
+  font-weight: var(--weight-regular);
+  line-height: 30px;
+}
+
+.content .book-more-infos span{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 10px 0;
+  
+}
+
+
+.content .book-more-infos span p{
+  width: 60px;
+  font-size: var(--font-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-black);
+  text-align: left;
+}
+
+.content .book-more-infos span input{
+  padding: 0 8px;
+  height: 30px;
+  width: auto;
+  border-radius: var(--border-radius-input);
+  border: 0.2px var(--color-dark-gray) solid;
+}
+
+.content .book-more-infos span input#titleInput{
+  width: 90%;
+}
+
+.content .book-more-infos span textarea{
+  padding: 0 8px;
+  height: 300px;
+  width: 90%;
+  border-radius: var(--border-radius-input);
+  border: 0.2px var(--color-dark-gray) solid;
+  line-height: 23px;
+}
+
+.content .add-books-block-child{
+  border-top-left-radius: var(--border-radius-input);
+  border-top-right-radius: var(--border-radius-input);
+  padding-top: 5px;
+  text-align: center;
+  height: 30px;
+  width: 100%;
+  margin: 0;
+
+}
+
+.content .add-books-block-child:hover {
+
+  background-color: var(--color-light-green);
+  font-weight: var(--weight-bold);
+  color: var(--color-point);
+
 }
 
 /*-----회원관리------*/
@@ -339,12 +425,38 @@
 .content .admin-items .admin-user-info .admin-user-name {
   width: 180px;
   font-size: var(--font-small);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-semi-bold);
   color: var(--color-black);
   text-align: center;
   margin: auto, 20px;
   padding-right: 20px;
 
+}
+
+.content .admin-items .admin-user-info .admin-user-name.admin {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  
+  width: 180px;
+  font-size: var(--font-small);
+  font-weight: var(--weight-bold);
+  color: var(--color-point);
+  text-align: center;
+  margin: auto, 20px;
+  padding-right: 20px;
+
+}
+
+.admin-mark {
+  color: var(--color-white);
+  width: 20px;
+  height: 13px;
+
+  font-size: var(--font-micro);
+  margin-bottom: 4px;
 }
 
 .content .admin-items .admin-user-info .admin-user-email {
@@ -361,7 +473,7 @@
   width: 100%;
   margin: 10px;
   padding: 10px 30px;
-  border-top: 0.3px var(--color-dark-gray) solid;
+  border-top: 0.3px var(--color-light-gray) solid;
 
   font-size: var(--font-small);
   font-weight: var(--weight-regular);
@@ -374,30 +486,69 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: space-between;
-  height: auto;
+  align-items: space-around;
+  width: 90%;
+  height: 40px;
+
+  margin: 8px;
+  padding: 0;
+  transition: all 0.3s ease;
 }
 
 .content .admin-items.ordered-list .order-upper{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: space-between;
+  align-items: center;
 
   height: auto;
   width: 100%;
   height: 40px;
   padding: 10px;
 
-  background-color: var(--color-point); 
-  border-top-right-radius: var(--border-radius-button);
-  border-top-left-radius: var(--border-radius-button);
+
+
 }
+
 
 .content .admin-items.ordered-list .order-upper p{
   font-size: var(--font-regular);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-regular);
 }
+
+.content .admin-items.ordered-list .order-upper p.order-date {
+  width: 30%;
+  font-size: var(--font-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-light-black);
+}
+
+.content .admin-items.ordered-list .order-upper p.order-id {
+  width: 50%;
+  font-weight: var(--weight-bold);
+  color: var(--color-black);
+}
+
+.content .admin-items.ordered-list .order-upper p.order-status {
+  font-weight: var(--weight-bold);
+  color: var(--color-point);
+}
+
+
+.content .admin-items .order-more-infos {
+  width: 100%;
+  height: auto;
+  border-top: 0.3px var(--color-light-gray) solid;
+
+  margin: 10px;
+  padding: 10px 30px;
+
+
+  font-size: var(--font-small);
+  font-weight: var(--weight-regular);
+  line-height: 23px;
+}
+
 
 .content .admin-items.ordered-list .order-lower{
   display: flex;
@@ -422,6 +573,7 @@
 }
 
 .content .admin-items .item-info .item-more-info.order{
+  
   display: flex;
   flex-direction: column;
   justify-content: space-around;  
