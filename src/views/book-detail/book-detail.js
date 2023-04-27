@@ -103,7 +103,9 @@ const renderBookDetail = (book) => {
     const cartCheckout = confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?");
     if(cartCheckout){
       location.href = '/cart';
-  }
+    }else{
+      main();
+    }
   });
   
   // 구매 버튼
