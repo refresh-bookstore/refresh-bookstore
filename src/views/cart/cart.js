@@ -1,4 +1,5 @@
 import { main } from '/public/js/main.js';
+import { isFullCart } from '/public/js/isFullCart.js';
 
 // 가격 문자열에서 숫자만 반환하는 함수
 function getPriceNumber(str) {
@@ -72,6 +73,8 @@ function renderBooks() {
     activateAmountBtn();
     activateDeleteBtn();
     setPayList();
+    window.addEventListener('popstate', isFullCart);
+    main();
 }
 renderBooks();
 
@@ -195,9 +198,12 @@ function activateDeleteSelectedBtn() {
     }
     activateCheckboxes();
     setPayList();
+    window.addEventListener('popstate', isFullCart);
+    main();
   });
 }
 activateDeleteSelectedBtn();
+
 
 // 금액 리스트 세팅 함수
 function setPayList() {
@@ -237,10 +243,17 @@ function setTotalCost() {
   totalCost.innerText = `${totalCostNum.toLocaleString()}원`;
 }
 
+// 구매하기 버튼
 orderButton.addEventListener('click', () => {
-  saveToPurchase(JSON.parse(localStorage.getItem('cart')));
-  localStorage.removeItem('cart');
-  location.href = '/order-create';
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    saveToPurchase(JSON.parse(localStorage.getItem('cart')));
+    localStorage.removeItem('cart');
+    location.replace('/order-create');
+  } else {
+    window.alert('로그인을 해주세요.');
+    location.href = '/login';
+  }
 });
 
 main();
