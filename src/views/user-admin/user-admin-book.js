@@ -237,7 +237,7 @@ const adminDeleteBook = (books) => {
 
       const bookTitlePart = bookInfoBlock.querySelector('.item-name');
       const thisBook = books.find((e) =>  e.title === bookTitlePart.innerText );
-      const deleteConfirm = confirm(`${thisBook.title} 책을 삭제하시겠습니까?`);
+      const deleteConfirm = confirm(`<${thisBook.title}> 도서를 삭제하시겠습니까?`);
       if(deleteConfirm){
         fetch(`/user-admin/product?book=${thisBook.isbn}`, {
           method: 'DELETE',
