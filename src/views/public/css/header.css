@@ -150,11 +150,12 @@ a {
   padding: 10px;
 }
 
-.header-menu-li {
-  font-size: 16px;
-  padding: 5px 5px 8px 5px;
-}
-
 .header-menu-li:hover {
   color: #bfbfbf;
+}
+
+.li-container {
+  font-size: 16px;
+  padding: 5px 5px 8px 5px;
+  width: 150px;
 }
