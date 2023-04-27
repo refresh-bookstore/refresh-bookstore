@@ -5,6 +5,8 @@
   <title>Refresh Books</title>
   <link rel="stylesheet" href="order-detail.css">
   <script type="module" src="order-detail.js"></script>
+  <script src="/public/js/findAddress.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -15,6 +17,11 @@
     <main class="order-container empty">
       <section class="products-detail">
 
+        <div class="field orderIdArea">
+          <p class="label">주문번호</p>
+          <div class="orderId">XQ66542346</div>
+        </div>
+
         <div class="field orderDateArea">
           <p class="label">주문일</p>
           <div class="orderDate">2023-04-20</div>
@@ -22,24 +29,18 @@
 
         <div class="field shippingStatusArea">
           <p class="label">배송 상태</p>
-          <div class="shippingStatus">배송전 > 배송중 > 배송완료</div>
+          <div class="shippingStatus">
+            <span id="state0">상품 준비중</span> >
+            <span id="state1">배송중</span> >
+            <span id="state2">배송완료</span>
+          </div>
         </div>
 
         <p class="label order-content">주문 내역</p>
         <div class="productInfoArea">
           <div class="productInfo">
             <ul class="books">
-              <li class="book">
-                  <div class="book-img">
-                    <img src="/public/images/sample_image.jpg">
-                  </div>
-                  <div class="book-info">
-                    <p class="book-title">혼자 공부하는 얄팍한 코딩지식</p>
-                    <p class="author">고현민</p>
-                    <p class="book-price">15,800원 X 2권</p>
-                  </div>
-              </li>
-              <li class="book">
+              <!-- <li class="book">
                 <div class="book-img">
                   <img src="../public/images/sample_image.jpg">
                 </div>
@@ -48,12 +49,12 @@
                   <p class="author">고현민</p>
                   <p class="book-price">15,800원 X 2권</p>
                 </div>
-              </li>
+              </li> -->
             </ul>
           </div>
           <div class="field deliveryFeeArea">
             <p class="label">배송비</p>
-            <div class="deliveryFee">3,000원</div>
+            <div class="deliveryFee"></div>
           </div>
           <div class="field entirePriceArea">
             <p class="label">총 결제금액</p>
@@ -75,10 +76,10 @@
             </div>
             <div class="addressArea">
               <label class="label" for="addressInput">주소</label>
-              <input  type="button" id="searchAddress" class="button search-address" value="주소 검색" onclick="findAddress()">
+              <input hidden type="button" id="searchAddress" class="button search-address" value="주소 검색" onclick="findAddress()">
               <input readonly type="text" id="postalCodeInput" class="postalCode" value="(13536)">
-              <input readonly type="text" class="address" value="경기 성남시 분당구 판교역로 10 (백현동)">
-              <input readonly type="text" class="detailAddress" value="131">
+              <input readonly type="text" id="addressInput" class="address" value="경기 성남시 분당구 판교역로 10 (백현동)">
+              <input readonly type="text" id="detailAddressInput" class="detailAddress" value="131">
             </div>
             <div class="deliveryRequestArea">
               <label class="label">배송 요청 사항</label>
@@ -88,6 +89,7 @@
         </div>
       </section>
       <section class="buttonArea">
+        <button hidden class="modifyCompleteButton">수정 완료</button>
         <button class="modifyButton">주문정보 수정</button>
         <button class="cancelButton">주문 취소</button>
       </section>
