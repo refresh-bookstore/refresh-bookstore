@@ -37,6 +37,7 @@ const createBookList = () => {
     }
     adminEditBook(books);
     adminAddBook(books);
+    adminDeleteBook(books);
   }
 }
 
@@ -183,7 +184,7 @@ const adminAddBook = (books) => {
             const bookPublished = bookAddBlock.querySelector('#dateInput');
             const bookPrice = bookAddBlock.querySelector('#priceInput');
             const bookDescription = bookAddBlock.querySelector('#descriptionInput');
-            if(bookTitle.value === null || bookAuthor.value === null || bookPublisher.value === null || bookCategory.value === null || bookIsbn.value === null || bookPublished.value === null || bookPrice.value === null){
+            if(!bookTitle.value || bookAuthor.value || bookPublisher.value || bookIsbn.value || bookPublished.value || bookPrice.value){
               window.alert('정보를 모두 입력해주세요.')
             }else{
               const bookData = {
@@ -225,5 +226,37 @@ const adminAddBook = (books) => {
       })
 
 }
+
+
+const adminDeleteBook = (books) => {
+  const bookDeleteBtn = adminContentBooks.querySelectorAll('.delete');
+  bookDeleteBtn.forEach((e)=> {
+    e.addEventListener('click', ()=>{
+
+      const bookInfoBlock = e.closest('.admin-items');
+
+      const bookTitlePart = bookInfoBlock.querySelector('.item-name');
+      const thisBook = books.find((e) =>  e.title === bookTitlePart.innerText );
+      const deleteConfirm = confirm(`${thisBook.title} 책을 삭제하시겠습니까?`);
+      if(deleteConfirm){
+        fetch(`/user-admin/product?book=${thisBook.isbn}`, {
+          method: 'DELETE',
+          })
+          .then(res => {
+            if (!res.ok) {
+              throw new Error(res.statusText);
+            }
+            console.log('책 삭제 성공');
+            createBookList();
+          })
+          .catch(err => {
+                console.error('책 삭제 실패', err);
+              });
+      }
+    })
+  }) 
+}
+
+
 
 export { createBookList };
