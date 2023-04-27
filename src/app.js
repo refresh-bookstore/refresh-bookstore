@@ -11,7 +11,7 @@ const PORT = process.env.PORT;
 const SERVER_LINK = process.env.SERVER_LINK;
 
 ///라우터 가지고오기
-const indexRouter = require("./routes/index");
+const homeRouter = require("./routes/homeRouter");
 const usersRouter = require("./routes/userRouters");
 const pageRouter = require("./routes/pageRouters");
 const productRouter = require("./routes/productRouters");
@@ -60,7 +60,7 @@ app.use(
   })
 );
 
-app.use("/", indexRouter);
+app.use("/", homeRouter);
 app.use("/", usersRouter);
 app.use("/", pageRouter);
 app.use("/", productRouter);

@@ -26,13 +26,16 @@ exports.cancelOrder = async (req, res) => {
 
     const findOrderId = await Order.findOne({ orderId });
 
-    if(findOrderId.shippingStatus === "배송 완료" || findOrderId.shippingStatus === "주문 취소"){
+    if (
+      findOrderId.shippingStatus === "배송 완료" ||
+      findOrderId.shippingStatus === "주문 취소"
+    ) {
       throw new Error("이미 배송 완료된 상품이거나 취소된 주문입니다.");
     }
 
     const order = await Order.findOneAndUpdate(
       { orderId },
-      { shippingStatus},
+      { shippingStatus },
       { new: true }
     );
 
@@ -50,9 +53,8 @@ exports.cancelOrder = async (req, res) => {
 // Admin :: 주문 삭제하기
 exports.deleteOrder = async (req, res) => {
   try {
-
     const orderId = req.params.orderId;
-    const order = await Order.deleteOne({ orderId: orderId});
+    const order = await Order.deleteOne({ orderId: orderId });
 
     if (!orderId) {
       return res.status(404).send({ error: "Order not found" });
@@ -65,7 +67,6 @@ exports.deleteOrder = async (req, res) => {
   }
 };
 
-
 // 사용자 전용 :: 주문정보 변경
 exports.changeShippingAddress = async (req, res) => {
   try {
@@ -76,9 +77,7 @@ exports.changeShippingAddress = async (req, res) => {
 
     const order = await Order.findOneAndUpdate(
       { orderId },
-      { postalCode,
-        address, 
-        detailAddress},
+      { postalCode, address, detailAddress },
       { new: true }
     );
 
@@ -92,7 +91,6 @@ exports.changeShippingAddress = async (req, res) => {
     res.status(500).send({ error: "Server error" });
   }
 };
-
 
 //  주문 상태 변경
 exports.updateShippingStatus = async (req, res, next) => {
