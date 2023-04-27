@@ -178,3 +178,18 @@
 .order-info a:hover {
   background-color: var(--color-dark-gray);
 }
+
+.contentArea.empty {
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto;
+}
+
+.empty-order-list {
+  font-size: var(--font-large);
+  color: var(--color-dark-gray);
+  display: flex;
+  height: 440px;
+  align-items: center;
+  justify-content: center;
+}
