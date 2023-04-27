@@ -4,7 +4,7 @@
 .slider {
   width: 1024px;
   height: 300px;
-  overflow: hidden;
+  overflow: hidden;margin-top: 15px;
 }
 
 .slider .slides {
@@ -20,7 +20,7 @@
 
 /* main */
 .category-title {
-  margin: 20px 0px;
+  margin: 10px 0px;
 }
 
 .nav-item.category {
