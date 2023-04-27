@@ -488,7 +488,7 @@
   justify-content: flex-start;
   align-items: space-around;
   width: 90%;
-  height: 40px;
+  height: auto;
 
   margin: 8px;
   padding: 0;
@@ -525,16 +525,26 @@
 }
 
 .content .admin-items.ordered-list .order-upper p.order-id {
-  width: 50%;
+  width: 40%;
   font-weight: var(--weight-bold);
   color: var(--color-black);
 }
 
 .content .admin-items.ordered-list .order-upper p.order-status {
+  width: 100px;
   font-weight: var(--weight-bold);
   color: var(--color-point);
 }
 
+.content .admin-items.ordered-list .order-upper select {
+  width: 100px;
+  height:30px;
+  font-size: var(--font-regular);
+  font-weight: var(--weight-bold);
+  color: var(--color-point);
+  border: 0.5px var(--color-point) solid;
+
+}
 
 .content .admin-items .order-more-infos {
   width: 100%;

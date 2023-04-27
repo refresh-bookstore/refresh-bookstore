@@ -150,20 +150,24 @@ const deleteCategory = (categories) => {
       const thisCategory = categories.find((e) => e.name === categoryName.innerText)
       console.log(thisCategory);
       const categoryIdValue = thisCategory._id;
-      fetch(`/user-admin/category?id=${categoryIdValue}`, {
-        method: 'DELETE',
-      })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        console.log('카테고리 삭제 성공');
-        categoryBox.remove();
-        createCategoryList();
-      })
-      .catch(err => {
-        console.error('카테고리 삭제 실패', err);
-      });
+      const deleteConfirm = window.confirm(`<${thisCategory.name}> 카테고리를 삭제하시겠습니까?`)
+      if(deleteConfirm){
+        fetch(`/user-admin/category?id=${categoryIdValue}`, {
+          method: 'DELETE',
+        })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          console.log('카테고리 삭제 성공');
+          categoryBox.remove();
+          createCategoryList();
+        })
+        .catch(err => {
+          console.error('카테고리 삭제 실패', err);
+        });
+      }
+      
 
     })
   })
