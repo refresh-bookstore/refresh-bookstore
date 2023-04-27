@@ -50,6 +50,7 @@ async function getOrderList() {
       data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
       if (data.length > 0) {
+        contentArea.classList.remove("empty");
         data.forEach((orderInfo) => {
           const orderDate = orderInfo.createdAt.slice(0, 10);
           const shippingStatus = orderInfo.shippingStatus;
@@ -92,6 +93,10 @@ async function getOrderList() {
       
           contentArea.innerHTML += orderHtml;
         });
+      } else {
+        contentArea.classList.add("empty");
+        contentArea.innerHTML += `<div></div>
+        <div class="empty-order-list">주문 내역이 없습니다</div>`;
       }
     } else {
       alert("사용자를 찾을 수 없습니다.");
