@@ -1,5 +1,6 @@
 import { main } from '/public/js/main.js';
 import { checkValid } from './checkValid.js';
+import { logout } from '/public/js/logout.js';
 
 const userGreeting = document.getElementById("user-greeting");
 const nameText = document.getElementById("nameText");
@@ -81,7 +82,11 @@ async function getUserData () {
       const data = await response.json();
       loadUserData(data);
     } else {
-      alert("사용자를 찾을 수 없습니다.");
+      alert("잘못된 접근입니다.");
+
+      // 로그아웃
+      logout();
+      // location.href = "/";
 
       throw new Error("사용자를 찾을 수 없습니다.");
     }
@@ -150,14 +155,15 @@ async function deleteUser(event) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: emailText.innerText
+          email: emailText.innerText,
+          password: passwordInput.value
         })
       });
 
       const data = await response.json();
       console.log(data)
       if (response.ok) {
-        alert(`탈퇴하셨습니다.\n함께해서 즐거웠어요.\u{2764}`);
+        alert(`탈퇴하셨습니다.\n다음에 만나요 꼬옥\u{2764}`);
         
         // 스토리지 전부 삭제
         sessionStorage.clear();
