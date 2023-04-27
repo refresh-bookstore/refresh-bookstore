@@ -81,3 +81,18 @@ exports.getOrderId = async (req, res, next) => {
     next(error);
   }
 };
+
+//email로 사용자 조회하기
+exports.getOrderEmail = async (req, res, next) => {
+  try {
+    const email = req.session.user.email;
+    console.log(email);
+
+    const orders = await Order.find({ email : email });
+ 
+    res.status(200).json(orders);
+  } catch (error) {
+    next(error);
+  }
+};
+
