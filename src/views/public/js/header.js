@@ -75,16 +75,20 @@ function headerFunc() {
     // 로그인한 유저일 때
     dropdownMenu.innerHTML = `
       <ul class="header-menu-ul">
-        <li class="header-menu-li" id="menu-mypage">마이페이지</li>
-        <li class="header-menu-li" id="menu-logout">로그아웃</li>
+        <div class="li-container mypage">
+          <li class="header-menu-li" id="menu-mypage">마이페이지</li>
+        </div>
+        <div class="li-container logout">
+          <li class="header-menu-li" id="menu-logout">로그아웃</li>
+        </div>
       </ul>
     `;
 
     // 드롭 다운 메뉴 HTML 추가
     userBtn.appendChild(dropdownMenu);
 
-    const mypageBtn = document.querySelector("#menu-mypage");
-    const logoutBtn = document.querySelector("#menu-logout");
+    const mypageBtn = document.querySelector(".mypage");
+    const logoutBtn = document.querySelector(".logout");
 
     // 마이페이지 메뉴 클릭 이벤트
     mypageBtn.addEventListener("click", () => {
@@ -97,16 +101,20 @@ function headerFunc() {
     // 로그인한 유저가 아닐 때
     dropdownMenu.innerHTML = `
       <ul class="header-menu-ul">
-        <li class="header-menu-li" id="menu-login">로그인</li>
-        <li class="header-menu-li" id="menu-register">회원가입</li>
+        <div class="li-container login">
+          <li class="header-menu-li" id="menu-login">로그인</li>
+        </div>
+        <div class="li-container register">
+          <li class="header-menu-li" id="menu-register">회원가입</li>
+        </div>
       </ul>
     `;
 
     // 드롭 다운 메뉴 HTML 추가
     userBtn.appendChild(dropdownMenu);
 
-    const loginBtn = document.querySelector("#menu-login");
-    const registerBtn = document.querySelector("#menu-register");
+    const loginBtn = document.querySelector(".login");
+    const registerBtn = document.querySelector(".register");
 
     // 로그인 메뉴 클릭 이벤트
     loginBtn.addEventListener("click", () => {
