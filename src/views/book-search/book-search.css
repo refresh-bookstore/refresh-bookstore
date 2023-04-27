@@ -2,19 +2,20 @@
 
 .main-contents {
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
   justify-content: center;
 }
 
 .content-area {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
 }
 
 .content-area > p {
   font-size: var(--font-large);
   font-weight: var(--weight-semi-bold);
+  padding-bottom: 20px;
 }
 
 .content {
