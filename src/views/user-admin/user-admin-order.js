@@ -19,7 +19,7 @@ const createOrderList = () => {
       `
       <div class="admin-items ordered-list">
         <div class="order-upper">
-          <p class="order-date"> ${ordered.getFullYear()}/${ordered.getMonth()+1}/${ordered.getDate()} ${ordered.getUTCHours()}:${ordered.getMinutes()} </p>
+          <p class="order-date"> ${ordered.getFullYear()}/${(ordered.getMonth()+1).toString().padStart(2, '0')}/${ordered.getDate().toString().padStart(2, '0')} ${ordered.getUTCHours().toString().padStart(2, '0')}:${ordered.getMinutes().toString().padStart(2, '0')} </p>
           <p class="order-id"> ${orders[i].orderId} </p>
           <p class="order-status"> ${orders[i].shippingStatus} </p>
         </div>
