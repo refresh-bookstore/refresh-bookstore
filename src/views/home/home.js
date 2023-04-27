@@ -4,21 +4,12 @@ const slider = document.querySelector(".slider");
 const slides = slider.querySelector(".slides");
 const slide = slides.querySelectorAll(".slide");
 
-// slide 할 image width 구하기
-function getImageWidth() {
-  const img = new Image();
-  
-  img.src = "/public/images/img_banner_1.png";
-  return img.width;
-}
-
-const width = getImageWidth();
 let currentSlide = 0;
 
 // slide 5초씩 반복
 setInterval(function() {
-  let from = - (width * currentSlide);
-  let to = from - width;   
+  let from = - (1026 * currentSlide);
+  let to = from - 1026;   
 
   slides.animate({
     marginLeft: [from + "px", to + "px"]
@@ -33,7 +24,7 @@ setInterval(function() {
   if (currentSlide === (slide.length - 1)) {
     currentSlide = 0;
   }
-}, 3000);
+}, 5000);
 
 // 해당 카테고리 책 권수 
 const productCounter = document.querySelector(".product-counter");

@@ -15,12 +15,11 @@
 
 .slider .slide {
   float: left;
-  width: 1024px;
   height: 300px;
 }
 
 /* main */
-.category {
+.category-title {
   margin: 20px 0px;
 }
 
@@ -79,6 +78,7 @@
 
 .img-container {
   text-align: center;
+  margin-bottom: 8px;
 }
 
 .book-link {
@@ -90,13 +90,15 @@
   width: auto;
   height: 180px;
   object-fit: cover;
-  justify-content: center
+  justify-content: center;
+  box-shadow: 10px 10px 20px var(--color-light-gray);
 }
 
 .book-text.title {
   font-size: var(--font-regular);
   font-weight: var(--weight-semi-bold);
-  margin-bottom: 5px;
+  margin: 5px auto;
+  padding: 0 10px;
 
   display: block;
   overflow: hidden;
@@ -119,10 +121,12 @@
   font-size: var(--font-small);
   color: var(--color-point);
   margin-bottom: 5px;
+  padding: 0 10px;
 }
 
 .book-text.price {
   font-size: var(--font-small);
+  padding: 0 10px;
 }
 
 .books.empty {
