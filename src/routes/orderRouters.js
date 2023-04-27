@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const checkSession = require("../middlewares/checkSession");
-const { createOrder, getOrderList, getOrderId } = require("../controllers/orderController");
+const { createOrder, getOrderList, getOrderId, getOrderEmail } = require("../controllers/orderController");
 const { changeShippingAddress, updateShippingStatus, cancelOrder, deleteOrder} = require("../services/orderService");
 const { isAdmin } = require("../middlewares/isAdmin.js");
 const router = Router();
@@ -13,6 +13,9 @@ router.post("/orders", checkSession, createOrder);
 
 //주문 ID로 데이터 불러오기 API
 router.get("/orders/:orderId", checkSession, getOrderId);
+
+//email로 데이터 불러오기 API 
+router.get("/ordered", checkSession, getOrderEmail);
 
 //사용자는 주문 정보를 변경할 수 있습니다.
 router.put("/order/:orderId", checkSession, changeShippingAddress);
