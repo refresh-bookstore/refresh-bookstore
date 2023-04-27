@@ -1,4 +1,5 @@
 import { logout } from './logout.js';
+import { isFullCart } from './isFullCart.js';
 
 function headerFunc() {
   const searchBtn = document.querySelector('#search-icon');
@@ -64,6 +65,9 @@ function headerFunc() {
   cartBtn.addEventListener("click", () => {
     location.href = "/cart";
   })
+
+  // 장바구니 아이템 유무에 따라 아이콘 변경
+  isFullCart();
 
   // 드롭 다운 메뉴 생성
   const dropdownMenu = document.createElement('div');
