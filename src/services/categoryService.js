@@ -15,9 +15,9 @@ exports.createCategory = async categoryName => {
 
   const isCategory = await Category.findOne({ name: categoryName });
   if (isCategory) {
-    throw { 
-      status: 400, 
-      message: "이미 존재하는 카테고리입니다." 
+    throw {
+      status: 400,
+      message: "이미 존재하는 카테고리입니다.",
     };
     //return;
   }
@@ -29,9 +29,9 @@ exports.createCategory = async categoryName => {
 exports.getCategories = async () => {
   const categories = await Category.find({});
   if (categories.length === 0) {
-    throw { 
-      status: 400, 
-      message: "카테고리가 존재하지 않습니다." 
+    throw {
+      status: 400,
+      message: "카테고리가 존재하지 않습니다.",
     };
   }
   return categories;
@@ -40,21 +40,20 @@ exports.getCategories = async () => {
 exports.getCategoryQuery = async id => {
   const category = await Category.findById(id);
   if (!category) {
-    throw { 
-      status: 400, 
-      message: "카테고리가 존재하지 않습니다." 
+    throw {
+      status: 400,
+      message: "카테고리가 존재하지 않습니다.",
     };
   }
   return category;
 };
 
-
 exports.getCategory = async id => {
   const category = await Category.findById(id);
   if (!category) {
-    throw { 
-      status: 400, 
-      message: "카테고리가 존재하지 않습니다." 
+    throw {
+      status: 400,
+      message: "카테고리가 존재하지 않습니다.",
     };
   }
   return category;
@@ -74,9 +73,9 @@ exports.updateCategory = async (_id, name) => {
 exports.removeCategory = async id => {
   const category = await Category.findByIdAndDelete(id);
   if (!category) {
-    throw { 
-      status: 400, 
-      message: "삭제할 데이터가 없습니다." 
+    throw {
+      status: 400,
+      message: "삭제할 데이터가 없습니다.",
     };
   }
   return category;

@@ -27,9 +27,9 @@ exports.createProduct = async (
   //ISBN 중복 필터링 :: 중복 시 책 등록 불가
   const isFindisbn = await Product.findOne({ isbn });
   if (isFindisbn) {
-    throw { 
-      status: 400, 
-      message: "등록된 ISBN입니다." 
+    throw {
+      status: 400,
+      message: "등록된 ISBN입니다.",
     };
   }
   const book = await Product.create(post);
@@ -41,9 +41,9 @@ exports.getProducts = async () => {
 
   console.log(products);
   if (products.length === 0) {
-    throw { 
-      status: 400, 
-      message: "데이터를 찾을 수 없습니다." 
+    throw {
+      status: 400,
+      message: "데이터를 찾을 수 없습니다.",
     };
   }
 
@@ -51,12 +51,12 @@ exports.getProducts = async () => {
 };
 
 exports.getProductQuery = async book => {
-  const product = await Product.find({ isbn : book });
+  const product = await Product.find({ isbn: book });
 
   if (product.length === 0) {
-    throw { 
-      status: 400, 
-      message: "데이터를 찾을 수 없습니다." 
+    throw {
+      status: 400,
+      message: "데이터를 찾을 수 없습니다.",
     };
   }
 
@@ -66,24 +66,23 @@ exports.getProductQuery = async book => {
 exports.getProduct = async id => {
   const product = await Product.findById(id);
   if (product.length === 0) {
-    throw { 
-      status: 400, 
-      message: "데이터를 찾을 수 없습니다." 
+    throw {
+      status: 400,
+      message: "데이터를 찾을 수 없습니다.",
     };
   }
 
   return product;
 };
 
-
 exports.getProductCategory = async categoryName => {
   const findCategory = await Category.find({ categoryId: categoryName });
   const products = await Product.find({ category: findCategory[0].name });
 
   if (products.length === 0) {
-    throw { 
-      status: 400, 
-      message: "데이터를 찾을 수 없습니다." 
+    throw {
+      status: 400,
+      message: "데이터를 찾을 수 없습니다.",
     };
   }
   return products;
@@ -92,23 +91,22 @@ exports.getProductCategory = async categoryName => {
 exports.getProductISBN = async productIsbn => {
   const findCategory = await Product.find({ isbn: productIsbn });
   if (findCategory.length === 0) {
-    throw { 
-      status: 400, 
-      message: "데이터를 찾을 수 없습니다." 
+    throw {
+      status: 400,
+      message: "데이터를 찾을 수 없습니다.",
     };
   }
   return findCategory;
 };
 
-
-exports.searchwordProduct = async (keyword)=> {
+exports.searchwordProduct = async keyword => {
   let contents = [];
   if (keyword) {
     console.log(keyword);
     contents = await Product.find({
       $or: [
-        { title: {$regex: new RegExp(`${keyword}`, "i")}},
-        { author: {$regex: new RegExp(`${keyword}`, "i")}},
+        { title: { $regex: new RegExp(`${keyword}`, "i") } },
+        { author: { $regex: new RegExp(`${keyword}`, "i") } },
       ],
     });
   }
@@ -116,8 +114,8 @@ exports.searchwordProduct = async (keyword)=> {
 };
 
 exports.updateProduct = async (
-  { book }
-  ,{
+  { book },
+  {
     title,
     author,
     publisher,
@@ -129,9 +127,8 @@ exports.updateProduct = async (
     category,
   }
 ) => {
-
   const product = await Product.findOneAndUpdate(
-    { isbn : book },
+    { isbn: book },
     {
       title,
       author,
@@ -149,24 +146,24 @@ exports.updateProduct = async (
   );
 
   if (!product) {
-    throw { 
-      status: 400, 
-      message: "데이터를 찾을 수 없습니다." 
+    throw {
+      status: 400,
+      message: "데이터를 찾을 수 없습니다.",
     };
   }
 
   const isFindisbn = await Product.find({ isbn });
   if (isFindisbn.length > 1) {
-    throw { 
-      status: 400, 
-      message: "데이터를 찾을 수 없습니다." 
+    throw {
+      status: 400,
+      message: "데이터를 찾을 수 없습니다.",
     };
   }
   return product;
 };
 
 exports.deleteProduct = async book => {
-  const product = await Product.findOneAndDelete({ isbn : book });
+  const product = await Product.findOneAndDelete({ isbn: book });
   return product;
 };
 
