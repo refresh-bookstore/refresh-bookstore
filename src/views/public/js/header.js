@@ -85,7 +85,9 @@ function headerFunc() {
     const logoutBtn = document.querySelector("#menu-logout");
 
     // 마이페이지 메뉴 클릭 이벤트
-    mypageBtn.addEventListener("click", moveToMypage);
+    mypageBtn.addEventListener("click", () => {
+      location.href = "/user-mypage";
+    });
 
     // 로그아웃 메뉴 클릭 이벤트
     logoutBtn.addEventListener("click", logout);
@@ -123,40 +125,6 @@ function headerFunc() {
       dropdownMenu.style.display = "none";
     }
   })
-
-  // 마이페이지 메뉴 이동
-  async function moveToMypage () {
-    try {
-      const response = await fetch ("/userinfo", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": `Bearer ${sessionStorage.getItem("token")}`,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-
-        // 데이터를 sessionStorage에 저장
-        sessionStorage.setItem("userData", JSON.stringify(data));
-
-        // 마이페이지로 이동
-        location.href = "/user-mypage";
-      } else {
-        alert("사용자를 찾을 수 없습니다.");
-
-        // 세션스토리지 아이템 제거
-        sessionStorage.clear();
-        location.href = '/';
-
-        throw new Error("사용자를 찾을 수 없습니다.");
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
 
   async function logout() {
     try {
