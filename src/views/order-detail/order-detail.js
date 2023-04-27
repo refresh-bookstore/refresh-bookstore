@@ -57,7 +57,10 @@ async function loadOrderDetail() {
       } else if (data[0].shippingStatus === '배송완료') {
         document.querySelector('#state2').style = 'color: var(--color-black); font-size: 20px; font-weight: 700';
       } else {
-        shippingStatusArea.innerHTML = '주문취소';
+        document.querySelectorAll('.shippingStatus > span').forEach(e => e.style.display = 'none');
+        shippingStatusArea.innerText = '주문취소';
+        modifyButton.style.display = 'none';
+        cancelButton.style.display = 'none';
         shippingStatusArea.style = 'color: var(--color-red); font-size: 20px; font-weight: 700';
       }
       // 책 정보
@@ -122,7 +125,7 @@ function completeModify() {
 async function modifyOrder() {
   try {
     const response = await fetch(`${orderId}`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -138,7 +141,7 @@ async function modifyOrder() {
 
     if (response.ok) {
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
     } else {
       alert("사용자를 찾을 수 없습니다.");
       throw new Error("사용자를 찾을 수 없습니다.");
@@ -153,7 +156,7 @@ cancelButton.addEventListener('click', cancelOrder);
 
 async function cancelOrder() {
   try {
-    const response = await fetch(`${orderId}`, {
+    const response = await fetch(`${orderId}/cancel`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -165,9 +168,9 @@ async function cancelOrder() {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       alert('주문이 취소되었습니다.');
-
+      location.href = '/order-list';
     } else {
       alert("사용자를 찾을 수 없습니다.");
       throw new Error("사용자를 찾을 수 없습니다.");
