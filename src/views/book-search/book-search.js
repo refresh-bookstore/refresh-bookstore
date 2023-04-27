@@ -2,7 +2,7 @@ import { main } from '/public/js/main.js';
 
 const title = sessionStorage.getItem("search");
 
-// 도서 검색 api
+// 도서 검색
 searchBookByTitle();
 
 const results = document.querySelector(".results");
@@ -55,10 +55,17 @@ async function searchBookByTitle() {
       results.classList.add("empty");
       results.innerHTML = `<div></div>
                         <div class="empty-result-list">검색 결과가 없습니다</div>`;
+    } else {
+      throw new Error(data.message);
     }
   } catch (error) {
     console.log(error.message);
   }
+}
+
+// 페이지 떠날 때 세션 스토리지 search 삭제
+window.onbeforeunload = function() {
+  sessionStorage.removeItem('search');
 }
 
 main();
