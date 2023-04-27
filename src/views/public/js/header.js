@@ -32,12 +32,26 @@ function headerFunc() {
   
   //검색창 클릭 이벤트
   
-  searchBtn.addEventListener('click', () => {
+  searchBtn.addEventListener('click', async () => {
     if (searchBtn.classList.contains('activate')) {
         if (searchInput.value) {
           
-          ///검색기능
-          
+          ///검색기능 임시
+          try {
+            const response = await fetch(`/product/search?keyword=${searchInput.value}`, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json"
+              },
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              console.log(data);
+            }
+          } catch (error) {
+            console.log(error.message);
+          }
 
         } else {
           searchInput.placeholder = "";

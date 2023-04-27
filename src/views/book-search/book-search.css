@@ -1,0 +1,118 @@
+@import url('../public/css/main.css');
+
+.main-contents {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.content-area > p {
+  font-size: var(--font-large);
+  font-weight: var(--weight-semi-bold);
+}
+
+.content {
+  width: 800px;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.order {
+  border: 1px solid var(--color-light-gray);
+  border-radius: 8px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 5px var(--color-light-gray);
+}
+
+.order .order-view {
+  display: flex;
+  justify-content: center;
+}
+
+.order-item {
+  width: 730px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-button);
+  border: 1px var(--color-light-gray) solid;
+}
+
+.order-item .item-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  border: 0.3px var(--color-light-gray) solid;
+}
+
+.order-item .item-img img {
+  width: 100px;
+}
+
+.order-item .item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 570px;
+  margin: 0;
+}
+
+.order-item .item-info .item-title {
+
+  font-size: var(--font-medium);
+  font-weight: var(--weight-bold);
+  color: var(--color-black);
+  text-align: left;
+  position: inherit;
+  width: 100%;
+  margin: 10px;
+  padding: 10px 0;
+  border-bottom: 0.3px var(--color-light-gray) solid;
+}
+
+.order-item .item-info .item-author {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+  text-align: left;
+  width: 100%;
+  margin: 0 10px;
+
+}
+
+.order-item .item-info .item-cost {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+  text-align: right;
+  width: 100%;
+  margin: 10px;
+  padding: 0 10px;
+}
+
+.contentArea.empty {
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto;
+}
+
+.empty-order-list {
+  font-size: var(--font-large);
+  color: var(--color-dark-gray);
+  display: flex;
+  height: 440px;
+  align-items: center;
+  justify-content: center;
+}
