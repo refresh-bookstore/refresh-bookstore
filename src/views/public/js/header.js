@@ -1,5 +1,6 @@
 import { logout } from './logout.js';
 import { isFullCart } from './isFullCart.js';
+import { isLoggedIn } from './isLoggedIn.js';
 
 function headerFunc() {
   const searchBtn = document.querySelector('#search-icon');
@@ -31,30 +32,30 @@ function headerFunc() {
   
   //검색창 클릭 이벤트
   
-  searchBtn.addEventListener('click', ()=>{
-    if(searchBtn.classList.contains('activate')){
-        if(searchInput.value){
+  searchBtn.addEventListener('click', () => {
+    if (searchBtn.classList.contains('activate')) {
+        if (searchInput.value) {
           
           ///검색기능
+          
 
-        }else{
+        } else {
           searchInput.placeholder = "";
-          searchInput.animate(searchInputDisappear,searchInputTiming);
-          setTimeout(()=>{
+          searchInput.animate(searchInputDisappear, searchInputTiming);
+          setTimeout(() => {
             searchBtn.classList.remove('activate');
             searchInput.classList.remove('activate');
           }, 230)
         }
-    }else{
+    } else {
     searchBtn.classList.add('activate');
     searchInput.classList.add('activate');
-    searchInput.animate(searchInputAppear,searchInputTiming);
-    setTimeout(()=>{
+    searchInput.animate(searchInputAppear, searchInputTiming);
+    setTimeout(() => {
       searchInput.placeholder = "도서명을 검색해주세요.";
     }, 230);
     }
   })
-  
 
   // 로고 클릭 이벤트
   logoImage.addEventListener("click", () => {
@@ -68,6 +69,9 @@ function headerFunc() {
 
   // 장바구니 아이템 유무에 따라 아이콘 변경
   isFullCart();
+
+  // 로그인 유무에 따라 아이콘 변경
+  isLoggedIn();
 
   // 드롭 다운 메뉴 생성
   const dropdownMenu = document.createElement('div');

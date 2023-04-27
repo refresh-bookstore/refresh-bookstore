@@ -131,6 +131,10 @@ header .header-user {
   cursor: pointer;
 }
 
+header .header-user.login {
+  background-image: url('../images/icon_user_login.svg');
+}
+
 a {
   text-decoration: none;
 
