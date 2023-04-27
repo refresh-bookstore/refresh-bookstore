@@ -1,7 +1,17 @@
 const { Router } = require("express");
 const checkSession = require("../middlewares/checkSession");
-const { createOrder, getOrderList, getOrderId, getOrderEmail } = require("../controllers/orderController");
-const { changeShippingAddress, updateShippingStatus, cancelOrder, deleteOrder} = require("../services/orderService");
+const {
+  createOrder,
+  getOrderList,
+  getOrderId,
+  getOrderEmail,
+} = require("../controllers/orderController");
+const {
+  changeShippingAddress,
+  updateShippingStatus,
+  cancelOrder,
+  deleteOrder,
+} = require("../services/orderService");
 const { isAdmin } = require("../middlewares/isAdmin.js");
 const router = Router();
 
@@ -14,7 +24,7 @@ router.post("/orders", checkSession, createOrder);
 //주문 ID로 데이터 불러오기 API
 router.get("/orders/:orderId", checkSession, getOrderId);
 
-//email로 데이터 불러오기 API 
+//email로 데이터 불러오기 API
 router.get("/ordered", checkSession, getOrderEmail);
 
 //사용자는 주문 정보를 변경할 수 있습니다.
@@ -24,7 +34,12 @@ router.put("/order/:orderId", checkSession, changeShippingAddress);
 router.put("/orders/:orderId", checkSession, cancelOrder);
 
 // Admin :: 주문 수정하기
-router.put("/order/admin/:orderId", checkSession, isAdmin, updateShippingStatus);
+router.put(
+  "/order/admin/:orderId",
+  checkSession,
+  isAdmin,
+  updateShippingStatus
+);
 
 // Admin :: 주문 삭제하기
 router.delete("/order/admin/:orderId", checkSession, isAdmin, deleteOrder);

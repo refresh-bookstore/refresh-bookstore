@@ -21,16 +21,15 @@ router.post("/register", validateUserRegistration, createUser);
 router.post("/login", login);
 //로그아웃
 router.post("/logout", checkSession, logout);
-//사용자 정보 조회
-router.get("/userinfo", checkSession, getUserInfo);
-
-//사용자 정보 업데이트
-router.post("/update", checkSession, updateUserValidator, updateUserInfo);
-
 //사용자 정보 삭제
 router.delete("/user", checkSession, deleteUserByEmail);
-
 //회원 정보들 불러오기
 router.get("/users", checkSession, isAdmin, getUsers);
+
+// non-RESTful API 엔드포인트...
+//사용자 정보 조회
+router.get("/userinfo", checkSession, getUserInfo);
+//사용자 정보 업데이트
+router.post("/update", checkSession, updateUserValidator, updateUserInfo);
 
 module.exports = router;
