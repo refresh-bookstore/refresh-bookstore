@@ -31,7 +31,7 @@ router.get("/ordered", checkSession, getOrderEmail);
 router.put("/order-detail/:orderId", checkSession, changeShippingAddress);
 
 //사용자는 주문을 취소할 수 있습니다.(배송상태를 주문취소로 변경)
-router.put("/order-detail/:orderId", checkSession, cancelOrder);
+router.put("/order-detail/:orderId/cancel", checkSession, cancelOrder);
 
 // Admin :: 주문 수정하기
 router.put(
