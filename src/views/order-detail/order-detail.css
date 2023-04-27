@@ -31,7 +31,7 @@ section {
 }
 
 .orderDate {
-  color: var(--color-light-black);
+  color: var(--color-black);
 }
 
 .shippingStatus {
@@ -212,6 +212,16 @@ input:read-only:focus {
   display: flex;
   justify-content: flex-end;
   margin: 0;
+}
+
+.modifyCompleteButton {
+  font-size: var(--font-medium);
+  color: var(--color-black);
+  border: 1px var(--color-dark-gray) solid;
+  border-radius: var(--border-radius-button);
+  padding: 8px 12px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .modifyButton {

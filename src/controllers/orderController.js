@@ -71,7 +71,10 @@ exports.getOrderId = async (req, res, next) => {
     const orderId = req.params.orderId;
     console.log(orderId);
 
-    const order = await Order.find({ orderId: orderId });
+    const order = await Order.find({ orderId: orderId }).populate({
+      path: "orderList.product",
+      model: "Product",
+    });
     console.log(order);
 
     res.status(200).json(order);

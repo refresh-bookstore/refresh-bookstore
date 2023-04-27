@@ -27,10 +27,12 @@ exports.cancelOrder = async (req, res) => {
     const findOrderId = await Order.findOne({ orderId });
 
     if (
-      findOrderId.shippingStatus === "배송 완료" ||
-      findOrderId.shippingStatus === "주문 취소"
+      findOrderId.shippingStatus === "배송완료" ||
+      findOrderId.shippingStatus === "주문취소"
     ) {
       throw new Error("이미 배송 완료된 상품이거나 취소된 주문입니다.");
+    } else if (findOrderId.shippingStatus === "배송중") {
+      throw new Error("배송중인 주문은 취소할 수 없습니다.");
     }
 
     const order = await Order.findOneAndUpdate(
@@ -70,14 +72,12 @@ exports.deleteOrder = async (req, res) => {
 // 사용자 전용 :: 주문정보 변경
 exports.changeShippingAddress = async (req, res) => {
   try {
-    const { postalCode, address, detailAddress } = req.body;
+    const { userName, userPhone, postalCode, address, detailAddress, orderRequest } = req.body;
     const orderId = req.params.orderId;
-
-    console.log(orderId);
 
     const order = await Order.findOneAndUpdate(
       { orderId },
-      { postalCode, address, detailAddress },
+      { userName, userPhone, postalCode, address, detailAddress, orderRequest },
       { new: true }
     );
 
