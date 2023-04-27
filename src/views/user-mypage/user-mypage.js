@@ -26,11 +26,6 @@ submitButton.addEventListener("click", updateUser);
 // 회원 탈퇴 버튼 이벤트 리스너
 deleteButton.addEventListener("click", deleteUser);
 
-// 페이지를 떠날 때 세션 스토리지의 userData 삭제
-window.addEventListener("beforeunload", function() {
-  sessionStorage.removeItem("userData");
-});
-
 function loadUserData(userData) {
   // 회원 정보 로드
   if (userData) {
@@ -83,11 +78,7 @@ async function getUserData () {
       loadUserData(data);
     } else {
       alert("잘못된 접근입니다.");
-
-      // 로그아웃
       logout();
-      // location.href = "/";
-
       throw new Error("사용자를 찾을 수 없습니다.");
     }
   } catch (error) {
@@ -116,19 +107,6 @@ async function updateUser(event) {
       });
 
       if (response.ok) {
-        const updated = JSON.stringify({
-          name: nameText.innerText,
-          email: emailText.innerText,
-          password: passwordInput.value,
-          postalCode: postalCodeInput.value,
-          address: addressInput.value,
-          detailAddress: detailAddressInput.value,
-          phone: phoneInput.value,
-        });
-
-        sessionStorage.removeItem("userData");
-        sessionStorage.setItem("userData", updated);
-
         alert("회원정보가 수정되었습니다.");
       } else {
         throw new Error(response.message);
