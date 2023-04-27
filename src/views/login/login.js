@@ -33,7 +33,23 @@ async function handlerSubmit(event) {
         const data = await response.json();
 
         sessionStorage.setItem("token", data.token);
-        location.replace("/");
+
+        // 로그인 후 이전 페이지로 갈 수 있는 경로
+        const previousPath = document.referrer;
+        const goPath = ["book-detail", "cart"];
+        let found = false;
+
+        goPath.forEach(path => {
+          if (previousPath.includes(path)) {
+            location.href = previousPath;
+            found = true;
+          }
+        });
+
+        if (!found) {
+          location.replace("/");
+        }
+
       } else if (response.status === 401 || response.status === 500) {
         // 로그인 서버 오류
 
