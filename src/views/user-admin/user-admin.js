@@ -47,7 +47,6 @@ lists.forEach((e)=> {
 
     //////////////////////도서관리///////////////////////
     if(lists.indexOf(e) === 0){
-      contents[0].innerHTML = ""; 
         createBookList();
       }
 
@@ -59,7 +58,6 @@ lists.forEach((e)=> {
 
     //////////////////////주문관리///////////////////////
     if(lists.indexOf(e) === 2){
-      contents[2].innerHTML = ""; 
       createOrderList();
       
     }

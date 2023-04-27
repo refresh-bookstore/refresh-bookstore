@@ -19,21 +19,36 @@ const createUserList = () => {
     adminContentUsers.innerHTML = ""; 
     for(let i = 0; i < users.length; i++){
       const registered = new Date(users[i].createdAt);
-      adminContentUsers.innerHTML += 
-      `
-      <div class="admin-items">
-        <div class="admin-user-info">
-          <p class="admin-user-added-date"> ${registered.getFullYear()} / ${registered.getMonth() + 1} / ${registered.getDate()}</p>
-          <div class="admin-info-block">
-            <p class="admin-user-name"> ${users[i].name}</p>    
-            <p class="admin-user-email">${users[i].email}</p>
+      if(users[i].isAdmin) {
+        adminContentUsers.innerHTML += 
+        `
+        <div class="admin-items">
+          <div class="admin-user-info">
+            <p class="admin-user-added-date"> ${registered.getFullYear()} / ${registered.getMonth() + 1} / ${registered.getDate()}</p>
+            <div class="admin-info-block">
+              <span class="admin-user-name admin"> ${users[i].name} <img class="admin-mark" src="/public/images/icon_user_admin.svg"> </span>   
+              <p class="admin-user-email">${users[i].email}</p>
+            </div>
           </div>
         </div>
-      </div>
-      `
+        `
+
+      } else {
+        adminContentUsers.innerHTML += 
+        `
+        <div class="admin-items">
+          <div class="admin-user-info">
+            <p class="admin-user-added-date"> ${registered.getFullYear()} / ${registered.getMonth() + 1} / ${registered.getDate()}</p>
+            <div class="admin-info-block">
+              <p class="admin-user-name"> ${users[i].name}</p>    
+              <p class="admin-user-email">${users[i].email}</p>
+            </div>
+          </div>
+        </div>
+        `
+      }
 
       adminUserCloserLook(users);
-
 
     }
   }

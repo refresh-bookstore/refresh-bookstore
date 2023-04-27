@@ -3,39 +3,86 @@
 const adminContentOrders = document.querySelector('#admin-orders');
 
 const createOrderList = () => {
-  for(let i = 0; i < 5; i++){
-    adminContentOrders.innerHTML += 
-    `
-    <div class="admin-items ordered-list">
-      <div class="order-upper">
-          <input type="checkbox">
-          <p class="item-name order"> 230421001 </p>
-          <p class="order-status"> 배송중</p>
-      </div>
-      <div class="order-lower">
-        <div class="item-info order">
-          <div class="item-more-info order a">
-            <p class="item-detail order"> 김토끼</p>
-            <p class="item-detail order"> 010-2323-2323</p>
-            <p class="item-detail order"> 서울시 양천구 오목로359 사무실</p>
-          </div>
-          <div class="item-more-info order b">
-            <p class="item-detail order"> 혼자 공부하는 얄팍한 코딩 지식 (3)</p>
-            <p class="item-detail order"> 코딩 관련 책 이름 하나</p>
-            <p class="item-detail order"> 이것도 코딩에 관련된 책</p>
-            <p class="item-detail order"> 책 이름은 모르지만 코딩임(2)</p>
-          </div>
-          <p class="item-cost"> 23,400원</p>
-          <span class="admin-buttons">
-            <img class="admin-button order-edit" title="수정" src="/public/images/icon_edit.svg">
-            <img class="admin-button order-check hidden" title="확인" src="/public/images/icon_check.svg">
-            <img class="admin-button order-delete" title="삭제" src="/public/images/icon_delete.svg">
-          </span>
+  fetch('/orders')
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+    listingOrders(data);
+  })
+  .catch((err) => console.log(err));
+
+  const listingOrders = (orders) => {
+    adminContentOrders.innerHTML = ""; 
+    for(let i = 0; i < orders.length; i++){
+      const ordered = new Date(orders[i].createdAt);
+      adminContentOrders.innerHTML += 
+      `
+      <div class="admin-items ordered-list">
+        <div class="order-upper">
+          <p class="order-date"> ${ordered.getFullYear()}/${ordered.getMonth()+1}/${ordered.getDate()} ${ordered.getUTCHours()}:${ordered.getMinutes()} </p>
+          <p class="order-id"> ${orders[i].orderId} </p>
+          <p class="order-status"> ${orders[i].shippingStatus} </p>
         </div>
       </div>
-    </div>
-    `
+      `
+    }
+
+    adminOrderCloserLook(orders)
   }
 }
+
+
+const adminOrderCloserLook = (orders) => {
+  const orderInfoBlocks = adminContentOrders.querySelectorAll('.admin-items');
+  orderInfoBlocks.forEach((e)=> {
+    e.addEventListener('click', ()=>{
+      const moreInfo = e.querySelector('.order-more-infos');
+      if(moreInfo){
+        moreInfo.remove();
+        e.style.height = "40px";
+      }else{
+        const orderIdPart = e.querySelector('.order-id');
+        const thisOrder = orders.find((e) =>  e.orderId === orderIdPart.innerText );
+        console.log(thisOrder);
+
+        // 제품 정보 불러오기
+
+        fetch('/product')
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.data);
+            const books = data.data;
+            let orderList = '';
+            for( let i = 0; i < thisOrder.orderList.length; i++){
+              const orderedBook = books.find((e)=> e._id === thisOrder.orderList[i].product).title;
+              orderList += `상품: ${orderedBook} 수량: ${thisOrder.orderList[i].amount} <br>`
+            }
+            console.log(orderList);
+            e.style.height = "230px";
+            setTimeout(()=>{
+            e.innerHTML += `
+              <div class="order-more-infos">
+               <p>주문자 | ${thisOrder.userName} </p>
+               <p>주문자 연락처 | ${thisOrder.userPhone} </p>
+               <p>배송주소 | (${thisOrder.postalCode}) ${thisOrder.address} ${thisOrder.detailAddress} </p>
+               <p>요청사항 | ${thisOrder.orderRequest} </p>
+               <p>주문내역 | ${orderList} </p>
+               <p>결제금액 | ${thisOrder.totalPrice.toLocaleString()}원 </p>
+              </div>
+            `
+        }, 230);
+            
+          })
+          .catch((err) => console.log(err));
+
+
+      }
+    })
+  })
+
+
+}
+
+
 
 export { createOrderList };
