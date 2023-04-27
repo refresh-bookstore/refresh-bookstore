@@ -55,5 +55,8 @@ router.get("/order-list", (req, res) => {
   res.render("order-list/order-list.html");
 });
 
+router.get("/book-search", (req, res) => {
+  res.render("book-search/book-search.html");
+});
 
 module.exports = router;

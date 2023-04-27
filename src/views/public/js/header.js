@@ -35,7 +35,7 @@ function headerFunc() {
   searchBtn.addEventListener('click', async () => {
     if (searchBtn.classList.contains('activate')) {
         if (searchInput.value) {
-          location.href = "/book-search/book-search.html";
+          location.href = "/book-search";
           sessionStorage.setItem("search", searchInput.value);
         } else {
           searchInput.placeholder = "";
