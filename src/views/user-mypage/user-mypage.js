@@ -13,8 +13,8 @@ const orderListButton = document.getElementById("order-list-button");
 const submitButton = document.getElementById("submitButton");
 const deleteButton = document.getElementById("deleteButton");
 
-// 유저 정보 조회
-loadUserData();
+// 회원 정보 조회
+getUserData();
 
 // 주문 조회 버튼 이벤트 리스너
 orderListButton.addEventListener("click", handleOrderList);
@@ -30,10 +30,7 @@ window.addEventListener("beforeunload", function() {
   sessionStorage.removeItem("userData");
 });
 
-function loadUserData() {
-  // 세션스토리지의 유저 데이터
-  const userData = JSON.parse(sessionStorage.getItem("userData"));
-
+function loadUserData(userData) {
   // 회원 정보 로드
   if (userData) {
     userGreeting.innerText = `안녕하세요, ${userData.name}님\u{1F49A}`;
@@ -67,6 +64,30 @@ function handleOrderList(event) {
   event.preventDefault();
 
   location.href = "/order-list";
+}
+
+// 회원 정보 조회
+async function getUserData () {
+  try {
+    const response = await fetch ("/userinfo", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      loadUserData(data);
+    } else {
+      alert("사용자를 찾을 수 없습니다.");
+
+      throw new Error("사용자를 찾을 수 없습니다.");
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 async function updateUser(event) {
@@ -121,9 +142,9 @@ async function deleteUser(event) {
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("정말 탈퇴하시겠습니까?")) {
-    document.querySelector('.user-form-box').action = '/delete';
+    document.querySelector('.user-form-box').action = '/user';
     try {
-      const response = await fetch("/delete", {
+      const response = await fetch("/user", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
