@@ -1,7 +1,6 @@
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 
-
 // 주문 하기
 exports.createOrder = async (req, res, next) => {
   try {
@@ -34,7 +33,6 @@ exports.createOrder = async (req, res, next) => {
       orderArr.push({ product: product._id, amount: orderList[i].amount });
     }
 
-    
     const order = new Order({
       userName,
       postalCode,
@@ -44,7 +42,7 @@ exports.createOrder = async (req, res, next) => {
       orderRequest,
       orderList: orderArr,
       deliveryFee,
-      email, 
+      email,
       totalPrice,
     });
 
@@ -73,7 +71,7 @@ exports.getOrderId = async (req, res, next) => {
     const orderId = req.params.orderId;
     console.log(orderId);
 
-    const order = await Order.find({orderId : orderId});
+    const order = await Order.find({ orderId: orderId });
     console.log(order);
 
     res.status(200).json(order);
@@ -88,11 +86,13 @@ exports.getOrderEmail = async (req, res, next) => {
     const email = req.session.user.email;
     console.log(email);
 
-    const orders = await Order.find({ email : email });
- 
+    const orders = await Order.find({ email: email }).populate({
+      path: "orderList.product",
+      model: "Product",
+    });
+
     res.status(200).json(orders);
   } catch (error) {
     next(error);
   }
 };
-
