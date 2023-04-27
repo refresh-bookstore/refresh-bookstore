@@ -1,3 +1,5 @@
+import { logout } from './logout.js';
+
 function headerFunc() {
   const searchBtn = document.querySelector('#search-icon');
   const cartBtn = document.querySelector('#cart-icon');
@@ -125,34 +127,6 @@ function headerFunc() {
       dropdownMenu.style.display = "none";
     }
   })
-
-  async function logout() {
-    try {
-      const response = await fetch("/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Cookie"
-        }
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("다음에 만나요 꼬옥\u{1F49A}");
-        
-        // 스토리지 초기화
-        sessionStorage.clear();
-        localStorage.clear();
-
-        location.href = '/';
-      } else { 
-        throw new Error(data.message);
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
 }
 
 export { headerFunc };
