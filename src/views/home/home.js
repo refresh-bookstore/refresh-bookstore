@@ -8,7 +8,7 @@ const slide = slides.querySelectorAll(".slide");
 function getImageWidth() {
   const img = new Image();
   
-  img.src = "/public/images/img_sample_banner_1.png";
+  img.src = "/public/images/img_banner_1.png";
   return img.width;
 }
 
