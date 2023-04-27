@@ -23,13 +23,18 @@ exports.createOrder = async (req, res, next) => {
       throw new Error("주문 상품 목록이 없습니다.");
     }
 
+    let orderArr = [];
     // 주문 상품 목록에서 상품 수량이 0 이하일 경우 에러 발생
     for (let i = 0; i < orderList.length; i++) {
       if (orderList[i].amount <= 0) {
         throw new Error("상품 수량은 1개 이상이어야 합니다.");
       }
+      // isbn으로 상품 찾아서 _id 전달
+      const product = await Product.findOne({ isbn: orderList[i].product });
+      orderArr.push({ product: product._id, amount: orderList[i].amount });
     }
 
+    
     const order = new Order({
       userName,
       postalCode,
@@ -37,7 +42,7 @@ exports.createOrder = async (req, res, next) => {
       detailAddress,
       userPhone,
       orderRequest,
-      orderList,
+      orderList: orderArr,
       deliveryFee,
       email, 
       totalPrice,

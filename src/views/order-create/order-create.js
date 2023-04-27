@@ -150,8 +150,8 @@ async function payBtnClick() {
 
   let orderArr = [];
   for (let i = 0; i < purchaseData.length; i++) {
-    let ISBN = purchaseData[i].isbn;
-    let amount = purchaseData[i].amount;
+    const ISBN = purchaseData[i].isbn;
+    const amount = purchaseData[i].amount;
     orderArr.push({product: ISBN, amount: amount});
   }
 
@@ -162,7 +162,6 @@ async function payBtnClick() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
         userName: nameInput.value,
         postalCode: postalCodeInput.value,
         address: addressInput.value,
@@ -171,6 +170,7 @@ async function payBtnClick() {
         orderRequest: request,
         orderList: orderArr, // [{product: ISBN, amount: n}, {product: ISBN, amount: n}]
         deliveryFee: getPriceNumber(deliveryFee.innerText),
+        email: email,
         totalPrice: getPriceNumber(totalCost.innerText),
       }),
     });
@@ -178,6 +178,7 @@ async function payBtnClick() {
     if (response.ok) {
       const data = await response.json();
       alert(data.message);
+      localStorage.removeItem('purchase');
       location.href = "/order-complete";
     } else {
       throw new Error("결제에 실패했습니다.");
