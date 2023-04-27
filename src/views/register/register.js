@@ -32,13 +32,13 @@ async function handleSubmit(e) {
         const data = await response.json();
         
         alert(`${data.message}\n${nameInput.value}님 환영합니다!`);
-        location.href = "/login";
+        location.replace("/login");
       } else {
         throw new Error("회원가입 실패했습니다.");
       }
     } catch (error) {
       console.log(error.message);
-      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      alert("이미 사용 중인 이메일 주소입니다.");
     }
   } else {
     checkValid();
