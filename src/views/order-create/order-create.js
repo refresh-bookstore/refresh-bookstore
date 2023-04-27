@@ -193,5 +193,8 @@ async function payBtnClick() {
 const payBtn = document.querySelector(".paymentButton button");
 payBtn.addEventListener("click", payBtnClick);
 
+window.addEventListener("beforeunload", function() {
+  localStorage.removeItem("purchase");
+});
 
 main();
