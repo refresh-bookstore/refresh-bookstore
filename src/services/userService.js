@@ -1,3 +1,4 @@
+const { isValidObjectId } = require("mongoose");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
@@ -39,17 +40,16 @@ exports.deleteUserByEmail = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+
     if (!user) {
-      return res.status(404).json({ message: "사용자를 찾을 수 없습니다." });
+      return res.status(404).json({ message: "사용자를 찾을 수 없습니다!" });
     }
 
-    // 기존 비밀번호를 인증하는 과정
-    const isValidPassword = await user.checkPassword(password);
+    const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       return res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
     }
-
-    await user.delete();
+    await User.deleteOne({ email });
     res.status(200).json({ message: "사용자 정보를 삭제하였습니다." });
   } catch (error) {
     res.status(500).json({ message: error.message });
