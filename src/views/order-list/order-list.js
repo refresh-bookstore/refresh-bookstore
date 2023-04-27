@@ -2,16 +2,17 @@ import { main } from '/public/js/main.js';
 
 const mypageButton = document.getElementById("mypage-button");
 const userGreeting = document.getElementById("user-greeting");
+const contentArea = document.querySelector('.content');
 
 // 주문 조회 버튼 이벤트 리스너
 mypageButton.addEventListener("click", handleMypage);
-
 function handleMypage(event) {
   event.preventDefault();
   location.href = "/user-mypage";
 }
 
-async function getUserEmail() {
+// userGreeting에 이름 띄우기
+async function setUserName() {
   try {
     const response = await fetch("/userinfo", {
       method: "GET",
@@ -20,11 +21,9 @@ async function getUserEmail() {
         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
       },
     });
-    console.log(response);
     if (response.ok) {
       const data = await response.json();
       userGreeting.innerText = `안녕하세요, ${data.name}님\u{1F49A}`;
-      console.log(data);
     } else {
       alert("사용자를 찾을 수 없습니다.");
       throw new Error("사용자를 찾을 수 없습니다.");
@@ -33,56 +32,75 @@ async function getUserEmail() {
     console.log(error.message);
   }
 }
-getUserEmail();
+setUserName();
 
-async function loadOrderData() {
+// 주문내역 불러오기
+async function getOrderList() {
   try {
-    const response = await fetch("/orders", {
+    const response = await fetch("/ordered", {
       method: "GET",
       headers: {
-        'content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      
+      // data 최근 주문순 정렬
+      data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+      if (data.length > 0) {
+        data.forEach((orderInfo) => {
+          const orderDate = orderInfo.createdAt.slice(0, 10);
+          const shippingStatus = orderInfo.shippingStatus;
+          const orderId = orderInfo.orderId;
+      
+          console.log(orderDate, shippingStatus, orderId);
+      
+          let orderHtml = `<div class="order">
+            <p class="order-date">${orderDate}</p>
+            <div class="order-view">
+            <div class="order-items-area">`;
+      
+          for (let i = 0; i < orderInfo.orderList.length; i++) {
+            const image_path = orderInfo.orderList[i].product.image_path;
+            const title = orderInfo.orderList[i].product.title;
+            const author = orderInfo.orderList[i].product.author;
+            const price = orderInfo.orderList[i].product.price;
+            const amount = orderInfo.orderList[i].amount;
+      
+            orderHtml += `
+              <div class="order-item">
+                <div class="item-img">
+                  <img src="${image_path}">
+                </div>
+                <div class="item-info">
+                  <p class="item-title">${title}</p>
+                  <p class="item-author">${author}</p>
+                  <p class="item-cost">${price}원 X ${amount}권</p>
+                </div>
+              </div>`;
+          }
+      
+          orderHtml += `</div>
+              <div class="order-info">
+              <span class="shipping-status">${shippingStatus}</span>
+              <a class="order-detail" href="/order-detail/${orderId}">주문 상세</a>
+            </div>
+            </div>
+          </div>`;
+      
+          contentArea.innerHTML += orderHtml;
+        });
+      }
+    } else {
+      alert("사용자를 찾을 수 없습니다.");
+      throw new Error("사용자를 찾을 수 없습니다.");
     }
   } catch (error) {
     console.log(error.message);
   }
 }
-loadOrderData();
+getOrderList();
 
 main();
-/* <div class="order">
-  <p class="order-date">2023-04-25</p>
-  <div class="order-view">
-    <div class="order-items-area">
-      <div class="order-item">
-        <div class="item-img">
-          <img src="../public/images/sample_image.jpg">
-        </div>
-        <div class="item-info">
-          <p class="item-title">혼자 공부하는 얄팍한 코딩지식</p>
-          <p class="item-author">고현민</p>
-          <p class="item-cost">15,800원 X 2권</p>
-        </div>
-      </div>
-      <div class="order-item">
-        <div class="item-img">
-          <img src="../public/images/sample_image.jpg">
-        </div>
-        <div class="item-info">
-          <p class="item-title">혼자 공부하는 얄팍한 코딩지식</p>
-          <p class="item-author">고현민</p>
-          <p class="item-cost">15,800원 X 2권</p>
-        </div>
-      </div>
-    </div>
-    <div class="order-info">
-      <span class="shipping-status">배송 준비 중</span>
-      <a class="order-detail" href="/order-detail/${}">주문 상세</a>
-    </div>
-  </div>
-</div> */
