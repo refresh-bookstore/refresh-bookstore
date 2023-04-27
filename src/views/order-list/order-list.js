@@ -85,7 +85,7 @@ async function getOrderList() {
           orderHtml += `</div>
               <div class="order-info">
               <span class="shipping-status">${shippingStatus}</span>
-              <a class="order-detail" href="/order-detail/${orderId}">주문 상세</a>
+              <a class="order-detail" href="/order-detail/?orderId=${orderId}">주문 상세</a>
             </div>
             </div>
           </div>`;
