@@ -71,7 +71,7 @@ const createBook = (book) => {
               </div>
               <div class="book-body">
                 <div class="book-text title">${book.title}</div>
-                <div class="book-text category">${book.category}</div>
+                <div class="book-text category">#${book.category}</div>
                 <div class="book-text price">${book.price.toLocaleString()}원</div>
               </div>
             </a>

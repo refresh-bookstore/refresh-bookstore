@@ -1,10 +1,95 @@
 @import url("/public/css/main.css");
 
+.container {
+  margin-top: 0;
+}
+.animation {
+  position: relative;
+  margin-top: 70px;
+  width: 100%;
+  height: 250px;
+  border: 0.5px var(--color-dark-gray) solid;
+  overflow: hidden;
+}
+
+.el-1{
+  position: absolute;
+  left: 60%;
+  top: -130%;
+  width: 900px;
+  height: 900px;
+  background-image: url(/public/images/animation-elements-03.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: movingSideway 20s linear 1s infinite alternate;
+
+  z-index: 2;
+}
+
+.el-2{
+  position: absolute;
+  left: 40%;
+  top: -50%;
+  width: 1200px;
+  height: 1200px;
+  background-image: url(/public/images/animation-elements-04.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: movingSideway2 25s linear 1s infinite alternate;
+
+  z-index: 1;
+}
+
+.el-3{
+  position: absolute;
+  left: -30%;
+  top: 0;
+  width: 900px;
+  height: 900px;
+  background-image: url(/public/images/animation-elements-05.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: movingSideway3 25s linear 1s infinite alternate;
+
+  z-index: 3;
+}
+
+.el-4{
+  position: absolute;
+  left: -20%;
+  top: -600px;
+  width: 1200px;
+  height: 1200px;
+  background-image: url(/public/images/animation-elements-06.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: movingSideway4 22s linear 1s infinite alternate;
+
+  z-index: 2;
+}
+
+.el-logo{
+  width: 100%;
+  background-image: url(/public/images/animation_logo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  height: 100%;
+  z-index: 6;
+}
+
 /* Auto Image Slider */
 .slider {
   width: 1024px;
   height: 300px;
-  overflow: hidden;margin-top: 15px;
+  overflow: hidden;
+  margin-top: 5px;
+  border: 0.3px var(--color-dark-gray) solid;
 }
 
 .slider .slides {
@@ -18,23 +103,45 @@
   height: 300px;
 }
 
+.slide img{
+  width: 1024px;
+}
+
 /* main */
 .category-title {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
   margin: 10px 0px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px var(--color-dark-gray) solid;
 }
 
 .nav-item.category {
-  display:inline-block;
-  margin: 10px;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px;
 }
 
 .nav-item.category .nav-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
   cursor: pointer;
   color: var(--color-point);
   border: 1px solid var(--color-point);
   border-radius: 20px;
-  font-size: var(--font-small);
-  padding: 5px;
+  font-size: var(--font-regulat);
+  padding: 10px;
+  margin: 5px 0;
 }
 
 .nav-item.category .nav-link:hover {
@@ -52,14 +159,14 @@
 
 .line {
   background-color: var(--color-dark-gray);
-  height: 1px;
+  height: 0.5px;
   border: none;
 }
 
 .product-counter {
-  margin: 20px;
+  margin: 20px 20px;
   color: var(--color-black);
-  font-size: var(--font-medium);
+  font-size: var(--font-regular);
   font-weight: var(--weight-bold);
 }
 
@@ -70,35 +177,63 @@
 }
 
 .book {
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
   width: 20%;
   cursor: pointer;
   padding: 0 0 20px 10px;
 }
 
 .img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 280px;
   text-align: center;
   margin-bottom: 8px;
 }
 
 .book-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   color: var(--color-black);
   text-decoration: none;
 }
 
 .book-img {
-  width: auto;
-  height: 180px;
+  height: auto;
+  width: 170px;
   object-fit: cover;
   justify-content: center;
-  box-shadow: 10px 10px 20px var(--color-light-gray);
+  border: 0.3px var(--color-light-gray) solid;
+  box-shadow: 5px 5px 5px var(--color-light-gray);
+  transition: all 0.5s ease;
+}
+
+.book-img:hover {
+  height: auto;
+  width: 180px;
 }
 
 .book-text.title {
-  font-size: var(--font-regular);
+
+  font-size: var(--font-small);
   font-weight: var(--weight-semi-bold);
   margin: 5px auto;
   padding: 0 10px;
+
+  word-break: keep-all;
+  word-wrap: break-word;
+  text-align: center;
 
   display: block;
   overflow: hidden;
@@ -118,13 +253,19 @@
 }
 
 .book-text.category {
+  text-align: center;
+
+  width: 180px;
+  border-top: 0.5px var(--color-light-gray) solid;
+  margin-top: 10px;
   font-size: var(--font-small);
   color: var(--color-point);
   margin-bottom: 5px;
-  padding: 0 10px;
+  padding: 10px 10px;
 }
 
 .book-text.price {
+  text-align: center;
   font-size: var(--font-small);
   padding: 0 10px;
 }
@@ -138,4 +279,27 @@
 .empty-book-list {
   font-size: var(--font-large);
   color: var(--color-dark-gray);
+}
+
+
+
+
+@keyframes movingSideway {
+  from { transform: translate(0, 0);}
+  to { transform: translate(20%, 300px);}
+}
+
+@keyframes movingSideway2 {
+  from { transform: translate(0, 0);}
+  to { transform: translate(-20%, -20%);}
+}
+
+@keyframes movingSideway3 {
+  from { transform: translate(0, 0);}
+  to { transform: translate(10%, -20%);}
+}
+
+@keyframes movingSideway4 {
+  from { transform: translate(0, 0);}
+  to { transform: translate(10%, 20%);}
 }
