@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="order-create.css">
   <script type="module" src="order-create.js"></script>
   <script src="/public/js/findAddress.js"></script>
+  <script src="/public/js/autoHyphen.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
@@ -15,7 +16,6 @@
   <div class="container">
     <!-- 결제하기 타이틀 -->
     <p class="order-create-title">결제하기</p>
-
     <main>
       <div class="leftSide">
         <p>주문/배송 정보</p>
@@ -27,7 +27,14 @@
           </div>
           <div class="userPhoneNumber">
             <label for="userPhoneNumber">연락처</label>
-            <input type="text" class="userPhoneNumber user_delivery_info" placeholder="'-' 제외 입력해주세요.">
+            <input 
+              type="text" 
+              class="userPhoneNumber user_delivery_info" 
+              placeholder="" 
+              autocomplete="on"
+              oninput="autoHyphen(this)"
+              maxlength="13"
+            />
           </div>
           <div class="userAddress">
             <label for="findAddress">주소</label>
