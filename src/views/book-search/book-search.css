@@ -24,6 +24,14 @@
   padding-top: 20px;
 }
 
+.results {
+  border: 1px solid var(--color-light-gray);
+  border-radius: 8px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 5px var(--color-light-gray);
+}
+
 .results .result-view {
   display: flex;
   justify-content: center;
