@@ -26,7 +26,7 @@ const isbn = urlParams.get('isbn');
 fetch(`/book-detail/${isbn}`)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data.data[0]);
+    // console.log(data.data[0]);
     renderBookDetail(data.data[0]);
   })
   .catch((err) => console.error(err));

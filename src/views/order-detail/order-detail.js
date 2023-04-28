@@ -134,7 +134,7 @@ async function modifyOrder() {
   if (isAllValid) {
     try {
       const response = await fetch(`${orderId}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -150,7 +150,7 @@ async function modifyOrder() {
       
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
       } else {
         alert("사용자를 찾을 수 없습니다.");
         throw new Error("사용자를 찾을 수 없습니다.");
