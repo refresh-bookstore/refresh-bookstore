@@ -6,9 +6,6 @@ const orderDateArea = document.querySelector('.orderDate');
 const shippingStatusArea = document.querySelector('.shippingStatus');
 
 const booksArea = document.querySelector('.books');
-const bookTitle = document.querySelectorAll('.book-title');
-const bookAuthor = document.querySelectorAll('.author')
-const bookPrice = document.querySelectorAll('.book-price');
 
 const deliveryFeeArea = document.querySelector('.deliveryFee');
 const totalPriceArea = document.querySelector('.entirePrice');
@@ -46,9 +43,12 @@ async function loadOrderDetail() {
       const address = data[0].address;
       const detailAddress = data[0].detailAddress;
       const orderRequest = data[0].orderRequest;
+      const orderDate = data[0].createdAt.slice(0, 10);
 
       // 주문 번호
       orderIdArea.innerText = orderId;
+      // 주문 날짜
+      orderDateArea.innerText = orderDate;
       // 배송 상태
       if (data[0].shippingStatus === '상품 준비중') {
         document.querySelector('#state0').style = 'color: var(--color-black); font-size: 20px; font-weight: 700';
