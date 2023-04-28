@@ -89,6 +89,17 @@ function checkValid() {
   }
 
   if (!name || !email || !password || !passwordCheck || !postalCode || !address || !phone) {
+    const isNull = [];
+
+    if (!name) { isNull.push("이름"); }
+    if (!email) { isNull.push("이메일"); }
+    if (!password) { isNull.push("비밀번호"); }
+    if (!passwordCheck) { isNull.push("비밀번호 확인"); }
+    if (!postalCode) { isNull.push("우편번호"); }
+    if (!address) { isNull.push("주소"); }
+    if (!phone) { isNull.push("전화번호"); }
+
+    alert(`${isNull.join(", ")}을(를) 입력해주세요. \u{1F913}`);
     return false;
   }
   
