@@ -249,7 +249,6 @@ function setSelectedPrice() {
   } else selectedPrice.innerText = '0원';
 }
 
-
 // 배송비 계산 함수
 function setDeliveryFee() {
   if (getPriceNumber(selectedPrice.innerText) >= 50000 || selectedPrice.innerText === '0원') {

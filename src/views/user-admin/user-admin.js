@@ -30,8 +30,7 @@ const contents = [
   adminContentCategories,
 ];
 
-
-//////////////////////목록별 페이지 구현///////////////////////
+// 목록별 페이지 구현
 lists.forEach((e)=> {
   e.addEventListener('click', ()=>{
     contents.map((el) => {
@@ -42,32 +41,27 @@ lists.forEach((e)=> {
       }
     })
     title.innerText = e.innerText;
-    
 
-
-    //////////////////////도서관리///////////////////////
+    // 도서관리
     if(lists.indexOf(e) === 0){
         createBookList();
       }
 
-    //////////////////////회원관리///////////////////////
+    // 회원관리
     if(lists.indexOf(e) === 1){
       createUserList();
-      
     }
 
-    //////////////////////주문관리///////////////////////
+    // 주문관리
     if(lists.indexOf(e) === 2){
       createOrderList();
-      
     }
 
-    //////////////////////카테고리관리///////////////////////
+    // 카테고리 관리
     if(lists.indexOf(e) === 3){
       createCategoryList();
     }
-  })
-})
-
+  });
+});
 
 main();

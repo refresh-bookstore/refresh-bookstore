@@ -15,22 +15,22 @@ const {
 const { isAdmin } = require("../middlewares/isAdmin.js");
 const router = Router();
 
-//주문 목록을 기쟈오기 위한 API
+// 주문 목록을 가져오기 위한 API
 router.get("/orders", checkSession, getOrderList);
 
-//주문 생성을 하는 API
+// 주문 생성을 하는 API
 router.post("/orders", checkSession, createOrder);
 
-//주문 ID로 데이터 불러오기 API
+// 주문 ID로 데이터 불러오기 API
 router.get("/order-detail/:orderId", checkSession, getOrderId);
 
-//email로 데이터 불러오기 API
+// email로 데이터 불러오기 API
 router.get("/ordered", checkSession, getOrderEmail);
 
-//사용자는 주문 정보를 변경할 수 있습니다.
+// 사용자는 주문 정보를 변경할 수 있습니다.
 router.put("/order-detail/:orderId", checkSession, changeShippingAddress);
 
-//사용자는 주문을 취소할 수 있습니다.(배송상태를 주문취소로 변경)
+// 사용자는 주문을 취소할 수 있습니다.(배송상태를 주문취소로 변경)
 router.put("/order-detail/:orderId/cancel", checkSession, cancelOrder);
 
 // Admin :: 주문 수정하기
