@@ -146,7 +146,7 @@ function activateAmountBtn() {
   // 수량 값을 없애거나 0으로 만들면 1로 바뀌도록 함
   amountInput.forEach((amount, idx) => {
     amount.addEventListener('change', () => {
-      if (amount.value <= 1 || amount.value === undefined) {
+      if (amount.value <= 1 || amount.value === undefined || typeof(amount.value) !== 'number') {
         amount.value = 1;
       } 
       const data = JSON.parse(localStorage.getItem('cart'));
