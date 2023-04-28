@@ -34,7 +34,7 @@ function checkValid() {
   const phoneError = document.getElementById("phone-error");
   const addresError = document.getElementById("address-error");
 
-  if (!isNameValid) {
+  if (!isNameValid && name.length > 0) {
     nameError.style.display = "flex";
     nameError.innerText = "이름은 2글자 이상 입력해주세요";
     nameInput.focus();
@@ -43,7 +43,7 @@ function checkValid() {
     nameError.style.display = "none";
   }
 
-  if (!isEmailValid.test(email)) {
+  if (!isEmailValid.test(email) && email.length > 0) {
     emailError.style.display = "flex";
     emailError.innerText = "이메일 형식이 올바르지 않습니다";
     emailInput.focus();
@@ -52,7 +52,7 @@ function checkValid() {
     emailError.style.display = "none";
   }
 
-  if (!isPasswordValid.test(password)) {
+  if (!isPasswordValid.test(password) && password.length > 0) {
     passwordError.style.display = "flex";
     passwordError.innerText = "비밀번호 형식(8 ~ 15자, 특수문자, 문자, 숫자 포함)이 올바르지 않습니다";
     passwordInput.focus();
@@ -61,7 +61,7 @@ function checkValid() {
     passwordError.style.display = "none";
   }
 
-  if (!isPasswordSame) {
+  if (!isPasswordSame && passwordCheck.length > 0) {
     passwordCheckError.style.display = "flex";
     passwordCheckError.innerText = "비밀번호가 일치하지 않습니다";
     passwordCheckInput.focus();
@@ -70,7 +70,7 @@ function checkValid() {
     passwordCheckError.style.display = "none";
   }
 
-  if (!isAddressValid) {
+  if (!isAddressValid && postalCode > 0) {
     addresError.style.display = "flex";
     addresError.innerText = "주소를 검색해주세요";
     addressInput.focus();
@@ -79,13 +79,17 @@ function checkValid() {
     addresError.style.display = "none";
   }
 
-  if (!isPhoneValid.test(phone)) {
+  if (!isPhoneValid.test(phone) && phone.length > 0) {
     phoneError.style.display = "flex";
     phoneError.innerText = "전화번호 형식이 올바르지 않습니다";
     phoneInput.focus();
     return false;
   } else {
     phoneError.style.display = "none";
+  }
+
+  if (!name || !email || !password || !passwordCheck || !postalCode || !address || !phone) {
+    return false;
   }
   
   return true;
