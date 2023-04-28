@@ -274,29 +274,10 @@ function makeOrder() {
   if (token) {
     saveToPurchase(JSON.parse(localStorage.getItem('cart')));
     location.replace('/order-create');
-    // 이전페
-    const previousPath = document.referrer;
-    if (previousPath.includes('login')) {
-      location.href = previousPath;
-      history.pushState(null, null, location.href); 
-      // 뒤로가기 이벤트감지 -> 현재페이지로 이동
-      window.onpopstate = function() { 
-        history.go(-1); 
-      }
-    }
-      
-
-    if (!found) {
-      location.replace("/");
-    }
   } else {
     window.alert('로그인을 해주세요.');
     location.href = '/login';
   }
 }
 
-const cartData = JSON.parse(localStorage.getItem('cart'));
-if (!cartData || cartData.length === 0) {
-  
-}
 main();
