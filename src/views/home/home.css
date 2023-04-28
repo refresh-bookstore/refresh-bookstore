@@ -82,6 +82,17 @@
   z-index: 6;
 }
 
+.el-slogan {
+  font-size: var(--font-medium);
+  color: rgb(12, 50, 9);
+  top:60%;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  z-index: 6;
+}
+
 /* Auto Image Slider */
 .slider {
   width: 1024px;
@@ -107,6 +118,7 @@
 }
 
 /* main */
+
 .category-title {
   display: flex;
   flex-wrap: wrap;
@@ -170,8 +182,12 @@
 
 /* book list */
 .books {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .book {
@@ -181,9 +197,9 @@
   justify-content: center;
   align-items: center;
 
-  width: 200px;
+  width: 20%;
   cursor: pointer;
-  padding: 0 0 20px 10px;
+  padding: 0 10px 20px 10px;
 }
 
 .img-container {

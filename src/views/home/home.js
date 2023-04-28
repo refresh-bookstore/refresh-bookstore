@@ -5,6 +5,7 @@ const slides = slider.querySelector(".slides");
 const slide = slides.querySelectorAll(".slide");
 
 let currentSlide = 0;
+let textStatus = 1;
 
 // slide 5초씩 반복
 setInterval(function() {
@@ -25,6 +26,23 @@ setInterval(function() {
     currentSlide = 0;
   }
 }, 5000);
+
+setInterval(() => {
+  const changingText = document.querySelector('.el-slogan')
+  changingText.innerHTML = `당신의 { <i><b>마음</b></i> } 을 리프레시하는 서점`;
+  if(textStatus === 4) {
+    textStatus = 1;
+  } else if(textStatus === 1) {
+    changingText.innerHTML = `당신의 { <i><b>내일</b></i> } 을 리프레시하는 서점`;
+    textStatus += 1;
+  } else if(textStatus === 2) {
+    changingText.innerHTML = `당신의 { <i><b>작업</b></i> } 을 리프레시하는 서점`;
+    textStatus += 1;
+  } else if(textStatus === 3) {
+    changingText.innerHTML = `당신의 { <i><b>세상</b></i> } 을 리프레시하는 서점`;
+    textStatus += 1;
+}
+}, 1000);
 
 // 해당 카테고리 책 권수 
 const productCounter = document.querySelector(".product-counter");
@@ -152,5 +170,6 @@ try {
 } catch (error) {
   console.log(error.message);
 }
+
 
 main();
