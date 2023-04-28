@@ -39,7 +39,7 @@ exports.createProduct = async (
 exports.getProducts = async () => {
   const products = await Product.find({});
 
-  console.log(products);
+  //console.log(products);
   if (products.length === 0) {
     throw {
       status: 400,
