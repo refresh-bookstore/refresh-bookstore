@@ -1,5 +1,5 @@
 import { main } from '/public/js/main.js';
-import { order } from './temp.js';
+import { logout } from '/public/js/logout.js';
 
 const orderIdArea = document.querySelector('.orderId');
 const orderDateArea = document.querySelector('.orderDate');
@@ -95,6 +95,10 @@ async function loadOrderDetail() {
         deliveryRequest.value = orderRequest;
 
       });
+    } else {
+      alert("잘못된 접근입니다.");
+      logout();
+      throw new Error("사용자를 찾을 수 없습니다.");
     }
   } catch (error) {
     console.log(error.message);
