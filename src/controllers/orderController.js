@@ -68,6 +68,10 @@ exports.getOrderList = async (req, res, next) => {
 
 exports.getOrderId = async (req, res, next) => {
   try {
+    if (!req.session.user) {
+      return res.status(401).send("Unauthorized");
+    }
+
     const orderId = req.params.orderId;
     console.log(orderId);
 

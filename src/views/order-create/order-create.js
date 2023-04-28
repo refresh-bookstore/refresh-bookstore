@@ -1,4 +1,5 @@
 import { main } from '/public/js/main.js';
+import { logout } from '/public/js/logout.js';
 
 // 가격 문자열에서 숫자만 반환하는 함수
 function getPriceNumber(str) {
@@ -33,6 +34,10 @@ async function loadUserData() {
       addressInput.value = data.address;
       detailAddressInput.value = data.detailAddress;
       email = data.email;
+    } else {
+      alert("잘못된 접근입니다.");
+      logout();
+      throw new Error("사용자를 찾을 수 없습니다.");
     }
   } catch (error) {
     console.log(error.message);

@@ -1,4 +1,5 @@
 import { main } from '/public/js/main.js';
+import { logout } from '/public/js/logout.js';
 
 const mypageButton = document.getElementById("mypage-button");
 const userGreeting = document.getElementById("user-greeting");
@@ -25,7 +26,8 @@ async function setUserName() {
       const data = await response.json();
       userGreeting.innerText = `안녕하세요, ${data.name}님\u{1F49A}`;
     } else {
-      alert("사용자를 찾을 수 없습니다.");
+      alert("잘못된 접근입니다.");
+      logout();
       throw new Error("사용자를 찾을 수 없습니다.");
     }
   } catch (error) {
@@ -99,7 +101,7 @@ async function getOrderList() {
         <div class="empty-order-list">주문 내역이 없습니다</div>`;
       }
     } else {
-      alert("사용자를 찾을 수 없습니다.");
+      // alert("사용자를 찾을 수 없습니다.");
       throw new Error("사용자를 찾을 수 없습니다.");
     }
   } catch (error) {
