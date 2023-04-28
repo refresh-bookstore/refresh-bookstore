@@ -65,6 +65,7 @@ function headerFunc() {
   };
 
   // 로고 클릭 이벤트
+
   if (location.pathname === '/order-create/') {
     logoImage.addEventListener('click', () => {
       if (!confirm('페이지에서 나가시겠습니까?')) {
