@@ -43,7 +43,7 @@ async function loadOrderDetail() {
       const address = data[0].address;
       const detailAddress = data[0].detailAddress;
       const orderRequest = data[0].orderRequest;
-      const orderDate = data[0].createdAt.slice(0, 10);
+      const orderDate = new Date(new Date(data[0].createdAt).getTime() + (1000 * 60 * 60 * 9)).toISOString().slice(0, 10);
 
       // 주문 번호
       orderIdArea.innerText = orderId;
