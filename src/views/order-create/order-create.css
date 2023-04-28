@@ -47,7 +47,7 @@ main .rightSide {
 }
 
 .delivery__information label {
-  width: 140px;
+  width: 120px;
   padding-left: 20px;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@ main .rightSide {
 
 .userName input {
   padding: 8px;
-  width: 250px;
+  width: 270px;
   border: 1px solid var(--color-dark-gray);
   border-radius: var(--border-radius-input);
 }
@@ -75,7 +75,7 @@ main .rightSide {
 
 .userPhoneNumber input {
   padding: 8px;
-  width: 250px;
+  width: 270px;
   border: 1px solid var(--color-dark-gray);
   border-radius: var(--border-radius-input);
   color: var(--color-light-black);
@@ -87,7 +87,7 @@ main .rightSide {
   justify-content: flex-start;
 }
 .userAddress input {
-  width: 250px;
+  width: 270px;
   margin: 8px 0;
   padding: 8px;
   border-radius: var(--border-radius-input);
@@ -99,7 +99,7 @@ main .rightSide {
 }
 
 input.search_address {
-  width: 100px;
+  width: 120px;
   color: gray;
   border: 1px solid var(--color-point);
 }
@@ -114,19 +114,18 @@ input.search_address:hover {
 }
 
 .deliveryRequest p {
-  width: 140px;
+  width: 120px;
   display: flex;
   align-items: center;
   border-right: 1px solid var(--color-dark-gray);
   margin-right: 8px;
-  padding-left: 20px;
   padding-right: 0;
   justify-content: center;
   font-weight: var(--weight-semi-bold);
 }
 
 .deliveryRequest select, input {
-  width: 250px;
+  width: 270px;
   margin: 4px 0;
   padding: 8px;
   border-radius: var(--border-radius-input);
@@ -135,7 +134,7 @@ input.search_address:hover {
 }
 
 .customRequestContainer input {
-  width: 250px;
+  width: 270px;
   padding: 8px;
 }
 
