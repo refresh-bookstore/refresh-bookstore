@@ -14,19 +14,6 @@ const totalCost = document.querySelector('.totalCost');
 const userDeliveryInfo =  document.querySelectorAll('.user_delivery_info');
 const [ nameInput , phoneNumberInput , postalCodeInput , addressInput , detailAddressInput ] = userDeliveryInfo;
 
-// window.addEventListener('beforeunload', (event) => {
-//   // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
-//   event.preventDefault();
-
-//   // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
-//   event.returnValue = '';
-// });
-
-// // 페이지 떠날 때 로컬 스토리지 purchase 삭제
-// window.onbeforeunload = function() {
-//   localStorage.removeItem('purchase');
-// }
-
 // 사용자 기본정보 출력
 let email;
 async function loadUserData() {

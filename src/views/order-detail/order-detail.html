@@ -87,9 +87,9 @@
             </div>
             <div class="addressArea">
               <label class="label" for="addressInput">주소</label>
-              <input hidden type="button" id="searchAddress" class="button search-address" value="주소 검색" onclick="findAddress()">
-              <input readonly type="text" id="postalCodeInput" class="postalCode" value="">
-              <input readonly type="text" id="addressInput" class="address" value="">
+              <input hidden type="button" onclick="findAddress()" id="searchAddress" class="button search-address" value="주소 검색" onclick="findAddress()">
+              <input readonly type="text" onclick="findAddress()" id="postalCodeInput" class="postalCode" value="">
+              <input readonly type="text" onclick="findAddress()" id="addressInput" class="address" value="">
               <input readonly type="text" id="detailAddressInput" class="detailAddress" value="">
             </div>
             <div class="deliveryRequestArea">
