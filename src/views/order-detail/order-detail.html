@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>Refresh Books</title>
   <link rel="stylesheet" href="order-detail.css">
-  <script type="module" src="order-detail.js"></script>
   <script src="/public/js/findAddress.js"></script>
+  <script src="/public/js/autoHyphen.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
@@ -72,7 +72,16 @@
             </div>
             <div class="phoneNumberArea">
               <label class="label" for="phoneNumberInput">연락처</label>
-              <input readonly class="phoneNumber" for="phoneNumberInput" value="">
+              <input 
+              readonly 
+              class="phoneNumber" 
+              autocomplete="on"
+              oninput="autoHyphen(this)"
+              maxlength="13" 
+              for="phoneNumberInput"
+              id="phoneInput"
+              value=""
+              />
             </div>
             <div class="addressArea">
               <label class="label" for="addressInput">주소</label>
@@ -88,6 +97,7 @@
           </form>
         </div>
       </section>
+      <p class="error" id="input-error"></p>
       <section class="buttonArea">
         <button hidden class="modifyCompleteButton">수정 완료</button>
         <button class="modifyButton">주문정보 수정</button>
@@ -97,5 +107,6 @@
     
   </div>
   <footer></footer>
+  <script type="module" src="order-detail.js"></script>
 </body>
 </html>

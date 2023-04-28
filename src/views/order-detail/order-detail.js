@@ -1,4 +1,5 @@
 import { main } from '/public/js/main.js';
+import { checkValid } from "./order-checkValid.js";
 import { logout } from '/public/js/logout.js';
 
 const orderIdArea = document.querySelector('.orderId');
@@ -119,39 +120,44 @@ function activateModify() {
 }
 modifyCompleteButton.addEventListener('click', completeModify);
 function completeModify() {
-  modifyCompleteButton.style.display = 'none';
-  modifyButton.style.display = 'block';
-  searchAddressBtn.style.display = 'none';
-  document.querySelectorAll('input').forEach(e => e.readOnly = true);
+  if (checkValid()) {
+    modifyCompleteButton.style.display = 'none';
+    modifyButton.style.display = 'block';
+    searchAddressBtn.style.display = 'none';
+    document.querySelectorAll('input').forEach(e => e.readOnly = true);
+  }
   modifyOrder();
 }
 
 async function modifyOrder() {
-  try {
-    const response = await fetch(`${orderId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: name.value,
-        userPhone: phoneNumber.value,
-        postalCode: postalCodeInput.value,
-        address: addressInput.value,
-        detailAddress: detailAddressInput.value,
-        orderRequest: deliveryRequest.value,
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-    } else {
-      alert("사용자를 찾을 수 없습니다.");
-      throw new Error("사용자를 찾을 수 없습니다.");
+  const isAllValid = checkValid();
+  if (isAllValid) {
+    try {
+      const response = await fetch(`${orderId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: name.value,
+          userPhone: phoneNumber.value,
+          postalCode: postalCodeInput.value,
+          address: addressInput.value,
+          detailAddress: detailAddressInput.value,
+          orderRequest: deliveryRequest.value,
+        }),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        alert("사용자를 찾을 수 없습니다.");
+        throw new Error("사용자를 찾을 수 없습니다.");
+      }
+    } catch (error) {
+      console.log(error.message);
     }
-  } catch (error) {
-    console.log(error.message);
   }
 }
 
