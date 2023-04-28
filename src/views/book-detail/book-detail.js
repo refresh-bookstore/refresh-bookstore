@@ -130,6 +130,7 @@ const published = new Date(book.publication_date);
       // location.replace('/order-create');
     } else {
       window.alert('로그인을 해주세요.')
+      location.href = '/login';
     }
   });
   
