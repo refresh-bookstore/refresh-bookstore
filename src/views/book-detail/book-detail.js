@@ -58,7 +58,9 @@ const published = new Date(book.publication_date);
   minusBtn.addEventListener('click',(e)=>{
     e.preventDefault();
     if (Number(amountInput.value) <= 1){
-    }else{
+      amountInput.value = 1;
+    } 
+     else {
       amountInput.value -= 1;
       totalCost.innerText = `${(book.price * amountInput.value).toLocaleString()}원`;
     }
@@ -73,7 +75,10 @@ const published = new Date(book.publication_date);
   totalCost.innerText = `${(book.price * amountInput.value).toLocaleString()}원`;
   
   amountInput.addEventListener('input', ()=>{
-    totalCost.innerText = `${(book.price * amountInput.value).toLocaleString()}원`;
+    let amout = amountInput.value;
+    amout = amout.replace(/[^0-9]/g, ''); // 입력된 값에서 숫자만 추출
+    amountInput.value = amout; // 입력란에 숫자만 입력
+    totalCost.innerText = `${(book.price * amout).toLocaleString()}원`;
   });
   
   
