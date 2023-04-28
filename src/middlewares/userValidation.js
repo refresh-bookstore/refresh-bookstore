@@ -26,7 +26,8 @@ exports.validateUserRegistration = [
       // 이메일 중복 검사
       const user = await User.findOne({ email: value });
       if (user) {
-        throw new Error("이미 사용 중인 이메일 주소입니다.");
+        // throw new Error("이미 사용 중인 이메일 주소입니다.");
+        return false;
       }
       return true;
     }),
