@@ -22,6 +22,11 @@ const [ nameInput , phoneNumberInput , postalCodeInput , addressInput , detailAd
 //   event.returnValue = '';
 // });
 
+// 페이지 떠날 때 로컬 스토리지 purchase 삭제
+window.onbeforeunload = function() {
+  localStorage.removeItem('purchase');
+}
+
 // 사용자 기본정보 출력
 let email;
 async function loadUserData() {

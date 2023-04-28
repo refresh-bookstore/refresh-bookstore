@@ -126,8 +126,8 @@ const published = new Date(book.publication_date);
           amount: Number(amountInput.value),
       }];
       localStorage.setItem('purchase', JSON.stringify(purchaseItems));
-      // location.href = '/order-create';
-      location.replace('/order-create');
+      location.href = '/order-create';
+      // location.replace('/order-create');
     } else {
       window.alert('로그인을 해주세요.')
     }
