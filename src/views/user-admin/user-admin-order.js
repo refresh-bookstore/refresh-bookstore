@@ -16,13 +16,14 @@ const createOrderList = () => {
       fetch('/product')
       .then((res) => res.json())
       .then((data) => {
+        orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         const books = data.data;
         let orderList = '';
         for( let j = 0; j < orders[i].orderList.length; j++){
           const orderedBook = books.find((e)=> e._id === orders[i].orderList[j].product).title;
           orderList += `<br>&emsp;&emsp;&emsp;&emsp;  &lt; ${orderedBook} &gt; ${orders[i].orderList[j].amount}권`
         }
-        const ordered = new Date(orders[i].createdAt);
+        const ordered = new Date(new Date(orders[i].createdAt).getTime() + (1000 * 60 * 60 * 9)).toISOString().slice(0, 10);
         const shippingStatus = ['상품 준비중', '배송중', '배송완료', '주문취소'];
         let statusSelect = '';
         for(let j = 0; j < shippingStatus.length; j++) {
@@ -36,7 +37,7 @@ const createOrderList = () => {
         `
         <div class="admin-items ordered-list">
           <div class="order-upper">
-            <p class="order-date"> ${ordered.getFullYear()}/${(ordered.getMonth()+1).toString().padStart(2, '0')}/${ordered.getDate().toString().padStart(2, '0')} ${ordered.getUTCHours().toString().padStart(2, '0')}:${ordered.getMinutes().toString().padStart(2, '0')} </p>
+            <p class="order-date"> ${ordered} </p>
             <p class="order-id"> ${orders[i].orderId} </p>
             <p class="order-status"> ${orders[i].shippingStatus} </p>
             <select class="hidden" id="orderCategoryInput" name="categories">${statusSelect}</select>
