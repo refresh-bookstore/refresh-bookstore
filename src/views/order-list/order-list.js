@@ -68,15 +68,16 @@ async function getOrderList() {
             const title = orderInfo.orderList[i].product.title;
             const author = orderInfo.orderList[i].product.author;
             const price = orderInfo.orderList[i].product.price;
+            const isbn = orderInfo.orderList[i].product.isbn;
             const amount = orderInfo.orderList[i].amount;
       
             orderHtml += `
               <div class="order-item">
                 <div class="item-img">
-                  <img src="${image_path}">
+                  <a href="/book-detail/?isbn=${isbn}"><img src="${image_path}"></a>
                 </div>
                 <div class="item-info">
-                  <p class="item-title">${title}</p>
+                  <p class="item-title"><a href="/book-detail/?isbn=${isbn}">${title}</a></p>
                   <p class="item-author">${author}</p>
                   <p class="item-cost">${price}원 X ${amount}권</p>
                 </div>
