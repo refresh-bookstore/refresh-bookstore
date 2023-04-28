@@ -12,8 +12,7 @@ function headerFunc() {
   
   const logoImage = document.querySelector('.header-logo');
 
-  //검색창 애니메이션
-
+  // 검색창 애니메이션
   const searchInputAppear = [
     { transform: "translate(300px, 0px)" },
     { transform: "translate(0px, 0px)" },
@@ -30,21 +29,10 @@ function headerFunc() {
     iterations: 1,
   };
   
-  //검색창 클릭 이벤트
-  
+  // 검색창 클릭 이벤트
   searchBtn.addEventListener('click', async () => {
     if (searchBtn.classList.contains('activate')) {
-        if (searchInput.value) {
-          location.href = "/book-search";
-          sessionStorage.setItem("search", searchInput.value);
-        } else {
-          searchInput.placeholder = "";
-          searchInput.animate(searchInputDisappear, searchInputTiming);
-          setTimeout(() => {
-            searchBtn.classList.remove('activate');
-            searchInput.classList.remove('activate');
-          }, 230)
-        }
+        handleSearch();
     } else {
     searchBtn.classList.add('activate');
     searchInput.classList.add('activate');
@@ -54,6 +42,27 @@ function headerFunc() {
     }, 230);
     }
   })
+
+  // 검색창 엔터 이벤트
+  searchInput.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  });
+
+  const handleSearch = async () => {
+    if (searchInput.value) {
+      location.href = "/book-search";
+      sessionStorage.setItem("search", searchInput.value);
+    } else {
+      searchInput.placeholder = "";
+      searchInput.animate(searchInputDisappear, searchInputTiming);
+      setTimeout(() => {
+        searchBtn.classList.remove('activate');
+        searchInput.classList.remove('activate');
+      }, 230);
+    }
+  };
 
   // 로고 클릭 이벤트
   logoImage.addEventListener("click", () => {
