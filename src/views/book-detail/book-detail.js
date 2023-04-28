@@ -1,7 +1,5 @@
 import { main } from '/public/js/main.js';
 
-// const likeBtn = document.querySelector('#likeBtn');
-
 const bookImageArea = document.querySelector('.imageArea');
 const bookTitle = document.querySelectorAll('.bookTitle');
 const detailedInfo = document.querySelector('#detailedInfo');
@@ -35,27 +33,19 @@ fetch(`/book-detail/${isbn}`)
 // 페이지 렌더
 
 const renderBookDetail = (book) => {
-const published = new Date(book.publication_date);
-
-//   likeBtn.addEventListener('click',()=>{
-//     likeBtn.src = "/public/images/like_2.svg";
-//   });
-  
+  const published = new Date(book.publication_date);
   
   // 책 정보
-  
   bookImageArea.innerHTML = `<img src="${book.image_path}">`;
   bookCategory.innerText = `#${book.category}`;
-  bookTitle.forEach((e)=>{
+  bookTitle.forEach((e) => {
     e.innerText = book.title;
   });
   
   detailedInfo.innerText = `${book.author} | ${book.publisher} | ${published.getFullYear()}`;
   
-  
-  
   // 수량 버튼
-  minusBtn.addEventListener('click',(e)=>{
+  minusBtn.addEventListener('click', (e) => {
     e.preventDefault();
     if (Number(amountInput.value) <= 1){
       amountInput.value = 1;
@@ -65,7 +55,7 @@ const published = new Date(book.publication_date);
     }
   });
   
-  plusBtn.addEventListener('click',(e)=>{
+  plusBtn.addEventListener('click', (e) => {
     e.preventDefault();
     amountInput.value = Number(amountInput.value) + 1;
     totalCost.innerText = `${(book.price * amountInput.value).toLocaleString()}원`;
@@ -73,20 +63,19 @@ const published = new Date(book.publication_date);
   
   totalCost.innerText = `${(book.price * amountInput.value).toLocaleString()}원`;
   
-  amountInput.addEventListener('input', ()=>{
+  amountInput.addEventListener('input', () => {
     let amout = amountInput.value;
     amout = amout.replace(/[^0-9]/g, ''); // 입력된 값에서 숫자만 추출
     amountInput.value = amout; // 입력란에 숫자만 입력
     totalCost.innerText = `${(book.price * amout).toLocaleString()}원`;
   });
   
-  
   // 장바구니 버튼
-  addToCartBtn.addEventListener('click',()=>{
+  addToCartBtn.addEventListener('click', () => {
     let cartItems = JSON.parse(localStorage.getItem('cart'));
-    if(cartItems === null) cartItems = [];
+    if (cartItems === null) cartItems = [];
     const isAlreadyInCart = cartItems.findIndex(item=> item.isbn === book.isbn);
-    if(isAlreadyInCart !== -1){
+    if (isAlreadyInCart !== -1) {
       cartItems[isAlreadyInCart].amount += Number(amountInput.value);
     } else {
       cartItems.push({
@@ -105,7 +94,7 @@ const published = new Date(book.publication_date);
     localStorage.setItem('cart', JSON.stringify(cartItems));
   
     const cartCheckout = confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?");
-    if(cartCheckout){
+    if (cartCheckout){
       location.href = '/cart';
     }else{
       main();
@@ -131,21 +120,17 @@ const published = new Date(book.publication_date);
       }];
       localStorage.setItem('purchase', JSON.stringify(purchaseItems));
       location.href = '/order-create';
-      // location.replace('/order-create');
     } else {
       window.alert('로그인을 해주세요.')
       location.href = '/login';
     }
   });
-  
-  
-  
+
   // 책 소개 부분
   bookInfoIsbn.innerText = `ISBN | ${book.isbn}`;
   bookInfoAuthor.innerText = `저자 | ${book.author}`;
   bookInfoPublisher.innerText = `출판사 | ${book.publisher}`;
   bookInfoDate.innerText = `발행일 | ${published.getFullYear()}년 ${published.getMonth() + 1}월 ${published.getDate()}일`;
-  
   
   bookIntroduction.innerText = book.description;
 }

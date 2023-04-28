@@ -60,8 +60,12 @@ async function loadOrderDetail() {
         document.querySelector('#state0').style = 'color: var(--color-black); font-size: 20px; font-weight: 700';
       } else if (data[0].shippingStatus === '배송중') {
         document.querySelector('#state1').style = 'color: var(--color-black); font-size: 20px; font-weight: 700';
+        modifyButton.style.display = 'none';
+        cancelButton.style.display = 'none';
       } else if (data[0].shippingStatus === '배송완료') {
         document.querySelector('#state2').style = 'color: var(--color-black); font-size: 20px; font-weight: 700';
+        modifyButton.style.display = 'none';
+        cancelButton.style.display = 'none';
       } else {
         document.querySelectorAll('.shippingStatus > span').forEach(e => e.style.display = 'none');
         shippingStatusArea.innerText = '주문취소';
@@ -69,6 +73,7 @@ async function loadOrderDetail() {
         cancelButton.style.display = 'none';
         shippingStatusArea.style = 'color: var(--color-red); font-size: 20px; font-weight: 700';
       }
+      
       // 책 정보
       data[0].orderList.forEach(book => {
         const isbn = book.product.isbn;

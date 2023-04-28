@@ -59,8 +59,6 @@ const orderSchema = new Schema(
     },
     detailAddress: {
       type: String,
-      // required: true,
-      // trim: true,
     },
     userPhone: {
       type: String,
@@ -92,25 +90,6 @@ const orderSchema = new Schema(
     timestamps: true,
   }
 );
-
-// orderSchema.pre("save", async function (next) {
-//   try {
-//     let totalPrice = 0;
-//     const order = this;
-
-//     for (let i = 0; i < order.orderList.length; i++) {
-//       let getPrice = await productService.getPrice(
-//         order.orderList[i].product.price
-//       );
-//       totalPrice += order.orderList[i].quantity * getPrice;
-//     }
-
-//     order.totalPrice = totalPrice;
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 
 const Order = mongoose.model("Order", orderSchema);
 

@@ -43,8 +43,8 @@ const createBookList = () => {
 
 const adminEditBook = (books) => {
   const bookEditBtn = adminContentBooks.querySelectorAll('.edit');
-  bookEditBtn.forEach((e)=> {
-    e.addEventListener('click', ()=>{
+  bookEditBtn.forEach((e) => {
+    e.addEventListener('click', () => {
 
       const bookInfoBlock = e.closest('.admin-items');
       const checkBtn = bookInfoBlock.querySelector('.check');
@@ -56,110 +56,104 @@ const adminEditBook = (books) => {
       const thisBook = books.find((e) =>  e.title === bookTitlePart.innerText );
       const published = new Date(thisBook.publication_date);
 
-      console.log(thisBook);
+      // console.log(thisBook);
 
       fetch('/user-admin/categories')
         .then((res) => res.json())
         .then((data) => {
           bookInfoBlock.style.height = "780px";
           let categoryList = "";
-          for(let i = 0; i < data.data.length; i++){
-            if(data.data[i].name === thisBook.category){
-              categoryList += `<option value="${data.data[i].name}" selected>${data.data[i].name}</option>`
+          for (let i = 0; i < data.data.length; i++) {
+            if (data.data[i].name === thisBook.category) {
+              categoryList += `<option value="${data.data[i].name}" selected>${data.data[i].name}</option>`;
             }else{
-              categoryList += `<option value="${data.data[i].name}">${data.data[i].name}</option>`
+              categoryList += `<option value="${data.data[i].name}">${data.data[i].name}</option>`;
             }
-
           }
-          setTimeout(()=>{
-          bookInfoBlock.innerHTML += `
-            <div class="book-more-infos">
-              <span> <p>제목</p> <input id="titleInput" type="text" value="${thisBook.title}"/> </span>
-              <span> <p>저자</p> <input id="authorInput" type="text" value="${thisBook.author}"/> </span>
-              <span> <p>출판사</p> <input id="publisherInput" type="text" value="${thisBook.publisher}"/> </span>
-              <span> <p>카테고리</p> <select id="categoryInput" name="categories">${categoryList}</select> </span>
-              <span> <p>ISBN</p> <input id="isbnInput" type="text" value="${thisBook.isbn}"/> </span>
-              <span> <p>출판일</p> <input type="date" id="dateInput" name="publication_date" value="${published.getFullYear()}-${(published.getMonth()+ 1).toString().padStart(2, '0') }-${published.getDate().toString().padStart(2, '0')}"/> </span>
-              <span> <p>가격</p> <input id="priceInput" type="text" value="${thisBook.price}"/> </span>
-              <span> <p>책소개</p> <textarea id="descriptionInput""/> ${thisBook.description} </textarea></span>
-            </div>
-          `
-          const checkBtn = bookInfoBlock.querySelector('.check');
-          const editBtn = bookInfoBlock.querySelector('.edit');
-          const moreInfo = bookInfoBlock.querySelector('.book-more-infos');
+          setTimeout(() => {
+            bookInfoBlock.innerHTML += `
+              <div class="book-more-infos">
+                <span> <p>제목</p> <input id="titleInput" type="text" value="${thisBook.title}"/> </span>
+                <span> <p>저자</p> <input id="authorInput" type="text" value="${thisBook.author}"/> </span>
+                <span> <p>출판사</p> <input id="publisherInput" type="text" value="${thisBook.publisher}"/> </span>
+                <span> <p>카테고리</p> <select id="categoryInput" name="categories">${categoryList}</select> </span>
+                <span> <p>ISBN</p> <input id="isbnInput" type="text" value="${thisBook.isbn}"/> </span>
+                <span> <p>출판일</p> <input type="date" id="dateInput" name="publication_date" value="${published.getFullYear()}-${(published.getMonth()+ 1).toString().padStart(2, '0') }-${published.getDate().toString().padStart(2, '0')}"/> </span>
+                <span> <p>가격</p> <input id="priceInput" type="text" value="${thisBook.price}"/> </span>
+                <span> <p>책소개</p> <textarea id="descriptionInput""/> ${thisBook.description} </textarea></span>
+              </div>
+            `;
+            const checkBtn = bookInfoBlock.querySelector('.check');
+            const editBtn = bookInfoBlock.querySelector('.edit');
+            const moreInfo = bookInfoBlock.querySelector('.book-more-infos');
 
-          checkBtn.addEventListener('click', ()=> {
-            console.log('hi');
-            const bookTitle = bookInfoBlock.querySelector('#titleInput');
-            const bookAuthor = bookInfoBlock.querySelector('#authorInput');
-            const bookPublisher = bookInfoBlock.querySelector('#publisherInput');
-            const bookCategory = bookInfoBlock.querySelector('#categoryInput');
-            const bookIsbn = bookInfoBlock.querySelector('#isbnInput');
-            const bookPublished = bookInfoBlock.querySelector('#dateInput');
-            const bookPrice = bookInfoBlock.querySelector('#priceInput');
-            const bookDescription = bookInfoBlock.querySelector('#descriptionInput');
+            checkBtn.addEventListener('click', ()=> {
+              console.log('hi');
+              const bookTitle = bookInfoBlock.querySelector('#titleInput');
+              const bookAuthor = bookInfoBlock.querySelector('#authorInput');
+              const bookPublisher = bookInfoBlock.querySelector('#publisherInput');
+              const bookCategory = bookInfoBlock.querySelector('#categoryInput');
+              const bookIsbn = bookInfoBlock.querySelector('#isbnInput');
+              const bookPublished = bookInfoBlock.querySelector('#dateInput');
+              const bookPrice = bookInfoBlock.querySelector('#priceInput');
+              const bookDescription = bookInfoBlock.querySelector('#descriptionInput');
+    
+              const bookData = {
+                title: bookTitle.value,
+                author: bookAuthor.value,
+                publisher: bookPublisher.value,
+                category: bookCategory.value,
+                isbn: bookIsbn.value,
+                publication_date: bookPublished.value,
+                price: bookPrice.value,
+                description: bookDescription.value,
+              };
   
-            const bookData = {
-              title: bookTitle.value,
-              author: bookAuthor.value,
-              publisher: bookPublisher.value,
-              category: bookCategory.value,
-              isbn: bookIsbn.value,
-              publication_date: bookPublished.value,
-              price: bookPrice.value,
-              description: bookDescription.value,
-            }
-  
-            fetch(`/user-admin/product?book=${thisBook.isbn}`, {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(bookData),
-            })
-            .then(res => {
-              if (!res.ok) {
-                throw new Error(res.statusText);
-              }
-              console.log('책 수정 성공');
-              editBtn.classList.remove('hidden');
-              checkBtn.classList.add('hidden');
-              moreInfo.remove();
-              bookInfoBlock.style.height = "60px";
-              createBookList();
-            })
-            .catch(err => {
-              console.error('책 수정 실패', err);
-            });
+              fetch(`/user-admin/product?book=${thisBook.isbn}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookData),
+              })
+              .then(res => {
+                if (!res.ok) {
+                  throw new Error(res.statusText);
+                }
+                // console.log('책 수정 성공');
+                editBtn.classList.remove('hidden');
+                checkBtn.classList.add('hidden');
+                moreInfo.remove();
+                bookInfoBlock.style.height = "60px";
+                createBookList();
+              })
+              .catch(err => {
+                console.error('책 수정 실패', err);
+              });
             })
           }, 230);
         })
         .catch((err) => console.log(err));
-      
-
-        })
-  })
-
-
-}
-
-
+      });
+  });
+};
 
 const adminAddBook = (books) => {
   const bookAddBlock = document.querySelector('.add-books-block');
   const bookAddBtn = document.querySelector('.add-books-block-child');
-  bookAddBtn.addEventListener('click', ()=>{
+  bookAddBtn.addEventListener('click', () => {
+    fetch('/user-admin/categories')
+      .then((res) => res.json())
+      .then((data) => {
+        bookAddBtn.innerText = "클릭하여 책을 추가해주세요."
+        bookAddBlock.style.height = "780px";
+        let categoryList = "";
 
-      fetch('/user-admin/categories')
-        .then((res) => res.json())
-        .then((data) => {
-          bookAddBtn.innerText = "클릭하여 책을 추가해주세요."
-          bookAddBlock.style.height = "780px";
-          let categoryList = "";
-          for(let i = 0; i < data.data.length; i++){
-            categoryList += `<option value="${data.data[i].name}">${data.data[i].name}</option>`
-          }
-          setTimeout(()=>{
+        for (let i = 0; i < data.data.length; i++) {
+          categoryList += `<option value="${data.data[i].name}">${data.data[i].name}</option>`
+        }
+
+        setTimeout(() => {
           bookAddBlock.innerHTML += `
             <div class="book-more-infos">
               <span> <p>제목</p> <input id="titleInput" type="text" placeholder="책 제목을 입력해주세요."/> </span>
@@ -171,8 +165,9 @@ const adminAddBook = (books) => {
               <span> <p>가격</p> <input id="priceInput" type="text" placeholder="책 가격을 입력해주세요."/> </span>
               <span> <p>책소개</p> <textarea id="descriptionInput" placeholder="책 설명을 입력해주세요."/> </textarea></span>
             </div>
-          `
+          `;
           const bookAddBtn = document.querySelector('.add-books-block-child');
+
           bookAddBtn.addEventListener('click', ()=> {
             const moreInfo = bookAddBlock.querySelector('.book-more-infos');
             console.log('hi');
@@ -184,9 +179,10 @@ const adminAddBook = (books) => {
             const bookPublished = bookAddBlock.querySelector('#dateInput');
             const bookPrice = bookAddBlock.querySelector('#priceInput');
             const bookDescription = bookAddBlock.querySelector('#descriptionInput');
-            if(!bookTitle.value || !bookAuthor.value || !bookPublisher.value || !bookIsbn.value || !bookPublished.value || !bookPrice.value){
-              window.alert('정보를 모두 입력해주세요.')
-            }else{
+
+            if (!bookTitle.value || !bookAuthor.value || !bookPublisher.value || !bookIsbn.value || !bookPublished.value || !bookPrice.value) {
+              window.alert('정보를 모두 입력해주세요.');
+            } else {
               const bookData = {
                 title: bookTitle.value,
                 author: bookAuthor.value,
@@ -197,8 +193,8 @@ const adminAddBook = (books) => {
                 price: bookPrice.value,
                 description: bookDescription.value,
                 image_path: `https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/${bookIsbn.value}.jpg`,
-              }
-    
+              };
+  
               fetch(`/user-admin/product`, {
                 method: 'POST',
                 headers: {
@@ -210,35 +206,34 @@ const adminAddBook = (books) => {
                 if (!res.ok) {
                   throw new Error(res.statusText);
                 }
-                console.log('책 추가 성공');
+                // console.log('책 추가 성공');
                 moreInfo.remove();
                 bookAddBlock.style.height = "30px";
                 createBookList();
               })
               .catch(err => {
                 console.error('책 추가 실패', err);           
-            });
-          }
-            })
-         }, 230);
-        })
-        .catch((err) => console.log(err));
-      })
-
-}
+              });
+            }
+          });
+        }, 230);
+      }
+    ).catch((err) => console.log(err));
+  });
+};
 
 
 const adminDeleteBook = (books) => {
   const bookDeleteBtn = adminContentBooks.querySelectorAll('.delete');
-  bookDeleteBtn.forEach((e)=> {
-    e.addEventListener('click', ()=>{
+  bookDeleteBtn.forEach((e) => {
+    e.addEventListener('click', () => {
 
       const bookInfoBlock = e.closest('.admin-items');
 
       const bookTitlePart = bookInfoBlock.querySelector('.item-name');
       const thisBook = books.find((e) =>  e.title === bookTitlePart.innerText );
       const deleteConfirm = confirm(`<${thisBook.title}> 도서를 삭제하시겠습니까?`);
-      if(deleteConfirm){
+      if (deleteConfirm) {
         fetch(`/user-admin/product?book=${thisBook.isbn}`, {
           method: 'DELETE',
           })
@@ -246,17 +241,13 @@ const adminDeleteBook = (books) => {
             if (!res.ok) {
               throw new Error(res.statusText);
             }
-            console.log('책 삭제 성공');
+            // console.log('책 삭제 성공');
             createBookList();
           })
-          .catch(err => {
-                console.error('책 삭제 실패', err);
-              });
+          .catch(err => { console.error('책 삭제 실패', err); });
       }
-    })
-  }) 
-}
-
-
+    });
+  });
+};
 
 export { createBookList };

@@ -15,19 +15,16 @@ footer {
 }
 
 footer .footer-container {
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 
   height: 100%;
   width: 1024px;
 }
 
 footer .footer-container .footer-upper-area {
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,7 +47,6 @@ footer .footer-container .footer-upper-area .footer-logo{
 
 
 footer .footer-container .footer-lower-area {
-
   display: flex;
   flex-direction: column;
   align-items: center;

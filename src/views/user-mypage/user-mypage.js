@@ -48,7 +48,6 @@ function loadUserData(userData) {
     if (phoneInput.value === "undefined") {
       phoneInput.value = "";
     }
-
   } else {
     alert("회원 정보가 없습니다.");
     // 홈으로 돌아가기
@@ -57,8 +56,6 @@ function loadUserData(userData) {
 }
 
 function handleOrderList(event) {
-  // event.preventDefault();
-
   location.href = "/order-list";
 }
 
@@ -88,7 +85,7 @@ async function getUserData () {
 
 async function updateUser(event) {
   const isAllValid = checkValid();
-
+  
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
     document.querySelector('.user-form-box').action = '/update';
     try {

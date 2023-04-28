@@ -32,8 +32,6 @@ const userSchema = new mongoose.Schema(
     },
     detailAddress: {
       type: String,
-      //required: true,
-      trim: true,
     },
     phone: {
       type: String,
@@ -55,5 +53,4 @@ const userSchema = new mongoose.Schema(
 );
 
 const User = mongoose.model("User", userSchema);
-
 module.exports = User;

@@ -8,7 +8,7 @@ searchBookByTitle();
 const results = document.querySelector(".results");
 const resultTitle = document.querySelector(".result-title");
 
-resultTitle.innerText = `'${title}' 검색결과`
+resultTitle.innerText = `'${title}' 검색결과`;
 
 // 결과로 나온 책 html 생성
 const createBook = (book) => {

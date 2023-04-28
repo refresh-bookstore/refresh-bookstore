@@ -112,24 +112,3 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-// exports.updateUsers = async (req, res) => {
-//   try {
-//     const { isAdmin, users } = req.body;
-//     if (!isAdmin) {
-//       return res.status(403).json({ message: "허용되지 않은 요청입니다." });
-//     }
-//     const bulkUpdateOps = users.map(user => ({
-//       updateOne: {
-//         filter: { email: user.email },
-//         update: { $set: user },
-//       },
-//     }));
-//     const result = await User.bulkWrite(bulkUpdateOps);
-//     res.status(200).json({
-//       message: `${result.modifiedCount}개의 유저 정보가 수정되었습니다.`,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "서버 오류" });
-//   }
-// };

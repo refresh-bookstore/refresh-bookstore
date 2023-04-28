@@ -46,7 +46,6 @@ function checkValid() {
     addressError.style.display = "none";
   }
 
-
   if (!isPhoneValid.test(phone)) {
     phoneError.style.display = "flex";
     phoneError.innerText = "전화번호 형식이 올바르지 않습니다";

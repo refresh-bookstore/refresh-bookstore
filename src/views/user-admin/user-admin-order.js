@@ -1,5 +1,3 @@
-
-
 const adminContentOrders = document.querySelector('#admin-orders');
 
 const createOrderList = () => {
@@ -12,28 +10,31 @@ const createOrderList = () => {
 
   const listingOrders = (orders) => {
     adminContentOrders.innerHTML = ""; 
-    for(let i = 0; i < orders.length; i++){
+    for (let i = 0; i < orders.length; i++) {
       fetch('/product')
       .then((res) => res.json())
       .then((data) => {
         orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         const books = data.data;
         let orderList = '';
-        for( let j = 0; j < orders[i].orderList.length; j++){
-          const orderedBook = books.find((e)=> e._id === orders[i].orderList[j].product).title;
-          orderList += `<br>&emsp;&emsp;&emsp;&emsp;  &lt; ${orderedBook} &gt; ${orders[i].orderList[j].amount}권`
+
+        for (let j = 0; j < orders[i].orderList.length; j++) {
+          const orderedBook = books.find((e) => e._id === orders[i].orderList[j].product).title;
+          orderList += `<br>&emsp;&emsp;&emsp;&emsp;  &lt; ${orderedBook} &gt; ${orders[i].orderList[j].amount}권`;
         }
+        
         const ordered = new Date(new Date(orders[i].createdAt).getTime() + (1000 * 60 * 60 * 9)).toISOString().slice(0, 10);
         const shippingStatus = ['상품 준비중', '배송중', '배송완료', '주문취소'];
         let statusSelect = '';
-        for(let j = 0; j < shippingStatus.length; j++) {
-          if(orders[i].shippingStatus === shippingStatus[j]){
-            statusSelect += `<option value="${shippingStatus[j]}" selected>${shippingStatus[j]}</selected>`
-          }else{
-            statusSelect += `<option value="${shippingStatus[j]}">${shippingStatus[j]}</selected>`
+
+        for (let j = 0; j < shippingStatus.length; j++) {
+          if (orders[i].shippingStatus === shippingStatus[j]) {
+            statusSelect += `<option value="${shippingStatus[j]}" selected>${shippingStatus[j]}</selected>`;
+          } else {
+            statusSelect += `<option value="${shippingStatus[j]}">${shippingStatus[j]}</selected>`;
           }
         }
-      adminContentOrders.innerHTML += 
+        adminContentOrders.innerHTML += 
         `
         <div class="admin-items ordered-list">
           <div class="order-upper">
@@ -54,25 +55,22 @@ const createOrderList = () => {
           <p>결제금액 | ${orders[i].totalPrice.toLocaleString()}원 </p>
         </div>
         </div>
-        `
+        `;
+
         adminOrderEdit(orders);
         adminOrderDelete(orders);
       })
-      .catch((err) => console.log(err));
-      
+      .catch((err) => console.log(err)); 
     }
-  
-  }
-}
+  };
+};
 
 const adminOrderEdit = (orders) => {
   const orderEditBtn = adminContentOrders.querySelectorAll('.edit');
-  orderEditBtn.forEach((e)=> {
-    e.addEventListener('click', ()=>{
-      console.log('hi');
+  orderEditBtn.forEach((e) => {
+    e.addEventListener('click', () => {
       const orderBox = e.closest('.admin-items');
       const orderIdOnBox = orderBox.querySelector('.order-id').innerText;
-      console.log(orderIdOnBox);
       const checkBtn = orderBox.querySelector('.check');
       e.classList.add('hidden');
       checkBtn.classList.remove('hidden');
@@ -81,13 +79,10 @@ const adminOrderEdit = (orders) => {
       orderStatus.classList.add('hidden');
       statusSelect.classList.remove('hidden');
 
-
-      
-      checkBtn.addEventListener('click', ()=> {
+      checkBtn.addEventListener('click', () => {
         const data = {
           shippingStatus: statusSelect.value
-        }
-        console.log('hi');
+        };
         fetch(`/order/admin/${orderIdOnBox}`, {
           method: 'PUT',
           headers: {
@@ -99,42 +94,39 @@ const adminOrderEdit = (orders) => {
           if (!res.ok) {
             throw new Error(res.statusText);
           }
-          console.log('주문상태 수정 성공');
+          // console.log('주문상태 수정 성공');
           createOrderList();
         })
         .catch(err => {
           console.error('주문상태 수정 실패', err);
         });
-
-          })
-        })
-      })
-}
+      });
+    });
+  });
+};
 
 const adminOrderDelete = (orders) => {
   const orderDeleteBtn = adminContentOrders.querySelectorAll('.delete');
-  orderDeleteBtn.forEach((e)=> {
-    e.addEventListener('click', ()=>{
+  orderDeleteBtn.forEach((e) => {
+    e.addEventListener('click', () => {
       const orderBox = e.closest('.admin-items');
       const orderIdOnBox = orderBox.querySelector('.order-id').innerText;
       const deleteConfirm = confirm(`주문번호 ${orderIdOnBox}를 삭제하시겠습니까?`);
-      if(deleteConfirm){
+      if (deleteConfirm) {
         fetch(`/order/admin/${orderIdOnBox}`, {
           method: 'DELETE',
-          })
-          .then(res => {
-            if (!res.ok) {
-              throw new Error(res.statusText);
-            }
-            console.log('주문 삭제 성공');
-            createOrderList();
-          })
-          .catch(err => {
-                console.error('주문 삭제 실패', err);
-              });
+        })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          console.log('주문 삭제 성공');
+          createOrderList();
+        })
+        .catch(err => console.error('주문 삭제 실패', err));
       }
-    })
-  }) 
-}
+    });
+  });
+};
 
 export { createOrderList };

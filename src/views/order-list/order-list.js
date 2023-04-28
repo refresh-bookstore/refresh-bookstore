@@ -100,7 +100,6 @@ async function getOrderList() {
         <div class="empty-order-list">주문 내역이 없습니다</div>`;
       }
     } else {
-      // alert("사용자를 찾을 수 없습니다.");
       throw new Error("사용자를 찾을 수 없습니다.");
     }
   } catch (error) {

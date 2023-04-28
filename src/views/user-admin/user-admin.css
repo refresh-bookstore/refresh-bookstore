@@ -1,7 +1,6 @@
 @import url('/public/css/main.css');
 
 /*-------------상단영역--------------*/
-
 .upper-area {
   display: flex;
   align-items: center;
@@ -19,9 +18,7 @@
   font-weight: var(--weight-bold);
 }
 
-
 /*-------------하단영역--------------*/
-
 .middle-area {
   width:100%;
   display: flex;
@@ -33,6 +30,7 @@
   border-bottom: var(--color-dark-gray) solid 0.5px;
 
 }
+
 /*-------목록영역--------*/
 .navigate-area {
   display: flex;
@@ -71,7 +69,6 @@
   flex-direction: column;
   flex-wrap: wrap;
   align-items: space-between;
-
 }
 
 .content-area .content-upper-area {
@@ -84,10 +81,7 @@
   align-items: center;
 }
 
-
 /*-----컨텐츠 추가------*/
-
-
 .content-area .add-button {
   width: 40px;
   height: 40px;
@@ -118,7 +112,6 @@
   font-weight: var(--weight-semi-bold);
   margin: 5px;
 
-
   background-color: var(--color-point);
   border-radius: var(--border-radius-button);
   border: 0.3px var(--color-light-gray) solid;
@@ -134,7 +127,6 @@
 
   border-radius: var(--border-radius-input);
   border: none;
-
 }
 
 .content-area .add-page.hidden{
@@ -162,10 +154,7 @@
   display:flex;
 }
 
-
-
 /*-----공통 사용 요소------*/
-
 .content .admin-buttons {
   display: flex;
   flex-direction: row;
@@ -211,9 +200,7 @@
   transition: all 0.4s ease;
 }
 
-
 /*-----도서관리------*/
-
 .content .add-books-block {
   display: flex;
   flex-direction: column;
@@ -234,10 +221,7 @@
   cursor: pointer;
 }
 
-
-
 .content .admin-items .item-info {
-
   width: 95%;
   display: flex;
   flex-direction: row;
@@ -246,7 +230,6 @@
 }
 
 .content .admin-items .item-info .item-added-date {
-
   font-size: var(--font-small);
   font-weight: var(--weight-medium);
   color: var(--color-light-black);
@@ -265,12 +248,10 @@
 }
 
 .content .admin-items .item-info .item-name {
-
   font-size: var(--font-small);
   font-weight: var(--weight-bold);
   color: var(--color-black);
   text-align: right;
-
 }
 
 .content .admin-items .item-info .item-detail {
@@ -279,7 +260,6 @@
   color: var(--color-light-black);
   text-align: right;
   margin-top: 5px;
-
 }
 
 .content .admin-items .item-info .item-cost {
@@ -318,7 +298,6 @@
   
 }
 
-
 .content .book-more-infos span p{
   width: 60px;
   font-size: var(--font-small);
@@ -356,19 +335,15 @@
   height: 30px;
   width: 100%;
   margin: 0;
-
 }
 
 .content .add-books-block-child:hover {
-
   background-color: var(--color-light-green);
   font-weight: var(--weight-bold);
   color: var(--color-point);
-
 }
 
 /*-----회원관리------*/
-
 .content#admin-users .admin-items {
   display: flex;
   flex-direction: column;
@@ -390,11 +365,9 @@
 .content#admin-users .admin-items:hover {
   background-color: var(--color-light-green);
   cursor: pointer;
-
 }
 
 .content .admin-items .admin-user-info {
-
   width: 95%;
   display: flex;
   flex-direction: row;
@@ -419,7 +392,6 @@
   text-align: left;
   margin: auto, 20px;
   padding-left: 20px;
-
 }
 
 .content .admin-items .admin-user-info .admin-user-name {
@@ -430,7 +402,6 @@
   text-align: center;
   margin: auto, 20px;
   padding-right: 20px;
-
 }
 
 .content .admin-items .admin-user-info .admin-user-name.admin {
@@ -438,7 +409,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   
   width: 180px;
   font-size: var(--font-small);
@@ -447,7 +417,6 @@
   text-align: center;
   margin: auto, 20px;
   padding-right: 20px;
-
 }
 
 .admin-mark {
@@ -466,7 +435,6 @@
   font-weight: var(--weight-medium);
   color: var(--color-light-black);
   text-align: right;
-
 }
 
 .content .admin-items .user-more-infos {
@@ -481,7 +449,6 @@
 }
 
 /*-----주문관리------*/
-
 .content .admin-items.ordered-list {
   display: flex;
   flex-direction: column;
@@ -506,11 +473,7 @@
   width: 100%;
   height: 40px;
   padding: 10px;
-
-
-
 }
-
 
 .content .admin-items.ordered-list .order-upper p{
   font-size: var(--font-regular);
@@ -543,7 +506,6 @@
   font-weight: var(--weight-bold);
   color: var(--color-point);
   border: 0.5px var(--color-point) solid;
-
 }
 
 .content .admin-items .order-more-infos {
@@ -554,14 +516,12 @@
   margin: 10px;
   padding: 10px 30px;
 
-
   font-size: var(--font-small);
   font-weight: var(--weight-regular);
   line-height: 23px;
 }
 
-
-.content .admin-items.ordered-list .order-lower{
+.content .admin-items.ordered-list .order-lower {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -583,34 +543,31 @@
   padding: 0 10px;
 }
 
-.content .admin-items .item-info .item-more-info.order{
-  
+.content .admin-items .item-info .item-more-info.order {
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;  
   align-items: flex-start;
 }
 
-.content .admin-items .item-info .item-name.order{
-
+.content .admin-items .item-info .item-name.order {
   font-size: var(--font-small);
   font-weight: var(--weight-bold);
   color: var(--color-black);
   text-align: right;
 
   margin-bottom: 10px; 
-
 }
 
-.content .admin-items .item-info .item-more-info.a .item-detail.order{
+.content .admin-items .item-info .item-more-info.a .item-detail.order {
   font-size: var(--font-micro); 
   font-weight: var(--weight-medium);
   color: var(--color-black);
   text-align: right;
-
 }
 
-.content .admin-items .item-info .item-more-info.b .item-detail.order{
+.content .admin-items .item-info .item-more-info.b .item-detail.order {
   font-size: var(--font-micro); 
   font-weight: var(--weight-regular);
   color: var(--color-light-black);
@@ -619,7 +576,6 @@
 
 
 /*-----카테고리 관리------*/
-
 .content#admin-categories {
   width: 100%;
   margin: 10px;
@@ -644,7 +600,6 @@
   font-weight: var(--weight-semi-bold);
   margin: 5px;
 
-
   background-color: var(--color-point);
   border-radius: var(--border-radius-button);
   border: 0.3px var(--color-light-gray) solid;
@@ -652,7 +607,7 @@
 }
 
 
-.content .category-box .category-edit-input{
+.content .category-box .category-edit-input {
   color:var(--color-point);
   font-size: var(--font-medium);
   font-weight: var(--weight-regular);
@@ -661,23 +616,19 @@
 
   border-radius: var(--border-radius-input);
   border: none;
-
 }
 
-.content .category-box .admin-button{
+.content .category-box .admin-button {
   width: 20px;
   height: 20px;
   margin-left: 8px;
   opacity: 0.3;
-
 }
 
-.content .category-box .admin-button:hover{
+.content .category-box .admin-button:hover {
   opacity: 1;
-
 }
 
 .hidden {
   display: none;
 }
-
