@@ -15,19 +15,34 @@ const saveToPurchase = (data) => {
   localStorage.setItem('purchase', JSON.stringify(data));
 }
 
+const selectAll = document.querySelector('input[name="checkAll"]');
 const cart = document.querySelector('.cart');
 const selectedPrice = document.querySelector('.selectedPrice');
 const deliveryFee = document.querySelector('.deliveryFee');
 const totalCost = document.querySelector('.totalCost');
-const orderButton = document.querySelector('.order__button');
+const orderButtonArea = document.querySelector('.order__button');
 
+const data = JSON.parse(localStorage.getItem('cart'));
+if (!data || data.length === 0) {
+  // 장바구니에 상품이 없습니다
+  cart.innerHTML = `<p class="empty-cart">상품이 없습니다.</p>`;
+  document.querySelector('.selectAll').style.display = 'none';
+  document.querySelector('.deleteSelected').style.display = 'none'
+  orderButtonArea.removeEventListener('click', makeOrder);
+  document.querySelector('button.order__button').classList.add('empty');
+  // localStorage.clear();
+}
 // 로컬스토리지에서 데이터 불러오기, 체크박스, 수량조절, 삭제버튼 활성화, 가격 출력 자동화
 function renderBooks() {
   const data = JSON.parse(localStorage.getItem('cart'));
   if (!data || data.length === 0) {
     // 장바구니에 상품이 없습니다
     cart.innerHTML = `<p class="empty-cart">상품이 없습니다.</p>`;
-    localStorage.clear();
+    document.querySelector('.selectAll').style.display = 'none';
+    document.querySelector('.deleteSelected').style.display = 'none'
+    orderButtonArea.removeEventListener('click', makeOrder);
+    document.querySelector('button.order__button').classList.add('empty');
+    // localStorage.clear();
   } else {
     data.forEach((order, idx) => {
       const image_path = order.image_path;
@@ -81,7 +96,6 @@ renderBooks();
 // 체크박스 활성화 함수
 function activateCheckboxes() {
   const checkboxes = document.querySelectorAll('input[name="buy"]');
-  const selectAll = document.querySelector('input[name="checkAll"]');
   
   function checkSelectAll()  {
     const checkedItems = document.querySelectorAll('input[name="buy"]:checked');
@@ -244,7 +258,8 @@ function setTotalCost() {
 }
 
 // 구매하기 버튼
-orderButton.addEventListener('click', () => {
+orderButtonArea.addEventListener('click', makeOrder);
+function makeOrder() {
   const token = sessionStorage.getItem('token');
   if (token) {
     saveToPurchase(JSON.parse(localStorage.getItem('cart')));
@@ -254,6 +269,10 @@ orderButton.addEventListener('click', () => {
     window.alert('로그인을 해주세요.');
     location.href = '/login';
   }
-});
+}
 
+const cartData = JSON.parse(localStorage.getItem('cart'));
+if (!cartData || cartData.length === 0) {
+  
+}
 main();
