@@ -17,7 +17,7 @@
 
 ## &ensp;3. 서비스 구성도
 
-- 기술 스택: VanillaJS, Express.js, MongoDB
+- 기술 스택: VanillaJS, Express.js, MongoDB, Docker, PM2
 - 와이어프레임 링크: [Refresh Bookstore 와이어프레임](https://www.notion.so/4-18-50f780066803467a83aeac4a4e4ef4b8)
 - API 명세 문서 링크: [Refresh Bookstore API 명세](https://www.notion.so/API-e0ced6930cd04a838b51927ad733c709)
 
@@ -27,9 +27,9 @@
 
 | 멤버      | 책임                                  |
 | --------- | ------------------------------------- |
-| 김영채(F) | 프로젝트 기획, 프로젝트 팀장          |
-| 황반석(F) |                                       |
-| 신혜지(F) |                                       |
+| 김영채(F) | 프로젝트 기획, 프로젝트 팀장, 장바구니, 주문 구현 |
+| 황반석(F) | 관리자 페이지, 디자인 총괄             |
+| 신혜지(F) | 로그인, 회원가입, 홈, 마이페이지       |
 | 김나연(B) | 데이터베이스 설계 및 상용 서비스 구현 |
 | 송호준(B) | 배포 및 기본 기능 구현 관련           |
 
