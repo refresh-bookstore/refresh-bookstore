@@ -36,6 +36,11 @@ input[type="checkbox"] {
   padding: 4px;
 }
 
+.cartMenu .selectMenu .deleteSelected:hover {
+  cursor: pointer;
+  background-color: var(--color-dark-gray);
+}
+
 .selectAll {
   display: flex;
 }
@@ -117,7 +122,7 @@ img.book-img {
   align-items: center;
 }
 
-.amountArea button{
+.amountArea button {
   width: 35px;
   height: 35px;
   color: var(--color-point);
@@ -125,6 +130,14 @@ img.book-img {
   font-weight: var(--weight-light);
   border: var(--color-point) 0.5px solid;
   background-color: var(--color-light-green);
+}
+
+.amountArea button:hover {
+  cursor: pointer;
+  color: var(--color-white);
+  border: var(--color-point) 0.5px solid;
+  background-color: var(--color-point);
+  cursor: pointer;
 }
 
 .amountArea input{
@@ -151,6 +164,12 @@ img.book-img {
   border-radius: var(--border-radius-button);
   padding: 4px;
 }
+
+.deleteBtn:hover {
+  cursor: pointer;
+  background-color: var(--color-dark-gray);
+}
+
 /* pay list */
 .pay__list {
   display: flex;
@@ -196,6 +215,7 @@ button.order__button {
 }
 button.order__button:hover {
   background-color: var(--color-dark-green);
+  cursor: pointer;
 }
 button.order__button:active {
   background-color: #238d5d;

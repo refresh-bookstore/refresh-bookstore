@@ -26,7 +26,7 @@ async function setUserName() {
       const data = await response.json();
       userGreeting.innerText = `안녕하세요, ${data.name}님\u{1F49A}`;
     } else {
-      alert("잘못된 접근입니다.");
+      alert("로그인을 해주세요.");
       logout();
       throw new Error("사용자를 찾을 수 없습니다.");
     }
