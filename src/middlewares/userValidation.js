@@ -36,10 +36,10 @@ exports.validateUserRegistration = [
     .isLength({ min: 5, max: 5 })
     .notEmpty()
     .withMessage("우편번호를 입력해주세요."),
-  body("detailAddress")
-    .trim()
-    .notEmpty()
-    .withMessage("상세주소를 입력해주세요."),
+  // body("detailAddress")
+  //   .trim()
+  //   .notEmpty()
+  //   .withMessage("상세주소를 입력해주세요."),
 ];
 
 exports.updateUserValidator = [
@@ -50,9 +50,9 @@ exports.updateUserValidator = [
     .isLength({ min: 5, max: 5 })
     .withMessage("우편번호는 5자리로 입력해주세요."),
   check("address").isLength({ min: 1 }).withMessage("주소를 입력해주세요."),
-  check("detailAddress")
-    .isLength({ min: 1 })
-    .withMessage("상세 주소를 입력해주세요."),
+  // check("detailAddress")
+  //   .isLength({ min: 1 })
+  //   .withMessage("상세 주소를 입력해주세요."),
   check("phone")
     .matches(/^\d{3}-\d{3,4}-\d{4}$/)
     .withMessage("전화번호 형식이 올바르지 않습니다."),
