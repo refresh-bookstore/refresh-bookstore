@@ -197,7 +197,7 @@ async function payBtnClick() {
     if (response.ok) {
       const data = await response.json();
       alert(data.message);
-      // localStorage.removeItem('purchase');
+      localStorage.clear();
       location.href = "/order-complete";
     } else {
       throw new Error("결제에 실패했습니다.");

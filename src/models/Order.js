@@ -59,8 +59,8 @@ const orderSchema = new Schema(
     },
     detailAddress: {
       type: String,
-      required: true,
-      trim: true,
+      // required: true,
+      // trim: true,
     },
     userPhone: {
       type: String,
