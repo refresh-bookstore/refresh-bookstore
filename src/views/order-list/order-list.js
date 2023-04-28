@@ -54,12 +54,10 @@ async function getOrderList() {
       if (data.length > 0) {
         contentArea.classList.remove("empty");
         data.forEach((orderInfo) => {
-          const orderDate = orderInfo.createdAt.slice(0, 10);
+          const orderDate = new Date(new Date(orderInfo.createdAt).getTime() + (1000 * 60 * 60 * 9)).toISOString().slice(0, 10);
           const shippingStatus = orderInfo.shippingStatus;
           const orderId = orderInfo.orderId;
-      
-          console.log(orderDate, shippingStatus, orderId);
-      
+
           let orderHtml = `<div class="order">
             <p class="order-date">${orderDate}</p>
             <div class="order-view">
