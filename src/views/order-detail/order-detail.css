@@ -8,12 +8,32 @@ a:visited {
   color: var(--color-black);
 }
 
+.order-detail-menu {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-dark-gray);
+}
+
+.order-list-button {
+  text-align: right;
+  font-size: var(--font-medium);
+  padding: 0;
+  margin: 20px 20px;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.order-list-button:hover {
+  cursor: pointer;
+}
+
 .order-detail-title {
   text-align: left;
   font-size: var(--font-large);
   margin: 20px 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--color-dark-gray);
+  margin-bottom: 0;
 }
 
 main {
