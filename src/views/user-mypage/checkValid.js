@@ -24,7 +24,7 @@ function checkValid() {
 
   if (!isPasswordValid.test(password)) {
     passwordError.style.display = "flex";
-    passwordError.innerText = "비밀번호 형식이 올바르지 않습니다";
+    passwordError.innerText = "비밀번호 형식(8 ~ 15자, 특수문자, 문자, 숫자 포함)이 올바르지 않습니다";
     return false;
   } else {
     passwordError.style.display = "none";
