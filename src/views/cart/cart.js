@@ -248,7 +248,7 @@ orderButton.addEventListener('click', () => {
   const token = sessionStorage.getItem('token');
   if (token) {
     saveToPurchase(JSON.parse(localStorage.getItem('cart')));
-    localStorage.removeItem('cart');
+    // localStorage.removeItem('cart');
     location.replace('/order-create');
   } else {
     window.alert('로그인을 해주세요.');

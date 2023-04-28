@@ -59,8 +59,7 @@ const published = new Date(book.publication_date);
     e.preventDefault();
     if (Number(amountInput.value) <= 1){
       amountInput.value = 1;
-    } 
-     else {
+    } else {
       amountInput.value -= 1;
       totalCost.innerText = `${(book.price * amountInput.value).toLocaleString()}원`;
     }
