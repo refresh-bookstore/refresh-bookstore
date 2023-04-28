@@ -1,5 +1,13 @@
 @import url("/public/css/main.css");
 
+a {
+  color: var(--color-black);
+}
+
+a:visited {
+  color: var(--color-black);
+}
+
 .intro {
   margin: 50px 0 20px 0;
 }
