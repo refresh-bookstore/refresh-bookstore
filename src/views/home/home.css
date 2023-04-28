@@ -21,7 +21,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  animation: movingSideway 20s linear 1s infinite alternate;
+  animation: movingSideway 17s linear 1s infinite alternate;
 
   z-index: 2;
 }
@@ -36,7 +36,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  animation: movingSideway2 25s linear 1s infinite alternate;
+  animation: movingSideway2 20s linear 1s infinite alternate;
 
   z-index: 1;
 }
@@ -51,7 +51,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  animation: movingSideway3 25s linear 1s infinite alternate;
+  animation: movingSideway3 18s linear 1s infinite alternate;
 
   z-index: 3;
 }
@@ -66,7 +66,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  animation: movingSideway4 22s linear 1s infinite alternate;
+  animation: movingSideway4 17s linear 1s infinite alternate;
 
   z-index: 2;
 }
@@ -127,7 +127,7 @@
 
   margin: 10px 0px;
   padding-bottom: 10px;
-  border-bottom: 0.5px var(--color-dark-gray) solid;
+  border-bottom: 0.5px var(--color-light-gray) solid;
 }
 
 .nav-item.category {
