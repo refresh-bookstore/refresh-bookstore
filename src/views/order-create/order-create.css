@@ -1,4 +1,11 @@
-@import url('../public/css/main.css');
+@import url("/public/css/main.css");
+
+a {
+  color: var(--color-black);
+}
+a:visited {
+  color: var(--color-black);
+}
 
 .order-create-title {
   text-align: left;
@@ -91,9 +98,15 @@ main .rightSide {
   width: 140px;
 }
 
-input[type="button"] {
+input.search_address {
   width: 100px;
   color: gray;
+  border: 1px solid var(--color-point);
+}
+
+input.search_address:hover {
+  background-color: var(--color-light-gray);
+  cursor: pointer;
 }
 
 .deliveryRequest {
@@ -229,6 +242,11 @@ input[type="button"] {
   text-align: center;
   border: none;
   border-radius: var(--border-radius-button);
+}
+
+.paymentButton button:hover {
+  cursor: pointer;
+  background-color: var(--color-dark-green);
 }
 
 .hidden {

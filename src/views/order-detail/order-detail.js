@@ -96,7 +96,7 @@ async function loadOrderDetail() {
 
       });
     } else {
-      alert("잘못된 접근입니다.");
+      alert("로그인을 해주세요.");
       logout();
       throw new Error("사용자를 찾을 수 없습니다.");
     }

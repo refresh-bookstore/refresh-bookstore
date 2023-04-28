@@ -1,4 +1,4 @@
-@import "../public/css/main.css";
+@import url("/public/css/main.css");
 
 .order-complete-title {
   text-align: left;
@@ -15,9 +15,10 @@
 }
 
 .complete__message p.message {
-  font-size: var(--font-medium);
+  font-size: var(--font-large);
   text-align: center;
-  padding: 60px 0;
+  padding-top: 120px;
+  padding-bottom: 60px;
 }
 
 .button__area {
@@ -26,14 +27,17 @@
 
 .button__area button {
   font-size: var(--font-medium);
-  color: var(--color-point);
-  background-color: var(--color-white);
-  padding: 4px;
+  padding: 8px;
   margin: 4px;
-  border-radius: var(--border-radius-button);
-  border: 1px solid var(--color-point);
+  background-color: #1DC078;
+  color:var(--color-white);
+  font-weight: var(--weight-regular);
+  text-align: center;
+  border: none;
+  border-radius: 8px;
 }
 
 .button__area button:hover {
-  background-color: var(--color-light-green);
+  background-color: var(--color-dark-green);
+  cursor: pointer;
 }

@@ -35,7 +35,7 @@ async function loadUserData() {
       detailAddressInput.value = data.detailAddress;
       email = data.email;
     } else {
-      alert("잘못된 접근입니다.");
+      alert("로그인을 해주세요.");
       logout();
       throw new Error("사용자를 찾을 수 없습니다.");
     }
@@ -59,7 +59,7 @@ if (purchaseData.length !== 0) {
       </a>
       <div class="book__title__price">
         <div class="book-title">
-          <a class="book-link" href="/book-detail/${isbn}">${title}</a>
+          <a class="book-link" href="/book-detail/?isbn=${isbn}">${title}</a>
           <div class="author">${author}</div>
         </div>
         <div class="amount">총 ${amount}권</div>
@@ -198,8 +198,8 @@ async function payBtnClick() {
 const payBtn = document.querySelector(".paymentButton button");
 payBtn.addEventListener("click", payBtnClick);
 
-window.addEventListener("beforeunload", function() {
-  localStorage.removeItem("purchase");
-});
+// window.addEventListener("beforeunload", function() {
+//   localStorage.removeItem("purchase");
+// });
 
 main();
