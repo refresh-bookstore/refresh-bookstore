@@ -220,3 +220,10 @@ button.order__button:hover {
 button.order__button:active {
   background-color: #238d5d;
 }
+button.empty {
+  background-color: var(--color-dark-gray);
+}
+button.empty:hover {
+  background-color: var(--color-dark-gray);
+  cursor: auto;
+}
