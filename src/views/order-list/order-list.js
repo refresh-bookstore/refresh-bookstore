@@ -67,7 +67,7 @@ async function getOrderList() {
             const image_path = orderInfo.orderList[i].product.image_path;
             const title = orderInfo.orderList[i].product.title;
             const author = orderInfo.orderList[i].product.author;
-            const price = orderInfo.orderList[i].product.price;
+            const price = orderInfo.orderList[i].product.price.toLocaleString();
             const isbn = orderInfo.orderList[i].product.isbn;
             const amount = orderInfo.orderList[i].amount;
       

@@ -2,6 +2,7 @@ import { main } from '/public/js/main.js';
 import { checkValid } from "./order-checkValid.js";
 import { logout } from '/public/js/logout.js';
 
+const orderListButton = document.querySelector('.order-list-button');
 const orderIdArea = document.querySelector('.orderId');
 const orderDateArea = document.querySelector('.orderDate');
 const shippingStatusArea = document.querySelector('.shippingStatus');
@@ -24,6 +25,10 @@ const cancelButton = document.querySelector('.cancelButton');
 
 const urlParams = new URLSearchParams(window.location.search);
 const orderId = urlParams.get('orderId');
+
+orderListButton.addEventListener('click', () => {
+  location.href = '/order-list';
+})
 
 async function loadOrderDetail() {
   try {
