@@ -1,5 +1,13 @@
 @import url("/public/css/main.css");
 
+a {
+  color: var(--color-black);
+}
+
+a:visited {
+  color: var(--color-black);
+}
+
 .order-detail-title {
   text-align: left;
   font-size: var(--font-large);
@@ -52,10 +60,9 @@ section {
 .books .book {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin: 10px;
-
   background-color: var(--color-white);
   border-radius: var(--border-radius-button);
   border: 0.3px var(--color-light-gray) solid;
@@ -81,7 +88,7 @@ section {
   justify-content: flex-end;
   align-items: center;
   margin-right: 40px;
-  width: 65%;
+  width: 75%;
 }
 
 .book .book-info .book-title {
@@ -206,6 +213,12 @@ input:read-only:focus {
   display: flex;
   align-items: center;
   width: 300px;
+}
+
+#input-error {
+  display: none;
+  color: var(--color-red);
+  padding-left: 30px;
 }
 
 .buttonArea {
