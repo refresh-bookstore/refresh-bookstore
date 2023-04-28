@@ -13,6 +13,15 @@ const totalCost = document.querySelector('.totalCost');
 
 const userDeliveryInfo =  document.querySelectorAll('.user_delivery_info');
 const [ nameInput , phoneNumberInput , postalCodeInput , addressInput , detailAddressInput ] = userDeliveryInfo;
+
+// window.addEventListener('beforeunload', (event) => {
+//   // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+//   event.preventDefault();
+
+//   // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
+//   event.returnValue = '';
+// });
+
 // 사용자 기본정보 출력
 let email;
 async function loadUserData() {
@@ -183,7 +192,7 @@ async function payBtnClick() {
     if (response.ok) {
       const data = await response.json();
       alert(data.message);
-      localStorage.removeItem('purchase');
+      // localStorage.removeItem('purchase');
       location.href = "/order-complete";
     } else {
       throw new Error("결제에 실패했습니다.");
@@ -198,8 +207,5 @@ async function payBtnClick() {
 const payBtn = document.querySelector(".paymentButton button");
 payBtn.addEventListener("click", payBtnClick);
 
-// window.addEventListener("beforeunload", function() {
-//   localStorage.removeItem("purchase");
-// });
 
 main();

@@ -65,9 +65,25 @@ function headerFunc() {
   };
 
   // 로고 클릭 이벤트
-  logoImage.addEventListener("click", () => {
-    location.href = "/";
-  })
+  if (location.pathname === '/order-create/') {
+    logoImage.addEventListener('click', () => {
+      if (!confirm('페이지에서 나가시겠습니까?')) {
+        history.pushState(null, null, location.href); 
+        // 뒤로가기 이벤트감지 -> 현재페이지로 이동
+        window.onpopstate = function() { 
+          history.go(1); 
+        }
+      } else {
+        location.href = "/";
+        localStorage.removeItem('purchase');
+      }
+    });
+  } else {
+    logoImage.addEventListener("click", () => {
+      location.href = "/";
+    });
+  }
+
 
   // 장바구니 아이콘 클릭 이벤트
   cartBtn.addEventListener("click", () => {

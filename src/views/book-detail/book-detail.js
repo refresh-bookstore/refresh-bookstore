@@ -35,7 +35,7 @@ fetch(`/book-detail/${isbn}`)
 // 페이지 렌더
 
 const renderBookDetail = (book) => {
-   const published = new Date(book.publication_date);
+const published = new Date(book.publication_date);
 
 //   likeBtn.addEventListener('click',()=>{
 //     likeBtn.src = "/public/images/like_2.svg";
@@ -126,7 +126,8 @@ const renderBookDetail = (book) => {
           amount: Number(amountInput.value),
       }];
       localStorage.setItem('purchase', JSON.stringify(purchaseItems));
-      location.href = '/order-create';
+      // location.href = '/order-create';
+      location.replace('/order-create');
     } else {
       window.alert('로그인을 해주세요.')
     }
