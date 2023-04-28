@@ -49,13 +49,13 @@ function checkValid() {
     addressError.style.display = "none";
   }
 
-  if (!detailAddress) {
-    detailAddressError.style.display = "flex";
-    detailAddressError.innerText = "상세 주소를 입력하세요";
-    return false;
-  } else {
-    detailAddressError.style.display = "none";
-  }
+  // if (!detailAddress) {
+  //   detailAddressError.style.display = "flex";
+  //   detailAddressError.innerText = "상세 주소를 입력하세요";
+  //   return false;
+  // } else {
+  //   detailAddressError.style.display = "none";
+  // }
 
   if (!isPhoneValid.test(phone)) {
     phoneError.style.display = "flex";
