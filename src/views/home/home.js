@@ -9,7 +9,7 @@ let currentSlide = 0;
 // slide 5초씩 반복
 setInterval(function() {
   let from = - (1024 * currentSlide);
-  let to = from - 1024;   
+  let to = from - 1024;
 
   slides.animate({
     marginLeft: [from + "px", to + "px"]
@@ -36,7 +36,7 @@ const createCategory = (category) => {
           </li>`
 }
 
-const categoryWrap = document.querySelector(".category");
+const categoryWrap = document.querySelector(".category-title");
 
 try {
   const response = await fetch("/category", {
