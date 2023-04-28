@@ -8,8 +8,8 @@ let currentSlide = 0;
 
 // slide 5초씩 반복
 setInterval(function() {
-  let from = - (1026 * currentSlide);
-  let to = from - 1026;   
+  let from = - (1024 * currentSlide);
+  let to = from - 1024;   
 
   slides.animate({
     marginLeft: [from + "px", to + "px"]
