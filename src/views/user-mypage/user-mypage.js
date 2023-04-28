@@ -57,7 +57,7 @@ function loadUserData(userData) {
 }
 
 function handleOrderList(event) {
-  event.preventDefault();
+  // event.preventDefault();
 
   location.href = "/order-list";
 }
