@@ -39,8 +39,6 @@ async function handleSubmit(e) {
     } catch (error) {
       alert(error.message);
     }
-  } else {
-    checkValid();
   }
 }
 

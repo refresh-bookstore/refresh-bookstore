@@ -48,7 +48,7 @@ exports.createOrder = async (req, res, next) => {
 
     await order.save();
 
-    res.status(201).json({ message: "주문이 생성되었습니다.", order });
+    res.status(201).json({ message: "주문이 완료되었습니다\u{1f60e}", order });
   } catch (error) {
     next(error);
   }
