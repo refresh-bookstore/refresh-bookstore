@@ -3,7 +3,7 @@ import { logout } from '/public/js/logout.js';
 
 localStorage.removeItem('purchase');
 
-const token = sessionStorage.getItem('token');
+const token = localStorage.getItem('token');
 if (!token) {
   alert("잘못된 접근입니다.");
   logout();

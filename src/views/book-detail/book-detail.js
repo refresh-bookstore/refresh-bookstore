@@ -104,7 +104,7 @@ const renderBookDetail = (book) => {
   
   // 구매 버튼
   purchaseBtn.addEventListener('click',()=>{
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
       localStorage.removeItem('purchase');
       const purchaseItems = [{

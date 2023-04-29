@@ -21,7 +21,7 @@ async function handlerSubmit(event) {
         method: "POST",
         headers: {
           "content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           email: emailInput.value,
@@ -32,7 +32,7 @@ async function handlerSubmit(event) {
       if (response.ok) {
         const data = await response.json();
 
-        sessionStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.token);
 
         // 로그인 후 이전 페이지로 갈 수 있는 경로
         const previousPath = document.referrer;
