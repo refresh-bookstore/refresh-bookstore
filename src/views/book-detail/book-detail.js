@@ -63,11 +63,12 @@ const renderBookDetail = (book) => {
   
   totalCost.innerText = `${(book.price * amountInput.value).toLocaleString()}원`;
   
-  amountInput.addEventListener('input', () => {
-    let amout = amountInput.value;
-    amout = amout.replace(/[^0-9]/g, ''); // 입력된 값에서 숫자만 추출
-    amountInput.value = amout; // 입력란에 숫자만 입력
-    totalCost.innerText = `${(book.price * amout).toLocaleString()}원`;
+  amountInput.addEventListener('change', () => {
+    let amount = Number(amountInput.value.replace(/[^0-9]/g, ''));
+    if (amount === 0) {
+      amountInput.value = 1;
+    } 
+    totalCost.innerText = `${(book.price * amountInput.value).toLocaleString()}원`;
   });
   
   // 장바구니 버튼
