@@ -66,7 +66,7 @@ async function getUserData () {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
@@ -141,7 +141,7 @@ async function deleteUser(event) {
         alert(`탈퇴하셨습니다.\n다음에 만나요 꼬옥\u{2764}`);
         
         // 스토리지 전부 삭제
-        sessionStorage.clear();
+        localStorage.clear();
         localStorage.clear();
         
         // 홈 이동

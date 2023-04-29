@@ -12,7 +12,7 @@ async function logout() {
 
     if (response.ok) {
       // 스토리지 초기화
-      sessionStorage.clear();
+      localStorage.clear();
       localStorage.clear();
 
       location.href = '/';

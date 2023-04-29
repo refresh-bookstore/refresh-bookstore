@@ -29,7 +29,7 @@ if (!data || data.length === 0) {
   document.querySelector('.deleteSelected').style.display = 'none'
   orderButtonArea.removeEventListener('click', makeOrder);
   document.querySelector('button.order__button').classList.add('empty');
-  localStorage.clear();
+  localStorage.removeItem('cart');
 }
 // 로컬스토리지에서 데이터 불러오기, 체크박스, 수량조절, 삭제버튼 활성화, 가격 출력 자동화
 function renderBooks() {
@@ -41,7 +41,7 @@ function renderBooks() {
     document.querySelector('.deleteSelected').style.display = 'none'
     orderButtonArea.removeEventListener('click', makeOrder);
     document.querySelector('button.order__button').classList.add('empty');
-    localStorage.clear();
+    localStorage.removeItem('cart');
   } else {
     activateOrderButton();
     data.forEach((order, idx) => {
@@ -269,7 +269,7 @@ function activateOrderButton() {
   orderButtonArea.addEventListener('click', makeOrder);
 }
 function makeOrder() {
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
   if (token) {
     saveToPurchase(JSON.parse(localStorage.getItem('cart')));
     location.replace('/order-create');

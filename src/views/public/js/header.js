@@ -53,7 +53,7 @@ function headerFunc() {
   const handleSearch = async () => {
     if (searchInput.value) {
       location.href = "/book-search";
-      sessionStorage.setItem("search", searchInput.value);
+      localStorage.setItem("search", searchInput.value);
     } else {
       searchInput.placeholder = "";
       searchInput.animate(searchInputDisappear, searchInputTiming);
@@ -85,7 +85,7 @@ function headerFunc() {
   dropdownMenu.style.display = "none";
   dropdownMenu.classList.add('header-dropdown-menu');
 
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
   if (token) {
     // 로그인한 유저일 때
     dropdownMenu.innerHTML = `

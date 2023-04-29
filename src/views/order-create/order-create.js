@@ -22,7 +22,7 @@ async function loadUserData() {
       method: "GET",
       headers: {
         'content-Type': 'application/json',
-        "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "authorization": `Bearer ${localStorage.getItem("token")}`,
       }
     });
     if (response.ok) {
@@ -184,7 +184,8 @@ async function payBtnClick() {
     if (response.ok) {
       const data = await response.json();
       alert(data.message);
-      localStorage.clear();
+      localStorage.removeItem('purchase');
+      localStorage.removeItem('cart');
       location.href = "/order-complete";
     } else {
       throw new Error("결제에 실패했습니다.");

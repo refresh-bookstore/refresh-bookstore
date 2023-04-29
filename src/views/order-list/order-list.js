@@ -19,7 +19,7 @@ async function setUserName() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     });
     if (response.ok) {

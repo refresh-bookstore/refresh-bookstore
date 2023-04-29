@@ -1,6 +1,6 @@
 import { main } from '/public/js/main.js';
 
-const title = sessionStorage.getItem("search");
+const title = localStorage.getItem("search");
 
 // 도서 검색
 searchBookByTitle();
@@ -65,7 +65,7 @@ async function searchBookByTitle() {
 
 // 페이지 떠날 때 세션 스토리지 search 삭제
 window.onbeforeunload = function() {
-  sessionStorage.removeItem('search');
+  localStorage.removeItem('search');
 }
 
 main();
