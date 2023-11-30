@@ -8,6 +8,14 @@ git config --local commit.template .gitmessage.txt
 git commit
 ```
 
+## 🌳 기존 프로젝트의 문제점 🌳
+
+- MongoDB는 주문관리의 무결성을 보장하지 못합니다. RDBMS로 Migration하여, 무결성을 최대한 보장하고자 합니다.
+- token과 session 방식으로 혼용된 인증방식 단일화가 필요합니다.
+- 비즈니스 로직 분리 / Repository 패턴과, Service, Controller로 분리하고, 가독성을 위해 DTO를 사용하고자 합니다.
+
+## ERD
+
 ## 🌳 Refresh Bookstore로 Refresh하러 오세요. 🌳
 
 - Refresh Bookstore는 개발자와 개발을 공부하는 학생들이 IT 관련 서적을 구매할 수 있는 플랫폼입니다!
