@@ -27,7 +27,7 @@ exports.login = async (email, password) => {
   }
 };
 
-exports.getUserInfo = async token => {
+exports.getUserInfo = async (token) => {
   try {
     // JWT 검증
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);

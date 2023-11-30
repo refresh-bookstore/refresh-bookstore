@@ -1,4 +1,3 @@
-const Category = require("../models/Category");
 const categoryService = require("../services/categoryService");
 
 exports.createCategory = async (req, res, next) => {
@@ -20,7 +19,6 @@ exports.createCategory = async (req, res, next) => {
 exports.getCategoryList = async (req, res, next) => {
   try {
     const result = await categoryService.getCategories();
-    //res.render("categorydummy.html");
     res.status(200).json({
       message: "카테고리를 조회하였습니다.",
       data: result,
