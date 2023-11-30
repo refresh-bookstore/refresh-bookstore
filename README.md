@@ -1,6 +1,14 @@
 # 📚 Refresh Bookstore
 
-## 🌳 Refresh Bookstore로 Refresh하러 오세요 🌳
+```bash
+# 로컬 환경에서 커밋 템플릿 적용
+git config --local commit.template .gitmessage.txt
+
+# 커밋 템플릿으로 커밋
+git commit
+```
+
+## 🌳 Refresh Bookstore로 Refresh하러 오세요. 🌳
 
 - Refresh Bookstore는 개발자와 개발을 공부하는 학생들이 IT 관련 서적을 구매할 수 있는 플랫폼입니다!
 - 개발 공부를 시작하기 위해, 새로운 언어와 지식을 배우기 위해, **Refresh하기 위해** 책을 구매할 수 있는 곳, **Refresh Bookstore** 입니다
@@ -79,7 +87,9 @@
 
 A : 관리자 계정으로 로그인 후 홈 화면 url path에 /user-admin 을 입력하여 접근 가능합니다!
 <br>
+
 ##### 관리자 계정
+
 ```
 아이디 : admin@naver.com
 비밀번호 : !1q2w3e4r

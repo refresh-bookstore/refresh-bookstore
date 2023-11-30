@@ -1,3 +1,6 @@
-src/node_modules/
+node_modules
 .DS_Store
 src/.env
+refresh-bookstore.git
+dist
+output.txt
