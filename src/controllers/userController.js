@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
+import User from "../models/User";
 const userService = require("../services/userService");
 const {
   updateUserValidator,
@@ -111,4 +111,3 @@ exports.getUsers = async (req, res) => {
     res.status(500).json({ message: "서버 오류" });
   }
 };
-

@@ -1,5 +1,5 @@
 const { body, check, validationResult } = require("express-validator");
-const User = require("../models/User");
+import User from "../models/User";
 
 exports.validateUserRegistration = [
   body("name").trim().notEmpty().withMessage("이름을 입력해주세요."),

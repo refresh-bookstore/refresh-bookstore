@@ -1,4 +1,4 @@
-const User = require("../models/User");
+import User from "../models/User";
 
 const checkSession = async (req, res, next) => {
   if (!req.session.user) {

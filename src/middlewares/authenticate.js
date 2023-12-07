@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
+import User from "../models/User";
 
 exports.login = async (email, password) => {
   try {
@@ -27,7 +27,7 @@ exports.login = async (email, password) => {
   }
 };
 
-exports.getUserInfo = async token => {
+exports.getUserInfo = async (token) => {
   try {
     // JWT 검증
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);

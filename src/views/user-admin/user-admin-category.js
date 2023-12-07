@@ -12,9 +12,9 @@ const createCategoryList = () => {
     adminContentCategories.innerHTML = `
       <img class="add-button" id="category-add-button" src="/public/images/icon_add.svg">
       <div class="add-page hidden" id="admin-add-categories"></div>
-      `; 
+      `;
     for (let i = 0; i < categories.length; i++) {
-      adminContentCategories.innerHTML += 
+      adminContentCategories.innerHTML +=
       `
       <div class="category-box">
           <p class="category-name">${categories[i].name}</p>
@@ -49,13 +49,13 @@ const addCategory = () => {
 
     addCategoryCheck.addEventListener('click', () => {
       const addCategoryInput = document.querySelector('#add-category-input');
-      
+
       fetch('/user-admin/category', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           name: addCategoryInput.value,
           categoryId: 1,
         }),
@@ -73,7 +73,7 @@ const addCategory = () => {
         console.error('카테고리 추가 실패', err);
       });
     });
-  
+
     addCategoryDelete.addEventListener('click', () => {
       adminAddCategories.innerHTML ='';
       adminAddCategories.classList.add('hidden');
@@ -91,14 +91,14 @@ const editCategory = (categories) => {
       const categoryEditInput = categoryBox.querySelector('.category-edit-input');
       const categoryName = categoryBox.querySelector('.category-name');
       const categoryCheckBtn = categoryBox.querySelector('.category-check');
-  
+
       e.classList.add('hidden');
       categoryName.classList.add('hidden');
       categoryEditInput.classList.remove('hidden');
       categoryCheckBtn.classList.remove('hidden');
 
       const thisCategory = categories.find((e) => e.name === categoryName.innerText)
-  
+
       categoryEditInput.value = categoryName.innerText;
       console.log(thisCategory);
 

@@ -1,0 +1,30 @@
+{
+  "entryFile": "./src/app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["./src/controllers/*-controller.ts"],
+  "swagger": {
+    "securityDefinitions": {
+      "sessionAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "connect.sid"
+      }
+    },
+    "outputDirectory": "./src/build",
+    "entryFile": "./src/app.ts",
+    "specVersion": 3,
+    "rootSecurity": [
+      {
+        "apiKey": "Sfsafsa"
+      }
+    ]
+  },
+  "routes": {
+    "routesDir": "./src/routes",
+    "authenticationModule": "./src/middlewares/expressAuthentication.ts"
+  },
+  "spec": {
+    "outputDirectory": "./src/build",
+    "specVersion": 3
+  }
+}
