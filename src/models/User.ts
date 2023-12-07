@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema, Model } from "mongoose";
+import { IUser } from "src/interfaces/IUser";
 
-const userSchema = new mongoose.Schema(
+const userSchema: Schema<IUser> = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -41,7 +42,7 @@ const userSchema = new mongoose.Schema(
         validator: function (v) {
           return /\d{3}-\d{3,4}-\d{4}/.test(v);
         },
-        message: props => `${props.value}는 올바른 휴대폰 형식이 아님!`,
+        message: (props) => `${props.value}는 올바른 휴대폰 형식이 아님!`,
       },
     },
     isAdmin: {
@@ -52,5 +53,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+// User 모델 생성
+const User: Model<IUser> = mongoose.model<IUser>("User", userSchema);
+
+export default User;

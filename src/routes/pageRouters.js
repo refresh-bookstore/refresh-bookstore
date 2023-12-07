@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { updateUserValidator } = require("../middlewares/userValidation");
-const { getUserInfo, updateUserInfo } = require("../controllers/userController");
 const checkSession = require("../middlewares/checkSession");
 
 router.get("/register", (req, res) => {

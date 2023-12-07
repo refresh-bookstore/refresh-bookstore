@@ -1,8 +1,8 @@
 const { isValidObjectId } = require("mongoose");
-const User = require("../models/User");
+import User from "../models/User";
 const bcrypt = require("bcrypt");
 
-exports.getUserByEmail = async email => {
+exports.getUserByEmail = async (email) => {
   const user = await User.findOne({ email: email });
   return user;
 };

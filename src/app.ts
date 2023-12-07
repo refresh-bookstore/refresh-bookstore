@@ -9,11 +9,11 @@ import createError from "http-errors";
 import * as dotenv from "dotenv";
 dotenv.config();
 
+import { RegisterRoutes } from "./routes/routes";
 import homeRouter from "./routes/homeRouter";
 import usersRouter from "./routes/userRouters";
 import pageRouter from "./routes/pageRouters";
 import productRouter from "./routes/productRouters";
-import categoryRouter from "./routes/categoryRouters";
 import orderRouter from "./routes/orderRouters";
 
 import sessionMiddleware from "./middlewares/session";
@@ -52,12 +52,11 @@ app.use(
   })
 );
 
-// 라우터 설정
+RegisterRoutes(app);
 app.use("/", homeRouter);
 app.use("/", usersRouter);
 app.use("/", pageRouter);
 app.use("/", productRouter);
-app.use("/", categoryRouter);
 app.use("/", orderRouter);
 
 // 에러 핸들링
