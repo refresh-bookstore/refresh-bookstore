@@ -1,7 +1,7 @@
 {
   "entryFile": "./src/app.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs": ["./src/controllers/*-controller.ts"],
+  "controllerPathGlobs": ["./src/controllers/*.controller.ts"],
   "swagger": {
     "securityDefinitions": {
       "sessionAuth": {
@@ -24,7 +24,7 @@
     "authenticationModule": "./src/middlewares/expressAuthentication.ts"
   },
   "spec": {
-    "outputDirectory": "./src/build",
+    "outputDirectory": "./src/swagger",
     "specVersion": 3
   }
 }

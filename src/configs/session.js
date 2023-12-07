@@ -7,12 +7,10 @@ const sessionConfig = {
   cookie: {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 1000 * 60 * 60 * 24, // 1 day
+    maxAge: 1000 * 60 * 60 * 24,
   },
 };
 
-// 세션 미들웨어 생성
 const sessionMiddleware = session(sessionConfig);
 
-// 미들웨어 내보내기
 module.exports = sessionMiddleware;
