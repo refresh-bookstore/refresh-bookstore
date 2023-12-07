@@ -4,3 +4,4 @@ src/.env
 refresh-bookstore.git
 dist
 output.txt
+.env
