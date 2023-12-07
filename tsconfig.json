@@ -18,10 +18,15 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
-    "allowJs": true
+    "allowJs": true,
+    "resolveJsonModule": true,
   },
   "include": [
     "src/**/*.ts", // TypeScript 파일 포함
     "src/**/*.js" // JavaScript 파일 포함
-, "src/models/User"  ]
+    ,
+    "src/models/User",
+    "src/models/Category.js",
+    "src/services/categoryServic"
+  ]
 }

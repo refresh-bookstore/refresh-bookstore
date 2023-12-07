@@ -1,4 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from "express";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger/swagger.json";
 import path from "path";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
@@ -9,6 +11,7 @@ import createError from "http-errors";
 import * as dotenv from "dotenv";
 dotenv.config();
 
+import { PrismaClient } from "@prisma/client";
 import { RegisterRoutes } from "./routes/routes";
 import homeRouter from "./routes/homeRouter";
 import usersRouter from "./routes/userRouters";
@@ -16,10 +19,11 @@ import pageRouter from "./routes/pageRouters";
 import productRouter from "./routes/productRouters";
 import orderRouter from "./routes/orderRouters";
 
-import sessionMiddleware from "./middlewares/session";
+import sessionMiddleware from "./configs/session";
 import hashPassword from "./middlewares/hashPassword";
 
 const app: Application = express();
+const prisma = new PrismaClient();
 
 mongoose.set("strictQuery", false);
 mongoose.connect(process.env.SERVER_LINK);
@@ -52,6 +56,8 @@ app.use(
   })
 );
 
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 RegisterRoutes(app);
 app.use("/", homeRouter);
 app.use("/", usersRouter);
@@ -83,3 +89,5 @@ app.use(hashPassword);
 app.listen(process.env.PORT, () => {
   console.log(`Server started on port 3000`);
 });
+
+export { prisma };
