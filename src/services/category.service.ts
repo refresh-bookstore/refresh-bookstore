@@ -1,4 +1,4 @@
-import { CreateUpdateCategory } from "./../dtos/create.update.category";
+import { CreateCategory } from "../dtos/create.category";
 import { Category } from "./../dtos/category";
 import { CategoryRepository } from "../repositories/category.repository";
 
@@ -9,11 +9,9 @@ export class CategoryService {
     this.categoryRepository = new CategoryRepository();
   }
 
-  async createCategory(
-    createUpdateCategory: CreateUpdateCategory
-  ): Promise<Category> {
+  async createCategory(createCategory: CreateCategory): Promise<Category> {
     const isCategory = await this.categoryRepository.findByName(
-      createUpdateCategory.name
+      createCategory.name
     );
     if (isCategory) {
       throw {
@@ -21,7 +19,7 @@ export class CategoryService {
         message: "이미 존재하는 카테고리입니다.",
       };
     }
-    return await this.categoryRepository.create(createUpdateCategory.name);
+    return await this.categoryRepository.create(createCategory.name);
   }
 
   async getCategories(): Promise<Category[]> {

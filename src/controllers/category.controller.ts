@@ -12,7 +12,7 @@ import {
 } from "tsoa";
 import { CategoryService } from "../services/category.service";
 import { Category } from "../dtos/category";
-import { CreateUpdateCategory } from "../dtos/create.update.category";
+import { CreateCategory } from "../dtos/create.category";
 
 @Route("")
 export class CategoryController extends Controller {
@@ -26,7 +26,7 @@ export class CategoryController extends Controller {
   @Post("user-admin/category")
   @Security("sessionAuth", ["isAdmin"])
   public async createCategory(
-    @Body() createUpdateCategory: CreateUpdateCategory
+    @Body() createUpdateCategory: CreateCategory
   ): Promise<Category> {
     return await this.categoryService.createCategory(createUpdateCategory);
   }
