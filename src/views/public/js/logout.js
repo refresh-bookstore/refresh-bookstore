@@ -2,21 +2,13 @@ async function logout() {
   try {
     const response = await fetch("/logout", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Cookie"
-      }
     });
 
-    const data = await response.json();
-
-    if (response.ok) {
-      // 스토리지 초기화
+    if (response.status === 204) {
       localStorage.clear();
-      localStorage.clear();
-
-      location.href = '/';
-    } else { 
+      location.href = "/";
+    } else {
+      const data = await response.json();
       throw new Error(data.message);
     }
   } catch (error) {

@@ -4,23 +4,16 @@ import swaggerDocument from "./swagger/swagger.json";
 import path from "path";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
-import cors from "cors";
 import mongoose from "mongoose";
-import createError from "http-errors";
 import * as dotenv from "dotenv";
+import chalk from "chalk";
 dotenv.config();
 
 import { PrismaClient } from "@prisma/client";
 import { RegisterRoutes } from "./routes/routes";
-import homeRouter from "./routes/homeRouter";
-import usersRouter from "./routes/userRouters";
-import pageRouter from "./routes/pageRouters";
 import productRouter from "./routes/productRouters";
 import orderRouter from "./routes/orderRouters";
-
-import sessionMiddleware from "./configs/session";
-import hashPassword from "./middlewares/hashPassword";
+import sessionMiddleware from "./middlewares/session";
 
 const app: Application = express();
 const prisma = new PrismaClient();
@@ -28,23 +21,21 @@ const prisma = new PrismaClient();
 mongoose.set("strictQuery", false);
 mongoose.connect(process.env.SERVER_LINK);
 
-// 애플리케이션 설정
-// 뷰 엔진 설정
 app.set("views", path.join(__dirname, "views"));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
-
-// 미들웨어 설정
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(express.json());
+app.use(
+  logger("combined", {
+    skip: function (req, res) {
+      return res.statusCode < 400;
+    },
+  })
+);
+app.use(express.urlencoded({ extended: true }));
 app.use(sessionMiddleware);
 
-// 정적 파일 경로 설정
 app.use(express.static(path.join(__dirname, "views/home")));
 app.use(
   express.static(path.join(__dirname, "/views"), {
@@ -57,37 +48,34 @@ app.use(
 );
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-RegisterRoutes(app);
-app.use("/", homeRouter);
-app.use("/", usersRouter);
-app.use("/", pageRouter);
 app.use("/", productRouter);
 app.use("/", orderRouter);
+RegisterRoutes(app);
 
-// 에러 핸들링
-// 404 에러 핸들링
 app.use((req: Request, res: Response, next: NextFunction) => {
-  next(createError(404));
+  console.log(`Received request: ${req.method} ${req.url}`);
+  next();
 });
 
-// 전체 에러 핸들링
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  if (err.status === 401) {
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const env = req.app.get("env");
+  let logMessage = chalk.red(`[${status}] ${err.message}`);
+
+  if (status === 401) {
+    logMessage = chalk.yellow(logMessage); // 401 상태 코드에 대한 로그는 노란색으로 표시
     res.render("error-page/login-required.html");
+  } else {
+    res.locals.message = err.message;
+    res.locals.error = env === "development" ? err : {};
+    res.status(status).render("error");
   }
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  res.status(err.status || 500);
-  res.render("error");
+  console.log(logMessage);
 });
 
-app.use(hashPassword);
-
-// 서버 시작
 app.listen(process.env.PORT, () => {
-  console.log(`Server started on port 3000`);
+  console.log("Server started on port " + process.env.PORT);
 });
 
 export { prisma };

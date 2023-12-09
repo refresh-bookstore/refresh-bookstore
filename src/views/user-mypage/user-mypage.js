@@ -1,6 +1,6 @@
-import { main } from '/public/js/main.js';
-import { checkValid } from './checkValid.js';
-import { logout } from '/public/js/logout.js';
+import { main } from "/public/js/main.js";
+import { checkValid } from "./checkValid.js";
+import { logout } from "/public/js/logout.js";
 
 const userGreeting = document.getElementById("user-greeting");
 const nameText = document.getElementById("nameText");
@@ -37,9 +37,11 @@ function loadUserData(userData) {
     detailAddressInput.value = userData.detailAddress;
     phoneInput.value = userData.phone;
 
-    if (postalCodeInput.value === "undefined" ||
+    if (
+      postalCodeInput.value === "undefined" ||
       addressInput.value === "undefined" ||
-      detailAddressInput.value === "undefined") {
+      detailAddressInput.value === "undefined"
+    ) {
       postalCodeInput.value = "";
       addressInput.value = "";
       detailAddressInput.value = "";
@@ -60,13 +62,12 @@ function handleOrderList(event) {
 }
 
 // 회원 정보 조회
-async function getUserData () {
+async function getUserData() {
   try {
-    const response = await fetch ("/userinfo", {
+    const response = await fetch("/user", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
@@ -85,12 +86,12 @@ async function getUserData () {
 
 async function updateUser(event) {
   const isAllValid = checkValid();
-  
+
   if (isAllValid && confirm("회원 정보를 수정 하시겠습니까?")) {
-    document.querySelector('.user-form-box').action = '/update';
+    document.querySelector(".user-form-box").action = "/update";
     try {
-      const response = await fetch("/update", {
-        method: "POST",
+      const response = await fetch("/user", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -122,7 +123,7 @@ async function deleteUser(event) {
   const isAllValid = checkValid();
 
   if (isAllValid && confirm("정말 탈퇴하시겠습니까?")) {
-    document.querySelector('.user-form-box').action = '/user';
+    document.querySelector(".user-form-box").action = "/user";
     try {
       const response = await fetch("/user", {
         method: "DELETE",
@@ -131,20 +132,13 @@ async function deleteUser(event) {
         },
         body: JSON.stringify({
           email: emailText.innerText,
-          password: passwordInput.value
-        })
+          password: passwordInput.value,
+        }),
       });
-
-      const data = await response.json();
-      console.log(data)
-      if (response.ok) {
+      if (response.status === 204) {
         alert(`탈퇴하셨습니다.\n다음에 만나요 꼬옥\u{2764}`);
-        
-        // 스토리지 전부 삭제
+
         localStorage.clear();
-        localStorage.clear();
-        
-        // 홈 이동
         location.replace("/");
       } else {
         throw new Error(data.message);

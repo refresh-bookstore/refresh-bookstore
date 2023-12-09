@@ -6,7 +6,7 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Category": {
+			"CategoryDTO": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -22,7 +22,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"CreateUpdateCategory": {
+			"CreateCategory": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -30,6 +30,110 @@
 				},
 				"required": [
 					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserResponse": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"detailAddress": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"postalCode",
+					"address",
+					"phone"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateUser": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"detailAddress": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"password",
+					"postalCode",
+					"address",
+					"phone"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateUser": {
+				"properties": {
+					"password": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"detailAddress": {
+						"type": "string",
+						"nullable": true
+					},
+					"phone": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LoginDTO": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -44,7 +148,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/user-admin/category": {
+		"/category": {
 			"post": {
 				"operationId": "CreateCategory",
 				"responses": {
@@ -53,12 +157,15 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Category"
+									"$ref": "#/components/schemas/CategoryDTO"
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Category"
+				],
 				"security": [
 					{
 						"sessionAuth": [
@@ -72,43 +179,34 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateUpdateCategory"
+								"$ref": "#/components/schemas/CreateCategory"
 							}
 						}
 					}
 				}
 			},
 			"get": {
-				"operationId": "GetAdminCategoryQueryById",
+				"operationId": "GetCategoryList",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Category"
+									"items": {
+										"$ref": "#/components/schemas/CategoryDTO"
+									},
+									"type": "array"
 								}
 							}
 						}
 					}
 				},
-				"security": [
-					{
-						"sessionAuth": [
-							"isAdmin"
-						]
-					}
+				"tags": [
+					"Category"
 				],
-				"parameters": [
-					{
-						"in": "query",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
+				"security": [],
+				"parameters": []
 			},
 			"put": {
 				"operationId": "UpdateCategory",
@@ -118,12 +216,15 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Category"
+									"$ref": "#/components/schemas/CategoryDTO"
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Category"
+				],
 				"security": [
 					{
 						"sessionAuth": [
@@ -137,7 +238,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Category"
+								"$ref": "#/components/schemas/CategoryDTO"
 							}
 						}
 					}
@@ -151,12 +252,15 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Category"
+									"$ref": "#/components/schemas/CategoryDTO"
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Category"
+				],
 				"security": [
 					{
 						"sessionAuth": [
@@ -176,28 +280,6 @@
 				]
 			}
 		},
-		"/category": {
-			"get": {
-				"operationId": "GetCategoryList",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Category"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"security": [],
-				"parameters": []
-			}
-		},
 		"/category/{id}": {
 			"get": {
 				"operationId": "GetCategoryById",
@@ -207,12 +289,15 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Category"
+									"$ref": "#/components/schemas/CategoryDTO"
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Category"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -226,24 +311,225 @@
 				]
 			}
 		},
-		"/user-admin/categories": {
+		"/": {
 			"get": {
-				"operationId": "GetAdminCategoryList",
+				"operationId": "GetHomePage",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Category"
-									},
-									"type": "array"
-								}
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/login": {
+			"get": {
+				"operationId": "GetLoginPage",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginDTO"
 							}
 						}
 					}
+				}
+			}
+		},
+		"/register": {
+			"get": {
+				"operationId": "GetRegisterPage",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
 				},
+				"tags": [
+					"Page"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/user-mypage": {
+			"get": {
+				"operationId": "GetUserMypage",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/cart": {
+			"get": {
+				"operationId": "GetCart",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/order-detail": {
+			"get": {
+				"operationId": "GetOrderDetail",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/order-create": {
+			"get": {
+				"operationId": "GetOrderCreate",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/order-complete": {
+			"get": {
+				"operationId": "GetOrderComplete",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/order-list": {
+			"get": {
+				"operationId": "GetOrderList",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/book-detail": {
+			"get": {
+				"operationId": "GetBookDetail",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/book-search": {
+			"get": {
+				"operationId": "GetBookSearch",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/user-admin": {
+			"get": {
+				"operationId": "GetUserAdmin",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Page"
+				],
 				"security": [
 					{
 						"sessionAuth": [
@@ -251,6 +537,191 @@
 						]
 					}
 				],
+				"parameters": []
+			}
+		},
+		"/user": {
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateUser"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": []
+			},
+			"put": {
+				"operationId": "UpdateUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateUser"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteUser",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginDTO"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/UserResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"sessionAuth": [
+							"isAdmin"
+						]
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/login/status": {
+			"get": {
+				"operationId": "CheckLoginStatus",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/logout": {
+			"post": {
+				"operationId": "Logout",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
 				"parameters": []
 			}
 		}

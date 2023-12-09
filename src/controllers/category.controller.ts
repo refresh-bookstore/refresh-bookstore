@@ -9,12 +9,14 @@ import {
   Delete,
   Query,
   Security,
+  Tags,
 } from "tsoa";
 import { CategoryService } from "../services/category.service";
-import { Category } from "../dtos/category";
-import { CreateCategory } from "../dtos/create.category";
+import { CategoryDTO } from "../dtos/category/category.dto";
+import { CreateCategory } from "../dtos/category/create.category";
 
-@Route("")
+@Tags("Category")
+@Route("category")
 export class CategoryController extends Controller {
   private categoryService: CategoryService;
 
@@ -23,47 +25,35 @@ export class CategoryController extends Controller {
     this.categoryService = new CategoryService();
   }
 
-  @Post("user-admin/category")
+  @Post("")
   @Security("sessionAuth", ["isAdmin"])
   public async createCategory(
-    @Body() createUpdateCategory: CreateCategory
-  ): Promise<Category> {
-    return await this.categoryService.createCategory(createUpdateCategory);
+    @Body() createCategory: CreateCategory
+  ): Promise<CategoryDTO> {
+    return await this.categoryService.createCategory(createCategory);
   }
 
-  @Get("category")
-  public async getCategoryList(): Promise<Category[]> {
+  @Get("")
+  public async getCategoryList(): Promise<CategoryDTO[]> {
     return await this.categoryService.getCategories();
   }
 
-  @Get("category/{id}")
-  public async getCategoryById(@Path() id: string): Promise<Category> {
+  @Get("{id}")
+  public async getCategoryById(@Path() id: string): Promise<CategoryDTO> {
     return await this.categoryService.getCategory(id);
   }
 
-  @Get("user-admin/categories")
+  @Put("")
   @Security("sessionAuth", ["isAdmin"])
-  public async getAdminCategoryList(): Promise<Category[]> {
-    return await this.categoryService.getCategories();
-  }
-
-  @Get("user-admin/category")
-  @Security("sessionAuth", ["isAdmin"])
-  public async getAdminCategoryQueryById(
-    @Query() id: string
-  ): Promise<Category> {
-    return await this.categoryService.getCategory(id);
-  }
-
-  @Put("user-admin/category")
-  @Security("sessionAuth", ["isAdmin"])
-  public async updateCategory(@Body() category: Category): Promise<Category> {
+  public async updateCategory(
+    @Body() category: CategoryDTO
+  ): Promise<CategoryDTO> {
     return await this.categoryService.updateCategory(category);
   }
 
-  @Delete("user-admin/category")
+  @Delete("")
   @Security("sessionAuth", ["isAdmin"])
-  public async deleteCategory(@Query() id: string): Promise<Category> {
+  public async deleteCategory(@Query() id: string): Promise<CategoryDTO> {
     return await this.categoryService.removeCategory(id);
   }
 }

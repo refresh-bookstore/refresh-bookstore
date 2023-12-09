@@ -1,9 +1,9 @@
-import { main } from '/public/js/main.js';
-import { logout } from '/public/js/logout.js';
+import { main } from "/public/js/main.js";
+import { logout } from "/public/js/logout.js";
 
 const mypageButton = document.getElementById("mypage-button");
 const userGreeting = document.getElementById("user-greeting");
-const contentArea = document.querySelector('.content');
+const contentArea = document.querySelector(".content");
 
 // 주문 조회 버튼 이벤트 리스너
 mypageButton.addEventListener("click", handleMypage);
@@ -15,12 +15,8 @@ function handleMypage(event) {
 // userGreeting에 이름 띄우기
 async function setUserName() {
   try {
-    const response = await fetch("/userinfo", {
+    const response = await fetch("/user", {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": `Bearer ${localStorage.getItem("token")}`,
-      },
     });
     if (response.ok) {
       const data = await response.json();
@@ -47,14 +43,18 @@ async function getOrderList() {
     });
     if (response.ok) {
       const data = await response.json();
-      
+
       // data 최근 주문순 정렬
       data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
       if (data.length > 0) {
         contentArea.classList.remove("empty");
         data.forEach((orderInfo) => {
-          const orderDate = new Date(new Date(orderInfo.createdAt).getTime() + (1000 * 60 * 60 * 9)).toISOString().slice(0, 10);
+          const orderDate = new Date(
+            new Date(orderInfo.createdAt).getTime() + 1000 * 60 * 60 * 9
+          )
+            .toISOString()
+            .slice(0, 10);
           const shippingStatus = orderInfo.shippingStatus;
           const orderId = orderInfo.orderId;
 
@@ -62,7 +62,7 @@ async function getOrderList() {
             <p class="order-date">${orderDate}</p>
             <div class="order-view">
             <div class="order-items-area">`;
-      
+
           for (let i = 0; i < orderInfo.orderList.length; i++) {
             const image_path = orderInfo.orderList[i].product.image_path;
             const title = orderInfo.orderList[i].product.title;
@@ -70,7 +70,7 @@ async function getOrderList() {
             const price = orderInfo.orderList[i].product.price.toLocaleString();
             const isbn = orderInfo.orderList[i].product.isbn;
             const amount = orderInfo.orderList[i].amount;
-      
+
             orderHtml += `
               <div class="order-item">
                 <div class="item-img">
@@ -83,7 +83,7 @@ async function getOrderList() {
                 </div>
               </div>`;
           }
-      
+
           orderHtml += `</div>
               <div class="order-info">
               <span class="shipping-status">${shippingStatus}</span>
@@ -91,7 +91,7 @@ async function getOrderList() {
             </div>
             </div>
           </div>`;
-      
+
           contentArea.innerHTML += orderHtml;
         });
       } else {

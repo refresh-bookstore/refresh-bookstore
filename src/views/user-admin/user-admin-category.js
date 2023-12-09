@@ -1,7 +1,7 @@
 const adminContentCategories = document.querySelector("#admin-categories");
 
 const createCategoryList = () => {
-  fetch("/user-admin/categories")
+  fetch("/category")
     .then((response) => {
       return response.json();
     })
@@ -50,7 +50,7 @@ const addCategory = () => {
     addCategoryCheck.addEventListener("click", () => {
       const addCategoryInput = document.querySelector("#add-category-input");
 
-      fetch("/user-admin/category", {
+      fetch("/category", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ const editCategory = (categories) => {
       console.log(thisCategory);
 
       categoryCheckBtn.addEventListener("click", () => {
-        fetch(`/user-admin/category`, {
+        fetch(`/category`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -147,7 +147,7 @@ const deleteCategory = (categories) => {
         `<${thisCategory.name}> 카테고리를 삭제하시겠습니까?`
       );
       if (deleteConfirm) {
-        fetch(`/user-admin/category?id=${categoryIdValue}`, {
+        fetch(`/category?id=${categoryIdValue}`, {
           method: "DELETE",
         })
           .then((res) => {

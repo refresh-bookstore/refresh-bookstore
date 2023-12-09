@@ -1,5 +1,5 @@
-import { CreateCategory } from "../dtos/create.category";
-import { Category } from "./../dtos/category";
+import { CreateCategory } from "../dtos/category/create.category";
+import { CategoryDTO } from "../dtos/category/category.dto";
 import { CategoryRepository } from "../repositories/category.repository";
 
 export class CategoryService {
@@ -9,42 +9,30 @@ export class CategoryService {
     this.categoryRepository = new CategoryRepository();
   }
 
-  async createCategory(createCategory: CreateCategory): Promise<Category> {
+  async createCategory(createCategory: CreateCategory): Promise<CategoryDTO> {
     const isCategory = await this.categoryRepository.findByName(
       createCategory.name
     );
     if (isCategory) {
-      throw {
-        status: 400,
-        message: "이미 존재하는 카테고리입니다.",
-      };
+      throw new Error("이미 존재하는 카테고리입니다.");
     }
     return await this.categoryRepository.create(createCategory.name);
   }
 
-  async getCategories(): Promise<Category[]> {
+  async getCategories(): Promise<CategoryDTO[]> {
     const categories = await this.categoryRepository.findAll();
-    if (categories.length === 0) {
-      throw {
-        status: 400,
-        message: "카테고리가 존재하지 않습니다.",
-      };
-    }
     return categories;
   }
 
-  async getCategory(categoryId: string): Promise<Category> {
+  async getCategory(categoryId: string): Promise<CategoryDTO> {
     const category = await this.categoryRepository.findByCategoryId(categoryId);
     if (!category) {
-      throw {
-        status: 400,
-        message: "카테고리가 존재하지 않습니다.",
-      };
+      throw new Error("카테고리가 존재하지 않습니다.");
     }
     return category;
   }
 
-  async updateCategory(updateCategory: Category): Promise<Category> {
+  async updateCategory(updateCategory: CategoryDTO): Promise<CategoryDTO> {
     const category = await this.categoryRepository.update(
       updateCategory.categoryId,
       updateCategory.name
@@ -52,13 +40,10 @@ export class CategoryService {
     return category;
   }
 
-  async removeCategory(categoryId: string): Promise<Category> {
+  async removeCategory(categoryId: string): Promise<CategoryDTO> {
     const category = await this.categoryRepository.delete(categoryId);
     if (!category) {
-      throw {
-        status: 400,
-        message: "삭제할 데이터가 없습니다.",
-      };
+      throw new Error("삭제할 데이터가 없습니다.");
     }
     return category;
   }

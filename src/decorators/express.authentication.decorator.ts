@@ -1,11 +1,11 @@
-import { Request as ExpressRequest, Response } from "express";
+import { Request as ExpressRequest } from "express";
 import { Session, SessionData } from "express-session";
-import { IUser } from "src/interfaces/IUser";
-import User from "../models/User";
+import { UserRepository } from "../repositories/user.repository";
+import { User } from "@prisma/client";
 
-interface Request extends ExpressRequest {
+export interface Request extends ExpressRequest {
   session: Session & Partial<SessionData>;
-  user?: IUser;
+  user?: User;
 }
 
 export async function expressAuthentication(
@@ -17,8 +17,10 @@ export async function expressAuthentication(
     return Promise.reject(new Error("세션 또는 사용자를 찾을 수 없습니다."));
   }
 
+  const userRepository = new UserRepository();
+
   try {
-    const user = await User.findOne({ email: request.session.user.email });
+    const user = await userRepository.findByEmail(request.session.user.email);
     if (!user) {
       return Promise.reject(
         new Error("데이터베이스에서 일치하는 사용자를 찾을 수 없습니다.")

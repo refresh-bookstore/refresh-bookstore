@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { Category } from "src/dtos/category";
+import { CategoryDTO } from "../dtos/category/category.dto";
 const prisma = new PrismaClient();
 
 export class CategoryRepository {
-  async create(name: string): Promise<Category> {
+  async create(name: string): Promise<CategoryDTO> {
     return await prisma.category.create({
       data: {
         name: name,
@@ -15,7 +15,7 @@ export class CategoryRepository {
     });
   }
 
-  async findAll(): Promise<Category[]> {
+  async findAll(): Promise<CategoryDTO[]> {
     return await prisma.category.findMany({
       select: {
         categoryId: true,
@@ -24,7 +24,7 @@ export class CategoryRepository {
     });
   }
 
-  async findByCategoryId(categoryId: string): Promise<Category | null> {
+  async findByCategoryId(categoryId: string): Promise<CategoryDTO | null> {
     return await prisma.category.findUnique({
       where: { categoryId },
       select: {
@@ -34,7 +34,7 @@ export class CategoryRepository {
     });
   }
 
-  async findByName(name: string): Promise<Category | null> {
+  async findByName(name: string): Promise<CategoryDTO | null> {
     return await prisma.category.findFirst({
       where: { name },
       select: {
@@ -44,7 +44,7 @@ export class CategoryRepository {
     });
   }
 
-  async update(categoryId: string, name: string): Promise<Category> {
+  async update(categoryId: string, name: string): Promise<CategoryDTO> {
     return await prisma.category.update({
       where: { categoryId },
       data: { name },
@@ -55,7 +55,7 @@ export class CategoryRepository {
     });
   }
 
-  async delete(categoryId: string): Promise<Category> {
+  async delete(categoryId: string): Promise<CategoryDTO> {
     return await prisma.category.delete({
       where: { categoryId },
     });

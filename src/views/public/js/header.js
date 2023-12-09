@@ -1,50 +1,60 @@
-import { logout } from './logout.js';
-import { isFullCart } from './isFullCart.js';
-import { isLoggedIn } from './isLoggedIn.js';
+import { logout } from "./logout.js";
+import { isFullCart } from "./isFullCart.js";
+import { isLoggedIn } from "./isLoggedIn.js";
 
-function headerFunc() {
-  const searchBtn = document.querySelector('#search-icon');
-  const cartBtn = document.querySelector('#cart-icon');
-  const userBtn = document.querySelector('#user-icon');
-  
-  const searchInput = document.querySelector('.header-search-input');
-  const searchBox = document.querySelector('.header-search-box');
-  
-  const logoImage = document.querySelector('.header-logo');
+async function checkLoginStatus() {
+  try {
+    const response = await fetch("/login/status");
+    const text = await response.text();
+    return text === "true";
+  } catch (error) {
+    console.error("로그인 상태 확인 중 오류 발생:", error);
+    return false;
+  }
+}
+
+async function headerFunc() {
+  const searchBtn = document.querySelector("#search-icon");
+  const cartBtn = document.querySelector("#cart-icon");
+  const userBtn = document.querySelector("#user-icon");
+
+  const searchInput = document.querySelector(".header-search-input");
+  const searchBox = document.querySelector(".header-search-box");
+
+  const logoImage = document.querySelector(".header-logo");
 
   // 검색창 애니메이션
   const searchInputAppear = [
     { transform: "translate(300px, 0px)" },
     { transform: "translate(0px, 0px)" },
   ];
-  
+
   const searchInputDisappear = [
     { transform: "translate(0px, 0px)" },
     { transform: "translate(300px, 0px)" },
   ];
-  
 
   const searchInputTiming = {
     duration: 250,
     iterations: 1,
   };
-  
+
   // 검색창 클릭 이벤트
-  searchBtn.addEventListener('click', async () => {
-    if (searchBtn.classList.contains('activate')) {
-        handleSearch();
+  searchBtn.addEventListener("click", async () => {
+    if (searchBtn.classList.contains("activate")) {
+      handleSearch();
     } else {
-    searchBtn.classList.add('activate');
-    searchInput.classList.add('activate');
-    searchInput.animate(searchInputAppear, searchInputTiming);
-    setTimeout(() => {
-      searchInput.placeholder = "도서명을 검색해주세요.";
-    }, 230);
+      searchBtn.classList.add("activate");
+      searchInput.classList.add("activate");
+      searchInput.animate(searchInputAppear, searchInputTiming);
+      setTimeout(() => {
+        searchInput.placeholder = "도서명을 검색해주세요.";
+      }, 230);
     }
-  })
+  });
 
   // 검색창 엔터 이벤트
-  searchInput.addEventListener('keydown', (event) => {
+  searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       handleSearch();
     }
@@ -58,8 +68,8 @@ function headerFunc() {
       searchInput.placeholder = "";
       searchInput.animate(searchInputDisappear, searchInputTiming);
       setTimeout(() => {
-        searchBtn.classList.remove('activate');
-        searchInput.classList.remove('activate');
+        searchBtn.classList.remove("activate");
+        searchInput.classList.remove("activate");
       }, 230);
     }
   };
@@ -67,12 +77,12 @@ function headerFunc() {
   // 로고 클릭 이벤트
   logoImage.addEventListener("click", () => {
     location.href = "/";
-  })
+  });
 
   // 장바구니 아이콘 클릭 이벤트
   cartBtn.addEventListener("click", () => {
     location.href = "/cart";
-  })
+  });
 
   // 장바구니 아이템 유무에 따라 아이콘 변경
   isFullCart();
@@ -81,12 +91,12 @@ function headerFunc() {
   isLoggedIn();
 
   // 드롭 다운 메뉴 생성
-  const dropdownMenu = document.createElement('div');
+  const dropdownMenu = document.createElement("div");
   dropdownMenu.style.display = "none";
-  dropdownMenu.classList.add('header-dropdown-menu');
+  dropdownMenu.classList.add("header-dropdown-menu");
 
-  const token = localStorage.getItem('token');
-  if (token) {
+  const loggedIn = await checkLoginStatus();
+  if (loggedIn) {
     // 로그인한 유저일 때
     dropdownMenu.innerHTML = `
       <ul class="header-menu-ul">
@@ -131,15 +141,29 @@ function headerFunc() {
     const loginBtn = document.querySelector(".login");
     const registerBtn = document.querySelector(".register");
 
-    // 로그인 메뉴 클릭 이벤트
+    /**
+     * 로그인 페이지로 이동하기 전에 현재 페이지의 URL을 세션 스토리지에 저장합니다.
+     * 이렇게 하면 사용자가 로그인한 후 이전 페이지로 쉽게 돌아갈 수 있습니다.
+     *
+     * sessionStorage.setItem:
+     *  - 세션 스토리지에 'preLoginUrl' 키로 현재 페이지의 URL을 저장합니다.
+     *  - 세션 스토리지는 탭이 닫히면 정보가 사라지므로, 사용자가 브라우저를 닫았다가
+     *    다시 로그인할 경우 이전 페이지로 리디렉션되지 않습니다.
+     *
+     * location.href:
+     *  - 사용자를 로그인 페이지('/login')로 리디렉션합니다.
+     *
+     * @author Hojun Song
+     */
     loginBtn.addEventListener("click", () => {
+      sessionStorage.setItem("preLoginUrl", window.location.href);
       location.href = "/login";
-    })
+    });
 
     // 회원가입 메뉴 클릭 이벤트
     registerBtn.addEventListener("click", () => {
       location.href = "/register";
-    })
+    });
   }
 
   // 유저 아이콘 클릭 이벤트
@@ -149,7 +173,7 @@ function headerFunc() {
     } else {
       dropdownMenu.style.display = "none";
     }
-  })
+  });
 }
 
 export { headerFunc };

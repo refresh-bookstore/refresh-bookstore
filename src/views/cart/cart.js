@@ -1,47 +1,58 @@
-import { main } from '/public/js/main.js';
-import { isFullCart } from '/public/js/isFullCart.js';
+import { main } from "/public/js/main.js";
+import { isFullCart } from "/public/js/isFullCart.js";
+
+async function checkLoginStatus() {
+  try {
+    const response = await fetch("/login/status");
+    const text = await response.text();
+    return text === "true";
+  } catch (error) {
+    console.error("로그인 상태 확인 중 오류 발생:", error);
+    return false;
+  }
+}
 
 // 가격 문자열에서 숫자만 반환하는 함수
 function getPriceNumber(str) {
-  return Number(str.replace(/,/g, '').slice(0, -1));
+  return Number(str.replace(/,/g, "").slice(0, -1));
 }
 
 const saveToCart = (data) => {
-  localStorage.setItem('cart', JSON.stringify(data));
-}
+  localStorage.setItem("cart", JSON.stringify(data));
+};
 // 로컬스토리지 'purchase'에 데이터 저장 함수
 const saveToPurchase = (data) => {
-  localStorage.setItem('purchase', JSON.stringify(data));
-}
+  localStorage.setItem("purchase", JSON.stringify(data));
+};
 
 const selectAll = document.querySelector('input[name="checkAll"]');
-const cart = document.querySelector('.cart');
-const selectedPrice = document.querySelector('.selectedPrice');
-const deliveryFee = document.querySelector('.deliveryFee');
-const totalCost = document.querySelector('.totalCost');
-const orderButtonArea = document.querySelector('.order__button');
+const cart = document.querySelector(".cart");
+const selectedPrice = document.querySelector(".selectedPrice");
+const deliveryFee = document.querySelector(".deliveryFee");
+const totalCost = document.querySelector(".totalCost");
+const orderButtonArea = document.querySelector(".order__button");
 
-const data = JSON.parse(localStorage.getItem('cart'));
+const data = JSON.parse(localStorage.getItem("cart"));
 if (!data || data.length === 0) {
   // 장바구니에 상품이 없습니다
   cart.innerHTML = `<p class="empty-cart">상품이 없습니다.</p>`;
-  document.querySelector('.selectAll').style.display = 'none';
-  document.querySelector('.deleteSelected').style.display = 'none'
-  orderButtonArea.removeEventListener('click', makeOrder);
-  document.querySelector('button.order__button').classList.add('empty');
-  localStorage.removeItem('cart');
+  document.querySelector(".selectAll").style.display = "none";
+  document.querySelector(".deleteSelected").style.display = "none";
+  orderButtonArea.removeEventListener("click", makeOrder);
+  document.querySelector("button.order__button").classList.add("empty");
+  localStorage.removeItem("cart");
 }
 // 로컬스토리지에서 데이터 불러오기, 체크박스, 수량조절, 삭제버튼 활성화, 가격 출력 자동화
 function renderBooks() {
-  const data = JSON.parse(localStorage.getItem('cart'));
+  const data = JSON.parse(localStorage.getItem("cart"));
   if (!data || data.length === 0) {
     // 장바구니에 상품이 없습니다
     cart.innerHTML = `<p class="empty-cart">상품이 없습니다.</p>`;
-    document.querySelector('.selectAll').style.display = 'none';
-    document.querySelector('.deleteSelected').style.display = 'none'
-    orderButtonArea.removeEventListener('click', makeOrder);
-    document.querySelector('button.order__button').classList.add('empty');
-    localStorage.removeItem('cart');
+    document.querySelector(".selectAll").style.display = "none";
+    document.querySelector(".deleteSelected").style.display = "none";
+    orderButtonArea.removeEventListener("click", makeOrder);
+    document.querySelector("button.order__button").classList.add("empty");
+    localStorage.removeItem("cart");
   } else {
     activateOrderButton();
     data.forEach((order, idx) => {
@@ -52,8 +63,7 @@ function renderBooks() {
       const bookPrice = `${(order.price * amount).toLocaleString()}원`;
       const isbn = order.isbn;
 
-      cart.innerHTML += 
-      `<div class="item">
+      cart.innerHTML += `<div class="item">
       <input type="checkbox" name="buy" checked="">
       <!-- 책 이미지 -->
       <div class="book-img">
@@ -84,20 +94,20 @@ function renderBooks() {
       </div>`;
     });
   }
-    activateCheckboxes();
-    activateAmountBtn();
-    activateDeleteBtn();
-    setPayList();
-    window.addEventListener('popstate', isFullCart);
-    main();
+  activateCheckboxes();
+  activateAmountBtn();
+  activateDeleteBtn();
+  setPayList();
+  window.addEventListener("popstate", isFullCart);
+  main();
 }
 renderBooks();
 
 // 체크박스 활성화 함수
 function activateCheckboxes() {
   const checkboxes = document.querySelectorAll('input[name="buy"]');
-  
-  function checkSelectAll()  {
+
+  function checkSelectAll() {
     const checkedItems = document.querySelectorAll('input[name="buy"]:checked');
     if (checkboxes.length === checkedItems.length) {
       selectAll.checked = true;
@@ -111,11 +121,13 @@ function activateCheckboxes() {
     });
   }
 
-  checkboxes.forEach(checkbox => checkbox.addEventListener('click', () => {
-    checkSelectAll();
-    setPayList();
-  }));
-  selectAll.addEventListener('click', () => {
+  checkboxes.forEach((checkbox) =>
+    checkbox.addEventListener("click", () => {
+      checkSelectAll();
+      setPayList();
+    })
+  );
+  selectAll.addEventListener("click", () => {
     checkAll(selectAll);
     setPayList();
   });
@@ -123,36 +135,41 @@ function activateCheckboxes() {
 
 // 수량 조절 버튼 활성화 함수
 function activateAmountBtn() {
-  const minusBtn = document.querySelectorAll('.minusBtn');
-  const amountInput = document.querySelectorAll('.amountInput');
-  const plusBtn = document.querySelectorAll('.plusBtn');
-  
+  const minusBtn = document.querySelectorAll(".minusBtn");
+  const amountInput = document.querySelectorAll(".amountInput");
+  const plusBtn = document.querySelectorAll(".plusBtn");
+
   // 수량 증가 클릭 이벤트
   plusBtn.forEach((btn, idx) => {
-    btn.addEventListener('click', () => {
-      const data = JSON.parse(localStorage.getItem('cart'));
-      btn.previousElementSibling.value = Number(btn.previousElementSibling.value) + 1;
+    btn.addEventListener("click", () => {
+      const data = JSON.parse(localStorage.getItem("cart"));
+      btn.previousElementSibling.value =
+        Number(btn.previousElementSibling.value) + 1;
       data[idx].amount += 1;
-      localStorage.removeItem('cart');
+      localStorage.removeItem("cart");
       saveToCart(data);
       const bookPrice = document.querySelector(`.book-price${idx}`);
-      bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
+      bookPrice.innerText = `${(
+        data[idx].amount * data[idx].price
+      ).toLocaleString()}원`;
       setPayList();
     });
-  });  
+  });
   // 수량 감소 클릭 이벤트
   minusBtn.forEach((btn, idx) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       if (Number(btn.nextElementSibling.value) === 1) {
         btn.nextElementSibling.value = 1;
       } else {
-        const data = JSON.parse(localStorage.getItem('cart'));
+        const data = JSON.parse(localStorage.getItem("cart"));
         btn.nextElementSibling.value = Number(btn.nextElementSibling.value) - 1;
         data[idx].amount -= 1;
-        localStorage.removeItem('cart');
+        localStorage.removeItem("cart");
         saveToCart(data);
         const bookPrice = document.querySelector(`.book-price${idx}`);
-        bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
+        bookPrice.innerText = `${(
+          data[idx].amount * data[idx].price
+        ).toLocaleString()}원`;
       }
       setPayList();
     });
@@ -160,16 +177,18 @@ function activateAmountBtn() {
   // 수량 직접 입력시 가격 계산
   // 수량 값을 없애거나 0으로 만들면 1로 바뀌도록 함
   amountInput.forEach((amount, idx) => {
-    amount.addEventListener('change', () => {
-      if (Number(amount.value.replace(/[^0-9]/g, '')) === 0 ) {
+    amount.addEventListener("change", () => {
+      if (Number(amount.value.replace(/[^0-9]/g, "")) === 0) {
         amount.value = 1;
-      } 
-      const data = JSON.parse(localStorage.getItem('cart'));
+      }
+      const data = JSON.parse(localStorage.getItem("cart"));
       data[idx].amount = Number(amount.value);
-      localStorage.removeItem('cart');
+      localStorage.removeItem("cart");
       saveToCart(data);
       const bookPrice = document.querySelector(`.book-price${idx}`);
-      bookPrice.innerText = `${(data[idx].amount * data[idx].price).toLocaleString()}원`;
+      bookPrice.innerText = `${(
+        data[idx].amount * data[idx].price
+      ).toLocaleString()}원`;
       setPayList();
     });
   });
@@ -177,14 +196,14 @@ function activateAmountBtn() {
 
 // 단일상품삭제 버튼 활성화 함수
 function activateDeleteBtn() {
-  const deleteBtn = document.querySelectorAll('.deleteBtn');
+  const deleteBtn = document.querySelectorAll(".deleteBtn");
   deleteBtn.forEach((btn, idx) => {
-    btn.addEventListener('click', () => {
-      if (confirm('상품을 삭제하시겠습니까?')) {
-        const data = JSON.parse(localStorage.getItem('cart'));
+    btn.addEventListener("click", () => {
+      if (confirm("상품을 삭제하시겠습니까?")) {
+        const data = JSON.parse(localStorage.getItem("cart"));
         data.splice(idx, 1);
-        localStorage.removeItem('cart');
-        cart.innerHTML = '';
+        localStorage.removeItem("cart");
+        cart.innerHTML = "";
         saveToCart(data);
         renderBooks();
       }
@@ -194,9 +213,9 @@ function activateDeleteBtn() {
 
 // 선택삭제 버튼 활성화 함수
 function activateDeleteSelectedBtn() {
-  const deleteSelectedBtn = document.querySelector('.deleteSelected');
-  deleteSelectedBtn.addEventListener('click', () => {
-    if (confirm('상품을 삭제하시겠습니까?')) {
+  const deleteSelectedBtn = document.querySelector(".deleteSelected");
+  deleteSelectedBtn.addEventListener("click", () => {
+    if (confirm("상품을 삭제하시겠습니까?")) {
       let checkedIndex = [];
       const checkboxes = document.querySelectorAll('input[name="buy"]');
       if (checkboxes.length) {
@@ -205,27 +224,26 @@ function activateDeleteSelectedBtn() {
         });
       }
       if (checkedIndex.length) {
-        const data = JSON.parse(localStorage.getItem('cart'));
-        checkedIndex.forEach(indexNum => {
+        const data = JSON.parse(localStorage.getItem("cart"));
+        checkedIndex.forEach((indexNum) => {
           data.splice(indexNum, 1);
         });
-        localStorage.removeItem('cart');
+        localStorage.removeItem("cart");
         saveToCart(data);
-        cart.innerHTML = '';
+        cart.innerHTML = "";
         renderBooks();
       }
       activateCheckboxes();
       setPayList();
-      window.addEventListener('popstate', isFullCart);
+      window.addEventListener("popstate", isFullCart);
       main();
     }
-    window.addEventListener('popstate', isFullCart);
+    window.addEventListener("popstate", isFullCart);
     activateCheckboxes();
     main();
   });
 }
 activateDeleteSelectedBtn();
-
 
 // 금액 리스트 세팅 함수
 function setPayList() {
@@ -246,36 +264,41 @@ function setSelectedPrice() {
       }
     });
     selectedPrice.innerText = `${bookPriceSum.toLocaleString()}원`;
-  } else selectedPrice.innerText = '0원';
+  } else selectedPrice.innerText = "0원";
 }
 
 // 배송비 계산 함수
 function setDeliveryFee() {
-  if (getPriceNumber(selectedPrice.innerText) >= 50000 || selectedPrice.innerText === '0원') {
-    deliveryFee.innerText = '0원';
+  if (
+    getPriceNumber(selectedPrice.innerText) >= 50000 ||
+    selectedPrice.innerText === "0원"
+  ) {
+    deliveryFee.innerText = "0원";
   } else {
-    deliveryFee.innerText = '3,000원';
+    deliveryFee.innerText = "3,000원";
   }
 }
 
 // 총 결제 금액 계산 함수
 function setTotalCost() {
-  const totalCostNum = getPriceNumber(selectedPrice.innerText) + getPriceNumber(deliveryFee.innerText);
+  const totalCostNum =
+    getPriceNumber(selectedPrice.innerText) +
+    getPriceNumber(deliveryFee.innerText);
   totalCost.innerText = `${totalCostNum.toLocaleString()}원`;
 }
 
 // 구매하기 버튼
 function activateOrderButton() {
-  orderButtonArea.addEventListener('click', makeOrder);
+  orderButtonArea.addEventListener("click", makeOrder);
 }
-function makeOrder() {
-  const token = localStorage.getItem('token');
-  if (token) {
-    saveToPurchase(JSON.parse(localStorage.getItem('cart')));
-    location.replace('/order-create');
+async function makeOrder() {
+  const loggedIn = await checkLoginStatus();
+  if (loggedIn) {
+    saveToPurchase(JSON.parse(localStorage.getItem("cart")));
+    location.replace("/order-create");
   } else {
-    window.alert('로그인을 해주세요.');
-    location.href = '/login';
+    window.alert("로그인을 해주세요.");
+    location.href = "/login";
   }
 }
 

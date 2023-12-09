@@ -12,7 +12,7 @@ registerButton.addEventListener("click", handlerRegister);
 
 async function handlerSubmit(event) {
   event.preventDefault();
-  
+
   const isAllValid = checkValid();
 
   if (isAllValid) {
@@ -21,40 +21,21 @@ async function handlerSubmit(event) {
         method: "POST",
         headers: {
           "content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           email: emailInput.value,
-          password: passwordInput.value
-        })
+          password: passwordInput.value,
+        }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 204) {
+        const preLoginUrl =
+          sessionStorage.getItem("preLoginUrl") || "/home/home.html";
 
-        localStorage.setItem("token", data.token);
-
-        // 로그인 후 이전 페이지로 갈 수 있는 경로
-        const previousPath = document.referrer;
-        const goPath = ["book-detail", "cart"];
-        let found = false;
-
-        goPath.forEach(path => {
-          if (previousPath.includes(path)) {
-            location.href = previousPath;
-            found = true;
-          }
-        });
-
-        if (!found) {
-          location.replace("/");
-        }
-
+        location.replace(preLoginUrl);
       } else if (response.status === 401 || response.status === 500) {
-        // 로그인 서버 오류
-
         joinError.style.display = "flex";
-        joinError.innerText = "이메일 또는 비밀번호가 일치하지 않습니다.";  
+        joinError.innerText = "이메일 또는 비밀번호가 일치하지 않습니다.";
       } else {
         throw new Error("로그인 실패했습니다.");
       }
@@ -68,7 +49,7 @@ async function handlerSubmit(event) {
 function handlerRegister(event) {
   event.preventDefault();
 
-  location.href = "/register"
+  location.href = "/register";
 }
 
 function checkValid() {

@@ -1,6 +1,6 @@
 import { IsUUID, IsString } from "class-validator";
 
-export class Category {
+export class CategoryDTO {
   @IsString()
   name: string;
 

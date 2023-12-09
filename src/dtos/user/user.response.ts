@@ -1,10 +1,8 @@
-export interface IUser extends Document {
+export class UserResponse {
   name: string;
   email: string;
-  password: string;
   postalCode: string;
   address: string;
   detailAddress?: string;
   phone: string;
-  isAdmin: boolean;
 }
