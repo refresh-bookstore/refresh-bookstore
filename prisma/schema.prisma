@@ -1,28 +1,47 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-model Category {
-  id         Int    @id @default(autoincrement())
-  categoryId String @unique @default(uuid())
-  name       String @unique
+  extensions = [uuidOssp(map: "uuid-ossp")]
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  name         String
-  email        String   @unique
-  password     String
-  postalCode   String
-  address      String
-  detailAddress String?
-  phone        String   @unique
-  isAdmin      Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now()) @updatedAt
+  id            Int      @id @default(autoincrement())
+  name          String   @db.VarChar(50)
+  email         String   @unique @db.VarChar(100)
+  password      String   @db.VarChar(255)
+  postalCode    String   @db.VarChar(20)
+  address       String   @db.VarChar(255)
+  detailAddress String?  @db.VarChar(255)
+  phone         String   @unique @db.VarChar(20)
+  isAdmin       Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
+}
+
+model Category {
+  id         Int       @id @default(autoincrement())
+  categoryId String    @unique @default(dbgenerated("uuid_generate_v4()"))
+  name       String    @unique @db.VarChar(10)
+  products   Product[]
+}
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  title           String   @db.VarChar(100)
+  author          String   @db.VarChar(50)
+  publisher       String   @db.VarChar(50)
+  publicationDate DateTime
+  isbn            String   @unique @db.VarChar(13)
+  description     String   @db.VarChar(3000)
+  price           Float
+  imagePath       String   @db.VarChar(255)
+  categoryId      Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+  Category        Category @relation(fields: [categoryId], references: [id])
 }

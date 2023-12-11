@@ -1,5 +1,5 @@
 import { Controller, Get, Route, Request, Tags, Security } from "tsoa";
-import { Request as RequestExpress } from "../decorators/express.authentication.decorator";
+import { Request as RequestExpress } from "../middlewares/express.authentication";
 
 @Route("")
 @Tags("Page")

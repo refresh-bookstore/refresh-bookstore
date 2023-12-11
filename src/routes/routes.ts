@@ -8,7 +8,7 @@ import { CategoryController } from './../controllers/category.controller';
 import { PageController } from './../controllers/page.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../controllers/user.controller';
-import { expressAuthentication } from './../decorators/express.authentication.decorator';
+import { expressAuthentication } from './../middlewares/express.authentication';
 // @ts-ignore - no great way to install types from subpackage
 const promiseAny = require('promise.any');
 import type { RequestHandler, Router } from 'express';
@@ -19,29 +19,8 @@ const models: TsoaRoute.Models = {
     "CategoryDTO": {
         "dataType": "refObject",
         "properties": {
-            "name": {"dataType":"string","required":true},
-            "categoryId": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CreateCategory": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserResponse": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "email": {"dataType":"string","required":true},
-            "postalCode": {"dataType":"string","required":true},
-            "address": {"dataType":"string","required":true},
-            "detailAddress": {"dataType":"string"},
-            "phone": {"dataType":"string","required":true},
+            "name": {"dataType":"string"},
+            "categoryId": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -56,6 +35,20 @@ const models: TsoaRoute.Models = {
             "address": {"dataType":"string","required":true},
             "detailAddress": {"dataType":"string"},
             "phone": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "email": {"dataType":"string","required":true},
+            "postalCode": {"dataType":"string","required":true},
+            "address": {"dataType":"string","required":true},
+            "detailAddress": {"dataType":"string"},
+            "phone": {"dataType":"string","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
         },
         "additionalProperties": false,
     },
@@ -98,7 +91,7 @@ export function RegisterRoutes(app: Router) {
 
             function CategoryController_createCategory(request: any, response: any, next: any) {
             const args = {
-                    createCategory: {"in":"body","name":"createCategory","required":true,"ref":"CreateCategory"},
+                    category: {"in":"body","name":"category","required":true,"ref":"CategoryDTO"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -681,6 +674,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/login/status',
+            authenticateMiddleware([{"sessionAuth":[]}]),
             ...(fetchMiddlewares<RequestHandler>(UserController)),
             ...(fetchMiddlewares<RequestHandler>(UserController.prototype.checkLoginStatus)),
 

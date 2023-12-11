@@ -26,7 +26,7 @@ async function handleSubmit(e) {
           phone: phoneInput.value,
         }),
       });
-      if (response.ok) {
+      if (response.status === 204) {
         alert(`회원가입이 완료되었습니다!\n${nameInput.value}님 환영합니다!`);
         location.replace("/login");
       } else {

@@ -57,7 +57,7 @@ const adminEditBook = (books) => {
 
       // console.log(thisBook);
 
-      fetch("/user-admin/categories")
+      fetch("/category")
         .then((res) => res.json())
         .then((data) => {
           bookInfoBlock.style.height = "780px";
@@ -163,7 +163,7 @@ const adminAddBook = (books) => {
   const bookAddBlock = document.querySelector(".add-books-block");
   const bookAddBtn = document.querySelector(".add-books-block-child");
   bookAddBtn.addEventListener("click", () => {
-    fetch("/user-admin/categories")
+    fetch("/category")
       .then((res) => res.json())
       .then((data) => {
         bookAddBtn.innerText = "클릭하여 책을 추가해주세요.";

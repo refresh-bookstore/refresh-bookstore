@@ -3,7 +3,6 @@ const checkSession = require("../middlewares/checkSession");
 const {
   createProduct,
   getProductList,
-  getProductById,
   getProductQueryById,
   keywordProduct,
   getProductByISBN,

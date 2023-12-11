@@ -4,8 +4,7 @@ import { isFullCart } from "/public/js/isFullCart.js";
 async function checkLoginStatus() {
   try {
     const response = await fetch("/login/status");
-    const text = await response.text();
-    return text === "true";
+    return response.status === 204;
   } catch (error) {
     console.error("로그인 상태 확인 중 오류 발생:", error);
     return false;

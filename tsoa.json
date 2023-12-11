@@ -21,7 +21,7 @@
   },
   "routes": {
     "routesDir": "./src/routes",
-    "authenticationModule": "./src/decorators/express.authentication.decorator.ts"
+    "authenticationModule": "./src/middlewares/express.authentication.ts"
   },
   "spec": {
     "outputDirectory": "./src/swagger",

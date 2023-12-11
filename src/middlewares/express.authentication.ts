@@ -1,11 +1,14 @@
 import { Request as ExpressRequest } from "express";
 import { Session, SessionData } from "express-session";
 import { UserRepository } from "../repositories/user.repository";
-import { User } from "@prisma/client";
+import {
+  ForbiddenException,
+  InternalServerErrorException,
+  NotFoundException,
+} from "../exceptions/http.exception";
 
 export interface Request extends ExpressRequest {
   session: Session & Partial<SessionData>;
-  user?: User;
 }
 
 export async function expressAuthentication(
@@ -13,27 +16,25 @@ export async function expressAuthentication(
   securityName: string,
   scopes?: string[]
 ): Promise<any> {
-  if (!request.session || !request.session.user) {
-    return Promise.reject(new Error("세션 또는 사용자를 찾을 수 없습니다."));
+  if (!request.session || !request.session.email) {
+    return Promise.reject(new ForbiddenException("유효하지 않은 접근입니다."));
   }
 
   const userRepository = new UserRepository();
 
   try {
-    const user = await userRepository.findByEmail(request.session.user.email);
+    const user = await userRepository.findByEmail(request.session.email);
     if (!user) {
       return Promise.reject(
-        new Error("데이터베이스에서 일치하는 사용자를 찾을 수 없습니다.")
+        new NotFoundException("사용자를 찾을 수 없습니다.")
       );
     }
 
     if (securityName === "isAdmin" && !user.isAdmin) {
-      return Promise.reject(new Error("허용되지 않은 요청입니다."));
+      return Promise.reject(new ForbiddenException("접근 권한이 없습니다."));
     }
-
-    request.user = user;
     return Promise.resolve(user);
   } catch (err) {
-    return Promise.reject(err);
+    return Promise.reject(new InternalServerErrorException(err.message));
   }
 }

@@ -40,7 +40,6 @@ exports.createProduct = async (req, res) => {
 exports.getProductList = async (req, res) => {
   try {
     const result = await productService.getProducts();
-    //res.render("productdummy");
     res.status(200).json({
       message: "상품이 업로드되었습니다.",
       data: result,

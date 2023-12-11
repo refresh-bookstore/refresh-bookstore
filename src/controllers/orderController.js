@@ -68,7 +68,7 @@ exports.getOrderList = async (req, res, next) => {
 
 exports.getOrderId = async (req, res, next) => {
   try {
-    if (!req.session.user) {
+    if (!req.session.email) {
       return res.status(401).send("Unauthorized");
     }
 
@@ -90,7 +90,7 @@ exports.getOrderId = async (req, res, next) => {
 //email로 사용자 조회하기
 exports.getOrderEmail = async (req, res, next) => {
   try {
-    const email = req.session.user.email;
+    const email = req.session.email;
     console.log(email);
 
     const orders = await Order.find({ email: email }).populate({

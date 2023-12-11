@@ -1,6 +1,5 @@
 import { main } from "/public/js/main.js";
 import { checkValid } from "./checkValid.js";
-import { logout } from "/public/js/logout.js";
 
 const userGreeting = document.getElementById("user-greeting");
 const nameText = document.getElementById("nameText");
@@ -75,12 +74,14 @@ async function getUserData() {
       const data = await response.json();
       loadUserData(data);
     } else {
-      alert("잘못된 접근입니다.");
-      logout();
-      throw new Error("사용자를 찾을 수 없습니다.");
+      return res.json().then((errData) => {
+        throw new Error(
+          errData.message || res.statusText || "오류가 발생했습니다."
+        );
+      });
     }
-  } catch (error) {
-    console.log(error.message);
+  } catch (err) {
+    alert(err.message);
   }
 }
 
@@ -103,14 +104,20 @@ async function updateUser(event) {
           phone: phoneInput.value,
         }),
       });
-
-      if (response.ok) {
-        alert("회원정보가 수정되었습니다.");
-      } else {
-        throw new Error(response.message);
+      if (res.status !== 204) {
+        if (res.status === 403) {
+          alert("유효하지 않은 접근입니다.");
+          location.replace("/");
+        } else {
+          return res.json().then((errData) => {
+            throw new Error(
+              errData.message || res.statusText || "오류가 발생했습니다."
+            );
+          });
+        }
       }
-    } catch (error) {
-      console.log(error.message);
+    } catch (err) {
+      alert(err.message);
     }
   } else {
     event.preventDefault();
@@ -137,14 +144,21 @@ async function deleteUser(event) {
       });
       if (response.status === 204) {
         alert(`탈퇴하셨습니다.\n다음에 만나요 꼬옥\u{2764}`);
-
         localStorage.clear();
         location.replace("/");
-      } else {
-        throw new Error(data.message);
+        if (res.status === 403) {
+          alert("유효하지 않은 접근입니다.");
+          location.replace("/");
+        } else {
+          return res.json().then((errData) => {
+            throw new Error(
+              errData.message || res.statusText || "오류가 발생했습니다."
+            );
+          });
+        }
       }
-    } catch (error) {
-      alert(error.message);
+    } catch (err) {
+      alert(err.message);
     }
   } else {
     checkValid();

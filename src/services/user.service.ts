@@ -1,10 +1,16 @@
-import { UserRepository } from "../repositories/user.repository";
+import argon2 from "argon2";
 import { User } from "@prisma/client";
+import { UserRepository } from "../repositories/user.repository";
 import { CreateUser } from "../dtos/user/create.user";
 import { UpdateUser } from "../dtos/user/update.user";
 import { UserResponse } from "../dtos/user/user.response";
-import argon2 from "argon2";
 import { LoginDTO } from "../dtos/user/login.dto";
+import {
+  BadRequestException,
+  ConflictException,
+  InternalServerErrorException,
+  NotFoundException,
+} from "../exceptions/http.exception";
 
 export class UserService {
   private userRepository: UserRepository;
@@ -13,27 +19,54 @@ export class UserService {
     this.userRepository = new UserRepository();
   }
 
-  public async createUser(createUser: CreateUser): Promise<UserResponse> {
-    const isUser = await this.userRepository.findByEmail(createUser.email);
+  private async getUserOrThrow(email: string): Promise<User> {
+    const user = await this.userRepository.findByEmail(email);
+    if (!user) {
+      throw new NotFoundException(`해당 이메일의 사용자는 존재하지 않습니다.`);
+    }
+    return user;
+  }
 
-    if (isUser) {
-      throw new Error("이미 사용 중인 이메일입니다.");
+  private async isValidPassword(
+    password: string,
+    dbpassword: string
+  ): Promise<boolean> {
+    const isValidPassword = await argon2.verify(password, dbpassword);
+
+    if (!isValidPassword) {
+      throw new BadRequestException("비밀번호를 확인해주세요.");
+    }
+
+    return isValidPassword;
+  }
+
+  async createUser(createUser: CreateUser): Promise<void> {
+    const isExisting = this.userRepository.findByEmail(createUser.email);
+
+    if (isExisting) {
+      throw new ConflictException(
+        `${createUser.email}은(는) 이미 사용 중입니다.`
+      );
     }
 
     const hashedPassword = await argon2.hash(createUser.password);
+
     const userData = {
       ...createUser,
       password: hashedPassword,
     };
-    return await this.userRepository.create(userData);
+
+    const createdData = await this.userRepository.create(userData);
+
+    if (!createdData) {
+      throw new InternalServerErrorException(
+        "회원가입 중 오류가 발생했습니다."
+      );
+    }
   }
 
-  public async getUser(email: string): Promise<UserResponse> {
-    const user = await this.userRepository.findByEmail(email);
-
-    if (!user) {
-      throw new Error("사용자를 찾을 수 없습니다.");
-    }
+  async getUser(email: string): Promise<UserResponse> {
+    const user = await this.getUserOrThrow(email);
 
     return {
       name: user.name,
@@ -42,17 +75,30 @@ export class UserService {
       detailAddress: user.detailAddress,
       postalCode: user.postalCode,
       phone: user.phone,
+      createdAt: user.createdAt,
     };
   }
 
-  public async getUsers(): Promise<UserResponse[]> {
-    return await this.userRepository.findAll();
+  async getUsers(): Promise<UserResponse[]> {
+    const users = await this.userRepository.findAll();
+
+    return users.map((user) => ({
+      name: user.name,
+      email: user.email,
+      address: user.address,
+      detailAddress: user.detailAddress,
+      postalCode: user.postalCode,
+      phone: user.phone,
+      createdAt: user.createdAt,
+    }));
   }
 
-  public async updateUserByEmail(
+  async updateUserByEmail(
     email: string,
     updateUser: UpdateUser
-  ): Promise<UserResponse> {
+  ): Promise<void> {
+    await this.getUserOrThrow(email);
+
     const hashedPassword = await argon2.hash(updateUser.password);
 
     const updateUserWithHashedPassword = {
@@ -60,49 +106,32 @@ export class UserService {
       password: hashedPassword,
     };
 
-    const updatedUser = await this.userRepository.updateByEmail(
+    const updatedData = await this.userRepository.updateByEmail(
       email,
       updateUserWithHashedPassword
     );
 
-    return updatedUser;
+    if (!updatedData) {
+      throw new InternalServerErrorException("사용자 업데이트에 실패했습니다.");
+    }
   }
 
-  public async deleteUser(loginDTO: LoginDTO): Promise<void> {
-    const user = await this.userRepository.findByEmail(loginDTO.email);
+  async deleteUser(loginDTO: LoginDTO): Promise<void> {
+    const user = await this.getUserOrThrow(loginDTO.email);
 
-    if (!user) {
-      throw new Error("사용자를 찾을 수 없습니다.");
+    await this.isValidPassword(user.password, loginDTO.password);
+
+    const deleteUser = await this.userRepository.deleteByEmail(loginDTO.email);
+    if (!deleteUser) {
+      throw new InternalServerErrorException("사용자 탈퇴에 실패했습니다.");
     }
-
-    const isValidPassword = await argon2.verify(
-      user.password,
-      loginDTO.password
-    );
-
-    if (!isValidPassword) {
-      throw new Error("비밀번호를 확인해주세요.");
-    }
-
-    return await this.userRepository.deleteByEmail(loginDTO.email);
   }
 
-  async login(loginDTO: LoginDTO): Promise<User> {
-    const user = await this.userRepository.findByEmail(loginDTO.email);
+  async login(loginDTO: LoginDTO): Promise<string> {
+    const user = await this.getUserOrThrow(loginDTO.email);
 
-    if (!user) {
-      throw new Error("이메일 주소를 확인해주세요.");
-    }
+    await this.isValidPassword(user.password, loginDTO.password);
 
-    const isValidPassword = await argon2.verify(
-      user.password,
-      loginDTO.password
-    );
-
-    if (!isValidPassword) {
-      throw new Error("비밀번호를 확인해주세요.");
-    }
-
-    return user;
+    return user.email;
   }
 }

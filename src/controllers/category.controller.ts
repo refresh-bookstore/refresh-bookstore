@@ -10,10 +10,11 @@ import {
   Query,
   Security,
   Tags,
+  Middlewares,
 } from "tsoa";
 import { CategoryService } from "../services/category.service";
 import { CategoryDTO } from "../dtos/category/category.dto";
-import { CreateCategory } from "../dtos/category/create.category";
+import { validateBody } from "../middlewares/validate.middleware";
 
 @Tags("Category")
 @Route("category")
@@ -27,10 +28,9 @@ export class CategoryController extends Controller {
 
   @Post("")
   @Security("sessionAuth", ["isAdmin"])
-  public async createCategory(
-    @Body() createCategory: CreateCategory
-  ): Promise<CategoryDTO> {
-    return await this.categoryService.createCategory(createCategory);
+  @Middlewares(validateBody(CategoryDTO))
+  public async createCategory(@Body() category: CategoryDTO): Promise<void> {
+    await this.categoryService.createCategory(category.name);
   }
 
   @Get("")
@@ -45,15 +45,14 @@ export class CategoryController extends Controller {
 
   @Put("")
   @Security("sessionAuth", ["isAdmin"])
-  public async updateCategory(
-    @Body() category: CategoryDTO
-  ): Promise<CategoryDTO> {
-    return await this.categoryService.updateCategory(category);
+  @Middlewares(validateBody(CategoryDTO))
+  public async updateCategory(@Body() category: CategoryDTO): Promise<void> {
+    await this.categoryService.updateCategory(category);
   }
 
   @Delete("")
   @Security("sessionAuth", ["isAdmin"])
-  public async deleteCategory(@Query() id: string): Promise<CategoryDTO> {
-    return await this.categoryService.removeCategory(id);
+  public async deleteCategory(@Query() id: string): Promise<void> {
+    await this.categoryService.removeCategory(id);
   }
 }

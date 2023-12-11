@@ -60,15 +60,24 @@ const addCategory = () => {
         }),
       })
         .then((res) => {
-          if (!res.ok) {
-            throw new Error(res.statusText);
+          if (res.status !== 204) {
+            if (res.status === 403) {
+              alert("유효하지 않은 접근입니다.");
+              location.replace("/");
+            } else {
+              return res.json().then((errData) => {
+                throw new Error(
+                  errData.message || res.statusText || "오류가 발생했습니다."
+                );
+              });
+            }
           }
           adminAddCategories.innerHTML = "";
           adminAddCategories.classList.add("hidden");
           createCategoryList();
         })
         .catch((err) => {
-          console.error("카테고리 추가 실패", err);
+          alert(err.message);
         });
     });
 
@@ -115,8 +124,17 @@ const editCategory = (categories) => {
           }),
         })
           .then((res) => {
-            if (!res.ok) {
-              throw new Error(res.statusText);
+            if (res.status !== 204) {
+              if (res.status === 403) {
+                alert("유효하지 않은 접근입니다.");
+                location.replace("/");
+              } else {
+                return res.json().then((errData) => {
+                  throw new Error(
+                    errData.message || res.statusText || "오류가 발생했습니다."
+                  );
+                });
+              }
             }
             e.classList.remove("hidden");
             categoryName.classList.remove("hidden");
@@ -125,7 +143,7 @@ const editCategory = (categories) => {
             createCategoryList();
           })
           .catch((err) => {
-            console.error("카테고리 수정 실패", err);
+            alert(err.message);
           });
       });
     });
@@ -151,15 +169,23 @@ const deleteCategory = (categories) => {
           method: "DELETE",
         })
           .then((res) => {
-            if (!res.ok) {
-              throw new Error(res.statusText);
+            if (res.status !== 204) {
+              if (res.status === 403) {
+                alert("유효하지 않은 접근입니다.");
+                location.replace("/");
+              } else {
+                return res.json().then((errData) => {
+                  throw new Error(
+                    errData.message || res.statusText || "오류가 발생했습니다."
+                  );
+                });
+              }
             }
-            // console.log('카테고리 삭제 성공');
             categoryBox.remove();
             createCategoryList();
           })
           .catch((err) => {
-            console.error("카테고리 삭제 실패", err);
+            alert(err.message);
           });
       }
     });
