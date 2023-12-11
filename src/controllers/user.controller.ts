@@ -11,6 +11,7 @@ import {
   Put,
   Delete,
   Middlewares,
+  Response,
 } from "tsoa";
 import { UserService } from "../services/user.service";
 import { CreateUser } from "../dtos/user/create.user";
@@ -19,6 +20,7 @@ import { LoginDTO } from "../dtos/user/login.dto";
 import { promisify } from "util";
 import { UpdateUser } from "../dtos/user/update.user";
 import { validateBody } from "../middlewares/validate.middleware";
+import { Error } from "../exceptions/exception.type";
 
 @Tags("User")
 @Route("")
@@ -32,12 +34,15 @@ export class UserController extends Controller {
 
   @Post("user")
   @Middlewares(validateBody(CreateUser))
+  @Response<Error>("409", "이미 사용 중인 이메일입니다.")
+  @Response<Error>("500", "회원가입 중 오류가 발생했습니다.")
   public async createUser(@Body() createUser: CreateUser): Promise<void> {
     await this.userService.createUser(createUser);
   }
 
   @Get("user")
   @Security("sessionAuth")
+  @Response<Error>("404", "해당 사용자를 찾을 수 없습니다.")
   public async getUser(@Request() req: RequestExpress): Promise<UserResponse> {
     return this.userService.getUser(req.session.email);
   }
@@ -45,6 +50,8 @@ export class UserController extends Controller {
   @Put("user")
   @Security("sessionAuth")
   @Middlewares(validateBody(UpdateUser))
+  @Response<Error>("404", "해당 사용자를 찾을 수 없습니다.")
+  @Response<Error>("500", "사용자 업데이트에 실패했습니다.")
   public async updateUser(
     @Request() req: RequestExpress,
     @Body() updateUser: UpdateUser
@@ -55,6 +62,8 @@ export class UserController extends Controller {
   @Delete("user")
   @Security("sessionAuth")
   @Middlewares(validateBody(LoginDTO))
+  @Response<Error>("404", "해당 사용자를 찾을 수 없습니다.")
+  @Response<Error>("500", "사용자 탈퇴에 실패했습니다.")
   public async deleteUser(
     @Request() req: RequestExpress,
     @Body() loginDTO: LoginDTO
@@ -72,6 +81,7 @@ export class UserController extends Controller {
 
   @Post("login")
   @Middlewares(validateBody(LoginDTO))
+  @Response<Error>("404", "해당 사용자를 찾을 수 없습니다.")
   public async login(
     @Request() req: RequestExpress,
     @Body() loginDTO: LoginDTO

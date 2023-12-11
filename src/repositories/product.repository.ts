@@ -21,16 +21,16 @@ export class ProductRepository {
     });
   }
 
-  async update(productId: string, updateData: any): Promise<Product> {
-    return await prisma.product.update({
-      where: { productId },
-      data: updateData,
-    });
-  }
+  // async update(productId: string, updateData: any): Promise<Product> {
+  //   return await prisma.product.update({
+  //     where: { productId },
+  //     data: updateData,
+  //   });
+  // }
 
-  async delete(productId: string): Promise<Product> {
-    return await prisma.product.delete({
-      where: { productId },
-    });
-  }
+  // async delete(productId: string): Promise<Product> {
+  //   return await prisma.product.delete({
+  //     where: { productId },
+  //   });
+  // }
 }

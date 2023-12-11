@@ -6,6 +6,18 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"Error": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"CategoryDTO": {
 				"properties": {
 					"name": {
@@ -143,6 +155,26 @@
 				"responses": {
 					"204": {
 						"description": "No content"
+					},
+					"409": {
+						"description": "이미 존재하는 카테고리입니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "카테고리 생성 중 오류가 발생했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -195,6 +227,26 @@
 				"responses": {
 					"204": {
 						"description": "No content"
+					},
+					"404": {
+						"description": "해당 카테고리를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "카테고리 업데이트 중 오류가 발생했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -224,6 +276,26 @@
 				"responses": {
 					"204": {
 						"description": "No content"
+					},
+					"404": {
+						"description": "해당 카테고리를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "카테고리 삭제 중 오류가 발생했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -258,6 +330,26 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/CategoryDTO"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "해당 카테고리를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "카테고리를 불러오는 중에 오류가 발생했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
 								}
 							}
 						}
@@ -313,6 +405,16 @@
 				"responses": {
 					"204": {
 						"description": "No content"
+					},
+					"404": {
+						"description": "해당 사용자를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -514,6 +616,26 @@
 				"responses": {
 					"204": {
 						"description": "No content"
+					},
+					"409": {
+						"description": "이미 사용 중인 이메일입니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "회원가입 중 오류가 발생했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -544,6 +666,16 @@
 								}
 							}
 						}
+					},
+					"404": {
+						"description": "해당 사용자를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -561,6 +693,26 @@
 				"responses": {
 					"204": {
 						"description": "No content"
+					},
+					"404": {
+						"description": "해당 사용자를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "사용자 업데이트에 실패했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -588,6 +740,26 @@
 				"responses": {
 					"204": {
 						"description": "No content"
+					},
+					"404": {
+						"description": "해당 사용자를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "사용자 탈퇴에 실패했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
 					}
 				},
 				"tags": [

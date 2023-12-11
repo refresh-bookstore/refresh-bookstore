@@ -31,16 +31,16 @@ async function handlerSubmit(event) {
       if (response.status === 204) {
         const preLoginUrl =
           sessionStorage.getItem("preLoginUrl") || "/home/home.html";
-
         location.replace(preLoginUrl);
-      } else if (response.status === 401 || response.status === 500) {
-        joinError.style.display = "flex";
-        joinError.innerText = "이메일 또는 비밀번호가 일치하지 않습니다.";
       } else {
-        throw new Error("로그인 실패했습니다.");
+        res.json().then((errData) => {
+          throw new Error(
+            errData.message || res.statusText || "오류가 발생했습니다."
+          );
+        });
       }
     } catch (error) {
-      console.log(error.message);
+      alert("이메일 또는 비밀번호를 다시 한번 확인해주세요.");
     }
   }
 }

@@ -1,4 +1,4 @@
-const session = require("express-session");
+import session from "express-session";
 
 const sessionConfig = {
   secret: process.env.SECRET_KEY,
@@ -13,4 +13,4 @@ const sessionConfig = {
 
 const sessionMiddleware = session(sessionConfig);
 
-module.exports = sessionMiddleware;
+export default sessionMiddleware;
