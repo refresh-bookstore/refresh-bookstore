@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
+  previewFeatures = ["fullTextSearch", "postgresqlExtensions"]
 }
 
 datasource db {
@@ -18,7 +18,7 @@ model User {
   address       String   @db.VarChar(255)
   detailAddress String?  @db.VarChar(255)
   phone         String   @unique @db.VarChar(20)
-  isAdmin       Boolean  @default(false)
+  isAdmin       Boolean  @default(true)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now()) @updatedAt
 }
@@ -26,7 +26,7 @@ model User {
 model Category {
   id         Int       @id @default(autoincrement())
   categoryId String    @unique @default(dbgenerated("uuid_generate_v4()"))
-  name       String    @unique @db.VarChar(10)
+  name       String    @unique @db.VarChar(30)
   products   Product[]
 }
 
@@ -39,9 +39,8 @@ model Product {
   isbn            String   @unique @db.VarChar(13)
   description     String   @db.VarChar(3000)
   price           Float
+  stock           Int      @default(0)
   imagePath       String   @db.VarChar(255)
   categoryId      Int
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @default(now()) @updatedAt
   Category        Category @relation(fields: [categoryId], references: [id])
 }

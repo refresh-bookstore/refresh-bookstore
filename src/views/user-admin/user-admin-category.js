@@ -165,7 +165,7 @@ const deleteCategory = (categories) => {
         `<${thisCategory.name}> 카테고리를 삭제하시겠습니까?`
       );
       if (deleteConfirm) {
-        fetch(`/category?id=${categoryIdValue}`, {
+        fetch(`/category/${categoryIdValue}`, {
           method: "DELETE",
         })
           .then((res) => {

@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { IsNotEmpty, IsOptional, IsEmail, Length } from "class-validator";
 
 export class UserResponse {
@@ -28,4 +29,14 @@ export class UserResponse {
 
   @IsNotEmpty()
   createdAt: Date;
+
+  constructor(user: User) {
+    this.name = user.name;
+    this.email = user.email;
+    this.postalCode = user.postalCode;
+    this.address = user.address;
+    this.detailAddress = user.detailAddress;
+    this.phone = user.phone;
+    this.createdAt = user.createdAt;
+  }
 }

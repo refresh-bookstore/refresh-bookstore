@@ -1,10 +1,10 @@
-@import url('/public/css/main.css');
+@import url("/public/css/main.css");
 
 /*---------상단영역-------*/
 .upperArea {
   display: flex;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
 
   width: 100%;
   padding: 10px 20px;
@@ -21,10 +21,9 @@
   margin: 10px;
 }
 
-
 /*---------가운데 영역-------*/
 .middleArea {
-  width:100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -32,7 +31,6 @@
 
   padding: 10px 20px;
   border-bottom: var(--color-dark-gray) solid 0.5px;
-
 }
 
 .imageArea {
@@ -47,17 +45,14 @@
   flex-grow: 1;
 
   border: var(--color-light-gray) 0.3px solid;
-
 }
 
-.imageArea img{
+.imageArea img {
   margin: 20px 0;
   width: 48%;
   align-items: center;
   box-shadow: 10px 10px 20px var(--color-light-gray);
 }
-
-
 
 .purchaseArea {
   width: 50%;
@@ -73,7 +68,6 @@
 }
 
 .bookTitleArea {
-
   padding-bottom: 20px;
   width: 100%;
 
@@ -82,10 +76,7 @@
   flex-wrap: wrap;
 
   border-bottom: var(--color-light-gray) solid 0.3px;
-
 }
-
-
 
 .bookTitleArea p {
   font-size: var(--font-small);
@@ -116,17 +107,14 @@
 
   display: flex;
   flex-direction: column;
-
 }
-
-
 
 .purchaseInfo p {
   font-size: var(--font-micro);
   color: var(--color-light-black);
   margin: 5px;
 }
-.purchaseInfo .bookTitle{
+.purchaseInfo .bookTitle {
   width: 100%;
   color: var(--color-point);
   font-size: var(--font-regular);
@@ -153,7 +141,7 @@
   align-items: center;
 }
 
-.purchaseInfo .costArea .amountArea button{
+.purchaseInfo .costArea .amountArea button {
   width: 35px;
   height: 30px;
 
@@ -164,7 +152,7 @@
   background-color: var(--color-light-green);
 }
 
-.purchaseInfo .costArea .amountArea button:hover{
+.purchaseInfo .costArea .amountArea button:hover {
   color: var(--color-white);
   font-size: var(--font-regular);
   font-weight: 200;
@@ -173,11 +161,11 @@
   cursor: pointer;
 }
 
-.purchaseInfo .costArea .amountArea input{
+.purchaseInfo .costArea .amountArea input {
   width: 35px;
   height: 30px;
 
-  color:var(--color-point);
+  color: var(--color-point);
   font-size: var(--font-regular);
   font-weight: var(--weight-medium);
   text-align: center;
@@ -192,12 +180,11 @@
   font-size: 20pt;
   font-weight: 900;
   color: var(--color-black);
-  
+
   text-align: right;
 
   margin: 5px;
   margin-top: 20px;
-
 }
 
 .purchaseBtnArea {
@@ -210,48 +197,50 @@
   flex-wrap: wrap;
 }
 
-.purchaseBtnArea #addToCartBtn{
+.purchaseBtnArea #addToCartBtn {
   width: 48%;
   height: 30px;
   background-color: var(--color-white);
 
-  color:var(--color-point);
+  color: var(--color-point);
   font-size: 13pt;
   font-weight: 700;
   text-align: center;
-  border: 0.5px  var(--color-point) solid;
+  border: 0.5px var(--color-point) solid;
   border-radius: 8px;
-
 }
 
-.purchaseBtnArea #addToCartBtn:hover{
+.purchaseBtnArea #addToCartBtn:hover {
   background-color: var(--color-light-green);
   cursor: pointer;
 }
 
-.purchaseBtnArea  #purchaseBtn{
+.purchaseBtnArea #purchaseBtn {
   width: 48%;
   height: 30px;
-  background-color: #1DC078;
+  background-color: #1dc078;
 
-  color:var(--color-white);
+  color: var(--color-white);
   font-size: 13pt;
   font-weight: 700;
   text-align: center;
   border: none;
   border-radius: 8px;
-
 }
 
-.purchaseBtnArea  #purchaseBtn:hover{
+.purchaseBtnArea #purchaseBtn.disabledButton {
+  background-color: #c0c0c0;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.purchaseBtnArea #purchaseBtn:not(.disabledButton):hover {
   background-color: var(--color-dark-green);
   cursor: pointer;
 }
 
-
-
 /*---------하단 영역-------*/
-.detailArea{
+.detailArea {
   margin: 10px;
   padding: 20px;
   display: flex;
@@ -260,20 +249,17 @@
   align-items: center;
 
   line-height: 25pt;
-
 }
 
-.detailArea .title{
+.detailArea .title {
   font-weight: 800;
   font-size: var(--font-medium);
   border-bottom: var(--color-light-gray) 0.3px solid;
   padding-bottom: 20px;
   margin-bottom: 30px;
-
 }
 
-.detailArea .book-info-area{
-
+.detailArea .book-info-area {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -281,7 +267,7 @@
   width: 100%;
   height: 70px;
   margin-bottom: 50px;
-  
+
   background-color: var(--color-white);
   border-radius: var(--border-radius-button);
   border: 0.3px var(--color-light-gray) solid;
@@ -289,18 +275,16 @@
 
   color: var(--color-light-black);
   font-size: var(--font-small);
-
 }
 
-.detailArea .book-info-area .book-info-piece{
+.detailArea .book-info-area .book-info-piece {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 48%;
-  
 }
 
-.detailArea p{
+.detailArea p {
   font-weight: var(--weight-regular);
   font-size: var(--font-regular);
 }

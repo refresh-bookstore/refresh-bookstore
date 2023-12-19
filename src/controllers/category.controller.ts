@@ -4,19 +4,19 @@ import {
   Get,
   Post,
   Body,
-  Path,
   Put,
   Delete,
-  Query,
+  Path,
   Security,
   Tags,
   Middlewares,
   Response,
 } from "tsoa";
 import { CategoryService } from "../services/category.service";
-import { CategoryDTO } from "../dtos/category/category.dto";
+import { CategoryResponse } from "../dtos/category/category.response";
 import { validateBody } from "../middlewares/validate.middleware";
 import { Error } from "../exceptions/exception.type";
+import { CategoryDTO } from "../dtos/category/category.dto";
 
 @Tags("Category")
 @Route("category")
@@ -38,15 +38,8 @@ export class CategoryController extends Controller {
   }
 
   @Get("")
-  public async getCategoryList(): Promise<CategoryDTO[]> {
+  public async getCategoryList(): Promise<CategoryResponse[]> {
     return await this.categoryService.getCategories();
-  }
-
-  @Get("{id}")
-  @Response<Error>("404", "해당 카테고리를 찾을 수 없습니다.")
-  @Response<Error>("500", "카테고리를 불러오는 중에 오류가 발생했습니다.")
-  public async getCategoryById(@Path() id: string): Promise<CategoryDTO> {
-    return await this.categoryService.getCategory(id);
   }
 
   @Put("")
@@ -58,11 +51,11 @@ export class CategoryController extends Controller {
     await this.categoryService.updateCategory(category);
   }
 
-  @Delete("")
+  @Delete("{id}")
   @Security("sessionAuth", ["isAdmin"])
   @Response<Error>("404", "해당 카테고리를 찾을 수 없습니다.")
   @Response<Error>("500", "카테고리 삭제 중 오류가 발생했습니다.")
-  public async deleteCategory(@Query() id: string): Promise<void> {
+  public async deleteCategory(@Path() id: string): Promise<void> {
     await this.categoryService.removeCategory(id);
   }
 }

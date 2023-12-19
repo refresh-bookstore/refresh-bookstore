@@ -6,8 +6,6 @@ import errorHandler from "../middlewares/error.handler";
 import { RegisterRoutes } from "../routes/routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../swagger/swagger.json";
-
-import productRouter from "../routes/productRouters";
 import orderRouter from "../routes/orderRouters";
 
 export const applyMiddleware = (app: express.Application) => {
@@ -23,7 +21,6 @@ export const applyMiddleware = (app: express.Application) => {
   RegisterRoutes(app);
 
   app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  app.use("/", productRouter);
   app.use("/", orderRouter);
 
   app.use("*", (req, res) => {

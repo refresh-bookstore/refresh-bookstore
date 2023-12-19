@@ -64,7 +64,7 @@ async function getOrderList() {
             <div class="order-items-area">`;
 
           for (let i = 0; i < orderInfo.orderList.length; i++) {
-            const image_path = orderInfo.orderList[i].product.image_path;
+            const imagePath = orderInfo.orderList[i].product.imagePath;
             const title = orderInfo.orderList[i].product.title;
             const author = orderInfo.orderList[i].product.author;
             const price = orderInfo.orderList[i].product.price.toLocaleString();
@@ -74,7 +74,7 @@ async function getOrderList() {
             orderHtml += `
               <div class="order-item">
                 <div class="item-img">
-                  <a href="/book-detail/?isbn=${isbn}"><img src="${image_path}"></a>
+                  <a href="/book-detail/?isbn=${isbn}"><img src="${imagePath}"></a>
                 </div>
                 <div class="item-info">
                   <p class="item-title"><a href="/book-detail/?isbn=${isbn}">${title}</a></p>

@@ -41,7 +41,7 @@ export class UserService {
   }
 
   async createUser(createUser: CreateUser): Promise<void> {
-    const isExisting = this.userRepository.findByEmail(createUser.email);
+    const isExisting = await this.userRepository.findByEmail(createUser.email);
 
     if (isExisting) {
       throw new ConflictException(
@@ -67,30 +67,12 @@ export class UserService {
 
   async getUser(email: string): Promise<UserResponse> {
     const user = await this.getUserOrThrow(email);
-
-    return {
-      name: user.name,
-      email: user.email,
-      address: user.address,
-      detailAddress: user.detailAddress,
-      postalCode: user.postalCode,
-      phone: user.phone,
-      createdAt: user.createdAt,
-    };
+    return new UserResponse(user);
   }
 
   async getUsers(): Promise<UserResponse[]> {
     const users = await this.userRepository.findAll();
-
-    return users.map((user) => ({
-      name: user.name,
-      email: user.email,
-      address: user.address,
-      detailAddress: user.detailAddress,
-      postalCode: user.postalCode,
-      phone: user.phone,
-      createdAt: user.createdAt,
-    }));
+    return users.map((user) => new UserResponse(user));
   }
 
   async updateUserByEmail(

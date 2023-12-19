@@ -1,4 +1,4 @@
-import { IsUUID, IsString, Length, IsOptional } from "class-validator";
+import { IsOptional, IsString, IsUUID, Length } from "class-validator";
 
 export class CategoryDTO {
   @IsString()

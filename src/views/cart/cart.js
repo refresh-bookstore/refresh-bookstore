@@ -33,7 +33,6 @@ const orderButtonArea = document.querySelector(".order__button");
 
 const data = JSON.parse(localStorage.getItem("cart"));
 if (!data || data.length === 0) {
-  // 장바구니에 상품이 없습니다
   cart.innerHTML = `<p class="empty-cart">상품이 없습니다.</p>`;
   document.querySelector(".selectAll").style.display = "none";
   document.querySelector(".deleteSelected").style.display = "none";
@@ -55,7 +54,7 @@ function renderBooks() {
   } else {
     activateOrderButton();
     data.forEach((order, idx) => {
-      const image_path = order.image_path;
+      const imagePath = order.imagePath;
       const title = order.title;
       const author = order.author;
       const amount = order.amount;
@@ -67,7 +66,7 @@ function renderBooks() {
       <!-- 책 이미지 -->
       <div class="book-img">
       <a class="book-link" href="/book-detail/?isbn=${isbn}">
-      <img src="${image_path}" class="book-img" alt="${title}"/>
+      <img src="${imagePath}" class="book-img" alt="${title}"/>
       </a>
       </div>
       <!-- 책 정보 -->

@@ -1,6 +1,7 @@
 import { CategoryRepository } from "../repositories/category.repository";
 import { CategoryDTO } from "../dtos/category/category.dto";
 import { Category } from "@prisma/client";
+import { CategoryResponse } from "../dtos/category/category.response";
 import {
   NotFoundException,
   ConflictException,
@@ -24,7 +25,7 @@ export class CategoryService {
     return category;
   }
 
-  async createCategory(name: string): Promise<CategoryDTO> {
+  async createCategory(name: string): Promise<void> {
     const isExisting = await this.categoryRepository.findByName(name);
 
     if (isExisting) {
@@ -38,27 +39,12 @@ export class CategoryService {
         "카테고리 생성 중 오류가 발생했습니다."
       );
     }
-
-    return {
-      name: newCategory.name,
-      categoryId: newCategory.categoryId,
-    };
   }
+
   async getCategories(): Promise<CategoryDTO[]> {
     const categories = await this.categoryRepository.findAll();
 
-    return categories.map((category) => ({
-      name: category.name,
-      categoryId: category.categoryId,
-    }));
-  }
-
-  async getCategory(categoryId: string): Promise<CategoryDTO> {
-    const categoryData = await this.getCategoryOrThrow(categoryId);
-    return {
-      name: categoryData.name,
-      categoryId: categoryData.categoryId,
-    };
+    return categories.map((category) => new CategoryResponse(category));
   }
 
   async updateCategory(updateCategory: CategoryDTO): Promise<void> {

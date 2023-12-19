@@ -87,7 +87,7 @@ const createBook = (book) => {
   return `<div class="book">
             <a class="book-link" href="/book-detail/?isbn=${book.isbn}">
               <div class="img-container">
-                <img src="${book.image_path}" class="book-img" alt="${
+                <img src="${book.imagePath}" class="book-img" alt="${
     book.title
   }"/>
               </div>
@@ -109,8 +109,7 @@ try {
   });
 
   if (response.ok) {
-    const data = await response.json();
-    const products = data.data;
+    const products = await response.json();
 
     // 책 html 추가
     products.forEach((book) => {

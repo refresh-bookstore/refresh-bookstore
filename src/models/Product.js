@@ -15,7 +15,7 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    publication_date: {
+    publicationDate: {
       type: Date,
       required: true,
     },
@@ -32,7 +32,7 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    image_path: {
+    imagePath: {
       type: String,
       required: true,
     },

@@ -30,21 +30,20 @@ async function checkLoginStatus() {
 // 데이터 불러옴
 const urlParams = new URLSearchParams(window.location.search);
 const isbn = urlParams.get("isbn");
-fetch(`/book-detail/${isbn}`)
+fetch(`/product/${isbn}`)
   .then((res) => res.json())
   .then((data) => {
-    // console.log(data.data[0]);
-    renderBookDetail(data.data[0]);
+    renderBookDetail(data);
   })
   .catch((err) => console.error(err));
 
 // 페이지 렌더
 
 const renderBookDetail = (book) => {
-  const published = new Date(book.publication_date);
+  const published = new Date(book.publicationDate);
 
   // 책 정보
-  bookImageArea.innerHTML = `<img src="${book.image_path}">`;
+  bookImageArea.innerHTML = `<img src="${book.imagePath}">`;
   bookCategory.innerText = `#${book.category}`;
   bookTitle.forEach((e) => {
     e.innerText = book.title;
@@ -69,10 +68,15 @@ const renderBookDetail = (book) => {
 
   plusBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    amountInput.value = Number(amountInput.value) + 1;
-    totalCost.innerText = `${(
-      book.price * amountInput.value
-    ).toLocaleString()}원`;
+    let currentAmount = Number(amountInput.value);
+    if (currentAmount < book.stock) {
+      amountInput.value = currentAmount + 1;
+      totalCost.innerText = `${(
+        book.price * amountInput.value
+      ).toLocaleString()}원`;
+    } else {
+      alert("재고보다 더 많은 수량을 주문할 수 없습니다.");
+    }
   });
 
   totalCost.innerText = `${(
@@ -91,65 +95,78 @@ const renderBookDetail = (book) => {
 
   // 장바구니 버튼
   addToCartBtn.addEventListener("click", () => {
-    let cartItems = JSON.parse(localStorage.getItem("cart"));
-    if (cartItems === null) cartItems = [];
-    const isAlreadyInCart = cartItems.findIndex(
-      (item) => item.isbn === book.isbn
-    );
-    if (isAlreadyInCart !== -1) {
-      cartItems[isAlreadyInCart].amount += Number(amountInput.value);
+    if (book.stock === 0) {
+      alert("이 상품은 현재 품절되어 장바구니에 담을 수 없습니다.");
     } else {
-      cartItems.push({
-        title: book.title,
-        author: book.author,
-        publisher: book.publisher,
-        publication_date: book.publication_date,
-        isbn: book.isbn,
-        description: book.description,
-        price: book.price,
-        image_path: book.image_path,
-        category: book.category,
-        amount: Number(amountInput.value),
-      });
-    }
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-
-    const cartCheckout = confirm(
-      "장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?"
-    );
-    if (cartCheckout) {
-      location.href = "/cart";
-    } else {
-      main();
-    }
-  });
-
-  // 구매 버튼
-  purchaseBtn.addEventListener("click", async () => {
-    const loggedIn = await checkLoginStatus();
-    if (loggedIn) {
-      localStorage.removeItem("purchase");
-      const purchaseItems = [
-        {
+      let cartItems = JSON.parse(localStorage.getItem("cart"));
+      if (cartItems === null) cartItems = [];
+      const isAlreadyInCart = cartItems.findIndex(
+        (item) => item.isbn === book.isbn
+      );
+      if (isAlreadyInCart !== -1) {
+        cartItems[isAlreadyInCart].amount += Number(amountInput.value);
+      } else {
+        cartItems.push({
           title: book.title,
           author: book.author,
           publisher: book.publisher,
-          publication_date: published,
+          publicationDate: book.publicationDate,
           isbn: book.isbn,
           description: book.description,
           price: book.price,
-          image_path: book.image_path,
+          imagePath: book.imagePath,
           category: book.category,
           amount: Number(amountInput.value),
-        },
-      ];
-      localStorage.setItem("purchase", JSON.stringify(purchaseItems));
-      location.href = "/order-create";
-    } else {
-      window.alert("로그인을 해주세요.");
-      location.href = "/login";
+        });
+      }
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      const cartCheckout = confirm(
+        "장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?"
+      );
+      if (cartCheckout) {
+        location.href = "/cart";
+      } else {
+        main();
+      }
     }
   });
+
+  if (book.stock === 0) {
+    amountInput.value = 0;
+    amountInput.disabled = true;
+    minusBtn.disabled = true;
+    plusBtn.disabled = true;
+    totalCost.innerText = "0원";
+    purchaseBtn.classList.add("disabledButton");
+    purchaseBtn.disabled = true;
+    purchaseBtn.innerText = "품절";
+  } else {
+    purchaseBtn.addEventListener("click", async () => {
+      const loggedIn = await checkLoginStatus();
+      if (loggedIn) {
+        localStorage.removeItem("purchase");
+        const purchaseItems = [
+          {
+            title: book.title,
+            author: book.author,
+            publisher: book.publisher,
+            publicationDate: published,
+            isbn: book.isbn,
+            description: book.description,
+            price: book.price,
+            imagePath: book.imagePath,
+            category: book.category,
+            amount: Number(amountInput.value),
+          },
+        ];
+        localStorage.setItem("purchase", JSON.stringify(purchaseItems));
+        location.href = "/order-create";
+      } else {
+        window.alert("로그인을 해주세요.");
+        location.href = "/login";
+      }
+    });
+  }
 
   // 책 소개 부분
   bookInfoIsbn.innerText = `ISBN | ${book.isbn}`;

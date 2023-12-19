@@ -53,11 +53,11 @@ let bookPriceSum = 0;
 let purchaseData = JSON.parse(localStorage.getItem("purchase"));
 if (purchaseData.length !== 0) {
   purchaseData.forEach((data) => {
-    const { title, author, isbn, price, image_path, amount } = data;
+    const { title, author, isbn, price, imagePath, amount } = data;
 
     orderList.innerHTML += `<div class="item">
       <a class="book-img" href="/book-detail/?isbn=${isbn}">
-        <img src="${image_path}" class="book-img" alt="${title}"/>
+        <img src="${imagePath}" class="book-img" alt="${title}"/>
       </a>
       <div class="book__title__price">
         <div class="book-title">
