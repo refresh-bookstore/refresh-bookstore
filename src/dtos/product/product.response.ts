@@ -10,6 +10,8 @@ export class ProductResponse {
   price: number;
   stock: number;
   imagePath: string;
+  createdAt: Date;
+  updatedAt: Date;
   category: string;
 
   constructor(product: Product, category: string) {
@@ -22,6 +24,8 @@ export class ProductResponse {
     this.price = product.price;
     this.stock = product.stock;
     this.imagePath = product.imagePath;
+    this.createdAt = product.createdAt;
+    this.updatedAt = product.updatedAt;
     this.category = category;
   }
 }

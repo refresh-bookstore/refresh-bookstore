@@ -1,21 +1,25 @@
 const createBookInfoForm = (book, categories) => {
-  let categoryList = categories
-    .map((category) => {
-      const isSelected = book && category.name === book.category;
-      return `<option value="${category.name}" ${
-        isSelected ? "selected" : ""
-      }>${category.name}</option>`;
-    })
-    .join("");
+  let categoryList = "";
+
+  if (categories.length > 0) {
+    categoryList = categories
+      .map((category) => {
+        const isSelected = book && category.name === book.category;
+        return `<option value="${category.name}" ${
+          isSelected ? "selected" : ""
+        }>${category.name}</option>`;
+      })
+      .join("");
+  }
 
   categoryList += '<option value="custom">카테고리 직접 입력</option>';
 
   const stockValue = book ? book.stock : "";
 
   const formHtml = `
-    <div class="book-more-infos" id="${
-      book ? `book-form-${book.isbn}` : "new-book-form"
-    }">
+    <div class="book-more-infos ${book ? "book-form" : "new-book-form"}" id="${
+    book ? `book-form-${book.isbn}` : "new-book-form"
+  }">
       <span>
         <p>제목</p>
         <input class="book-input" id="titleInput" type="text" value="${
@@ -36,7 +40,7 @@ const createBookInfoForm = (book, categories) => {
       </span>
       <span>
         <p>카테고리</p>
-        <select class="book-input" id="categoryInput" name="categories" onchange="toggleCustomCategoryInput(this)">
+        <select class="book-input" id="categoryInput" name="categories">
           ${categoryList}
         </select>
         <input type="text" id="customCategoryInput" class="book-input" style="display:none;" placeholder="카테고리 이름 입력">
@@ -69,8 +73,10 @@ const createBookInfoForm = (book, categories) => {
         <p>재고</p>
         <input class="book-input" id="stockInput" type="number" value="${stockValue}" placeholder="재고 수량을 입력해주세요."/>
       </span>
+      <div class="button-container">
       <button class="form-close-button">닫기</button>
       <button class="form-submit-button">등록</button>
+      </div>
     </div>
   `;
 
@@ -80,6 +86,11 @@ const createBookInfoForm = (book, categories) => {
       categorySelectElement.addEventListener("change", (event) => {
         toggleCustomCategoryInput(event.target);
       });
+
+      if (categories.length === 0) {
+        categorySelectElement.value = "custom";
+        toggleCustomCategoryInput(categorySelectElement);
+      }
     }
   }, 0);
 
@@ -106,7 +117,6 @@ const createBookListHTML = (books) => {
           <p class="book-cost">${book.price.toLocaleString()}원</p>
           <span class="book-buttons">
             <img class="book-button edit" src="/public/images/icon_edit.svg">
-            <img class="book-button check hidden" src="/public/images/icon_check.svg">
             <img class="book-button delete" src="/public/images/icon_delete.svg">
           </span>
         </div>
@@ -126,22 +136,14 @@ const formatDate = (dateString) => {
 };
 
 function toggleCustomCategoryInput(selectElement) {
-  console.log("toggleCustomCategoryInput called");
-  console.log("Selected value:", selectElement.value);
   const customCategoryInput = document.getElementById("customCategoryInput");
 
   if (!customCategoryInput) {
-    console.error("customCategoryInput not found");
     return;
   }
 
-  if (selectElement.value === "custom") {
-    customCategoryInput.style.display = "block";
-    console.log("Custom category input displayed");
-  } else {
-    customCategoryInput.style.display = "none";
-    console.log("Custom category input hidden");
-  }
+  customCategoryInput.style.display =
+    selectElement.value === "custom" ? "block" : "none";
 }
 
 export { createBookInfoForm, createBookListHTML };

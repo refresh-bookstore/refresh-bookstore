@@ -17,7 +17,7 @@ export class ProductService {
   private async getProductOrThrow(isbn: string): Promise<ProductResponse> {
     const product = await this.productRepository.findByISBN(isbn);
 
-    if (!product) {
+    if (product === null) {
       throw new NotFoundException(
         `해당 ISBN을 '${isbn}'을 가진 상품이 존재하지 않습니다.`
       );

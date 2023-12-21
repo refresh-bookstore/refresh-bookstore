@@ -1,6 +1,7 @@
 import { createBookInfoForm, createBookListHTML } from "./html-generators.js";
 
 let books = [];
+const editButtonsMap = new Map();
 
 const getAdminContentBooks = () => document.querySelector("#admin-books");
 const adminContentBooks = getAdminContentBooks();
@@ -57,19 +58,18 @@ adminContentBooks.addEventListener("click", (e) => {
 
     fetchCategories().then((categories) => {
       const formHtml = createBookInfoForm(thisBook, categories);
-      bookItem.insertAdjacentHTML("afterend", formHtml); // 수정 폼을 적절한 위치에 삽입
+      bookItem.insertAdjacentHTML("afterend", formHtml);
       const formElement = document.getElementById(`book-form-${thisBook.isbn}`);
-      formElement.style.display = "block"; // 수정 폼을 표시
+      formElement.style.display = "block";
+
+      const editBtn = bookItem.querySelector(".edit");
+      editButtonsMap.set(bookItem, editBtn);
+      editBtn.style.visibility = "hidden";
 
       const saveChangesBtn = formElement.querySelector(".form-submit-button");
       saveChangesBtn.addEventListener("click", () => {
         updateBookInfo(formElement, thisBook.isbn);
       });
-
-      const editBtn = bookItem.querySelector(".edit");
-      editBtn.classList.add("hidden");
-      const checkBtn = bookItem.querySelector(".check");
-      checkBtn.classList.remove("hidden");
     });
   }
 
@@ -99,10 +99,22 @@ const addNewBook = (bookAddBlock) => {
   const addBookSubmitBtn = document.querySelector(".form-submit-button");
   if (addBookSubmitBtn) {
     addBookSubmitBtn.addEventListener("click", () => {
-      // 폼 데이터 수집
+      const newBookForm = document.querySelector(".new-book-form");
       const bookData = getFormDataFromBlock(
         document.querySelector(".new-book-form")
       );
+
+      if (bookData.category === "custom") {
+        const customCategoryValue = document.getElementById(
+          "customCategoryInput"
+        ).value;
+        if (customCategoryValue) {
+          bookData.category = customCategoryValue;
+        } else {
+          alert("사용자 정의 카테고리를 입력해주세요.");
+          return;
+        }
+      }
 
       // 폼 데이터 유효성 검사
       if (!isFormDataValid(bookData)) {
@@ -119,8 +131,8 @@ const addNewBook = (bookAddBlock) => {
           if (res.status !== 204) {
             throw new Error(`서버 오류: ${res.statusText}`);
           }
-          createBookList(); // 책 목록 새로고침
-          alert("책이 성공적으로 추가되었습니다.");
+          alert("성공적으로 추가되었습니다!");
+          createBookList();
         })
         .catch((err) => {
           console.error("책 추가 실패", err);
@@ -135,16 +147,17 @@ const addNewBook = (bookAddBlock) => {
 const updateBookInfo = (bookInfoBlock, isbn) => {
   const bookData = getFormDataFromBlock(bookInfoBlock);
 
-  submitBookData("PATCH", `/product/${isbn}`, bookData)
+  submitBookData("PATCH", `/product`, bookData)
     .then((res) => {
       if (res.status !== 204) {
         throw new Error(res.statusText);
       }
       bookInfoBlock.style.display = "none";
       createBookList();
+      alert("성공적으로 수정되었습니다!");
     })
     .catch((err) => {
-      console.error("책 수정 실패", err);
+      console.error("책 수정 실패: ", err);
     });
 };
 
@@ -153,22 +166,45 @@ const closeExistingForms = () => {
   openForms.forEach((form) => {
     form.remove();
   });
+
+  editButtonsMap.forEach((editBtn, bookItem) => {
+    editBtn.style.visibility = "visible";
+  });
+  editButtonsMap.clear();
 };
 
 document.addEventListener("click", function (event) {
-  if (event.target.matches(".form-close-button")) {
-    closeExistingForms();
-    document.querySelector(".add-books-block").style.display = "block";
-  }
-  if (event.target.matches(".form-submit-button")) {
-    closeExistingForms();
-    document.querySelector(".add-books-block").style.display = "block";
+  if (
+    event.target.matches(".form-close-button") ||
+    event.target.matches(".form-submit-button")
+  ) {
+    const form = event.target.closest(".book-more-infos");
+    if (form) {
+      form.classList.add("fade-out");
+
+      const editBtn = editButtonsMap.get(form.previousElementSibling);
+      if (editBtn) {
+        editBtn.style.visibility = "visible";
+        editButtonsMap.delete(form.previousElementSibling);
+      }
+
+      // 애니메이션이 끝난 후 폼을 제거합니다.
+      setTimeout(() => {
+        form.remove();
+        document.querySelector(".add-books-block").style.display = "block";
+      }, 500); // 500ms는 CSS 애니메이션 시간과 동일해야 합니다.
+    }
   }
 });
 
 const fetchBooks = () => {
   return fetch("/product")
     .then((res) => res.json())
+    .then((books) => {
+      return books.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+    })
     .catch((err) => {
       console.error("책 정보를 가져오는데 실패했습니다.", err);
       alert("책 정보를 가져오는 중 문제가 발생했습니다.");
@@ -194,6 +230,7 @@ const getFormDataFromBlock = (block) => {
     publicationDate: block.querySelector("#dateInput").value,
     price: block.querySelector("#priceInput").value,
     description: block.querySelector("#descriptionInput").value,
+    stock: block.querySelector("#stockInput").value,
   };
 };
 

@@ -91,10 +91,11 @@ export class UserController extends Controller {
   }
 
   @Get("login/status")
-  @Security("sessionAuth")
   public async checkLoginStatus(
     @Request() req: RequestExpress
-  ): Promise<void> {}
+  ): Promise<boolean> {
+    return !!req.session.email;
+  }
 
   @Post("logout")
   public async logout(@Request() req: RequestExpress): Promise<void> {

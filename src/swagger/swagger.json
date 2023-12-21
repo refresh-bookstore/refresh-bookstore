@@ -175,6 +175,14 @@
 					"imagePath": {
 						"type": "string"
 					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"category": {
 						"type": "string"
 					}
@@ -189,6 +197,8 @@
 					"price",
 					"stock",
 					"imagePath",
+					"createdAt",
+					"updatedAt",
 					"category"
 				],
 				"type": "object",
@@ -1169,18 +1179,21 @@
 			"get": {
 				"operationId": "CheckLoginStatus",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
 					"User"
 				],
-				"security": [
-					{
-						"sessionAuth": []
-					}
-				],
+				"security": [],
 				"parameters": []
 			}
 		},

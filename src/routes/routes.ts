@@ -90,6 +90,8 @@ const models: TsoaRoute.Models = {
             "price": {"dataType":"double","required":true},
             "stock": {"dataType":"double","required":true},
             "imagePath": {"dataType":"string","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
             "category": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
@@ -871,7 +873,6 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/login/status',
-            authenticateMiddleware([{"sessionAuth":[]}]),
             ...(fetchMiddlewares<RequestHandler>(UserController)),
             ...(fetchMiddlewares<RequestHandler>(UserController.prototype.checkLoginStatus)),
 
