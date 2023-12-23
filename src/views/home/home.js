@@ -59,26 +59,28 @@ const createCategory = (category) => {
 
 const categoryWrap = document.querySelector(".category-title");
 
-try {
-  const response = await fetch("/category", {
-    method: "GET",
-    headers: {
-      "content-Type": "application/json",
-    },
-  });
-
-  if (response.ok) {
-    const categories = await response.json();
-
-    //카테고리 html 추가
+fetch("/category", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then((categories) => {
+    // 카테고리 HTML 추가
     categories.forEach((category) => {
       const categoryEl = createCategory(category.name);
       categoryWrap.innerHTML += categoryEl;
     });
-  }
-} catch (error) {
-  console.log(error.message);
-}
+  })
+  .catch((error) => {
+    console.log("Error:", error.message);
+  });
 
 const books = document.querySelector(".books");
 
@@ -100,18 +102,20 @@ const createBook = (book) => {
           </div>`;
 };
 
-try {
-  const response = await fetch("/product", {
-    method: "GET",
-    headers: {
-      "content-Type": "application/json",
-    },
-  });
-
-  if (response.ok) {
-    const products = await response.json();
-
-    // 책 html 추가
+fetch("/product", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then((products) => {
+    // 책 HTML 추가
     products.forEach((book) => {
       const bookEl = createBook(book);
       books.innerHTML += bookEl;
@@ -162,7 +166,7 @@ try {
         if (findBookListByCategory.length === 0) {
           books.classList.add("empty");
           books.innerHTML = `<div></div>
-                            <div class="empty-book-list">상품이 없습니다</div>`;
+                          <div class="empty-book-list">상품이 없습니다</div>`;
         } else {
           books.classList.remove("empty");
           findBookListByCategory.forEach((book) => {
@@ -172,9 +176,9 @@ try {
         }
       });
     });
-  }
-} catch (error) {
-  console.log(error.message);
-}
+  })
+  .catch((error) => {
+    console.log("Error:", error.message);
+  });
 
 main();

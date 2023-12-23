@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>Refresh Books</title>
-  <link rel="stylesheet" href="order-detail.css">
-  <script src="/public/js/findAddress.js"></script>
-  <script src="/public/js/autoHyphen.js"></script>
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-</head>
-<body>
-  <!-- Header -->
-  <header></header>
-  <div class="container">
-    <div class="order-detail-menu">
-      <p class="order-detail-title">주문 상세</p>
-      <p class="order-list-button">< 목록으로</p>
-    </div>
-    <main class="order-container empty">
-      <section class="products-detail">
-
-        <div class="field orderIdArea">
-          <p class="label">주문번호</p>
-          <div class="orderId"></div>
-        </div>
-
-        <div class="field orderDateArea">
-          <p class="label">주문일</p>
-          <div class="orderDate"></div>
-        </div>
-
-        <div class="field shippingStatusArea">
-          <p class="label">배송 상태</p>
-          <div class="shippingStatus">
-            <span id="state0">상품 준비중</span> >
-            <span id="state1">배송중</span> >
-            <span id="state2">배송완료</span>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Refresh Books</title>
+    <link rel="stylesheet" href="order-detail.css" />
+    <script src="/public/js/findAddress.js"></script>
+    <script src="/public/js/autoHyphen.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header></header>
+    <div class="container">
+      <div class="order-detail-menu">
+        <p class="order-detail-title">주문 상세</p>
+        <p class="order-list-button">&lt; 목록으로</p>
+      </div>
+      <main class="order-container empty">
+        <section class="products-detail">
+          <div class="field orderIdArea">
+            <p class="label">주문번호</p>
+            <div class="orderId"></div>
           </div>
-        </div>
 
-        <p class="label order-content">주문 내역</p>
-        <div class="productInfoArea">
-          <div class="productInfo">
-            <ul class="books">
-              <!-- <li class="book">
+          <div class="field orderDateArea">
+            <p class="label">주문일</p>
+            <div class="orderDate"></div>
+          </div>
+
+          <div class="field shippingStatusArea">
+            <p class="label">배송 상태</p>
+            <div class="shippingStatus">
+              <span id="state0">상품 준비중</span> >
+              <span id="state1">배송중</span> >
+              <span id="state2">배송완료</span>
+            </div>
+          </div>
+
+          <p class="label order-content">주문 내역</p>
+          <div class="productInfoArea">
+            <div class="productInfo">
+              <ul class="books">
+                <!-- <li class="book">
                 <div class="book-img">
                   <img src="../public/images/sample_image.jpg">
                 </div>
@@ -52,63 +51,87 @@
                   <p class="book-price">15,800원 X 2권</p>
                 </div>
               </li> -->
-            </ul>
+              </ul>
+            </div>
+            <div class="field deliveryFeeArea">
+              <p class="label">배송비</p>
+              <div class="deliveryFee"></div>
+            </div>
+            <div class="field entirePriceArea">
+              <p class="label">총 결제금액</p>
+              <div class="entirePrice"></div>
+            </div>
           </div>
-          <div class="field deliveryFeeArea">
-            <p class="label">배송비</p>
-            <div class="deliveryFee"></div>
+        </section>
+        <section class="user-detail">
+          <p class="label">받는 사람 정보</p>
+          <div class="userInfoArea">
+            <form class="userInfo">
+              <div class="nameArea">
+                <label class="label" for="nameInput">이름</label>
+                <input readonly class="name" id="nameInput" value="" />
+              </div>
+              <div class="phoneNumberArea">
+                <label class="label" for="phoneNumberInput">연락처</label>
+                <input
+                  readonly
+                  class="phoneNumber"
+                  autocomplete="on"
+                  oninput="autoHyphen(this)"
+                  maxlength="13"
+                  for="phoneNumberInput"
+                  id="phoneInput"
+                  value=""
+                />
+              </div>
+              <div class="addressArea">
+                <label class="label" for="addressInput">주소</label>
+                <input
+                  hidden
+                  type="button"
+                  onclick="findAddress()"
+                  id="searchAddress"
+                  class="button search-address"
+                  value="주소 검색"
+                />
+                <input
+                  readonly
+                  type="text"
+                  id="postalCodeInput"
+                  class="postalCode"
+                  value=""
+                />
+                <input
+                  readonly
+                  type="text"
+                  id="addressInput"
+                  class="address"
+                  value=""
+                />
+                <input
+                  readonly
+                  type="text"
+                  id="detailAddressInput"
+                  class="detailAddress"
+                  value=""
+                />
+              </div>
+              <div class="deliveryRequestArea">
+                <label class="label">배송 요청 사항</label>
+                <input readonly class="deliveryRequest" value="" />
+              </div>
+            </form>
           </div>
-          <div class="field entirePriceArea">
-            <p class="label">총 결제금액</p>
-            <div class="entirePrice"></div>
-          </div>
-        </div>
-      </section>
-      <section class="user-detail">
-        <p class="label">받는 사람 정보</p>
-        <div class="userInfoArea">
-          <form class="userInfo">
-            <div class="nameArea">
-              <label class="label" for="nameInput">이름</label>
-              <input readonly class="name" id="nameInput" value="">
-            </div>
-            <div class="phoneNumberArea">
-              <label class="label" for="phoneNumberInput">연락처</label>
-              <input 
-              readonly 
-              class="phoneNumber" 
-              autocomplete="on"
-              oninput="autoHyphen(this)"
-              maxlength="13" 
-              for="phoneNumberInput"
-              id="phoneInput"
-              value=""
-              />
-            </div>
-            <div class="addressArea">
-              <label class="label" for="addressInput">주소</label>
-              <input hidden type="button" onclick="findAddress()" id="searchAddress" class="button search-address" value="주소 검색" onclick="findAddress()">
-              <input readonly type="text" id="postalCodeInput" class="postalCode" value="">
-              <input readonly type="text" id="addressInput" class="address" value="">
-              <input readonly type="text" id="detailAddressInput" class="detailAddress" value="">
-            </div>
-            <div class="deliveryRequestArea">
-              <label class="label">배송 요청 사항</label>
-              <input readonly class="deliveryRequest" value="">
-            </div>
-          </form>
-        </div>
-      </section>
-      <p class="error" id="input-error"></p>
-      <section class="buttonArea">
-        <button hidden class="modifyCompleteButton">수정 완료</button>
-        <button class="modifyButton">주문정보 수정</button>
-        <button class="cancelButton">주문 취소</button>
-      </section>
-    </main>
-    
-  </div>
-  <footer></footer>
-  <script type="module" src="order-detail.js"></script>
-</body>
+        </section>
+        <p class="error" id="input-error"></p>
+        <section class="buttonArea">
+          <button hidden class="modifyCompleteButton">수정 완료</button>
+          <button class="modifyButton">주문정보 수정</button>
+          <button class="cancelButton">주문 취소</button>
+        </section>
+      </main>
+    </div>
+    <footer></footer>
+    <script type="module" src="order-detail.js"></script>
+  </body>
 </html>

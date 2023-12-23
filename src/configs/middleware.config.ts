@@ -1,16 +1,20 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import { PrismaClient } from "@prisma/client";
+import { RegisterRoutes } from "../routes/routes";
 import sessionMiddleware from "./session.config";
 import errorHandler from "../middlewares/error.handler";
-import { RegisterRoutes } from "../routes/routes";
+import compression from "compression";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../swagger/swagger.json";
-import orderRouter from "../routes/orderRouters";
+
+export const prisma = new PrismaClient();
 
 export const applyMiddleware = (app: express.Application) => {
   app.use(cookieParser());
   app.use(express.json());
+  app.use(compression());
   app.use(
     logger("combined", {
       skip: (req, res) => res.statusCode < 400,
@@ -21,7 +25,6 @@ export const applyMiddleware = (app: express.Application) => {
   RegisterRoutes(app);
 
   app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  app.use("/", orderRouter);
 
   app.use("*", (req, res) => {
     res.send(`

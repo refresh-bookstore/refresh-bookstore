@@ -4,7 +4,19 @@ import { UpdateUser } from "../dtos/user/update.user";
 
 const prisma = new PrismaClient();
 
+interface UserContext {
+  user: {
+    findUnique: PrismaClient["user"]["findUnique"];
+  };
+}
+
 export class UserRepository {
+  private context: UserContext;
+
+  constructor() {
+    this.context = { user: prisma.user };
+  }
+
   async create(createUser: CreateUser): Promise<User> {
     return await prisma.user.create({
       data: {
@@ -13,8 +25,11 @@ export class UserRepository {
     });
   }
 
-  async findByEmail(email: string): Promise<User | null> {
-    return await prisma.user.findUnique({
+  async findByEmail(
+    email: string,
+    context: UserContext = this.context
+  ): Promise<User | null> {
+    return await context.user.findUnique({
       where: {
         email: email,
       },

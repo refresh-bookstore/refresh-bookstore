@@ -42,13 +42,16 @@ export class CategoryController extends Controller {
     return await this.categoryService.getCategories();
   }
 
-  @Put("")
+  @Put("{id}")
   @Security("sessionAuth", ["isAdmin"])
   @Response<Error>("404", "해당 카테고리를 찾을 수 없습니다.")
   @Response<Error>("500", "카테고리 업데이트 중 오류가 발생했습니다.")
   @Middlewares(validateBody(CategoryDTO))
-  public async updateCategory(@Body() category: CategoryDTO): Promise<void> {
-    await this.categoryService.updateCategory(category);
+  public async updateCategory(
+    @Path() id: string,
+    @Body() category: CategoryDTO
+  ): Promise<void> {
+    await this.categoryService.updateCategory(id, category);
   }
 
   @Delete("{id}")
@@ -56,6 +59,6 @@ export class CategoryController extends Controller {
   @Response<Error>("404", "해당 카테고리를 찾을 수 없습니다.")
   @Response<Error>("500", "카테고리 삭제 중 오류가 발생했습니다.")
   public async deleteCategory(@Path() id: string): Promise<void> {
-    await this.categoryService.removeCategory(id);
+    await this.categoryService.deleteCategory(id);
   }
 }

@@ -29,8 +29,6 @@ async function loadUserData() {
     });
     if (response.ok) {
       const data = await response.json();
-      // 인풋 창에 사용자 정보 불러오기
-      console.log(data);
       nameInput.value = data.name;
       phoneNumberInput.value = data.phone;
       postalCodeInput.value = data.postalCode;
@@ -162,32 +160,30 @@ async function payBtnClick() {
   for (let i = 0; i < purchaseData.length; i++) {
     const ISBN = purchaseData[i].isbn;
     const amount = purchaseData[i].amount;
-    orderArr.push({ product: ISBN, amount: amount });
+    orderArr.push({ ISBN: ISBN, amount: amount });
   }
 
   try {
-    const response = await fetch("/orders", {
+    const response = await fetch("/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userName: nameInput.value,
+        recipientName: nameInput.value,
         postalCode: postalCodeInput.value,
         address: addressInput.value,
-        detailAddress: detailAddressInput.value,
-        userPhone: phoneNumberInput.value,
-        orderRequest: request,
-        orderList: orderArr, // [{product: ISBN, amount: n}, {product: ISBN, amount: n}]
+        addressDetail: detailAddressInput.value,
+        contact: phoneNumberInput.value,
+        deliveryRequest: request,
+        orderItems: orderArr,
         deliveryFee: getPriceNumber(deliveryFee.innerText),
-        email: email,
         totalPrice: getPriceNumber(totalCost.innerText),
       }),
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      alert(data.message);
+    if (response.status === 204) {
+      alert("주문에 성공했습니다.");
       localStorage.removeItem("purchase");
       localStorage.removeItem("cart");
       location.href = "/order-complete";

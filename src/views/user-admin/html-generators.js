@@ -16,6 +16,10 @@ const createBookInfoForm = (book, categories) => {
 
   const stockValue = book ? book.stock : "";
 
+  const isbnInputHtml = book
+    ? `<input class="book-input" id="isbnInput" type="text" value="${book.isbn}" placeholder="책 ISBN을 입력해주세요." readonly/>`
+    : `<input class="book-input" id="isbnInput" type="text" placeholder="책 ISBN을 입력해주세요."/>`;
+
   const formHtml = `
     <div class="book-more-infos ${book ? "book-form" : "new-book-form"}" id="${
     book ? `book-form-${book.isbn}` : "new-book-form"
@@ -47,9 +51,7 @@ const createBookInfoForm = (book, categories) => {
       </span>
       <span>
         <p>ISBN</p>
-        <input class="book-input" id="isbnInput" type="text" value="${
-          book ? book.isbn : ""
-        }" placeholder="책 ISBN을 입력해주세요."/>
+        ${isbnInputHtml}
       </span>
       <span>
         <p>출판일</p>

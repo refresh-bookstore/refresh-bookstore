@@ -21,6 +21,7 @@ model User {
   isAdmin       Boolean  @default(true)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now()) @updatedAt
+  orders Order[]
 }
 
 model Category {
@@ -45,4 +46,40 @@ model Product {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   Category        Category @relation(fields: [categoryId], references: [id])
+  orderItems      OrderItem[]
+}
+
+model Order {
+  id                Int              @id @default(autoincrement())
+  userId            Int
+  orderId           String           @unique
+  recipientName     String
+  postalCode        String
+  address           String
+  addressDetail     String
+  contact  String
+  deliveryRequest   String?
+  shippingStatus    ShippingStatus   @default(READY)
+  deliveryFee       Float
+  totalPrice        Float
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  user              User             @relation(fields: [userId], references: [id])
+  orderItems        OrderItem[]
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  amount    Int
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+enum ShippingStatus {
+  READY
+  SHIPPING
+  DELIVERED
+  CANCELLED
 }

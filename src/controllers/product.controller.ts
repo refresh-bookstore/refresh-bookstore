@@ -1,7 +1,3 @@
-import { ProductResponse } from "../dtos/product/product.response";
-import { ProductDTO } from "../dtos/product/product.dto";
-import { validateBody } from "../middlewares/validate.middleware";
-import { ProductService } from "../services/product.service";
 import {
   Body,
   Controller,
@@ -17,6 +13,10 @@ import {
   Query,
   Patch,
 } from "tsoa";
+import { ProductResponse } from "../dtos/product/product.response";
+import { ProductDTO } from "../dtos/product/product.dto";
+import { validateBody } from "../middlewares/validate.middleware";
+import { ProductService } from "../services/product.service";
 import { UpdateProduct } from "../dtos/product/update.product";
 
 @Tags("Product")
@@ -38,13 +38,16 @@ export class ProductController extends Controller {
     await this.productService.createProduct(productDTO);
   }
 
-  @Patch("")
+  @Patch("{isbn}")
   @Security("sessionAuth", ["isAdmin"])
   @Response<Error>("404", "해당 상품이 존재하지 않습니다.")
   @Response<Error>("500", "상품 등록 중 오류가 발생했습니다.")
   @Middlewares(validateBody(UpdateProduct))
-  public async updateProduct(@Body() updateData: UpdateProduct): Promise<void> {
-    await this.productService.updateProduct(updateData);
+  public async updateProduct(
+    @Path() isbn: string,
+    @Body() updateData: UpdateProduct
+  ): Promise<void> {
+    await this.productService.updateProduct(isbn, updateData);
   }
 
   @Get("")

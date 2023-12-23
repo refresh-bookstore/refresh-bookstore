@@ -32,7 +32,7 @@ orderListButton.addEventListener("click", () => {
 
 async function loadOrderDetail() {
   try {
-    const response = await fetch(`/order-detail/${orderId}`, {
+    const response = await fetch(`/order/${orderId}`, {
       method: "GET",
       headers: {
         "content-Type": "application/json",
@@ -41,16 +41,16 @@ async function loadOrderDetail() {
     if (response.ok) {
       const data = await response.json();
 
-      const deliveryFee = data[0].deliveryFee.toLocaleString();
-      const totalPrice = data[0].totalPrice.toLocaleString();
-      const userName = data[0].userName;
-      const userPhone = data[0].userPhone;
-      const postalCode = data[0].postalCode;
-      const address = data[0].address;
-      const detailAddress = data[0].detailAddress;
-      const orderRequest = data[0].orderRequest;
+      const deliveryFee = data.deliveryFee.toLocaleString();
+      const totalPrice = data.totalPrice.toLocaleString();
+      const recipientName = data.recipientName;
+      const contact = data.contact;
+      const postalCode = data.postalCode;
+      const address = data.address;
+      const addressDetail = data.addressDetail;
+      const deliveryRequest = data.deliveryRequest;
       const orderDate = new Date(
-        new Date(data[0].createdAt).getTime() + 1000 * 60 * 60 * 9
+        new Date(data.createdAt).getTime() + 1000 * 60 * 60 * 9
       )
         .toISOString()
         .slice(0, 10);
@@ -60,15 +60,15 @@ async function loadOrderDetail() {
       // 주문 날짜
       orderDateArea.innerText = orderDate;
       // 배송 상태
-      if (data[0].shippingStatus === "상품 준비중") {
+      if (data.shippingStatus === "상품 준비중") {
         document.querySelector("#state0").style =
           "color: var(--color-black); font-size: 20px; font-weight: 700";
-      } else if (data[0].shippingStatus === "배송중") {
+      } else if (data.shippingStatus === "배송중") {
         document.querySelector("#state1").style =
           "color: var(--color-black); font-size: 20px; font-weight: 700";
         modifyButton.style.display = "none";
         cancelButton.style.display = "none";
-      } else if (data[0].shippingStatus === "배송완료") {
+      } else if (data.shippingStatus === "배송완료") {
         document.querySelector("#state2").style =
           "color: var(--color-black); font-size: 20px; font-weight: 700";
         modifyButton.style.display = "none";
@@ -85,13 +85,13 @@ async function loadOrderDetail() {
       }
 
       // 책 정보
-      data[0].orderList.forEach((book) => {
-        const isbn = book.product.isbn;
-        const imagePath = book.product.imagePath;
-        const title = book.product.title;
-        const author = book.product.author;
+      data.orderList.forEach((book) => {
+        const isbn = book.isbn;
+        const imagePath = book.imagePath;
+        const title = book.title;
+        const author = book.author;
         const amount = book.amount;
-        const price = book.product.price.toLocaleString();
+        const price = book.price.toLocaleString();
         booksArea.innerHTML += `<li class="book">
                     <div class="book-img">
                       <a href="/book-detail/?isbn=${isbn}"><img src="${imagePath}"></a>
@@ -102,19 +102,17 @@ async function loadOrderDetail() {
                       <p class="book-price">${price}원 X ${amount}권</p>
                     </div>
                 </li>`;
-
-        // 가격 정보
-        deliveryFeeArea.innerText = `${deliveryFee}원`;
-        totalPriceArea.innerText = `${totalPrice}원`;
-
-        // 받는사람 정보
-        name.value = userName;
-        phoneNumber.value = userPhone;
-        postalCodeInput.value = postalCode;
-        addressInput.value = address;
-        detailAddressInput.value = detailAddress;
-        deliveryRequest.value = orderRequest;
       });
+      deliveryFeeArea.innerText = `${deliveryFee}원`;
+      totalPriceArea.innerText = `${totalPrice}원`;
+
+      // 받는사람 정보
+      name.value = recipientName;
+      phoneNumber.value = contact;
+      postalCodeInput.value = postalCode;
+      addressInput.value = address;
+      detailAddressInput.value = addressDetail;
+      deliveryRequest.value = deliveryRequest;
     } else {
       alert("로그인을 해주세요.");
       logout();
@@ -151,24 +149,23 @@ async function modifyOrder() {
   const isAllValid = checkValid();
   if (isAllValid) {
     try {
-      const response = await fetch(`${orderId}`, {
-        method: "PUT",
+      const response = await fetch(`/order/${orderId}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userName: name.value,
-          userPhone: phoneNumber.value,
+          recipientName: name.value,
+          contact: phoneNumber.value,
           postalCode: postalCodeInput.value,
           address: addressInput.value,
-          detailAddress: detailAddressInput.value,
-          orderRequest: deliveryRequest.value,
+          addressDetail: detailAddressInput.value,
+          deliveryRequest: deliveryRequest.value,
         }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        // console.log(data);
+      if (response.status === 204) {
+        alert("주문정보를 수정하였습니다.");
       } else {
         alert("사용자를 찾을 수 없습니다.");
         throw new Error("사용자를 찾을 수 없습니다.");
@@ -180,28 +177,26 @@ async function modifyOrder() {
 }
 
 // 주문 취소
-cancelButton.addEventListener("click", cancelOrder);
+cancelButton.addEventListener("click", () => cancelOrder(orderId));
 
-async function cancelOrder() {
+async function cancelOrder(orderId) {
   try {
-    const response = await fetch(`${orderId}/cancel`, {
-      method: "PUT",
+    const response = await fetch(`/order/${orderId}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        shippingStatus: "주문취소",
+        shippingStatus: "CANCELLED",
       }),
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      // console.log(data);
+    if (response.status === 204) {
       alert("주문이 취소되었습니다.");
       location.href = "/order-list";
     } else {
-      alert("사용자를 찾을 수 없습니다.");
-      throw new Error("사용자를 찾을 수 없습니다.");
+      const errorData = await response.json();
+      alert(errorData.message || "주문 취소 중 오류가 발생했습니다.");
     }
   } catch (error) {
     console.log(error.message);

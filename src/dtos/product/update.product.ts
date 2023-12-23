@@ -1,25 +1,36 @@
-import { IsOptional } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 
 export class UpdateProduct {
-  title: string;
-
-  author: string;
-
-  publisher: string;
-
-  publicationDate: Date;
-
-  isbn: string;
-
-  description: string;
-
-  price: number;
+  @IsOptional()
+  @IsString()
+  title?: string;
 
   @IsOptional()
-  stock?: number = 0;
+  @IsString()
+  author?: string;
 
   @IsOptional()
+  @IsString()
+  publisher?: string;
+
+  @IsOptional()
+  publicationDate?: Date;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
+  price?: number;
+
+  @IsOptional()
+  stock?: number;
+
+  @IsOptional()
+  @IsString()
   imagePath?: string;
 
-  category: string;
+  @IsOptional()
+  @IsString()
+  category?: string;
 }

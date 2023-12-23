@@ -35,7 +35,7 @@ setUserName();
 // 주문내역 불러오기
 async function getOrderList() {
   try {
-    const response = await fetch("/ordered", {
+    const response = await fetch("/order", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,6 @@ async function getOrderList() {
     if (response.ok) {
       const data = await response.json();
 
-      // data 최근 주문순 정렬
       data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
       if (data.length > 0) {
@@ -64,11 +63,11 @@ async function getOrderList() {
             <div class="order-items-area">`;
 
           for (let i = 0; i < orderInfo.orderList.length; i++) {
-            const imagePath = orderInfo.orderList[i].product.imagePath;
-            const title = orderInfo.orderList[i].product.title;
-            const author = orderInfo.orderList[i].product.author;
-            const price = orderInfo.orderList[i].product.price.toLocaleString();
-            const isbn = orderInfo.orderList[i].product.isbn;
+            const imagePath = orderInfo.orderList[i].imagePath;
+            const title = orderInfo.orderList[i].title;
+            const author = orderInfo.orderList[i].author;
+            const price = orderInfo.orderList[i].price.toLocaleString();
+            const isbn = orderInfo.orderList[i].isbn;
             const amount = orderInfo.orderList[i].amount;
 
             orderHtml += `

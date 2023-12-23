@@ -37,8 +37,11 @@ export class ProductService {
     await this.productRepository.create(productDTO);
   }
 
-  async updateProduct(updateProduct: UpdateProduct): Promise<void> {
-    const existing = await this.getProductOrThrow(updateProduct.isbn);
+  async updateProduct(
+    isbn: string,
+    updateProduct: UpdateProduct
+  ): Promise<void> {
+    const existing = await this.getProductOrThrow(isbn);
     await this.productRepository.update(existing.isbn, updateProduct);
   }
 

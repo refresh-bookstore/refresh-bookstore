@@ -3,13 +3,21 @@ import { CategoryRepository } from "./category.repository";
 import { ProductDTO } from "../dtos/product/product.dto";
 import { ProductResponse } from "../dtos/product/product.response";
 import { UpdateProduct } from "../dtos/product/update.product";
-import { NotFoundException } from "../exceptions/http.exception";
+
 const prisma = new PrismaClient();
 
+interface ProductContext {
+  product: {
+    findUnique: PrismaClient["product"]["findUnique"];
+  };
+}
+
 export class ProductRepository {
+  private context: ProductContext;
   private categoryRepository: CategoryRepository;
 
   constructor() {
+    this.context = { product: prisma.product };
     this.categoryRepository = new CategoryRepository();
   }
 
@@ -21,7 +29,6 @@ export class ProductRepository {
 
       if (!category) {
         category = await this.categoryRepository.create(productDTO.category);
-        console.log("Created new category:", category);
       }
 
       const { category: _, ...productData } = productDTO;
@@ -35,7 +42,6 @@ export class ProductRepository {
         });
         return createdProduct;
       } catch (error) {
-        console.error("Error creating product:", error);
         throw error;
       }
     });
@@ -43,22 +49,29 @@ export class ProductRepository {
 
   async update(isbn: string, updateProduct: UpdateProduct): Promise<Product> {
     return await prisma.$transaction(async (transaction) => {
-      let category = await this.categoryRepository.findByName(
-        updateProduct.category
-      );
+      let category;
 
-      if (!category) {
-        category = await this.categoryRepository.create(updateProduct.category);
+      if (updateProduct.category) {
+        category = await this.categoryRepository.findByName(
+          updateProduct.category
+        );
+
+        if (!category) {
+          category = await this.categoryRepository.create(
+            updateProduct.category
+          );
+        }
       }
 
       const { category: _, ...productData } = updateProduct;
 
+      const updateData = category
+        ? { ...productData, categoryId: category.id }
+        : productData;
+
       return await transaction.product.update({
         where: { isbn },
-        data: {
-          ...productData,
-          categoryId: category.id,
-        },
+        data: updateData,
       });
     });
   }
@@ -75,8 +88,11 @@ export class ProductRepository {
     );
   }
 
-  async findByISBN(isbn: string): Promise<ProductResponse | null> {
-    const product = await prisma.product.findUnique({
+  async findByISBN(
+    isbn: string,
+    context: ProductContext = this.context
+  ): Promise<ProductResponse | null> {
+    const product = await context.product.findUnique({
       where: { isbn },
       include: {
         Category: { select: { name: true } },
@@ -88,6 +104,24 @@ export class ProductRepository {
     }
 
     return new ProductResponse(product, product.Category.name);
+  }
+
+  async getProduct(
+    isbn: string,
+    context: ProductContext = this.context
+  ): Promise<Product | null> {
+    const product = await context.product.findUnique({
+      where: { isbn },
+      include: {
+        Category: { select: { name: true } },
+      },
+    });
+
+    if (!product) {
+      return null;
+    }
+
+    return product;
   }
 
   async delete(isbn: string): Promise<Product> {
@@ -102,17 +136,17 @@ export class ProductRepository {
         OR: [
           {
             title: {
-              search: searchTerm,
+              contains: searchTerm,
             },
           },
           {
             author: {
-              search: searchTerm,
+              contains: searchTerm,
             },
           },
           {
             publisher: {
-              search: searchTerm,
+              contains: searchTerm,
             },
           },
         ],
@@ -125,5 +159,17 @@ export class ProductRepository {
     return products.map(
       (product) => new ProductResponse(product, product.Category.name)
     );
+  }
+
+  async checkStock(
+    isbn: string,
+    context: ProductContext = this.context
+  ): Promise<number> {
+    const product = await context.product.findUnique({
+      where: { isbn },
+      select: { stock: true },
+    });
+
+    return product ? product.stock : 0;
   }
 }

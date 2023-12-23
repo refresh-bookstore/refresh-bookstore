@@ -19,7 +19,7 @@ export class UserService {
     this.userRepository = new UserRepository();
   }
 
-  private async getUserOrThrow(email: string): Promise<User> {
+  async getUserOrThrow(email: string): Promise<User> {
     const user = await this.userRepository.findByEmail(email);
     if (!user) {
       throw new NotFoundException(`해당 이메일의 사용자는 존재하지 않습니다.`);

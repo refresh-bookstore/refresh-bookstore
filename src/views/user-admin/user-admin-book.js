@@ -146,8 +146,9 @@ const addNewBook = (bookAddBlock) => {
 
 const updateBookInfo = (bookInfoBlock, isbn) => {
   const bookData = getFormDataFromBlock(bookInfoBlock);
+  delete bookData.isbn;
 
-  submitBookData("PATCH", `/product`, bookData)
+  submitBookData("PATCH", `/product/${isbn}`, bookData)
     .then((res) => {
       if (res.status !== 204) {
         throw new Error(res.statusText);
@@ -188,11 +189,10 @@ document.addEventListener("click", function (event) {
         editButtonsMap.delete(form.previousElementSibling);
       }
 
-      // 애니메이션이 끝난 후 폼을 제거합니다.
       setTimeout(() => {
         form.remove();
         document.querySelector(".add-books-block").style.display = "block";
-      }, 500); // 500ms는 CSS 애니메이션 시간과 동일해야 합니다.
+      }, 500);
     }
   }
 });

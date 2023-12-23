@@ -177,7 +177,7 @@ const renderBookDetail = (book) => {
     published.getMonth() + 1
   }월 ${published.getDate()}일`;
 
-  bookIntroduction.innerText = book.description;
+  bookIntroduction.innerHTML = book.description;
 };
 
 main();

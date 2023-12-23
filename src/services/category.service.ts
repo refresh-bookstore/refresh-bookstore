@@ -15,12 +15,10 @@ export class CategoryService {
     this.categoryRepository = new CategoryRepository();
   }
 
-  private async getCategoryOrThrow(categoryId: string): Promise<Category> {
-    const category = await this.categoryRepository.findByCategoryId(categoryId);
+  private async getCategoryOrThrow(id: string): Promise<Category> {
+    const category = await this.categoryRepository.findByCategoryId(id);
     if (!category) {
-      throw new NotFoundException(
-        `카테고리 ID ${categoryId}는 존재하지 않습니다.`
-      );
+      throw new NotFoundException(`해당 카테고리는 존재하지 않습니다.`);
     }
     return category;
   }
@@ -47,10 +45,8 @@ export class CategoryService {
     return categories.map((category) => new CategoryResponse(category));
   }
 
-  async updateCategory(updateCategory: CategoryDTO): Promise<void> {
-    const existingCategory = await this.getCategoryOrThrow(
-      updateCategory.categoryId
-    );
+  async updateCategory(id: string, updateCategory: CategoryDTO): Promise<void> {
+    const existingCategory = await this.getCategoryOrThrow(id);
 
     const updatedCategory = await this.categoryRepository.update(
       existingCategory.categoryId,
@@ -64,8 +60,8 @@ export class CategoryService {
     }
   }
 
-  async removeCategory(categoryId: string): Promise<void> {
-    const existingCategory = await this.getCategoryOrThrow(categoryId);
+  async deleteCategory(id: string): Promise<void> {
+    const existingCategory = await this.getCategoryOrThrow(id);
 
     const deleted = await this.categoryRepository.delete(
       existingCategory.categoryId

@@ -22,9 +22,6 @@
 				"properties": {
 					"name": {
 						"type": "string"
-					},
-					"categoryId": {
-						"type": "string"
 					}
 				},
 				"type": "object",
@@ -37,6 +34,215 @@
 					},
 					"categoryId": {
 						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"OrderItem": {
+				"properties": {
+					"ISBN": {
+						"type": "string"
+					},
+					"amount": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"ISBN",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateOrder": {
+				"properties": {
+					"recipientName": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"addressDetail": {
+						"type": "string"
+					},
+					"contact": {
+						"type": "string"
+					},
+					"deliveryRequest": {
+						"type": "string"
+					},
+					"orderItems": {
+						"items": {
+							"$ref": "#/components/schemas/OrderItem"
+						},
+						"type": "array"
+					},
+					"deliveryFee": {
+						"type": "number",
+						"format": "double"
+					},
+					"totalPrice": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"recipientName",
+					"postalCode",
+					"address",
+					"contact",
+					"deliveryRequest",
+					"orderItems",
+					"deliveryFee",
+					"totalPrice"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"OrderList": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"author": {
+						"type": "string"
+					},
+					"publisher": {
+						"type": "string"
+					},
+					"isbn": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"imagePath": {
+						"type": "string"
+					},
+					"amount": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"title",
+					"author",
+					"publisher",
+					"isbn",
+					"price",
+					"imagePath",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"OrderResponse": {
+				"properties": {
+					"orderId": {
+						"type": "string"
+					},
+					"recipientName": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"addressDetail": {
+						"type": "string"
+					},
+					"contact": {
+						"type": "string"
+					},
+					"deliveryRequest": {
+						"type": "string"
+					},
+					"shippingStatus": {
+						"type": "string"
+					},
+					"deliveryFee": {
+						"type": "number",
+						"format": "double"
+					},
+					"totalPrice": {
+						"type": "number",
+						"format": "double"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"orderList": {
+						"items": {
+							"$ref": "#/components/schemas/OrderList"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"orderId",
+					"recipientName",
+					"postalCode",
+					"address",
+					"addressDetail",
+					"contact",
+					"deliveryRequest",
+					"shippingStatus",
+					"deliveryFee",
+					"totalPrice",
+					"createdAt",
+					"updatedAt",
+					"orderList"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"%24Enums.ShippingStatus": {
+				"type": "string",
+				"enum": [
+					"READY",
+					"SHIPPING",
+					"DELIVERED",
+					"CANCELLED"
+				]
+			},
+			"ShippingStatus": {
+				"$ref": "#/components/schemas/%24Enums.ShippingStatus"
+			},
+			"UpdateOrder": {
+				"properties": {
+					"recipientName": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"addressDetail": {
+						"type": "string"
+					},
+					"contact": {
+						"type": "string"
+					},
+					"deliveryRequest": {
+						"type": "string"
+					},
+					"shippingStatus": {
+						"$ref": "#/components/schemas/ShippingStatus"
 					}
 				},
 				"type": "object",
@@ -108,9 +314,6 @@
 						"type": "string",
 						"format": "date-time"
 					},
-					"isbn": {
-						"type": "string"
-					},
 					"description": {
 						"type": "string"
 					},
@@ -120,8 +323,7 @@
 					},
 					"stock": {
 						"type": "number",
-						"format": "double",
-						"default": 0
+						"format": "double"
 					},
 					"imagePath": {
 						"type": "string"
@@ -130,16 +332,6 @@
 						"type": "string"
 					}
 				},
-				"required": [
-					"title",
-					"author",
-					"publisher",
-					"publicationDate",
-					"isbn",
-					"description",
-					"price",
-					"category"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -395,7 +587,9 @@
 				],
 				"security": [],
 				"parameters": []
-			},
+			}
+		},
+		"/category/{id}": {
 			"put": {
 				"operationId": "UpdateCategory",
 				"responses": {
@@ -433,7 +627,16 @@
 						]
 					}
 				],
-				"parameters": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -444,9 +647,7 @@
 						}
 					}
 				}
-			}
-		},
-		"/category/{id}": {
+			},
 			"delete": {
 				"operationId": "DeleteCategory",
 				"responses": {
@@ -494,6 +695,302 @@
 						}
 					}
 				]
+			}
+		},
+		"/order": {
+			"post": {
+				"operationId": "CreateOrder",
+				"responses": {
+					"204": {
+						"description": "No content"
+					},
+					"404": {
+						"description": "해당 사용자를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "재고가 부족하거나, 현재 주문을 처리할 수 없습니다. 다시 시도해주세요.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Order"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateOrder"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetOrdersbyUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/OrderResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "해당 사용자를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Order"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/order/{id}": {
+			"get": {
+				"operationId": "GetOrder",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/OrderResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "해당 주문은 존재하지 않습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Order"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdateOrder",
+				"responses": {
+					"204": {
+						"description": "No content"
+					},
+					"404": {
+						"description": "해당 사용자를 찾을 수 없습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "주문 수정 중 오류가 발생했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Order"
+				],
+				"security": [
+					{
+						"sessionAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateOrder"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "RemoveOrders",
+				"responses": {
+					"204": {
+						"description": "No content"
+					},
+					"500": {
+						"description": "주문 수정 중 오류가 발생했습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Order"
+				],
+				"security": [
+					{
+						"sessionAuth": [
+							"isAdmin"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/orders": {
+			"get": {
+				"operationId": "GetOrders",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/OrderResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Order"
+				],
+				"security": [
+					{
+						"sessionAuth": [
+							"isAdmin"
+						]
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/order/admin/{id}": {
+			"patch": {
+				"operationId": "UpdateOrderbyAdmin",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Order"
+				],
+				"security": [
+					{
+						"sessionAuth": [
+							"isAdmin"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateOrder"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/": {
@@ -785,6 +1282,31 @@
 					}
 				}
 			},
+			"get": {
+				"operationId": "GetProductList",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/ProductResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Product"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/product/{isbn}": {
 			"patch": {
 				"operationId": "UpdateProduct",
 				"responses": {
@@ -822,7 +1344,16 @@
 						]
 					}
 				],
-				"parameters": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "isbn",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -834,65 +1365,6 @@
 					}
 				}
 			},
-			"get": {
-				"operationId": "GetProductList",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/ProductResponse"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Product"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/product/search": {
-			"get": {
-				"operationId": "SearchProduct",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/ProductResponse"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Product"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "query",
-						"name": "keyword",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
-		"/product/{isbn}": {
 			"get": {
 				"operationId": "GetProduct",
 				"responses": {
@@ -963,6 +1435,40 @@
 					{
 						"in": "path",
 						"name": "isbn",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/product/search": {
+			"get": {
+				"operationId": "SearchProduct",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/ProductResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Product"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "keyword",
 						"required": true,
 						"schema": {
 							"type": "string"

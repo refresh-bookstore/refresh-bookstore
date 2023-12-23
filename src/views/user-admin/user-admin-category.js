@@ -75,6 +75,7 @@ const addCategory = () => {
           adminAddCategories.innerHTML = "";
           adminAddCategories.classList.add("hidden");
           createCategoryList();
+          alert("카테고리가 성공적으로 추가되었습니다.");
         })
         .catch((err) => {
           alert(err.message);
@@ -113,14 +114,13 @@ const editCategory = (categories) => {
       console.log(thisCategory);
 
       categoryCheckBtn.addEventListener("click", () => {
-        fetch(`/category`, {
+        fetch(`/category/${thisCategory.categoryId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             name: categoryEditInput.value,
-            categoryId: thisCategory.categoryId,
           }),
         })
           .then((res) => {
@@ -141,6 +141,7 @@ const editCategory = (categories) => {
             categoryEditInput.classList.add("hidden");
             categoryCheckBtn.classList.add("hidden");
             createCategoryList();
+            alert("카테고리가 성공적으로 수정되었습니다.");
           })
           .catch((err) => {
             alert(err.message);
@@ -183,6 +184,7 @@ const deleteCategory = (categories) => {
             }
             categoryBox.remove();
             createCategoryList();
+            alert("카테고리가 성공적으로 삭제되었습니다.");
           })
           .catch((err) => {
             alert(err.message);
