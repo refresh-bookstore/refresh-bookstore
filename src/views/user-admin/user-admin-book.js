@@ -17,7 +17,7 @@ const createBookList = (page = 1, searchTerm = "", isbn = "") => {
       adminContentBooks.innerHTML = createBookListHTML(
         books,
         global.currentPage,
-        totalPages
+        totalPages,
       );
 
       document.querySelectorAll(".book-item").forEach((item) => {
@@ -49,7 +49,7 @@ const createBookList = (page = 1, searchTerm = "", isbn = "") => {
           }
         });
       }
-    }
+    },
   );
 };
 
@@ -168,12 +168,12 @@ const addNewBook = (bookAddBlock) => {
     addBookSubmitBtn.addEventListener("click", () => {
       const newBookForm = document.querySelector(".new-book-form");
       const bookData = getFormDataFromBlock(
-        document.querySelector(".new-book-form")
+        document.querySelector(".new-book-form"),
       );
 
       if (bookData.category === "custom") {
         const customCategoryValue = document.getElementById(
-          "customCategoryInput"
+          "customCategoryInput",
         ).value;
         if (customCategoryValue) {
           bookData.category = customCategoryValue;
@@ -268,7 +268,7 @@ const fetchBooks = (
   page = 1,
   limit = limitPerPage,
   searchTerm = "",
-  isbn = ""
+  isbn = "",
 ) => {
   let query = `?page=${page}&limit=${limit}`;
   if (searchTerm) query += `&searchTerm=${encodeURIComponent(searchTerm)}`;
@@ -279,7 +279,7 @@ const fetchBooks = (
     .then((response) => {
       return {
         books: response.data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         ),
         total: response.total,
         totalPages: Math.ceil(response.total / limit),

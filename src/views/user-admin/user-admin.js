@@ -24,11 +24,11 @@ const adminContentBooks = checkElement("#admin-books", "Admin Content Books");
 const adminContentUsers = checkElement("#admin-users", "Admin Content Users");
 const adminContentOrders = checkElement(
   "#admin-orders",
-  "Admin Content Orders"
+  "Admin Content Orders",
 );
 const adminContentCategories = checkElement(
   "#admin-categories",
-  "Admin Content Categories"
+  "Admin Content Categories",
 );
 
 const lists = [adminBooks, adminUsers, adminOrders, adminCategories];
