@@ -102,7 +102,7 @@ const renderBookDetail = (book) => {
       let cartItems = JSON.parse(localStorage.getItem("cart"));
       if (cartItems === null) cartItems = [];
       const isAlreadyInCart = cartItems.findIndex(
-        (item) => item.isbn === book.isbn
+        (item) => item.isbn === book.isbn,
       );
       if (isAlreadyInCart !== -1) {
         cartItems[isAlreadyInCart].amount += Number(amountInput.value);
@@ -122,7 +122,7 @@ const renderBookDetail = (book) => {
       }
       localStorage.setItem("cart", JSON.stringify(cartItems));
       const cartCheckout = confirm(
-        "장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?"
+        "장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?",
       );
       if (cartCheckout) {
         location.href = "/cart";

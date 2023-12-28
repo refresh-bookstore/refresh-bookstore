@@ -27,7 +27,7 @@ export class UserRepository {
 
   async findByEmail(
     email: string,
-    context: UserContext = this.context
+    context: UserContext = this.context,
   ): Promise<User | null> {
     return await context.user.findUnique({
       where: {
@@ -40,7 +40,7 @@ export class UserRepository {
     return await prisma.user.findMany();
   }
 
-  async updateByEmail(email: string, updateUser: UpdateUser): Promise<User> {
+  async update(email: string, updateUser: UpdateUser): Promise<User> {
     return await prisma.user.update({
       where: {
         email: email,
@@ -49,7 +49,7 @@ export class UserRepository {
     });
   }
 
-  async deleteByEmail(email: string): Promise<User> {
+  async delete(email: string): Promise<User> {
     return await prisma.user.delete({
       where: {
         email: email,

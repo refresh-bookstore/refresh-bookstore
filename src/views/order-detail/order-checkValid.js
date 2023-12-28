@@ -44,8 +44,8 @@ function checkValid() {
   } else {
     inputError.style.display = "none";
   }
-  
+
   return true;
 }
 
-export { checkValid }
+export { checkValid };

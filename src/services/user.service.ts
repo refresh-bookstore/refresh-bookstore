@@ -29,7 +29,7 @@ export class UserService {
 
   private async isValidPassword(
     password: string,
-    dbpassword: string
+    dbpassword: string,
   ): Promise<boolean> {
     const isValidPassword = await argon2.verify(password, dbpassword);
 
@@ -45,7 +45,7 @@ export class UserService {
 
     if (isExisting) {
       throw new ConflictException(
-        `${createUser.email}은(는) 이미 사용 중입니다.`
+        `${createUser.email}은(는) 이미 사용 중입니다.`,
       );
     }
 
@@ -60,7 +60,7 @@ export class UserService {
 
     if (!createdData) {
       throw new InternalServerErrorException(
-        "회원가입 중 오류가 발생했습니다."
+        "회원가입 중 오류가 발생했습니다.",
       );
     }
   }
@@ -77,7 +77,7 @@ export class UserService {
 
   async updateUserByEmail(
     email: string,
-    updateUser: UpdateUser
+    updateUser: UpdateUser,
   ): Promise<void> {
     await this.getUserOrThrow(email);
 
@@ -88,9 +88,9 @@ export class UserService {
       password: hashedPassword,
     };
 
-    const updatedData = await this.userRepository.updateByEmail(
+    const updatedData = await this.userRepository.update(
       email,
-      updateUserWithHashedPassword
+      updateUserWithHashedPassword,
     );
 
     if (!updatedData) {
@@ -103,7 +103,7 @@ export class UserService {
 
     await this.isValidPassword(user.password, loginDTO.password);
 
-    const deleteUser = await this.userRepository.deleteByEmail(loginDTO.email);
+    const deleteUser = await this.userRepository.delete(loginDTO.email);
     if (!deleteUser) {
       throw new InternalServerErrorException("사용자 탈퇴에 실패했습니다.");
     }

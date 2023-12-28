@@ -50,7 +50,7 @@ async function getOrderList() {
         contentArea.classList.remove("empty");
         data.forEach((orderInfo) => {
           const orderDate = new Date(
-            new Date(orderInfo.createdAt).getTime() + 1000 * 60 * 60 * 9
+            new Date(orderInfo.createdAt).getTime() + 1000 * 60 * 60 * 9,
           )
             .toISOString()
             .slice(0, 10);

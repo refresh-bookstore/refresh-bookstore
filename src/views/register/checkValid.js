@@ -18,9 +18,11 @@ function checkValid() {
   // 이름 길이 확인
   const isNameValid = name.length >= 2;
   // 이메일 정규식 확인
-  const isEmailValid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const isEmailValid =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   // 비밀번호 확인 (8 ~ 15자, 특수문자, 문자, 숫자 포함)
-  const isPasswordValid = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+  const isPasswordValid =
+    /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
   const isPasswordSame = password === passwordCheck;
   // 주소 검색 여부 확인
   const isAddressValid = postalCode && address;
@@ -54,7 +56,8 @@ function checkValid() {
 
   if (!isPasswordValid.test(password) && password.length > 0) {
     passwordError.style.display = "flex";
-    passwordError.innerText = "비밀번호 형식(8 ~ 15자, 특수문자, 문자, 숫자 포함)이 올바르지 않습니다";
+    passwordError.innerText =
+      "비밀번호 형식(8 ~ 15자, 특수문자, 문자, 숫자 포함)이 올바르지 않습니다";
     passwordInput.focus();
     return false;
   } else {
@@ -88,22 +91,44 @@ function checkValid() {
     phoneError.style.display = "none";
   }
 
-  if (!name || !email || !password || !passwordCheck || !postalCode || !address || !phone) {
+  if (
+    !name ||
+    !email ||
+    !password ||
+    !passwordCheck ||
+    !postalCode ||
+    !address ||
+    !phone
+  ) {
     const isNull = [];
 
-    if (!name) { isNull.push("이름"); }
-    if (!email) { isNull.push("이메일"); }
-    if (!password) { isNull.push("비밀번호"); }
-    if (!passwordCheck) { isNull.push("비밀번호 확인"); }
-    if (!postalCode) { isNull.push("우편번호"); }
-    if (!address) { isNull.push("주소"); }
-    if (!phone) { isNull.push("전화번호"); }
+    if (!name) {
+      isNull.push("이름");
+    }
+    if (!email) {
+      isNull.push("이메일");
+    }
+    if (!password) {
+      isNull.push("비밀번호");
+    }
+    if (!passwordCheck) {
+      isNull.push("비밀번호 확인");
+    }
+    if (!postalCode) {
+      isNull.push("우편번호");
+    }
+    if (!address) {
+      isNull.push("주소");
+    }
+    if (!phone) {
+      isNull.push("전화번호");
+    }
 
     alert(`${isNull.join(", ")}을(를) 입력해주세요. \u{1F913}`);
     return false;
   }
-  
+
   return true;
 }
 
-export { checkValid }
+export { checkValid };

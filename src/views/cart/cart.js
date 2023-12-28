@@ -124,7 +124,7 @@ function activateCheckboxes() {
     checkbox.addEventListener("click", () => {
       checkSelectAll();
       setPayList();
-    })
+    }),
   );
   selectAll.addEventListener("click", () => {
     checkAll(selectAll);

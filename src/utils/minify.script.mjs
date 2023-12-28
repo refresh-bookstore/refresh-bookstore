@@ -1,12 +1,16 @@
-const fs = require("fs");
-const path = require("path");
-const { minify, mangler } = require("terser");
-const CSO = require("csso");
-const htmlMinifier = require("html-minifier").minify;
+import path from "path";
+import fs from "fs";
+import { minify } from "terser";
+import * as CSO from "csso";
+import { minify as htmlMinifier } from "html-minifier";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const viewsDirectoryPath = path.join(__dirname, "..", "..", "dist", "views");
 
-function minifyDirectory(dirPath) {
+async function minifyDirectory(dirPath) {
   fs.readdir(dirPath, (err, files) => {
     if (err) {
       console.error("Unable to scan directory:", err);
@@ -18,7 +22,6 @@ function minifyDirectory(dirPath) {
         minifyDirectory(filePath);
       } else {
         if (file.endsWith(".js")) {
-          // JavaScript 파일 압축
           try {
             const fileContents = fs.readFileSync(filePath, "utf8");
             const minified = await minify(fileContents, {

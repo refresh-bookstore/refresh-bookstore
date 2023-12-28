@@ -396,6 +396,36 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"GetProductsResult": {
+				"properties": {
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/ProductResponse"
+						},
+						"type": "array"
+					},
+					"total": {
+						"type": "number",
+						"format": "double"
+					},
+					"page": {
+						"type": "number",
+						"format": "double"
+					},
+					"limit": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"data",
+					"total",
+					"page",
+					"limit"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"CreateUser": {
 				"properties": {
 					"name": {
@@ -1290,10 +1320,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/ProductResponse"
-									},
-									"type": "array"
+									"$ref": "#/components/schemas/GetProductsResult"
 								}
 							}
 						}
@@ -1303,7 +1330,44 @@
 					"Product"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 10,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "searchTerm",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "isbn",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/product/{isbn}": {
@@ -1374,6 +1438,16 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/ProductResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "해당 상품이 존재하지 않습니다.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
 								}
 							}
 						}
@@ -1475,6 +1549,61 @@
 						}
 					}
 				]
+			}
+		},
+		"/products/{categoryId}": {
+			"get": {
+				"operationId": "GetProductsByCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/ProductResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Product"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "categoryId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/fetch-aladin": {
+			"post": {
+				"operationId": "FetchAndStoreAladinData",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Product"
+				],
+				"security": [
+					{
+						"sessionAuth": [
+							"isAdmin"
+						]
+					}
+				],
+				"parameters": []
 			}
 		},
 		"/user": {

@@ -15,7 +15,7 @@ export class CategoryService {
     this.categoryRepository = new CategoryRepository();
   }
 
-  private async getCategoryOrThrow(id: string): Promise<Category> {
+  async getCategoryOrThrow(id: string): Promise<Category> {
     const category = await this.categoryRepository.findByCategoryId(id);
     if (!category) {
       throw new NotFoundException(`해당 카테고리는 존재하지 않습니다.`);
@@ -34,7 +34,7 @@ export class CategoryService {
 
     if (!newCategory) {
       throw new InternalServerErrorException(
-        "카테고리 생성 중 오류가 발생했습니다."
+        "카테고리 생성 중 오류가 발생했습니다.",
       );
     }
   }
@@ -50,12 +50,12 @@ export class CategoryService {
 
     const updatedCategory = await this.categoryRepository.update(
       existingCategory.categoryId,
-      updateCategory.name
+      updateCategory.name,
     );
 
     if (!updatedCategory) {
       throw new InternalServerErrorException(
-        "카테고리 업데이트 중 오류가 발생했습니다."
+        "카테고리 업데이트 중 오류가 발생했습니다.",
       );
     }
   }
@@ -64,11 +64,11 @@ export class CategoryService {
     const existingCategory = await this.getCategoryOrThrow(id);
 
     const deleted = await this.categoryRepository.delete(
-      existingCategory.categoryId
+      existingCategory.categoryId,
     );
     if (!deleted) {
       throw new InternalServerErrorException(
-        "카테고리 삭제 중 오류가 발생했습니다."
+        "카테고리 삭제 중 오류가 발생했습니다.",
       );
     }
   }

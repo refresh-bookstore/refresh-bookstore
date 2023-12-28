@@ -1,4 +1,5 @@
-import { PrismaClient, Category } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import type { Category } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -18,7 +19,7 @@ export class CategoryRepository {
 
   async create(
     name: string,
-    context: CategoryContext = this.context
+    context: CategoryContext = this.context,
   ): Promise<Category> {
     return await context.category.create({
       data: { name },
@@ -37,7 +38,7 @@ export class CategoryRepository {
 
   async findByName(
     name: string,
-    context: CategoryContext = this.context
+    context: CategoryContext = this.context,
   ): Promise<Category | null> {
     return await context.category.findFirst({
       where: { name },

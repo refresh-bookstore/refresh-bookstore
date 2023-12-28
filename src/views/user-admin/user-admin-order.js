@@ -14,7 +14,7 @@ const createOrderList = () => {
 
     for (let i = 0; i < orders.length; i++) {
       const ordered = new Date(
-        new Date(orders[i].createdAt).getTime() + 1000 * 60 * 60 * 9
+        new Date(orders[i].createdAt).getTime() + 1000 * 60 * 60 * 9,
       )
         .toISOString()
         .slice(0, 10);
@@ -57,8 +57,8 @@ const createOrderList = () => {
               <p>주문자 | ${orders[i].recipientName} </p>
               <p>주문자 연락처 | ${orders[i].contact} </p>
               <p>배송주소 | (${orders[i].postalCode}) ${orders[i].address} ${
-        orders[i].addressDetail
-      } </p>
+                orders[i].addressDetail
+              } </p>
               <p>요청사항 | ${deliveryRequest} </p>
               <p>주문내역 | ${orderList} </p>
               <p>결제금액 | ${orders[i].totalPrice.toLocaleString()}원 </p>
@@ -119,7 +119,7 @@ const adminOrderEdit = (orders) => {
               } else {
                 return res.json().then((errData) => {
                   throw new Error(
-                    errData.message || res.statusText || "오류가 발생했습니다."
+                    errData.message || res.statusText || "오류가 발생했습니다.",
                   );
                 });
               }
@@ -149,7 +149,7 @@ const adminOrderDelete = (orders) => {
       }
 
       const deleteConfirm = confirm(
-        `주문번호 ${orderIdOnBox}를 삭제하시겠습니까?`
+        `주문번호 ${orderIdOnBox}를 삭제하시겠습니까?`,
       );
       if (deleteConfirm) {
         fetch(`/order/${orderIdOnBox}`, {
@@ -163,7 +163,7 @@ const adminOrderDelete = (orders) => {
               } else {
                 return res.json().then((errData) => {
                   throw new Error(
-                    errData.message || res.statusText || "오류가 발생했습니다."
+                    errData.message || res.statusText || "오류가 발생했습니다.",
                   );
                 });
               }

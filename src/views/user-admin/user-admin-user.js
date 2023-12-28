@@ -22,8 +22,8 @@ const createUserList = () => {
         <div class="admin-items">
           <div class="admin-user-info">
             <p class="admin-user-added-date"> ${registered.getFullYear()} / ${
-          registered.getMonth() + 1
-        } / ${registered.getDate()}</p>
+              registered.getMonth() + 1
+            } / ${registered.getDate()}</p>
             <div class="admin-info-block">
               <span class="admin-user-name admin"> ${
                 users[i].name
@@ -38,8 +38,8 @@ const createUserList = () => {
         <div class="admin-items">
           <div class="admin-user-info">
             <p class="admin-user-added-date"> ${registered.getFullYear()} / ${
-          registered.getMonth() + 1
-        } / ${registered.getDate()}</p>
+              registered.getMonth() + 1
+            } / ${registered.getDate()}</p>
             <div class="admin-info-block">
               <p class="admin-user-name"> ${users[i].name}</p>
               <p class="admin-user-email">${users[i].email}</p>

@@ -1,5 +1,5 @@
 import { main } from "/public/js/main.js";
-
+import { global } from "./globalVariables.js";
 import { createBookList } from "./user-admin-book.js";
 import { createUserList } from "./user-admin-user.js";
 import { createOrderList } from "./user-admin-order.js";
@@ -7,7 +7,6 @@ import { createCategoryList } from "./user-admin-category.js";
 
 const title = document.querySelector(".title");
 
-// DOM 요소 존재 확인
 const checkElement = (selector, name) => {
   const element = document.querySelector(selector);
   if (!element) {
@@ -55,6 +54,10 @@ lists.forEach((e) => {
 
     switch (lists.indexOf(e)) {
       case 0:
+        global.searchTerm = "";
+        global.isbn = "";
+        global.searchCategory = "title";
+        global.currentPage = 1;
         createBookList();
         break;
       case 1:

@@ -5,7 +5,7 @@ import { OrderIdGenerator } from "../utils/order.id.generator";
 import { UpdateProduct } from "../dtos/product/update.product";
 import { OrderResponse } from "../dtos/order/order.response";
 import { OrderList } from "../dtos/order/order.list";
-import { UpdateOrder } from "src/dtos/order/update.order";
+import { UpdateOrder } from "../dtos/order/update.order";
 
 const prisma = new PrismaClient();
 
@@ -26,7 +26,7 @@ export class OrderRepository {
 
   async create(
     userId: number,
-    createOrder: CreateOrder
+    createOrder: CreateOrder,
   ): Promise<Order | null> {
     return await prisma.$transaction(async (transaction) => {
       let uniqueOrderId: string;
@@ -75,7 +75,7 @@ export class OrderRepository {
   async update(
     orderId: string,
     userId: number | undefined,
-    updateOrder: UpdateOrder
+    updateOrder: UpdateOrder,
   ): Promise<Order | null> {
     return await prisma.$transaction(async (transaction) => {
       const existingOrder = await transaction.order.findUnique({
@@ -133,7 +133,7 @@ export class OrderRepository {
 
   async getOrder(
     userId: number,
-    orderId: string
+    orderId: string,
   ): Promise<OrderResponse | null> {
     const order = await prisma.order.findUnique({
       where: {
@@ -153,7 +153,7 @@ export class OrderRepository {
     }
 
     const orderLists = order.orderItems.map(
-      (item) => new OrderList(item.product, item.amount)
+      (item) => new OrderList(item.product, item.amount),
     );
     return new OrderResponse(order, orderLists);
   }
@@ -174,7 +174,7 @@ export class OrderRepository {
 
     return orders.map((order) => {
       const orderLists = order.orderItems.map(
-        (item) => new OrderList(item.product, item.amount)
+        (item) => new OrderList(item.product, item.amount),
       );
 
       return new OrderResponse(order, orderLists);
@@ -194,7 +194,7 @@ export class OrderRepository {
 
     return orders.map((order) => {
       const orderLists = order.orderItems.map(
-        (item) => new OrderList(item.product, item.amount)
+        (item) => new OrderList(item.product, item.amount),
       );
 
       return new OrderResponse(order, orderLists);
@@ -220,7 +220,7 @@ export class OrderRepository {
 
   private async isOrderIdUnique(
     orderId: string,
-    context: OrderContext = this.context
+    context: OrderContext = this.context,
   ): Promise<boolean> {
     const order = await context.order.findUnique({
       where: { orderId },

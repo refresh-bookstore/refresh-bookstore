@@ -67,7 +67,7 @@ const addCategory = () => {
             } else {
               return res.json().then((errData) => {
                 throw new Error(
-                  errData.message || res.statusText || "오류가 발생했습니다."
+                  errData.message || res.statusText || "오류가 발생했습니다.",
                 );
               });
             }
@@ -96,7 +96,7 @@ const editCategory = (categories) => {
     e.addEventListener("click", () => {
       const categoryBox = e.closest(".category-box");
       const categoryEditInput = categoryBox.querySelector(
-        ".category-edit-input"
+        ".category-edit-input",
       );
       const categoryName = categoryBox.querySelector(".category-name");
       const categoryCheckBtn = categoryBox.querySelector(".category-check");
@@ -107,7 +107,7 @@ const editCategory = (categories) => {
       categoryCheckBtn.classList.remove("hidden");
 
       const thisCategory = categories.find(
-        (e) => e.name === categoryName.innerText
+        (e) => e.name === categoryName.innerText,
       );
 
       categoryEditInput.value = categoryName.innerText;
@@ -131,7 +131,7 @@ const editCategory = (categories) => {
               } else {
                 return res.json().then((errData) => {
                   throw new Error(
-                    errData.message || res.statusText || "오류가 발생했습니다."
+                    errData.message || res.statusText || "오류가 발생했습니다.",
                   );
                 });
               }
@@ -158,12 +158,12 @@ const deleteCategory = (categories) => {
       const categoryBox = e.closest(".category-box");
       const categoryName = categoryBox.querySelector(".category-name");
       const thisCategory = categories.find(
-        (e) => e.name === categoryName.innerText
+        (e) => e.name === categoryName.innerText,
       );
 
       const categoryIdValue = thisCategory.categoryId;
       const deleteConfirm = window.confirm(
-        `<${thisCategory.name}> 카테고리를 삭제하시겠습니까?`
+        `<${thisCategory.name}> 카테고리를 삭제하시겠습니까?`,
       );
       if (deleteConfirm) {
         fetch(`/category/${categoryIdValue}`, {
@@ -177,7 +177,7 @@ const deleteCategory = (categories) => {
               } else {
                 return res.json().then((errData) => {
                   throw new Error(
-                    errData.message || res.statusText || "오류가 발생했습니다."
+                    errData.message || res.statusText || "오류가 발생했습니다.",
                   );
                 });
               }

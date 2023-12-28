@@ -76,7 +76,7 @@ async function getUserData() {
     } else {
       return res.json().then((errData) => {
         throw new Error(
-          errData.message || res.statusText || "오류가 발생했습니다."
+          errData.message || res.statusText || "오류가 발생했습니다.",
         );
       });
     }
@@ -111,7 +111,7 @@ async function updateUser(event) {
         } else {
           return res.json().then((errData) => {
             throw new Error(
-              errData.message || res.statusText || "오류가 발생했습니다."
+              errData.message || res.statusText || "오류가 발생했습니다.",
             );
           });
         }
@@ -152,7 +152,7 @@ async function deleteUser(event) {
         } else {
           return res.json().then((errData) => {
             throw new Error(
-              errData.message || res.statusText || "오류가 발생했습니다."
+              errData.message || res.statusText || "오류가 발생했습니다.",
             );
           });
         }

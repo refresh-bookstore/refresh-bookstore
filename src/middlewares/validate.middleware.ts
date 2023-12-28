@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 import { ValidateError } from "tsoa";
 
 export function validateBody<T extends object>(
-  targetClass: ClassConstructor<T>
+  targetClass: ClassConstructor<T>,
 ) {
   return async (req: Request, _res: Response, next: NextFunction) => {
     const instance = plainToInstance(targetClass, req.body);

@@ -50,7 +50,7 @@ async function loadOrderDetail() {
       const addressDetail = data.addressDetail;
       const deliveryRequest = data.deliveryRequest;
       const orderDate = new Date(
-        new Date(data.createdAt).getTime() + 1000 * 60 * 60 * 9
+        new Date(data.createdAt).getTime() + 1000 * 60 * 60 * 9,
       )
         .toISOString()
         .slice(0, 10);

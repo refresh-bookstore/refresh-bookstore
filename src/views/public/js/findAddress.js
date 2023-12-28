@@ -1,7 +1,6 @@
 function findAddress() {
   new daum.Postcode({
-    oncomplete: function(data) {
-
+    oncomplete: function (data) {
       const postalCodeInput = document.getElementById("postalCodeInput");
       const addressInput = document.getElementById("addressInput");
       const detailAddressInput = document.getElementById("detailAddressInput");
@@ -20,7 +19,8 @@ function findAddress() {
           extraAddr += data.bname;
         }
         if (data.buildingName !== "" && data.apartment === "Y") {
-          extraAddr += extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
+          extraAddr +=
+            extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
         }
         if (extraAddr !== "") {
           extraAddr = " (" + extraAddr + ")";
@@ -31,6 +31,6 @@ function findAddress() {
       addressInput.value = `${addr} ${extraAddr}`;
       detailAddressInput.value = "";
       detailAddressInput.focus();
-    }
+    },
   }).open({ autoClose: true });
 }

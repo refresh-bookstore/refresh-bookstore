@@ -91,7 +91,7 @@ setTotalCost();
 
 // 요청사항
 const customRequestContainer = document.querySelector(
-  ".customRequestContainer"
+  ".customRequestContainer",
 );
 const customRequestInput = document.querySelector(".customRequest");
 const requestSelectBox = document.querySelector("#request__Select__Box");

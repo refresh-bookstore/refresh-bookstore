@@ -12,7 +12,8 @@ function checkValid() {
   const phone = phoneInput.value;
 
   // 비밀번호 확인 (8 ~ 15자, 특수문자, 문자, 숫자 포함)
-  const isPasswordValid = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+  const isPasswordValid =
+    /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
   const isPasswordSame = password === passwordCheck;
   // 전화번호 확인 (가운데 - 기호 포함)
   const isPhoneValid = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
@@ -24,7 +25,8 @@ function checkValid() {
 
   if (!isPasswordValid.test(password)) {
     passwordError.style.display = "flex";
-    passwordError.innerText = "비밀번호 형식(8 ~ 15자, 특수문자, 문자, 숫자 포함)이 올바르지 않습니다";
+    passwordError.innerText =
+      "비밀번호 형식(8 ~ 15자, 특수문자, 문자, 숫자 포함)이 올바르지 않습니다";
     return false;
   } else {
     passwordError.style.display = "none";
@@ -53,8 +55,8 @@ function checkValid() {
   } else {
     phoneError.style.display = "none";
   }
-  
+
   return true;
 }
 
-export { checkValid }
+export { checkValid };

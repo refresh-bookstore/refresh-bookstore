@@ -23,7 +23,7 @@ export class OrderService {
 
     if (newOrder === null) {
       throw new InternalServerErrorException(
-        "재고가 부족하거나, 현재 주문을 처리할 수 없습니다. 다시 시도해주세요."
+        "재고가 부족하거나, 현재 주문을 처리할 수 없습니다. 다시 시도해주세요.",
       );
     }
   }
@@ -32,9 +32,9 @@ export class OrderService {
     orderId: string,
     email: string,
     updateOrder: UpdateOrder,
-    isAdmin: boolean
+    isAdmin: boolean,
   ): Promise<void> {
-    let userId: number | undefined = undefined;
+    let userId;
 
     if (!isAdmin) {
       const user = await this.userService.getUserOrThrow(email);
@@ -44,12 +44,12 @@ export class OrderService {
     const updateData = await this.orderRepository.update(
       orderId,
       userId,
-      updateOrder
+      updateOrder,
     );
 
     if (updateData === null) {
       throw new InternalServerErrorException(
-        "주문 수정 중 오류가 발생했습니다."
+        "주문 수정 중 오류가 발생했습니다.",
       );
     }
   }
@@ -77,7 +77,7 @@ export class OrderService {
     const deleted = await this.orderRepository.delete(id);
     if (deleted === null) {
       throw new InternalServerErrorException(
-        "주문 취소가 아니거나, 삭제처리 할 수 없습니다."
+        "주문 취소 상태가 아니거나, 삭제처리 할 수 없습니다.",
       );
     }
   }

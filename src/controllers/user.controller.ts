@@ -54,7 +54,7 @@ export class UserController extends Controller {
   @Response<Error>("500", "사용자 업데이트에 실패했습니다.")
   public async updateUser(
     @Request() req: RequestExpress,
-    @Body() updateUser: UpdateUser
+    @Body() updateUser: UpdateUser,
   ): Promise<void> {
     await this.userService.updateUserByEmail(req.session.email, updateUser);
   }
@@ -66,7 +66,7 @@ export class UserController extends Controller {
   @Response<Error>("500", "사용자 탈퇴에 실패했습니다.")
   public async deleteUser(
     @Request() req: RequestExpress,
-    @Body() loginDTO: LoginDTO
+    @Body() loginDTO: LoginDTO,
   ): Promise<void> {
     await this.userService.deleteUser(loginDTO);
     const destroySession = promisify(req.session.destroy).bind(req.session);
@@ -84,7 +84,7 @@ export class UserController extends Controller {
   @Response<Error>("404", "해당 사용자를 찾을 수 없습니다.")
   public async login(
     @Request() req: RequestExpress,
-    @Body() loginDTO: LoginDTO
+    @Body() loginDTO: LoginDTO,
   ): Promise<void> {
     const email = await this.userService.login(loginDTO);
     req.session.email = email;
@@ -92,7 +92,7 @@ export class UserController extends Controller {
 
   @Get("login/status")
   public async checkLoginStatus(
-    @Request() req: RequestExpress
+    @Request() req: RequestExpress,
   ): Promise<boolean> {
     return !!req.session.email;
   }
