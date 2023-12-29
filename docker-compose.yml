@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/local.dockerfile
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASS}@db/${DATABASE_NAME}
+      - API_KEY=${API_KEY}
+      - API_ENDPOINT=${API_ENDPOINT}
+      - CATEGORY_IDS=${CATEGORY_IDS}
+      - CONTENT_BASE_URL=${CONTENT_BASE_URL}
+    depends_on:
+      - db
+  db:
+    image: postgres:16.1-alpine
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASS}
+    ports:
+      - "5432:5432"

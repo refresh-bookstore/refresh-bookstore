@@ -1,0 +1,23 @@
+name: Docker Build and Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build the Docker image
+        run: docker build . --file docker/local.dockerfile -t your-image-name
+
+      - name: Push to Docker Registry
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push your-image-name
+
+      - name: Deploy using Docker Compose
+        run: |
+          docker-compose -f docker-compose.yml up -d

@@ -2,6 +2,9 @@
   "name": "refresh-bookstore",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "20.*"
+  },
   "scripts": {
     "start": "npm run build && node ./dist/app.js",
     "postbuild": "cp -r src/views dist/ && npm run minify",
@@ -38,9 +41,7 @@
     "swagger-ui-express": "^5.0.0",
     "terser": "^5.26.0",
     "ts-jest": "^29.1.1",
-    "tsoa": "^5.1.1"
-  },
-  "devDependencies": {
+    "tsoa": "^5.1.1",
     "@types/csso": "^5.0.4",
     "@types/ejs": "^3.1.5",
     "@types/html-minifier": "^4.0.5",

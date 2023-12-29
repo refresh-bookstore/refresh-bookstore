@@ -19,7 +19,7 @@ export const applyMiddleware = (app: express.Application) => {
   app.use(
     logger("combined", {
       skip: (_req, res: { statusCode: number }) => res.statusCode < 400,
-    }),
+    })
   );
   app.use(express.urlencoded({ extended: true }));
   app.use(sessionMiddleware);
