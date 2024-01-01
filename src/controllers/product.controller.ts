@@ -49,7 +49,7 @@ export class ProductController extends Controller {
   @Middlewares(validateBody(UpdateProduct))
   public async updateProduct(
     @Path() isbn: string,
-    @Body() updateData: UpdateProduct,
+    @Body() updateData: UpdateProduct
   ): Promise<void> {
     await this.productService.updateProduct(isbn, updateData);
   }
@@ -59,7 +59,7 @@ export class ProductController extends Controller {
     @Query() page: number = 1,
     @Query() limit: number = 10,
     @Query() searchTerm?: string,
-    @Query() isbn?: string,
+    @Query() isbn?: string
   ): Promise<GetProductsResult> {
     limit = Math.min(limit, 100);
 
@@ -80,7 +80,7 @@ export class ProductController extends Controller {
 
   @Get("product/search")
   public async searchProduct(
-    @Query() keyword: string,
+    @Query() keyword: string
   ): Promise<ProductResponse[]> {
     return await this.productService.searchProducts(keyword);
   }
@@ -93,7 +93,7 @@ export class ProductController extends Controller {
 
   @Get("products/{categoryId}")
   public async getProductsByCategory(
-    @Path() categoryId: string,
+    @Path() categoryId: string
   ): Promise<ProductResponse[]> {
     return await this.productService.getProductsByCategory(categoryId);
   }

@@ -9,13 +9,13 @@ import {
 import { User } from "@prisma/client";
 
 export interface Request extends ExpressRequest {
-  session: Session & Partial<SessionData>;
+  session: Session & Partial<SessionData> & { email?: string };
 }
 
 export async function expressAuthentication(
   request: Request,
   securityName: string,
-  _scopes?: string[],
+  _scopes?: string[]
 ): Promise<User | void> {
   if (!request.session || !request.session.email) {
     throw new ForbiddenException("유효하지 않은 접근입니다.");

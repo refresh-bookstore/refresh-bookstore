@@ -49,7 +49,7 @@ export class CategoryController extends Controller {
   @Middlewares(validateBody(CategoryDTO))
   public async updateCategory(
     @Path() id: string,
-    @Body() category: CategoryDTO,
+    @Body() category: CategoryDTO
   ): Promise<void> {
     await this.categoryService.updateCategory(id, category);
   }

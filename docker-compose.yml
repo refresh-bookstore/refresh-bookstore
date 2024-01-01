@@ -15,8 +15,11 @@ services:
       - API_ENDPOINT=${API_ENDPOINT}
       - CATEGORY_IDS=${CATEGORY_IDS}
       - CONTENT_BASE_URL=${CONTENT_BASE_URL}
+    volumes:
+      - .:/usr/src/app
     depends_on:
       - db
+    command: sh -c "npm run prisma:migrate:deploy && npm run dev"
   db:
     image: postgres:16.1-alpine
     environment:

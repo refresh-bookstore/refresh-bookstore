@@ -29,13 +29,12 @@ async function handlerSubmit(event) {
       });
 
       if (response.status === 204) {
-        const preLoginUrl =
-          sessionStorage.getItem("preLoginUrl") || "/home/home.html";
+        const preLoginUrl = sessionStorage.getItem("preLoginUrl") || "/";
         location.replace(preLoginUrl);
       } else {
         res.json().then((errData) => {
           throw new Error(
-            errData.message || res.statusText || "오류가 발생했습니다.",
+            errData.message || res.statusText || "오류가 발생했습니다."
           );
         });
       }
