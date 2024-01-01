@@ -34,7 +34,7 @@ async function handlerSubmit(event) {
       } else {
         res.json().then((errData) => {
           throw new Error(
-            errData.message || res.statusText || "오류가 발생했습니다."
+            errData.message || res.statusText || "오류가 발생했습니다.",
           );
         });
       }
