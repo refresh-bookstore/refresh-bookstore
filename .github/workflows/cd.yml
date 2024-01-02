@@ -1,0 +1,23 @@
+name: CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH and Rebuild & Restart Docker Service
+        uses: appleboy/ssh-action@master
+        with:
+          host: 217.142.238.10
+          username: opc
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/opc
+            docker-compose build refresh-bookstore
+            docker-compose up -d --no-deps refresh-bookstore
