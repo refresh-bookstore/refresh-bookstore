@@ -16,7 +16,7 @@ jobs:
         with:
           host: 217.142.238.10
           username: opc
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.KEY }}
           script: |
             cd /home/opc
             docker-compose build refresh-bookstore
