@@ -18,6 +18,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
+            cd /home/opc/refresh-bookstore
+            git pull origin main
             cd /home/opc
-            docker-compose build --no-cache tripsketch
-            docker-compose up -d --no-deps tripsketch
+            docker-compose build refresh-bookstore
+            docker-compose up -d --no-deps refresh-bookstore
+
