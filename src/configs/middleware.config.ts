@@ -1,8 +1,10 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import cron from "node-cron";
 import { PrismaClient } from "@prisma/client";
 import { RegisterRoutes } from "../routes/routes";
+import { BookStorageService } from "../services/book.storage.service";
 import sessionMiddleware from "./session.config";
 import errorHandler from "../middlewares/error.handler";
 import compression from "compression";
@@ -11,6 +13,7 @@ import swaggerDocument from "../swagger/swagger.json";
 import chalk from "chalk";
 
 export const prisma = new PrismaClient();
+const bookStorageService = new BookStorageService();
 
 export const applyMiddleware = (app: express.Application) => {
   app.use(cookieParser());
@@ -26,6 +29,18 @@ export const applyMiddleware = (app: express.Application) => {
   RegisterRoutes(app);
 
   app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+  cron.schedule(
+    "30 1 * * *",
+    async () => {
+      console.log("매일 작업을 실행합니다.");
+      await bookStorageService.fetchDataAndStore();
+    },
+    {
+      scheduled: true,
+      timezone: "Asia/Seoul",
+    }
+  );
 
   app.use("*", (_req, res) => {
     res.send(`
