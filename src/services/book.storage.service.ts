@@ -28,10 +28,16 @@ export class BookStorageService {
   lastExecutionDate = new Date();
 
   scheduleFetchAndStore() {
-    cron.schedule("0 0 * * *", async () => {
-      console.log("책을 매일 12시에 업데이트합니다.");
-      await this.fetchDataAndStore();
-    });
+    cron.schedule(
+      "20 12 * * *",
+      () => {
+        console.log("매일 12시 20분에 작업을 실행합니다.");
+      },
+      {
+        scheduled: true,
+        timezone: "Asia/Seoul",
+      }
+    );
   }
 
   async fetchDataAndStore() {
