@@ -29,7 +29,7 @@ export class BookStorageService {
 
   scheduleFetchAndStore() {
     cron.schedule(
-      "30 12 * * *",
+      "30 0 * * *",
       () => {
         console.log("매일 12시 30분에 작업을 실행합니다.");
       },
