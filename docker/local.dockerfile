@@ -6,8 +6,9 @@ RUN apt-get update -y && apt-get install -y openssl
 # 애플리케이션 디렉토리 생성
 WORKDIR /usr/src/app
 
-# package.json과 package-lock.json 복사
+# package.json, package-lock.json 및 schema.prisma 복사
 COPY package*.json ./
+COPY prisma/schema.prisma ./prisma/
 
 # 의존성 설치
 RUN npm install

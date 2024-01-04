@@ -1,14 +1,14 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch", "postgresqlExtensions"]
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets   = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
-  provider   = "postgresql"
-  url        = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("DATABASE_URL")
-  extensions = [uuid_ossp(map: "uuid-ossp")]
+  extensions        = [uuid_ossp(map: "uuid-ossp")]
 }
 
 model User {
@@ -23,7 +23,7 @@ model User {
   isAdmin       Boolean  @default(true)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now()) @updatedAt
-  orders Order[]
+  orders        Order[]
 }
 
 model Category {
@@ -34,49 +34,49 @@ model Category {
 }
 
 model Product {
-  id              Int      @id @default(autoincrement())
-  title           String   @db.VarChar(100)
-  author          String   @db.VarChar(50)
-  publisher       String   @db.VarChar(50)
+  id              Int         @id @default(autoincrement())
+  title           String      @db.VarChar(200)
+  author          String      @db.VarChar(50)
+  publisher       String      @db.VarChar(50)
   publicationDate DateTime
-  isbn            String   @unique @db.VarChar(13)
-  description     String   @db.VarChar(3000)
+  isbn            String      @unique @db.VarChar(13)
+  description     String      @db.VarChar(3000)
   price           Float
-  stock           Int      @default(0)
-  imagePath       String   @db.VarChar(255)
+  imagePath       String      @db.VarChar(255)
+  stock           Int         @default(0)
   categoryId      Int
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  Category        Category @relation(fields: [categoryId], references: [id])
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
   orderItems      OrderItem[]
+  Category        Category    @relation(fields: [categoryId], references: [id])
 }
 
 model Order {
-  id                Int              @id @default(autoincrement())
-  userId            Int
-  orderId           String           @unique
-  recipientName     String
-  postalCode        String
-  address           String
-  addressDetail     String
-  contact  String
-  deliveryRequest   String?
-  shippingStatus    ShippingStatus   @default(READY)
-  deliveryFee       Float
-  totalPrice        Float
-  createdAt         DateTime         @default(now())
-  updatedAt         DateTime         @updatedAt
-  user              User             @relation(fields: [userId], references: [id])
-  orderItems        OrderItem[]
+  id              Int            @id @default(autoincrement())
+  userId          Int
+  shippingStatus  ShippingStatus @default(READY)
+  deliveryFee     Float
+  totalPrice      Float
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  address         String
+  addressDetail   String
+  deliveryRequest String?
+  postalCode      String
+  recipientName   String
+  contact         String
+  orderId         String         @unique
+  user            User           @relation(fields: [userId], references: [id])
+  orderItems      OrderItem[]
 }
 
 model OrderItem {
-  id        Int      @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   orderId   Int
   productId Int
   amount    Int
-  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product   Product  @relation(fields: [productId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 enum ShippingStatus {
