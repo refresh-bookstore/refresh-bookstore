@@ -22,22 +22,6 @@ export class BookStorageService {
 
   constructor() {
     this.productService = new ProductService();
-    this.scheduleFetchAndStore();
-  }
-
-  lastExecutionDate = new Date();
-
-  scheduleFetchAndStore() {
-    cron.schedule(
-      "30 0 * * *",
-      () => {
-        console.log("매일 12시 30분에 작업을 실행합니다.");
-      },
-      {
-        scheduled: true,
-        timezone: "Asia/Seoul",
-      }
-    );
   }
   
   async fetchDataAndStore() {
