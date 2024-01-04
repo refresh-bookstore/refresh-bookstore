@@ -19,7 +19,7 @@ services:
       - .:/usr/src/app
     depends_on:
       - db
-    command: sh -c "npm run prisma:migrate:deploy && npm run dev"
+    command: sh -c "npm run prisma:generate && npm run prisma:migrate:deploy && npm run dev"
   db:
     image: postgres:16.1-alpine
     environment:
