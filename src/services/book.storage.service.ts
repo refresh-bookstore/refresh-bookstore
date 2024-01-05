@@ -1,5 +1,4 @@
 import axios from "axios";
-import cron from "node-cron";
 import { ProductService } from "./product.service";
 import { ProductDTO } from "../dtos/product/product.dto";
 import {

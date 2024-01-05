@@ -26,6 +26,7 @@
     "@types/html-minifier": "^4.0.5",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.5",
+    "@types/node-cron": "^3.0.11",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
     "argon2": "^0.31.2",
@@ -50,7 +51,6 @@
     "jest": "^29.7.0",
     "jest-mock-axios": "^4.7.3",
     "morgan": "1.10.0",
-    "node-cron": "^3.0.3",
     "nodemon": "^3.0.2",
     "path": "^0.12.7",
     "prisma": "^5.7.1",
@@ -136,5 +136,9 @@
         ]
       }
     ]
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.6",
+    "@types/morgan": "^1.9.9"
   }
 }
