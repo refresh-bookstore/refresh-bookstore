@@ -14,6 +14,7 @@ interface BookData {
   isbn13: string;
   priceSales: number;
   categoryName: string;
+  stock?: number;
 }
 
 export class BookStorageService {
@@ -22,7 +23,7 @@ export class BookStorageService {
   constructor() {
     this.productService = new ProductService();
   }
-  
+
   async fetchDataAndStore() {
     const categoryIds = process.env.CATEGORY_IDS.split(",").map(Number);
     const queryTypes = process.env.QUERY_TYPES.split(",");
@@ -56,7 +57,7 @@ export class BookStorageService {
 
           const books = data.item;
           for (const book of books) {
-            if (Math.random() < 0.2) {
+            if (Math.random() < 0.1) {
               book.stock = 0;
             }
 
@@ -91,7 +92,7 @@ export class BookStorageService {
     productDTO.description = `<img src="${CONTENT_BASE_URL}/sih/fit-in/814x0/dtl/illustrate/${isbnLastThree}/i${book.isbn13}.jpg" alt="책 이미지">`;
 
     productDTO.price = book.priceSales;
-    productDTO.stock = 50;
+    productDTO.stock = book.stock === undefined || book.stock !== 0 ? 50 : 0;
     productDTO.imagePath = `${CONTENT_BASE_URL}/sih/fit-in/458x0/pdt/${book.isbn13}.jpg`;
 
     productDTO.category = this.extractLastCategory(book.categoryName);
