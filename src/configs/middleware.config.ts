@@ -31,7 +31,7 @@ export const applyMiddleware = (app: express.Application) => {
   app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   cron.schedule(
-    "0 12 * * *",
+    "10 12 * * *",
     async () => {
       console.log("매일 정오 작업을 실행합니다.");
       await bookStorageService.fetchDataAndStore();
