@@ -22,7 +22,7 @@ export class BookStorageService {
   constructor() {
     this.productService = new ProductService();
   }
-
+  
   async fetchDataAndStore() {
     const categoryIds = process.env.CATEGORY_IDS.split(",").map(Number);
     const queryTypes = process.env.QUERY_TYPES.split(",");
