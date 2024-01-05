@@ -33,7 +33,7 @@ export const applyMiddleware = (app: express.Application) => {
   cron.schedule(
     "* * * * *",
     async () => {
-      console.log("매일 12시 20분 작업을 실행합니다.");
+      console.log("매일 작업을 실행합니다.");
       await bookStorageService.fetchDataAndStore();
     },
     {
