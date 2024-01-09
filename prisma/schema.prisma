@@ -34,7 +34,7 @@ model Category {
 
 model Product {
   id              Int         @id @default(autoincrement())
-  title           String      @db.VarChar(100)
+  title           String      @db.VarChar(200)
   author          String      @db.VarChar(50)
   publisher       String      @db.VarChar(50)
   publicationDate DateTime
