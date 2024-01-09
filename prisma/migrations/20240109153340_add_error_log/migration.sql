@@ -1,6 +1,3 @@
--- CreateExtension
-CREATE EXTENSION IF NOT EXISTS "citext" WITH SCHEMA "public";
-
 -- CreateTable
 CREATE TABLE "ErrorLog" (
     "id" SERIAL NOT NULL,
