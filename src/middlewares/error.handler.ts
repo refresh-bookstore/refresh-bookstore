@@ -2,13 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import { HttpException } from "../exceptions/http.exception";
 import { ValidateError } from "tsoa";
 import chalk from "chalk";
+import { prisma } from "../app";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const errorHandler = (
+export const errorHandler = async (
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   const isHttpException = err instanceof HttpException;
   const isValidationError = err instanceof ValidateError;
@@ -35,6 +36,18 @@ export const errorHandler = (
     console.log(chalk.yellow(logMessage));
   } else {
     console.error(chalk.red(logMessage));
+  }
+
+  try {
+    await prisma.errorLog.create({
+      data: {
+        message: err.message,
+        type: err.constructor.name,
+        stackTrace: err.stack,
+      },
+    });
+  } catch (dbError) {
+    console.error("데이터베이스 로깅 중 오류 발생:", dbError);
   }
 
   const clientMessage = isValidationError

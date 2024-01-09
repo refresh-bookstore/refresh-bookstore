@@ -7,8 +7,7 @@ generator client {
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("DATABASE_URL")
-  extensions        = [uuid_ossp(map: "uuid-ossp")]
+  extensions        = [citext(schema: "public"), uuid_ossp(map: "uuid-ossp")]
 }
 
 model User {
@@ -35,7 +34,7 @@ model Category {
 
 model Product {
   id              Int         @id @default(autoincrement())
-  title           String      @db.VarChar(200)
+  title           String      @db.VarChar(100)
   author          String      @db.VarChar(50)
   publisher       String      @db.VarChar(50)
   publicationDate DateTime
@@ -84,4 +83,12 @@ enum ShippingStatus {
   SHIPPING
   DELIVERED
   CANCELLED
+}
+
+model ErrorLog {
+  id         Int      @id @default(autoincrement())
+  message    String
+  type       String
+  stackTrace String?
+  createdAt  DateTime @default(now())
 }

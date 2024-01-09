@@ -20,6 +20,7 @@ services:
     depends_on:
       - db
     command: sh -c "npm run prisma:generate && npm run prisma:migrate:deploy && npm run dev"
+
   db:
     image: postgres:16.1-alpine
     environment:
@@ -27,4 +28,4 @@ services:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASS}
     ports:
-      - "5432:5432"
+      - "5434:5434"
