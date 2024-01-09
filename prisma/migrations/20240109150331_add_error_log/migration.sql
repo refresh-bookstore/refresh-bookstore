@@ -7,9 +7,6 @@
 -- CreateExtension
 CREATE EXTENSION IF NOT EXISTS "citext" WITH SCHEMA "public";
 
--- AlterTable
-ALTER TABLE "Product" ALTER COLUMN "title" SET DATA TYPE VARCHAR(100);
-
 -- CreateTable
 CREATE TABLE "ErrorLog" (
     "id" SERIAL NOT NULL,
