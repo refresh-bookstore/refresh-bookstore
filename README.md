@@ -1,12 +1,6 @@
 # 📚 Refresh Bookstore
 
-```bash
-# 로컬 환경에서 커밋 템플릿 적용
-git config --local commit.template .gitmessage.txt
 
-# 커밋 템플릿으로 커밋
-git commit
-```
 
 ## 시스템 아키텍처
 ![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458)
@@ -34,6 +28,15 @@ git commit
 ![Other Tools](https://img.shields.io/badge/-Other%20Tools-32CD32?style=for-the-badge&logo=nuget&logoColor=white)<br>
 [![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white)](https://swagger.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
+
+
+```bash
+# 로컬 환경에서 커밋 템플릿 적용
+git config --local commit.template .gitmessage.txt
+
+# 커밋 템플릿으로 커밋
+git commit
+```
 
 ## 🌳 기존 프로젝트의 문제점 🌳
 
