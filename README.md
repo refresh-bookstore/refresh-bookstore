@@ -1,14 +1,10 @@
-# 📚 Refresh Bookstore
+
 ![ezgif-5-985c54e5cd](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/0c23ba4e-ffc3-4fe3-b49f-08fb9f7ce65e)
 
+## Home Page
+Visit here: Refresh Bookstore 🌐
 
-
-## 시스템 아키텍처
-![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458)
-
-
-## 🛠️ Tech Stack
-
+## Tech Stack
 ![Programming Languages and Frameworks](https://img.shields.io/badge/-Programming%20Languages%20and%20Frameworks-8A2BE2?style=for-the-badge&logo=appveyor&logoColor=white)<br>
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![ExpressJS](https://img.shields.io/badge/ExpressJS-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
@@ -31,14 +27,6 @@
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
 
-```bash
-# 로컬 환경에서 커밋 템플릿 적용
-git config --local commit.template .gitmessage.txt
-
-# 커밋 템플릿으로 커밋
-git commit
-```
-
 ## 🌳 기존 프로젝트의 문제점 🌳
 
 - MongoDB는 주문관리의 무결성을 보장하지 못합니다. RDBMS로 Migration하여, 무결성을 최대한 보장하고자 합니다.
@@ -60,6 +48,14 @@ git commit
 - IT 관련 서적 정보를 제공하며, 사용자들은 책을 검색하고, 장바구니에 담고, 구매할 수 있습니다.
 
 <br>
+
+<details>
+  <summary>System Architecture</summary>
+
+  ## System Architecture
+  ![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458)
+
+</details>
 
 
 # &ensp;2. 서비스 주요 기능 설명
