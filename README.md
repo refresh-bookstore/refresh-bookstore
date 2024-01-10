@@ -8,7 +8,7 @@ git config --local commit.template .gitmessage.txt
 git commit
 ```
 
-##시스템 아키텍처
+## 시스템 아키텍처
 ![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/d4c0203b-06ff-411c-9849-598bc093eb01)
 
 
