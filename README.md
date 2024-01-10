@@ -14,6 +14,7 @@
 
 <div align="center">
 
+
 ## Tech Stack
 
 ![Programming Languages and Frameworks](https://img.shields.io/badge/-Programming%20Languages%20and%20Frameworks-8A2BE2?style=for-the-badge&logo=appveyor&logoColor=white)<br>
@@ -43,12 +44,53 @@
 [![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white)](https://swagger.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
-</div>
-</div>
-</div>
-</div>
+<!-- 공백 추가 -->
+<br><br>
 
-## System Architecture
-![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458)
+<div align="left">
+
+<!-- 홈페이지 작동 캡처 GIF -->
+## &middot; Homepage Operation
+<details>
+<summary><b>Screen shot</b></summary>
+<p align="center">
+  <img src="https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458" alt="System Architecture">
+</p>
+</details>
+
+<!-- 회고록 -->
+## &middot; Retrospective
+여기에 회고록 내용을 추가합니다.
+
+<!-- 파일 구조 -->
+## &middot; File Structure
+여기에 프로젝트의 파일 구조에 대한 설명을 추가합니다.
+
+<!-- ERD -->
+## &middot; ERD
+<details>
+<summary><b>ERD</b></summary>
+<p align="center">
+  <img src="https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458" alt="System Architecture">
+</p>
+</details>
+
+
+<!-- TIL -->
+## &middot; Today I Learned (TIL)
+여기에 TIL 섹션의 내용을 추가합니다.
+
+<!-- 개발일지 -->
+## &middot; Development Diary
+여기에 개발일지 내용을 추가합니다.
+
+## &middot; System Architecture
+<details>
+<summary><b>System Architecture</b></summary>
+<p align="center">
+  <img src="https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458" alt="System Architecture">
+</p>
+</details>
+
 
 
