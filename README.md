@@ -49,48 +49,73 @@
 
 <div align="left">
 
-<!-- 홈페이지 작동 캡처 GIF -->
-## &middot; Homepage Operation
+<!-- Installation and Setup -->
+## &middot; Installation and Setup
+... [Instructions on how to install and setup the project] ...
+
+<!-- System Architecture -->
+## &middot; System Architecture
 <details>
-<summary><b>Screen shot</b></summary>
+<summary><b>View Architecture</b></summary>
 <p align="center">
-  <img src="https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458" alt="System Architecture">
+  <img src="URL_TO_SYSTEM_ARCHITECTURE_IMAGE" alt="System Architecture">
 </p>
 </details>
 
-<!-- 회고록 -->
-## &middot; Retrospective
-여기에 회고록 내용을 추가합니다.
+<!-- Usage -->
+## &middot; Usage
+... [Instructions and examples on how to use the project] ...
 
-<!-- 파일 구조 -->
-## &middot; File Structure
-여기에 프로젝트의 파일 구조에 대한 설명을 추가합니다.
+<!-- Features -->
+## &middot; Features
+... [List of project features] ...
 
 <!-- ERD -->
 ## &middot; ERD
 <details>
-<summary><b>ERD</b></summary>
+<summary><b>View ERD</b></summary>
 <p align="center">
-  <img src="https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458" alt="System Architecture">
+  <img src="URL_TO_ERD_IMAGE" alt="ERD">
 </p>
 </details>
 
+<!-- File Structure -->
+## &middot; File Structure
+... [Description of the file structure] ...
 
-<!-- TIL -->
-## &middot; Today I Learned (TIL)
-여기에 TIL 섹션의 내용을 추가합니다.
-
-<!-- 개발일지 -->
-## &middot; Development Diary
-여기에 개발일지 내용을 추가합니다.
-
-## &middot; System Architecture
+<!-- Homepage Operation -->
+## &middot; Homepage Operation
 <details>
-<summary><b>System Architecture</b></summary>
+<summary><b>View Screenshot</b></summary>
 <p align="center">
-  <img src="https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458" alt="System Architecture">
+  <img src="URL_TO_HOMEPAGE_OPERATION_IMAGE" alt="Homepage Operation">
 </p>
 </details>
+
+<!-- Retrospective -->
+## &middot; Retrospective
+... [Retrospective content] ...
+
+<!-- Today I Learned (TIL) -->
+## &middot; Today I Learned (TIL)
+... [TIL content] ...
+
+<!-- Development Diary -->
+## &middot; Development Diary
+... [Development diary content] ...
+
+<!-- How to Contribute -->
+## &middot; How to Contribute
+... [Guidelines for contributing to the project] ...
+
+<!-- Credits and Acknowledgments -->
+## &middot; Credits and Acknowledgments
+... [List of collaborators and acknowledgments] ...
+
+<!-- License -->
+## &middot; License
+... [Project license information] ...
+
 
 
 
