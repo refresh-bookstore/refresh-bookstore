@@ -8,6 +8,9 @@ git config --local commit.template .gitmessage.txt
 git commit
 ```
 
+# 시스템 아키텍처
+![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/ac738cfb-4891-4a86-8123-e8e183b99dcf)
+
 ## 🌳 기존 프로젝트의 문제점 🌳
 
 - MongoDB는 주문관리의 무결성을 보장하지 못합니다. RDBMS로 Migration하여, 무결성을 최대한 보장하고자 합니다.
@@ -29,6 +32,7 @@ git commit
 - IT 관련 서적 정보를 제공하며, 사용자들은 책을 검색하고, 장바구니에 담고, 구매할 수 있습니다.
 
 <br>
+
 
 # &ensp;2. 서비스 주요 기능 설명
 
