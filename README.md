@@ -28,7 +28,6 @@
 ![Database and ORM](https://img.shields.io/badge/-Database%20and%20ORM-FF4500?style=for-the-badge&logo=redis&logoColor=white)<br>
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
-[![TSOA](https://img.shields.io/badge/TSOA-10B981?style=for-the-badge&logo=typescript&logoColor=white)](https://tsoa-community.github.io/docs/)
 
 <hr>
 
@@ -41,6 +40,7 @@
 <hr>
 
 ![Other Tools](https://img.shields.io/badge/-Other%20Tools-32CD32?style=for-the-badge&logo=nuget&logoColor=white)<br>
+[![TSOA](https://img.shields.io/badge/TSOA-10B981?style=for-the-badge&logo=typescript&logoColor=white)](https://tsoa-community.github.io/docs/)
 [![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white)](https://swagger.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
