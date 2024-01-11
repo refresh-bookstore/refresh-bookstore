@@ -84,11 +84,3 @@ enum ShippingStatus {
   DELIVERED
   CANCELLED
 }
-
-model ErrorLog {
-  id         Int      @id @default(autoincrement())
-  message    String   @db.VarChar(1000)
-  type       String   @db.VarChar(100)
-  stackTrace String?  @db.VarChar(3000)
-  createdAt  DateTime @default(now())
-}
