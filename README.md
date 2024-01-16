@@ -93,25 +93,10 @@
 </p>
 </details>
 
-<!-- Retrospective -->
-## &middot; Retrospective
-... [Retrospective content] ...
-
-<!-- Today I Learned (TIL) -->
-## &middot; Today I Learned (TIL)
-... [TIL content] ...
-
-<!-- Development Diary -->
-## &middot; Development Diary
+<!-- Did you know ? -->
+## &middot; Did you know?
 ... [Development diary content] ...
 
-<!-- How to Contribute -->
-## &middot; How to Contribute
-... [Guidelines for contributing to the project] ...
-
-<!-- Credits and Acknowledgments -->
-## &middot; Credits and Acknowledgments
-... [List of collaborators and acknowledgments] ...
 
 <!-- License -->
 ## &middot; License
