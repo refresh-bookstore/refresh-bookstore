@@ -75,15 +75,44 @@
 ## &middot; ERD
 <details>
 <summary><b>View ERD</b></summary>
-<p align="center">
-  <img src="URL_TO_ERD_IMAGE" alt="ERD">
-</p>
+
+![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/a929dafc-7152-40b9-92da-a2f9577e8671)
+
 </details>
 
 <!-- File Structure -->
 ## &middot; File Structure
-... [Description of the file structure] ...
+<details>
+<summary><b>View File Structure</b></summary>
 
+```
+├── README.md
+├── docker
+│   └── local.dockerfile
+├── docker-compose.yml
+├── package-lock.json
+├── package.json
+├── prisma
+│   ├── migrations
+│   └── schema.prisma
+├── src
+│   ├── app.ts
+│   ├── configs
+│   ├── controllers
+│   ├── dtos
+│   ├── exceptions
+│   ├── middlewares
+│   ├── repositories
+│   ├── routes
+│   ├── services
+│   ├── swagger
+│   ├── utils
+│   └── views
+├── tsconfig.json
+└── tsoa.json
+```
+
+</details>
 
 <!-- Homepage Operation -->
 ## &middot; Homepage Operation
