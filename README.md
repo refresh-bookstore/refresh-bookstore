@@ -1,20 +1,36 @@
+<div align="center">
+  <a href="https://refbook.kro.kr">
+    <img src="src/views/public/images/logo_green.svg" alt="Refresh Bookstore Logo" width="400">
+  </a>
+  <br>
+  <span style="font-size: 20px; color: green; background-color: yellow; padding: 10px; border-radius: 5px; text-decoration: none; border: 2px solid black; display: inline-block; margin-top: 20px;">
+    "We are a bookstore to 'refresh' your mind." 🍃
+  </span>
+  <br>
+  <a href="https://refbook.kro.kr" style="font-size: 16px; color: blue; text-decoration: none; margin-top: 10px;">
+    Visit Refresh Bookstore 📚
+  </a>
+</div>
 
-![ezgif-5-985c54e5cd](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/0c23ba4e-ffc3-4fe3-b49f-08fb9f7ce65e)
+<div align="center">
 
-## Home Page
-Visit here: Refresh Bookstore 🌐
 
-## Tech Stack
+## Tech Stack 🛠️
+
 ![Programming Languages and Frameworks](https://img.shields.io/badge/-Programming%20Languages%20and%20Frameworks-8A2BE2?style=for-the-badge&logo=appveyor&logoColor=white)<br>
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![ExpressJS](https://img.shields.io/badge/ExpressJS-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 [![EJS](https://img.shields.io/badge/EJS-A91E50?style=for-the-badge&logo=ejs&logoColor=white)](https://ejs.co/)
 [![VanillaJS](https://img.shields.io/badge/VanillaJS-F0DB4F?style=for-the-badge&logo=javascript&logoColor=white)](http://vanilla-js.com/)
 
+<hr>
+
 ![Database and ORM](https://img.shields.io/badge/-Database%20and%20ORM-FF4500?style=for-the-badge&logo=redis&logoColor=white)<br>
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
-[![TSOA](https://img.shields.io/badge/TSOA-10B981?style=for-the-badge&logo=typescript&logoColor=white)](https://tsoa-community.github.io/docs/)
+
+<hr>
 
 ![Infrastructure and Deployment](https://img.shields.io/badge/-Infrastructure%20and%20Deployment-1E90FF?style=for-the-badge&logo=azure-devops&logoColor=white)<br>
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
@@ -22,175 +38,105 @@ Visit here: Refresh Bookstore 🌐
 [![Oracle Cloud Infrastructure](https://img.shields.io/badge/Oracle_Cloud_Infrastructure-F80000?style=for-the-badge&logo=oracle&logoColor=white)](https://www.oracle.com/cloud/)
 [![Caddy](https://img.shields.io/badge/Caddy-00ADD8?style=for-the-badge&logo=caddy&logoColor=white)](https://caddyserver.com/)
 
+<hr>
+
 ![Other Tools](https://img.shields.io/badge/-Other%20Tools-32CD32?style=for-the-badge&logo=nuget&logoColor=white)<br>
+[![TSOA](https://img.shields.io/badge/TSOA-10B981?style=for-the-badge&logo=typescript&logoColor=white)](https://tsoa-community.github.io/docs/)
 [![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white)](https://swagger.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
+<!-- 공백 추가 -->
+<br><br>
 
-## 🌳 기존 프로젝트의 문제점 🌳
+<div align="left">
 
-- MongoDB는 주문관리의 무결성을 보장하지 못합니다. RDBMS로 Migration하여, 무결성을 최대한 보장하고자 합니다.
-- token과 session 방식으로 혼용된 인증방식 단일화가 필요합니다.
-- 비즈니스 로직 분리 / Repository 패턴과, Service, Controller로 분리하고, 가독성을 위해 DTO를 사용하고자 합니다.
+<!-- Installation and Setup -->
+## &middot; Installation and Setup 🔧
 
-## ERD
+This project can be built and run using Docker, without the need for installing Node.js or PostgreSQL separately. Follow these steps to get started:
 
-## 🌳 Refresh Bookstore로 Refresh하러 오세요. 🌳
+1. **Install Docker**
+   - Download Docker from the [Docker official website](https://www.docker.com/get-started).
+   - Follow the installation guide for your operating system.
+   - After installation, verify by running `docker --version` in your terminal.
 
-- Refresh Bookstore는 개발자와 개발을 공부하는 학생들이 IT 관련 서적을 구매할 수 있는 플랫폼입니다!
-- 개발 공부를 시작하기 위해, 새로운 언어와 지식을 배우기 위해, **Refresh하기 위해** 책을 구매할 수 있는 곳, **Refresh Bookstore** 입니다
-  <br>
-  <br>
+2. **Build and Run with Docker Compose**
+   - Ensure Docker is running on your system.
+   - Clone the project repository to your local machine.
+   - Navigate to the project directory in your terminal.
+   - Run `docker-compose up` to build and start the services defined in your `docker-compose.yml` file.
 
-# &ensp;1. 서비스 소개
+<!-- System Architecture -->
+## &middot; System Architecture 🌐
+![295508987-c0f47b2b-68a0-4d25-a405-269596150458](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/f24d8aad-ca25-4740-b190-e203339737aa)
 
-- 기술 스택: VanillaJS, Express.js, MongoDB, Docker, PM2
-- IT 관련 서적 정보를 제공하며, 사용자들은 책을 검색하고, 장바구니에 담고, 구매할 수 있습니다.
 
-<br>
+## &middot; Features ✨
+- 📚 **Home Screen**: Users can view book categories and lists.
+- 📖 **Book Details**: View details, select quantities, and add to cart.
+- 🛒 **Cart**: Adjust quantities, remove items via checkboxes.
+- ❌ **Unavailable Products**: Cannot purchase if out of stock.
+- 💳 **Checkout**: Enter recipient details, confirm items, and proceed to payment.
+- 👤 **My Page**: Change registered name, contact, address, and password.
+- 📦 **Order History**: View order details and shipping status; edit shipping info if 'Preparing for Delivery'.
+- 🛠️ **General Management**: Admins can manage books, members, orders, and categories.
+- 📝 **Book Management**: Modify book info, add new books.
+- 👥 **Member Management**: View member information.
 
+
+<!-- ERD -->
+## &middot; ERD 📊
 <details>
-  <summary>System Architecture</summary>
+<summary><b>View ERD</b></summary>
 
-  ## System Architecture
-  ![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/c0f47b2b-68a0-4d25-a405-269596150458)
+![image](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/a929dafc-7152-40b9-92da-a2f9577e8671)
+
+</details>
+
+<!-- File Structure -->
+## &middot; File Structure 📁
+<details>
+<summary><b>View File Structure</b></summary>
+
+```
+├── README.md
+├── docker
+│   └── local.dockerfile
+├── docker-compose.yml
+├── package-lock.json
+├── package.json
+├── prisma
+│   ├── migrations
+│   └── schema.prisma
+├── src
+│   ├── app.ts
+│   ├── configs
+│   ├── controllers
+│   ├── dtos
+│   ├── exceptions
+│   ├── middlewares
+│   ├── repositories
+│   ├── routes
+│   ├── services
+│   ├── swagger
+│   ├── utils
+│   └── views
+├── tsconfig.json
+└── tsoa.json
+```
+
+</details>
+
+<!-- Homepage Operation -->
+## &middot; Homepage Operation 🖥️
+<details>
+<summary><b>View Screenshot</b></summary>
+
+![animate-ezgif com-optimize](https://github.com/refresh-bookstore/.github/assets/51044545/1950b3f8-3196-46ed-a432-7c7a675d7515)
 
 </details>
 
 
-# &ensp;2. 서비스 주요 기능 설명
+## &middot; Did you know? ❓
 
-### &emsp;**- 사용자**
-
-- 사용자는 홈 화면에서 책의 카테고리와 책 목록을 확인할 수 있습니다.
-- 책 상세정보를 확인하고 수량 선택해 장바구니에 담을 수 있습니다.
-- 장바구니에서도 수량조절이 가능하고, 체크박스로 선택 삭제도 가능합니다.
-- 결제하기 페이지에서 받는사람의 정보를 입력하고, 구매할 상품을 확인 후 결제 가능합니다.
-- 사용자는 마이페이지에서 계정에 등록된 이름, 연락처, 주소, 비밀번호를 변경할 수 있습니다.
-- 사용자는 주문 내역 페이지에서 각 주문 정보와 배송상태를 확인 가능하고, '배송 준비중'일 경우 배송정보를 수정할 수 있습니다.
-
-### &emsp;**- 관리자**
-
-- 관리자는 도서, 회원, 주문, 카테고리를 관리할 수 있습니다.
-- 도서 관리 탭에서 책 정보를 수정하고, 새로운 책 상품을 등록할 수 있습니다.
-- 회원 관리 탭에서 회원 정
-
-<br>
-
-# &ensp;3. 서비스 구성도
-
-- 기술 스택: VanillaJS, Express.js, MongoDB, Docker, PM2
-- 와이어프레임 링크: [Refresh Bookstore 와이어프레임](https://www.notion.so/4-18-50f780066803467a83aeac4a4e4ef4b8)
-- API 명세 문서 링크: [Refresh Bookstore API 명세](https://www.notion.so/API-e0ced6930cd04a838b51927ad733c709)
-
-<br>
-
-# &ensp;4. 팀 구성
-
-### &ensp;💪🏻 멤버별 Responsibility
-
-| 멤버         | 책임                                              |
-| ------------ | ------------------------------------------------- |
-| 🐰 김영채(F) | 프로젝트 기획, 프로젝트 팀장, 장바구니, 주문 구현 |
-| 🐶 황반석(F) | 관리자 페이지, 디자인 총괄                        |
-| 🐥 신혜지(F) | 로그인, 회원가입, 홈, 마이페이지                  |
-| 😺 김서연(B) | 데이터베이스 설계 및 상용 서비스 구현             |
-| 🐻 송호준(B) | 배포 및 기본 기능 구현 관련                       |
-
-<br>
-
-# 5. 실행 방법
-
-- 백엔드
-
-  ```bash
-  1. mongodb 실행
-  2. npm install
-  3. npm start
-  ```
-
-<br>
-
-# 6. 버전
-
-- 1.0.0
-
-<br>
-
-# 7. FAQ
-
-#### **Q : 관리자 페이지는 어떻게 들어가나요?**
-
-A : 관리자 계정으로 로그인 후 홈 화면 url path에 /user-admin 을 입력하여 접근 가능합니다!
-<br>
-
-##### 관리자 계정
-
-```
-아이디 : admin@naver.com
-비밀번호 : !1q2w3e4r
-```
-
-#### **Q : 상품 추가도 가능한가요?**
-
-A : 네! 관리자 페이지의 도서관리 탭에서 가능합니다. ISBN을 비롯한 책 정보들을 입력하면 책 사진은 자동으로 불러와집니다✨
-
-<br>
-
-# +. 파일구조
-
-```
-refresh-bookstore
-└── src
-    ├── app.js
-    ├── bin
-    ├── controllers
-    │   ├── categoryController.js
-    │   ├── loginController.js
-    │   ├── orderController.js
-    │   ├── productController.js
-    │   └── userController.js
-    ├── middlewares
-    │   ├── authenticate.js
-    │   ├── checkSession.js
-    │   ├── hashPassword.js
-    │   ├── isAdmin.js
-    │   ├── session.js
-    │   └── userValidation.js
-    ├── models
-    │   ├── Category.js
-    │   ├── Order.js
-    │   ├── Product.js
-    │   ├── User.js
-    │   └── types
-    ├── routes
-    │   ├── categoryRouters.js
-    │   ├── homeRouter.js
-    │   ├── orderRouters.js
-    │   ├── pageRouters.js
-    │   ├── productRouters.js
-    │   └── userRouters.js
-    ├── services
-    │   ├── authService.js
-    │   ├── categoryService.js
-    │   ├── orderService.js
-    │   ├── productService.js
-    │   └── userService.js
-    └── views
-        ├── book-detail
-        ├── book-search
-        ├── cart
-        ├── error-page
-        ├── error.html
-        ├── home
-        ├── login
-        ├── order-complete
-        ├── order-create
-        ├── order-detail
-        ├── order-list
-        ├── product-images
-        ├── public
-        ├── register
-        ├── user-admin
-        └── user-mypage
-```
+-  [Crafting Controllers with TSOA by Hojun Song](https://velog.io/@who_doctor/%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-1%EB%B6%80-TSOA%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-Express%EC%97%90%EC%84%9C%EB%8F%84-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-Controller-%EC%9E%91%EC%84%B1%ED%95%B4%EB%B3%B4%EA%B8%B0)
