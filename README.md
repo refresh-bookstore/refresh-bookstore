@@ -15,7 +15,7 @@
 <div align="center">
 
 
-## Tech Stack
+## Tech Stack 🛠️
 
 ![Programming Languages and Frameworks](https://img.shields.io/badge/-Programming%20Languages%20and%20Frameworks-8A2BE2?style=for-the-badge&logo=appveyor&logoColor=white)<br>
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -51,20 +51,27 @@
 <div align="left">
 
 <!-- Installation and Setup -->
-## &middot; Installation and Setup
-... [Instructions on how to install and setup the project] ...
+## &middot; Installation and Setup 🔧
+
+This project can be built and run using Docker, without the need for installing Node.js or PostgreSQL separately. Follow these steps to get started:
+
+1. **Install Docker**
+   - Download Docker from the [Docker official website](https://www.docker.com/get-started).
+   - Follow the installation guide for your operating system.
+   - After installation, verify by running `docker --version` in your terminal.
+
+2. **Build and Run with Docker Compose**
+   - Ensure Docker is running on your system.
+   - Clone the project repository to your local machine.
+   - Navigate to the project directory in your terminal.
+   - Run `docker-compose up` to build and start the services defined in your `docker-compose.yml` file.
 
 <!-- System Architecture -->
-## &middot; System Architecture
-<details>
-<summary><b>View Architecture</b></summary>
-<p align="center">
-  <img src="URL_TO_SYSTEM_ARCHITECTURE_IMAGE" alt="System Architecture">
-</p>
-</details>
+## &middot; System Architecture 🌐
+![295508987-c0f47b2b-68a0-4d25-a405-269596150458](https://github.com/refresh-bookstore/refresh-bookstore/assets/51044545/f24d8aad-ca25-4740-b190-e203339737aa)
 
-<!-- Features -->
-## &middot; Features
+
+## &middot; Features ✨
 - 📚 **Home Screen**: Users can view book categories and lists.
 - 📖 **Book Details**: View details, select quantities, and add to cart.
 - 🛒 **Cart**: Adjust quantities, remove items via checkboxes.
@@ -77,9 +84,8 @@
 - 👥 **Member Management**: View member information.
 
 
-
 <!-- ERD -->
-## &middot; ERD
+## &middot; ERD 📊
 <details>
 <summary><b>View ERD</b></summary>
 
@@ -88,7 +94,7 @@
 </details>
 
 <!-- File Structure -->
-## &middot; File Structure
+## &middot; File Structure 📁
 <details>
 <summary><b>View File Structure</b></summary>
 
@@ -122,7 +128,7 @@
 </details>
 
 <!-- Homepage Operation -->
-## &middot; Homepage Operation
+## &middot; Homepage Operation 🖥️
 <details>
 <summary><b>View Screenshot</b></summary>
 
@@ -132,7 +138,7 @@
 
 
 <!-- Did you know ? -->
-## &middot; Did you know?
+## &middot; Did you know? ❓
 ... [Development diary content] ...
 
 
