@@ -63,13 +63,20 @@
 </p>
 </details>
 
-<!-- Usage -->
-## &middot; Usage
-... [Instructions and examples on how to use the project] ...
-
 <!-- Features -->
 ## &middot; Features
-... [List of project features] ...
+- 📚 **Home Screen**: Users can view book categories and lists.
+- 📖 **Book Details**: View details, select quantities, and add to cart.
+- 🛒 **Cart**: Adjust quantities, remove items via checkboxes.
+- ❌ **Unavailable Products**: Cannot purchase if out of stock.
+- 💳 **Checkout**: Enter recipient details, confirm items, and proceed to payment.
+- 👤 **My Page**: Change registered name, contact, address, and password.
+- 📦 **Order History**: View order details and shipping status; edit shipping info if 'Preparing for Delivery'.
+- 🛠️ **General Management**: Admins can manage books, members, orders, and categories.
+- 📝 **Book Management**: Modify book info, add new books.
+- 👥 **Member Management**: View member information.
+
+
 
 <!-- ERD -->
 ## &middot; ERD
