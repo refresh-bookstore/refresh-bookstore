@@ -137,9 +137,11 @@ This project can be built and run using Docker, without the need for installing 
 </details>
 
 
-<!-- Did you know ? -->
 ## &middot; Did you know? ❓
-... [Development diary content] ...
+
+-  [Crafting Controllers with TSOA by Hojun Song](https://velog.io/@who_doctor/%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-1%EB%B6%80-TSOA%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-Express%EC%97%90%EC%84%9C%EB%8F%84-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-Controller-%EC%9E%91%EC%84%B1%ED%95%B4%EB%B3%B4%EA%B8%B0)
+
+
 
 
 
