@@ -17,15 +17,14 @@ export class CreateOrder {
   @IsNotEmpty()
   address: string;
 
-  @IsNotEmpty()
   @IsOptional()
   addressDetail?: string;
 
   @IsNotEmpty()
   contact: string;
 
-  @IsNotEmpty()
-  deliveryRequest: string;
+  @IsOptional()
+  deliveryRequest?: string;
 
   @IsArray()
   @ValidateNested({ each: true })

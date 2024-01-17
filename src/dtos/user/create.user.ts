@@ -23,7 +23,6 @@ export class CreateUser {
   address: string;
 
   @IsOptional()
-  @Length(1, 255)
   detailAddress?: string;
 
   @IsNotEmpty()

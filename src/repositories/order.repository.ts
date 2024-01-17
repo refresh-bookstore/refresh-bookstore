@@ -43,6 +43,7 @@ export class OrderRepository {
           postalCode: createOrder.postalCode,
           address: createOrder.address,
           addressDetail: createOrder.addressDetail,
+          deliveryRequest: createOrder.deliveryRequest,
           contact: createOrder.contact,
           deliveryFee: createOrder.deliveryFee,
           totalPrice: createOrder.totalPrice,

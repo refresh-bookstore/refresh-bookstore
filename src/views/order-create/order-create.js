@@ -91,7 +91,7 @@ setTotalCost();
 
 // 요청사항
 const customRequestContainer = document.querySelector(
-  ".customRequestContainer",
+  ".customRequestContainer"
 );
 const customRequestInput = document.querySelector(".customRequest");
 const requestSelectBox = document.querySelector("#request__Select__Box");
@@ -101,9 +101,11 @@ function handleRequestChange(e) {
   const type = e.target.value;
 
   if (type === "5") {
+    console.log("직접 입력 선택됨");
     customRequestContainer.style.display = "flex";
     customRequestInput.focus();
   } else {
+    console.log("직접 입력 선택 해제됨");
     customRequestContainer.style.display = "none";
   }
 }
@@ -127,7 +129,9 @@ const requestOption = {
   5: "직접 입력",
 };
 
-async function payBtnClick() {
+// 결제하기 버튼 클릭 이벤트
+const payBtn = document.querySelector(".paymentButton button");
+payBtn.addEventListener("click", async () => {
   // 정보 입력
   if (
     !nameInput.value.trim() ||
@@ -151,10 +155,14 @@ async function payBtnClick() {
   if (requestType === "0") {
     request = "요청사항 없음.";
   } else if (requestType === "5") {
+    console.log("직접 입력 요청 사항:", customRequestInput.value);
     request = customRequestInput.value;
   } else {
+    console.log("선택한 요청 사항:", requestOption[requestType]);
     request = requestOption[requestType];
   }
+
+  console.log("request 변수 값:", request);
 
   let orderArr = [];
   for (let i = 0; i < purchaseData.length; i++) {
@@ -163,23 +171,27 @@ async function payBtnClick() {
     orderArr.push({ ISBN: ISBN, amount: amount });
   }
 
+  const requestData = {
+    recipientName: nameInput.value,
+    postalCode: postalCodeInput.value,
+    address: addressInput.value,
+    addressDetail: detailAddressInput.value,
+    contact: phoneNumberInput.value,
+    deliveryRequest: request,
+    orderItems: orderArr,
+    deliveryFee: getPriceNumber(deliveryFee.innerText),
+    totalPrice: getPriceNumber(totalCost.innerText),
+  };
+
+  console.log("fetch 요청 데이터:", requestData);
+
   try {
     const response = await fetch("/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        recipientName: nameInput.value,
-        postalCode: postalCodeInput.value,
-        address: addressInput.value,
-        addressDetail: detailAddressInput.value,
-        contact: phoneNumberInput.value,
-        deliveryRequest: request,
-        orderItems: orderArr,
-        deliveryFee: getPriceNumber(deliveryFee.innerText),
-        totalPrice: getPriceNumber(totalCost.innerText),
-      }),
+      body: JSON.stringify(requestData),
     });
 
     if (response.status === 204) {
@@ -194,10 +206,6 @@ async function payBtnClick() {
     console.log(error.message);
     alert("결제에 실패했습니다. 다시 시도해주세요.");
   }
-}
-
-// 결제하기 버튼 클릭 이벤트
-const payBtn = document.querySelector(".paymentButton button");
-payBtn.addEventListener("click", payBtnClick);
+});
 
 main();

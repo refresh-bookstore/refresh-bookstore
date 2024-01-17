@@ -17,7 +17,7 @@ const searchAddressBtn = document.querySelector(".search-address");
 const postalCodeInput = document.querySelector(".postalCode");
 const addressInput = document.querySelector(".address");
 const detailAddressInput = document.querySelector(".detailAddress");
-const deliveryRequest = document.querySelector(".deliveryRequest");
+const deliveryRequestInput = document.querySelector(".deliveryRequest");
 
 const modifyCompleteButton = document.querySelector(".modifyCompleteButton");
 const modifyButton = document.querySelector(".modifyButton");
@@ -50,7 +50,7 @@ async function loadOrderDetail() {
       const addressDetail = data.addressDetail;
       const deliveryRequest = data.deliveryRequest;
       const orderDate = new Date(
-        new Date(data.createdAt).getTime() + 1000 * 60 * 60 * 9,
+        new Date(data.createdAt).getTime() + 1000 * 60 * 60 * 9
       )
         .toISOString()
         .slice(0, 10);
@@ -112,7 +112,7 @@ async function loadOrderDetail() {
       postalCodeInput.value = postalCode;
       addressInput.value = address;
       detailAddressInput.value = addressDetail;
-      deliveryRequest.value = deliveryRequest;
+      deliveryRequestInput.value = deliveryRequest;
     } else {
       alert("로그인을 해주세요.");
       logout();
