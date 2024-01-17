@@ -84,23 +84,21 @@
 ## &middot; File Structure
 ... [Description of the file structure] ...
 
+
 <!-- Homepage Operation -->
 ## &middot; Homepage Operation
 <details>
 <summary><b>View Screenshot</b></summary>
-<p align="center">
-  <img src="URL_TO_HOMEPAGE_OPERATION_IMAGE" alt="Homepage Operation">
-</p>
+
+![animate-ezgif com-optimize](https://github.com/refresh-bookstore/.github/assets/51044545/1950b3f8-3196-46ed-a432-7c7a675d7515)
+
 </details>
+
 
 <!-- Did you know ? -->
 ## &middot; Did you know?
 ... [Development diary content] ...
 
-
-<!-- License -->
-## &middot; License
-... [Project license information] ...
 
 
 
