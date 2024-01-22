@@ -29,8 +29,14 @@ export class OrderRepository {
     createOrder: CreateOrder
   ): Promise<Order | null> {
     return await prisma.$transaction(async (transaction) => {
-      let uniqueOrderId: string;
+      for (const item of createOrder.orderItems) {
+        const product = await this.productRepository.getProduct(item.ISBN);
+        if (!product || product.stock < item.amount) {
+          return null;
+        }
+      }
 
+      let uniqueOrderId: string;
       do {
         uniqueOrderId = OrderIdGenerator.generateOrderId();
       } while (!(await this.isOrderIdUnique(uniqueOrderId)));
@@ -52,9 +58,6 @@ export class OrderRepository {
 
       for (const item of createOrder.orderItems) {
         const product = await this.productRepository.getProduct(item.ISBN);
-        if (!product || product.stock < item.amount) {
-          return null;
-        }
 
         await transaction.orderItem.create({
           data: {
