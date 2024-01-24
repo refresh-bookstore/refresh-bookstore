@@ -30,6 +30,15 @@ export class OrderController extends Controller {
     this.orderService = new OrderService();
   }
 
+  /**
+   * 주문을 생성합니다.
+   * 이 메소드는 오버헤드를 줄이기 위해 성공 시 '204 No Content' 상태 코드를 반환합니다.
+   * '204 No Content'는 요청이 성공적으로 처리되었으나 클라이언트에 전송할 추가 콘텐츠가 없음을 나타냅니다.
+   *
+   * @param createOrder 생성할 주문에 대한 데이터를 담은 DTO
+   * @throws {Error} 409 이미 존재하는 카테고리일 경우
+   * @throws {Error} 500 서버 오류로 카테고리 생성에 실패한 경우
+   */
   @Post("order")
   @Security("sessionAuth")
   @Response<Error>("404", "해당 사용자를 찾을 수 없습니다.")

@@ -62,7 +62,7 @@ const models: TsoaRoute.Models = {
             "address": {"dataType":"string","required":true},
             "addressDetail": {"dataType":"string"},
             "contact": {"dataType":"string","required":true},
-            "deliveryRequest": {"dataType":"string","required":true},
+            "deliveryRequest": {"dataType":"string"},
             "orderItems": {"dataType":"array","array":{"dataType":"refObject","ref":"OrderItem"},"required":true},
             "deliveryFee": {"dataType":"double","required":true},
             "totalPrice": {"dataType":"double","required":true},
@@ -270,7 +270,7 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.createCategory.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              promiseHandler(controller, promise, response, 204, next);
             } catch (err) {
                 return next(err);
             }
