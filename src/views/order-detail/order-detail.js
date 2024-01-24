@@ -134,6 +134,7 @@ function activateModify() {
   searchAddressBtn.style.display = "block";
   document.querySelectorAll("input").forEach((e) => (e.readOnly = false));
 }
+
 modifyCompleteButton.addEventListener("click", completeModify);
 function completeModify() {
   if (checkValid()) {
@@ -141,38 +142,35 @@ function completeModify() {
     modifyButton.style.display = "block";
     searchAddressBtn.style.display = "none";
     document.querySelectorAll("input").forEach((e) => (e.readOnly = true));
+    modifyOrder();
   }
-  modifyOrder();
 }
 
 async function modifyOrder() {
-  const isAllValid = checkValid();
-  if (isAllValid) {
-    try {
-      const response = await fetch(`/order/${orderId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          recipientName: name.value,
-          contact: phoneNumber.value,
-          postalCode: postalCodeInput.value,
-          address: addressInput.value,
-          addressDetail: detailAddressInput.value,
-          deliveryRequest: deliveryRequest.value,
-        }),
-      });
+  try {
+    const response = await fetch(`/order/${orderId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        recipientName: name.value,
+        contact: phoneNumber.value,
+        postalCode: postalCodeInput.value,
+        address: addressInput.value,
+        addressDetail: detailAddressInput.value,
+        deliveryRequest: deliveryRequestInput.value,
+      }),
+    });
 
-      if (response.status === 204) {
-        alert("주문정보를 수정하였습니다.");
-      } else {
-        alert("사용자를 찾을 수 없습니다.");
-        throw new Error("사용자를 찾을 수 없습니다.");
-      }
-    } catch (error) {
-      console.log(error.message);
+    if (response.status === 204) {
+      alert("주문정보를 수정하였습니다.");
+    } else {
+      alert("사용자를 찾을 수 없습니다.");
+      throw new Error("사용자를 찾을 수 없습니다.");
     }
+  } catch (error) {
+    console.log(error.message);
   }
 }
 
