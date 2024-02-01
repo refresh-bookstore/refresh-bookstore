@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cron from "node-cron";
+import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import { RegisterRoutes } from "../routes/routes";
 import { BookStorageService } from "../services/book.storage.service";
@@ -16,6 +17,7 @@ export const prisma = new PrismaClient();
 const bookStorageService = new BookStorageService();
 
 export const applyMiddleware = (app: express.Application) => {
+  app.use(cors());
   app.use(cookieParser());
   app.use(express.json());
   app.use(compression());
